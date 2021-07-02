@@ -1,0 +1,201 @@
+.App {
+  text-align: left;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #ffcd00;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#components-layout-demo-responsive .logo {
+  height: 32px;
+  margin: 10px !important;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout-sub-header-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+
+.content-layout {
+  box-shadow: 0 0.14em 0.57em rgba(0, 0, 0, 0.185);
+  min-height: 20em;
+  margin: 24px 16px 0;
+}
+
+#components-page-header-demo-content .image {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 60px;
+}
+
+#components-page-header-demo-content .ant-page-header-rtl .image {
+  margin: 0 60px 0 0;
+}
+
+#components-page-header-demo-content .example-link {
+  margin-right: 16px;
+  line-height: 24px;
+}
+[data-theme="compact"] #components-page-header-demo-content .example-link {
+  line-height: 20px;
+}
+#components-page-header-demo-content .example-link-icon {
+  margin-right: 8px;
+}
+
+[data-theme="compact"] #components-page-header-demo-content .example-link-icon {
+  width: 20px;
+  height: 20px;
+}
+
+#components-page-header-demo-content .ant-page-header-rtl .example-link {
+  float: right;
+  margin-right: 0;
+  margin-left: 16px;
+}
+#components-page-header-demo-content .ant-page-header-rtl .example-link-icon {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+  #components-page-header-demo-content .image {
+    flex: 100%;
+    margin: 24px 0 0;
+  }
+}
+
+a.example-link {
+  padding-right: 15px;
+}
+
+img.example-link-icon {
+  padding-right: 5px;
+}
+
+header.ant-layout-header.site-layout-sub-header-background {
+  background-color: #002e6d;
+}
+
+.appLogo {
+  width: 42px;
+  margin: 10px 10px 10px 20px;
+}
+
+button.ant-btn.ant-btn-primary {
+  background-color: #002e6d;
+  border-color: #002e6d;
+}
+
+div.ant-upload.ant-upload-select-picture-card {
+  width: 100px;
+  height: 60px;
+}
+
+div.ant-layout-sider {
+  background-color: #002e6d;
+}
+
+.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #ffcd00 !important;
+}
+
+ant-layout-sider-children {
+  background-color: #fff !important;
+}
+
+.ant-layout-sider {
+  position: relative;
+  min-width: 0;
+  background: #002e6d !important;
+  transition: all 0.2s;
+}
+
+.ant-menu.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub,
+.ant-menu.ant-menu-dark .ant-menu-sub {
+  color: #fff;
+  background: #002e6d !important;
+}
+
+.ant-layout-sider-trigger {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  height: 48px;
+  color: #fff;
+  line-height: 48px;
+  text-align: center;
+  background: #002e6d !important;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ant-menu-dark .ant-menu-item-selected > a,
+.ant-menu-dark .ant-menu-item-selected > span > a,
+.ant-menu-dark .ant-menu-item-selected > a:hover,
+.ant-menu-dark .ant-menu-item-selected > span > a:hover {
+  color: #002e6d !important;
+}
+
+.ant-menu-dark .ant-menu-item-selected .ant-menu-item-icon,
+.ant-menu-dark .ant-menu-item-selected .anticon {
+  color: #002e6d !important;
+}
+
+.site-card-border-less-wrapper {
+  padding: 4px;
+  background: #f0f2f5;
+  margin-left: 10px;
+}
+
+.ant-radio-group-solid
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  color: #fff;
+  background: #002e6d !important;
+  border-color: #002e6d !important;
+}
+
+.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+  background-color: #002e6d !important;
+}
+
+::selection {
+  color: #fff;
+  background: #002e6d !important;
+}
