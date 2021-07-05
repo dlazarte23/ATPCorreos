@@ -4,12 +4,12 @@ import {
   ListPeticiones,
   ModalCreatePeticion,
   ModalDetallePeticion,
-} from "../components";
+} from "./components";
 import { Row, Col } from "antd";
 
-import DetailPeticion from "../components/Peticiones/DetailPeticion";
+//import DetailPeticion from "../components/Peticiones/DetailPeticion";
 
-export default function TestCase() {
+export default function Peticionespage() {
   const [filter, setFilter] = useState({
     value: "Personales",
   });

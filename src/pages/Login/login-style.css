@@ -1,0 +1,42 @@
+.contenedor-izquierdo {
+  background-color: #fadb14;
+}
+
+.contenedor-derecho {
+  height: 100vh;
+  width: 100vh;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.imgLogo {
+  width: 100px;
+  margin-left: 2vh;
+  margin-top: 2vh;
+}
+
+.parentNomApp {
+  width: 100vh;
+  height: 75vh;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.nomApp {
+  display: block;
+  margin: 0 auto;
+}
+
+.tituloIniciarSesion {
+  text-align: center;
+}
+
+.contenedor-formLogin {
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.btnVamos {
+  float: right;
+}
