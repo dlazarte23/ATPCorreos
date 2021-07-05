@@ -23,10 +23,10 @@ export default function ModalCreatePeticion(props) {
 
   const layout = {
     labelCol: {
-      span: 8,
+      span: 7,
     },
     wrapperCol: {
-      span: 16,
+      span: 17,
     },
   };
 

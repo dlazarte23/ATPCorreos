@@ -7,6 +7,8 @@ import {
 } from "../components";
 import { Row, Col } from "antd";
 
+import DetailPeticion from "../components/Peticiones/DetailPeticion";
+
 export default function TestCase() {
   const [filter, setFilter] = useState({
     value: "Personales",
@@ -53,6 +55,7 @@ export default function TestCase() {
           setShowModal={setShowModal}
         />
       </Col>
+      {/* <Col lg={24} sm={24}> */}
       <Col lg={24} sm={24}>
         <ListPeticiones
           listData={filter.value === "Personales" ? listData : listData2}
@@ -60,6 +63,9 @@ export default function TestCase() {
           setShowModal={setShowModal}
         />
       </Col>
+      {/* <Col lg={10}>
+        <DetailPeticion />
+      </Col> */}
       <ModalDetallePeticion showModal={showModal} setShowModal={setShowModal} />
       <ModalCreatePeticion showModal={showModal} setShowModal={setShowModal} />
     </Row>

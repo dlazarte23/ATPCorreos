@@ -27,7 +27,7 @@ export default function ListPeticiones(props) {
           onChange: (page) => {
             console.log(page);
           },
-          pageSize: 3,
+          pageSize: 4,
         }}
         dataSource={listData}
         bordered={false}
@@ -51,7 +51,7 @@ export default function ListPeticiones(props) {
               <>
                 <Card
                   bordered={false}
-                  style={{ width: "100%", marginTop: "60%" }}
+                  style={{ width: "100%", marginTop: "20%" }}
                   size="small"
                   actions={[
                     <InfoCircleOutlined
@@ -80,10 +80,12 @@ export default function ListPeticiones(props) {
               title={<a href={item.href}>{item.title}</a>}
               description={item.description}
             />
-            {item.content}
+
+            {/* {item.content} */}
           </List.Item>
         )}
       />
+      <br />
     </>
   );
 }

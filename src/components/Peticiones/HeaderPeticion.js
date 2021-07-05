@@ -43,8 +43,9 @@ export default function HeaderPeticion(props) {
           placeholder="Buscar"
           allowClear
           //onSearch={onSearch}
-          style={{ width: "100%", marginBottom: "20px" }}
+          style={{ width: "50%", marginBottom: "20px" }}
         />
+        <br />
         <Radio.Group
           options={options}
           onChange={onChange}
@@ -53,10 +54,6 @@ export default function HeaderPeticion(props) {
           buttonStyle="solid"
         />
       </PageHeader>
-      {/* <ModalDetallePeticion
-        showModal={showModal}
-        setShowModal={setShowModal}
-      ></ModalDetallePeticion> */}
     </>
   );
 }

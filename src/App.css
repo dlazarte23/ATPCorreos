@@ -199,3 +199,13 @@ ant-layout-sider-children {
   color: #fff;
   background: #002e6d !important;
 }
+
+a {
+  color: #1890ff;
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  -webkit-text-decoration-skip: objects;
+}
