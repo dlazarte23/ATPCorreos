@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Avatar, Space, Card } from "antd";
+import { List, Avatar, Space, Card, Tag } from "antd";
 import {
   NumberOutlined,
   CalendarOutlined,
@@ -8,6 +8,7 @@ import {
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
+import "../peticion-style.css";
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -27,7 +28,7 @@ export default function ListPeticiones(props) {
           onChange: (page) => {
             console.log(page);
           },
-          pageSize: 4,
+          pageSize: 5,
         }}
         dataSource={listData}
         bordered={false}
@@ -76,8 +77,17 @@ export default function ListPeticiones(props) {
             }
           >
             <List.Item.Meta
-              avatar={<Avatar src={item.avatar} />}
-              title={<a href={item.href}>{item.title}</a>}
+              //avatar={<Avatar src={item.avatar} />}
+              title={
+                <a href={item.href}>
+                  {item.title}
+                  {item.key < 3 ? (
+                    <Tag color="#87d068" className="TagNewPeticion">
+                      Nuevo
+                    </Tag>
+                  ) : null}
+                </a>
+              }
               description={item.description}
             />
 

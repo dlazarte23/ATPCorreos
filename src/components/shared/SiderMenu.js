@@ -5,7 +5,8 @@ import logo from "../../../public/images/logo_correos.png";
 import {
   UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
+  ProfileOutlined,
+  ReconciliationOutlined,
 } from "@ant-design/icons";
 
 const { Sider } = Layout;
@@ -22,10 +23,10 @@ export default function MainSider() {
       <div className="logo" />
       <img src={logo} className="appLogo" alt="ATPCorreos"></img>
       <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-        <Menu.Item key="1" icon={<UserOutlined />}>
+        <Menu.Item key="1" icon={<ReconciliationOutlined />}>
           <Link to="/Peticiones/listado-de-peticiones">Peticiones</Link>
         </Menu.Item>
-        <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+        <Menu.Item key="2" icon={<ProfileOutlined />}>
           <Link to="/CasosDePrueba/creacion-de-casos-de-prueba">
             Casos de Prueba
           </Link>

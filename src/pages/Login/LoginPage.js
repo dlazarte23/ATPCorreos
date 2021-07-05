@@ -2,7 +2,7 @@ import React from "react";
 
 //import assets own
 import "./login-style.css";
-import logo_correos from "../../../public/images/logo_correos.png";
+import logo_correos from "../../../public/images/logo_correos_login.png";
 
 //import componentes from antd
 import { Row, Col, Typography } from "antd";

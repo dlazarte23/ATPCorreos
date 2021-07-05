@@ -4,10 +4,9 @@ import {
   ListPeticiones,
   ModalCreatePeticion,
   ModalDetallePeticion,
+  DetailPeticion,
 } from "./components";
 import { Row, Col } from "antd";
-
-//import DetailPeticion from "../components/Peticiones/DetailPeticion";
 
 export default function Peticionespage() {
   const [filter, setFilter] = useState({
@@ -20,8 +19,9 @@ export default function Peticionespage() {
   });
 
   const listData = [];
-  for (let i = 1; i < 6; i++) {
+  for (let i = 1; i < 8; i++) {
     listData.push({
+      key: i,
       href: "https://ant.design",
       title: `Nombre de la Petición ${i}`,
       avatar:
@@ -35,6 +35,7 @@ export default function Peticionespage() {
   const listData2 = [];
   for (let i = 1; i < 31; i++) {
     listData2.push({
+      key: i,
       href: "https://ant.design",
       title: `Configuración Footer Emails ${i}`,
       avatar:
@@ -55,7 +56,7 @@ export default function Peticionespage() {
           setShowModal={setShowModal}
         />
       </Col>
-      {/* <Col lg={24} sm={24}> */}
+      {/* <Col lg={14} sm={24}> */}
       <Col lg={24} sm={24}>
         <ListPeticiones
           listData={filter.value === "Personales" ? listData : listData2}

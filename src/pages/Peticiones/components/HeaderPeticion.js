@@ -24,11 +24,12 @@ export default function HeaderPeticion(props) {
         onBack={() => window.history.back()}
         title="Lista de Peticiones"
         //subTitle="This is a subtitle"
-        /* avatar={{
+        avatar={{
           src: "https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico",
-        }} */
+        }}
         extra={[
           <Button
+            shape="round"
             key="1"
             type="primary"
             onClick={() => setShowModal({ ...showModal, create: true })}
