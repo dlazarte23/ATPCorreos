@@ -1,11 +1,7 @@
 import "./App.css";
-import { BrowserRouter, Route } from "react-router-dom";
-import Header from "./components/shared/Header";
-import SiderMenu from "./components/shared/SiderMenu";
-import Footer from "./components/shared/Footer";
-import PeticionesPage from "./pages/Peticiones/PeticionesPage";
-import LoginPage from "./pages/Login/LoginPage";
-import CasosPruebasScreen from "./pages/CasosDePrueba/CasosPruebasScreen";
+import { Redirect, Route, Switch, BrowserRouter } from "react-router-dom";
+import { Header, SiderMenu, Footer, PageNotFound } from "./components";
+import { PeticionesPage, CasosPruebasScreen } from "./pages/";
 import { Layout } from "antd";
 
 const { Content } = Layout;
@@ -18,18 +14,26 @@ function App() {
           <SiderMenu />
           <Layout>
             <Header />
+
             <Content className="content-layout">
               <div
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 578 }}
               >
-                <Route path="/" exact />
-                <Route path="/Peticiones" exact component={PeticionesPage} />
-                <Route
-                  path="/Peticiones/creacion-de-casos-de-prueba"
-                  exact
-                  component={CasosPruebasScreen}
-                />
+                <Switch>
+                  <Route path="/" exact />
+                  <Route
+                    path="/Peticiones/listado-de-peticiones"
+                    exact
+                    component={PeticionesPage}
+                  />
+                  <Route
+                    path="/CasosDePrueba/creacion-de-casos-de-prueba"
+                    exact
+                    component={CasosPruebasScreen}
+                  />
+                  <Route path="" component={PageNotFound} />
+                </Switch>
               </div>
             </Content>
             <Footer />
