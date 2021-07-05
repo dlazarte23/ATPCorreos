@@ -1,5 +1,5 @@
-export { default as ListPeticiones } from "./ListPeticion";
-export { default as DetailPeticion } from "./DetailPeticion";
-export { default as HeaderPeticion } from "./HeaderPeticion";
-export { default as ModalDetallePeticion } from "./ModalDetallePeticion";
-export { default as ModalCreatePeticion } from "./ModalCreatePeticion";
+export { default as ListPeticiones } from "./Peticiones/ListPeticion";
+export { default as DetailPeticion } from "./Peticiones/DetailPeticion";
+export { default as HeaderPeticion } from "./Peticiones/HeaderPeticion";
+export { default as ModalDetallePeticion } from "./Peticiones/ModalDetallePeticion";
+export { default as ModalCreatePeticion } from "./Peticiones/ModalCreatePeticion";
