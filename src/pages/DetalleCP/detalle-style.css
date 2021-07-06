@@ -4,6 +4,7 @@
 
 .card-information {
     align-content: center;
+    margin-left: 33px;
 }
 
 .icon-informacion{
@@ -27,4 +28,13 @@
 
 .btnBack {
     font-size: 23px;
+}
+
+.info_icon {
+    max-width: 40px;
+    max-height: 40px;
+}
+
+.description-info{
+    margin-left: 48px;
 }

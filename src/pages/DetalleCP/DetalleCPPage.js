@@ -2,8 +2,16 @@ import React from "react";
 
 import './detalle-style.css';
 
-import { Typography, Button, Row, Col, Card } from 'antd';
-import { LeftOutlined, SaveFilled, InfoCircleFilled } from "@ant-design/icons";
+import { 
+    Typography, 
+    Button, 
+    Row, 
+    Col,
+    PageHeader,
+    Space} from 'antd';
+
+import { SaveFilled } from "@ant-design/icons";
+import info_icon from "../../assets/icons/info.png"
 
 import FormDetalle from "./components/FormDetalle";
 import TableDetallesCP from "./components/TableDetallesCP";
@@ -18,35 +26,35 @@ const DetalleCPPage = () => {
             {/** Column para el titulo y el botón general */}
             <Row>
                 <Col span={24}>
-                    <Title level={3} >
-                        <Button type="link" onc >
-                            <LeftOutlined className="btnBack" />
-                        </Button> 
-                        Detalle Del Caso De Prueba
-                    </Title>
-
-                    <Button 
-                        className="btnGuardaCambios"
-                        type="primary"
-                        shape="round"
-                        icon={ <SaveFilled /> }>
-                        Guardar
-                    </Button>
-                </Col>
-            </Row>
-
-            {/** Column para el info */}
-            <Row>
-                <Col span={6}>
-                    <Card className="card-information">
-                        <InfoCircleFilled className="icon-informacion" />
-                        <Title level={5} >
-                            CP - 001 Crear Nueva Ventana Conf.
-                        </Title>
-                        <span >
-                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-                        </span>
-                    </Card>
+                    <PageHeader
+                        onBack={() => window.history.back()}
+                        title="Detalle De Casos De Prueba"
+                        extra={[
+                            <Button
+                                shape="round"
+                                key="1"
+                                icon={ <SaveFilled/> }
+                                type="primary"
+                                onClick={() => alert("Botón en mantenimiento ..!!")}>
+                                Guardar
+                            </Button>
+                        ]}>
+                            <div className="card-information">
+                                <Space align="center">
+                                    <img alt="icon_info" src={info_icon} className="info_icon" />
+                                
+                                    <Title level={5} >
+                                        CP - 001 Crear Nueva Ventana Configuración.
+                                    </Title>
+                                    
+                                </Space>
+                                <br />
+                                <span className="description-info">
+                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                                </span>
+                                
+                            </div>
+                    </PageHeader>
                 </Col>
             </Row>
 
