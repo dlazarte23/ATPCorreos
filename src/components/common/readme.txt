@@ -1,0 +1,1 @@
+aqui pueden ir tablas genericas, modales genericos, notificaiones o etc, todo lo que sea generico.
