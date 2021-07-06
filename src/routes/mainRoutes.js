@@ -2,8 +2,9 @@ import React from 'react';
 
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 
-import { Header, SiderMenu, Footer, PageNotFound } from "../components";
-import { PeticionesPage, CasosPruebasScreen, LoginPage } from "../pages";
+import { Header, SiderMenu, Footer } from "../components";
+
+import { main } from './routes';
 
 import { Layout } from "antd";
 
@@ -22,19 +23,26 @@ const MainRoutes = () => (
                             style={{ padding: 24, minHeight: 578 }}
                         >
                             <Switch>
-                                <Route path="/" exact />
+                                <Route path={main.path} exact />
                                 <Route
-                                    path="/Peticiones/listado-de-peticiones"
+                                    path={main.peticiones.path}
                                     exact
-                                    component={PeticionesPage}
+                                    component={main.peticiones.component}
                                 />
                                 <Route
-                                    path="/CasosDePrueba/creacion-de-casos-de-prueba"
+                                    path={main.creacionCp.path}
                                     exact
-                                    component={CasosPruebasScreen}
+                                    component={main.creacionCp.component}
                                 />
-                                <Route path="/sign-in" exact component={LoginPage} />
-                                <Route path="" component={PageNotFound} />
+                                <Route
+                                    path={main.creacionDetalleCp.path}
+                                    exact
+                                    component={main.creacionDetalleCp.component}
+                                />
+                                <Route 
+                                    path={main.error404.path} 
+                                    component={main.error404.component} 
+                                />
                             </Switch>
                         </div>
                     </Content>

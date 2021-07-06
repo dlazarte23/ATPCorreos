@@ -1,7 +1,7 @@
 import React from "react";
 
-const CasosPruebasScreen = () => {
+const CasosPruebasPage = () => {
   return <h1>CasosPruebasScreen ..!!</h1>;
 };
 
-export default CasosPruebasScreen;
+export default CasosPruebasPage;
