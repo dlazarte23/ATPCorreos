@@ -1,17 +1,79 @@
 import React from "react";
 
 import "./detalle-style.css";
-
-import { Typography, Button, Row, Col, PageHeader, Space } from "antd";
-import { InfoCircleTwoTone } from "@ant-design/icons";
-import { SaveFilled } from "@ant-design/icons";
-import info_icon from "../../assets/icons/info.png";
-
+import {
+  Typography,
+  Button,
+  Row,
+  Col,
+  PageHeader,
+  Space,
+  Descriptions,
+  Avatar,
+} from "antd";
+import { SaveFilled, LeftOutlined } from "@ant-design/icons";
+import { InfoSvg } from "../../components/common/icons";
 import FormDetalle from "./components/FormDetalle";
 import TableDetallesCP from "./components/TableDetallesCP";
 
+const Content = ({ children, extra }) => (
+  <div className="content">
+    <div className="main">{children}</div>
+    <div className="extra">{extra}</div>
+  </div>
+);
+
+const extraContent = (
+  <div
+    style={{
+      display: "flex",
+      width: "max-content",
+      justifyContent: "flex-end",
+    }}
+  >
+    <div className="description-info"></div>
+  </div>
+);
+
 const DetalleCPPage = () => {
-  const { Title } = Typography;
+  const { Title, Paragraph } = Typography;
+
+  const renderContent = () => (
+    <div className="card-information">
+      <Space align="start">
+        <InfoSvg />
+        <PageHeader
+          className="case-header"
+          title={
+            <Title level={5} className="description-info">
+              CP - 001 Crear Nueva Ventana Configuración.
+            </Title>
+          }
+        >
+          <Paragraph className="description-info">
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsum is that it has a. Lorem Ipsum is simply dummy
+            text of the printing and typesetting industry.
+          </Paragraph>
+          <Paragraph className="description-info">
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout. The point
+            of using Lorem Ipsum is that it has a. Lorem Ipsum is simply dummy
+            text of the printing and typesetting industry.
+          </Paragraph>
+          <Descriptions size="small" column={3} className="description-info">
+            <Descriptions.Item label="Id. Petición">
+              {Math.floor(Math.random() * 10000000)}
+            </Descriptions.Item>
+            <Descriptions.Item label="Nombre Petición">
+              <a>Configuración Footer Email</a>
+            </Descriptions.Item>
+          </Descriptions>
+        </PageHeader>
+      </Space>
+    </div>
+  );
 
   return (
     <>
@@ -20,10 +82,10 @@ const DetalleCPPage = () => {
         <Col span={24}>
           <PageHeader
             onBack={() => window.history.back()}
-            title="Detalle De Casos De Prueba"
+            backIcon={<LeftOutlined />}
+            title="Detalle del Caso De Prueba"
             extra={[
               <Button
-                shape="round"
                 key="1"
                 icon={<SaveFilled />}
                 type="primary"
@@ -33,25 +95,7 @@ const DetalleCPPage = () => {
               </Button>,
             ]}
           >
-            <div className="card-information">
-              <Space align="center">
-                <InfoCircleTwoTone
-                  className="info_icon"
-                  style={{ fontSize: "40px" }}
-                />
-                {/* <img alt="icon_info" src={info_icon} className="info_icon" /> */}
-
-                <Title level={5}>
-                  CP - 001 Crear Nueva Ventana Configuración.
-                </Title>
-              </Space>
-              <br />
-              <span className="description-info">
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-                The point of using Lorem Ipsum is that it has a...
-              </span>
-            </div>
+            <Content extra={extraContent}>{renderContent()}</Content>
           </PageHeader>
         </Col>
       </Row>

@@ -2,37 +2,69 @@ import React, { useState } from "react";
 
 import "../detalle-style.css";
 import { Steps, Button, message } from "antd";
+import {
+  FileExclamationOutlined,
+  FileTextOutlined,
+  FileProtectOutlined,
+  FileImageOutlined,
+} from "@ant-design/icons";
+
 import EditorStepDetalle from "./EditorStepDetalle";
+import UploadEvidencias from "./UploadEvidencias";
 
 const FormDetalle = () => {
   const { Step } = Steps;
-  const [editorData, setEditorData] = useState(
+
+  const [dataPrecondicion, setDataPrecondicion] = useState(
     "<ul><li>Precondición del caso de prueba!</li><li>Segunda precondición.</li><li>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</li></ul>"
   );
+  const [dataAccion, setDataAccion] = useState(
+    "<ul><li>Acciones del caso de prueba!</li></ul>"
+  );
+  const [dataResultado, setDataResultado] = useState(
+    "<ul><li>Resultado esperado!</li></ul>"
+  );
+
   const [current, setCurrent] = React.useState(0);
-  console.log(editorData);
 
   const steps = [
     {
       title: "Precondición",
+      icon: <FileExclamationOutlined />,
       content: (
         <EditorStepDetalle
-          editorData={editorData}
-          setEditorData={setEditorData}
+          editorData={dataPrecondicion}
+          setEditorData={setDataPrecondicion}
+          key="1"
         />
       ),
     },
     {
       title: "Acción",
-      content: "Acción",
+      icon: <FileTextOutlined />,
+      content: (
+        <EditorStepDetalle
+          editorData={dataAccion}
+          setEditorData={setDataAccion}
+          key="2"
+        />
+      ),
     },
     {
       title: "Resultado Esperado",
-      content: "Resultado Esperado",
+      icon: <FileProtectOutlined />,
+      content: (
+        <EditorStepDetalle
+          editorData={dataResultado}
+          setEditorData={setDataResultado}
+          key="3"
+        />
+      ),
     },
     {
       title: "Evidencias",
-      content: "Evidencias",
+      icon: <FileImageOutlined />,
+      content: <UploadEvidencias />,
     },
   ];
 
@@ -45,16 +77,10 @@ const FormDetalle = () => {
   };
 
   return (
-    /*  <Steps current={1} percent={60}>
-      <Step title="Precondición" />
-      <Step title="Acción" />
-      <Step title="Resultado Esperado" />
-      <Step title="Evidencias" />
-    </Steps> */
     <>
-      <Steps current={current}>
+      <Steps current={current} /* percent={(current + 1) * 25} */>
         {steps.map((item) => (
-          <Step key={item.title} title={item.title} />
+          <Step key={item.title} title={item.title} icon={item.icon} />
         ))}
       </Steps>
       <div className="steps-content">{steps[current].content}</div>
@@ -67,7 +93,7 @@ const FormDetalle = () => {
         {current === steps.length - 1 && (
           <Button
             type="primary"
-            onClick={() => message.success("Processing complete!")}
+            onClick={() => message.success("Paso agregado!")}
           >
             Completar
           </Button>

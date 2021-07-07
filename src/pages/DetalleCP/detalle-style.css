@@ -5,6 +5,7 @@
 .card-information {
   align-content: center;
   margin-left: 33px;
+  margin-top: 20px !important;
 }
 
 .icon-informacion {
@@ -36,7 +37,7 @@
 }
 
 .description-info {
-  margin-left: 48px;
+  margin-left: 0px;
 }
 
 .steps-content {
@@ -51,4 +52,28 @@
 
 .steps-action {
   margin-top: 24px;
+}
+
+.ant-upload.ant-upload-drag .ant-upload-btn {
+  display: table;
+  height: 201px !important;
+}
+
+button {
+  border-radius: 10px !important;
+  color: #000 !important;
+}
+
+button.ant-btn.ant-btn-primary {
+  background-color: #ffcd00 !important;
+  border-color: #ffcd00 !important;
+}
+
+.ant-page-header-content {
+  padding-top: 0px !important;
+}
+
+.case-header {
+  padding-top: 0px !important;
+  margin-top: 0px !important;
 }
