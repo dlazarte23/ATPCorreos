@@ -4,9 +4,10 @@ import {
   ListPeticiones,
   ModalCreatePeticion,
   ModalDetallePeticion,
-  DetailPeticion,
+  InfoPeticion
 } from "./components";
 import { Row, Col } from "antd";
+import InfoPetitcion from "./components/InfoPetiticion";
 
 export default function Peticionespage() {
   const [filter, setFilter] = useState({
@@ -57,16 +58,18 @@ export default function Peticionespage() {
         />
       </Col>
       {/* <Col lg={14} sm={24}> */}
-      <Col lg={24} sm={24}>
+      <Col lg={14} sm={14}>
         <ListPeticiones
           listData={filter.value === "Personales" ? listData : listData2}
           showModal={showModal}
           setShowModal={setShowModal}
         />
       </Col>
-      {/* <Col lg={10}>
-        <DetailPeticion />
-      </Col> */}
+
+      <Col lg={10} sm={10}>
+        <InfoPetitcion />
+      </Col>
+
       <ModalDetallePeticion showModal={showModal} setShowModal={setShowModal} />
       <ModalCreatePeticion showModal={showModal} setShowModal={setShowModal} />
     </Row>

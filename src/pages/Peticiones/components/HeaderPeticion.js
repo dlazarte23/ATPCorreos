@@ -21,7 +21,6 @@ export default function HeaderPeticion(props) {
     <>
       <PageHeader
         className="site-page-header"
-        onBack={() => window.history.back()}
         title="Lista de Peticiones"
         //subTitle="This is a subtitle"
         avatar={{
@@ -44,15 +43,18 @@ export default function HeaderPeticion(props) {
           placeholder="Buscar"
           allowClear
           //onSearch={onSearch}
-          style={{ width: "50%", marginBottom: "20px" }}
+          style={{ width: "31.5%", marginBottom: "20px" }}
         />
         <br />
+        Filtros: 
         <Radio.Group
           options={options}
           onChange={onChange}
+          size={'small'}
           value={filter.value}
           optionType="button"
           buttonStyle="solid"
+          style={{marginLeft: 10}}
         />
       </PageHeader>
     </>

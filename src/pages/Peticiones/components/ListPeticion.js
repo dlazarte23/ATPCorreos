@@ -35,6 +35,7 @@ export default function ListPeticiones(props) {
         footer={<div></div>}
         renderItem={(item) => (
           <List.Item
+            style={{maxWidth: 650}}
             key={item.title}
             actions={[
               <IconText
