@@ -1,0 +1,35 @@
+.contenedor{
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.area-contenido{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
+}
+
+.texto-descripcion{
+    height: 100px;
+}
+
+.div-align{
+    grid-column: 2/3;
+}
+
+.btnAgregar{
+    margin-top: 20px;
+    max-width: 30%;
+    float: right;
+}
+
+.btnTestLink{
+    background-color: #595959;
+    color: #fff;
+}
+
+.btnExcel{
+    background-color: #d3f261;
+    color: black;
+}
