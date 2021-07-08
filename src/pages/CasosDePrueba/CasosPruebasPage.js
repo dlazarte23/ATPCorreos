@@ -72,7 +72,7 @@ const CasosPruebasPage = () => {
               </div>
               <div>
                 <Title level={5}>Descripcion del caso de prueba</Title>
-                <Input.TextArea className="texto-descripcion" />
+                <Input.TextArea maxLength={100} showCount />
               </div>
               <div className="div-align">
                 <Button shape="round" icon={<PlusOutlined />} className="btnAgregar" type="primary">Agregar</Button>
