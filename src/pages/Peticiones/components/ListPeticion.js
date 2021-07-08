@@ -1,13 +1,12 @@
 import React from "react";
-import { List, Avatar, Space, Card, Tag } from "antd";
+import { List, Space, Card, Tag } from "antd";
 import {
   NumberOutlined,
   CalendarOutlined,
   InfoCircleOutlined,
-  SettingOutlined,
-  EditOutlined,
-  DeleteOutlined,
+  RightOutlined
 } from "@ant-design/icons";
+
 import "../peticion-style.css";
 
 const IconText = ({ icon, text }) => (
@@ -66,12 +65,10 @@ export default function ListPeticiones(props) {
                         })
                       }
                     />,
-                    <SettingOutlined
-                      key="setting"
-                      title="Ajustes de petición"
-                    />,
-                    <EditOutlined key="edit" title="Editar" />,
-                    <DeleteOutlined key="delete" title="Eliminar" />,
+                    <Space align="start" style={{width:89}} onClick={() => alert("Hola")}>
+                      <p>Ver Detalle</p>
+                      <RightOutlined />
+                    </Space>,
                   ]}
                 ></Card>
               </>

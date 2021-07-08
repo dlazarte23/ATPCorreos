@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useHistory } from 'react-router';
 
-import { Card, Typography, Descriptions, Button } from 'antd';
+import { Card, Typography, Descriptions, Button, Space } from 'antd';
 import { 
     ExceptionOutlined, 
     SettingFilled, 
@@ -16,7 +16,7 @@ const InfoPetitcion = () => {
     const { Title } = Typography;
 
     return(
-        <Card style={{maxWidth: 600, float: "right"}}>
+        <Card style={{maxWidth: 550, float: "right"}}>
             <div style={{textAlign: "center", width: "100%", marginBottom:40}}>
                 <Title level={4}><ExceptionOutlined /> Detalle De La Petición</Title>
             </div>
@@ -44,16 +44,16 @@ const InfoPetitcion = () => {
             </div>
 
             <div style={{marginTop: 25}}>
-                <div style={{float: "left"}}>
+                <Space>
                     <Button icon={<EditOutlined />} shape="round"  type="dashed" /> 
 
                     <Button icon={<DeleteOutlined />} shape="round"  type="dashed" style={{marginLeft: 10}} />
-                </div>
-                <div style={{float: "right"}}>
+                </Space>
+                <Space style={{float: "right"}}>
                     <Button icon={<SettingFilled />} type="primary" shape="round" onClick={() => history.push('/peticiones/creacion-de-casos-de-prueba')}>
                         Configurar
                     </Button>
-                </div>
+                </Space>
             </div>
         </Card>
     );
