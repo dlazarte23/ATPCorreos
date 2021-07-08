@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useHistory } from 'react-router';
 
-import { Card, Typography, Descriptions, Button, Space } from 'antd';
+import { Card, Typography, Descriptions, Button, Space, Tooltip  } from 'antd';
 import { 
     ExceptionOutlined, 
     SettingFilled, 
@@ -45,9 +45,12 @@ const InfoPeticion = () => {
 
             <div style={{marginTop: 25}}>
                 <Space>
-                    <Button icon={<EditOutlined />} shape="round"  type="dashed" /> 
-
-                    <Button icon={<DeleteOutlined />} shape="round"  type="dashed" style={{marginLeft: 10}} />
+                    <Tooltip placement="left" title="Editar Petición">
+                        <Button icon={<EditOutlined />} shape="round"  type="dashed" /> 
+                    </Tooltip>
+                    <Tooltip placement="right" title="Eliminar Petición">
+                        <Button icon={<DeleteOutlined />} shape="round"  type="dashed" style={{marginLeft: 10}} />
+                    </Tooltip>
                 </Space>
                 <Space style={{float: "right"}}>
                     <Button icon={<SettingFilled />} type="primary" shape="round" onClick={() => history.push('/peticiones/creacion-de-casos-de-prueba')}>
