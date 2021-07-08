@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../detalle-style.css";
 import { Upload, message } from "antd";

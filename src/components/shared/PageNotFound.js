@@ -1,5 +1,4 @@
 import { Result, Button } from "antd";
-import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
   return (
@@ -8,8 +7,8 @@ const PageNotFound = () => {
       title="404"
       subTitle="Lo sentimos, la página que busca no existe."
       extra={
-        <Button type="primary">
-          <Link to="/">Volver al inicio</Link>
+        <Button type="primary" onClick={ () => window.history.back() }>
+          Volver al inicio
         </Button>
       }
     />

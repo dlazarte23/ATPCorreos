@@ -51,7 +51,7 @@ const CasosPruebasPage = () => {
                   <Title level={5}>
                     <Descriptions size="small" column={1} >
                       <Descriptions.Item label="Nombre Petición">
-                        <a href="#">Configuración Footer Email</a>
+                        <a href="!">Configuración Footer Email</a>
                       </Descriptions.Item>
                       <Descriptions.Item label="Id. Petición">
                         {Math.floor(Math.random() * 10000000)}
@@ -72,7 +72,7 @@ const CasosPruebasPage = () => {
               </div>
               <div>
                 <Title level={5}>Descripcion del caso de prueba</Title>
-                <textarea className="texto-descripcion" />
+                <Input.TextArea className="texto-descripcion" />
               </div>
               <div className="div-align">
                 <Button shape="round" icon={<PlusOutlined />} className="btnAgregar" type="primary">Agregar</Button>

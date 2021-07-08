@@ -1,5 +1,7 @@
 import { Space } from 'antd';
 
+import { Link } from 'react-router-dom';
+
 export const columns = [
     {
         title: "#",
@@ -21,9 +23,9 @@ export const columns = [
         key: "accion",
         render: () => (
             <Space size="middle">
-                <a href="!">Editar</a>
-                <a href="!">Eliminar</a>
-                <a href="!">Configurar</a>
+                <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">Editar</Link>
+                <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">Eliminar</Link>
+                <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">Configurar</Link>
             </Space>
         )
     }
