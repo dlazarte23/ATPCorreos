@@ -7,6 +7,7 @@ import {
   SettingOutlined,
   EditOutlined,
   DeleteOutlined,
+  RightOutlined,
 } from "@ant-design/icons";
 import "../peticion-style.css";
 
@@ -15,6 +16,14 @@ const IconText = ({ icon, text }) => (
     {React.createElement(icon)}
     {text}
   </Space>
+);
+
+const IconLink = ({ text }) => (
+  <a className="example-link" title="Ver detalle">
+    <InfoCircleOutlined />
+    {text}
+    <RightOutlined />
+  </a>
 );
 
 export default function ListPeticiones(props) {
@@ -28,72 +37,61 @@ export default function ListPeticiones(props) {
           onChange: (page) => {
             console.log(page);
           },
-          pageSize: 5,
+          pageSize: 3,
+          style: { float: "left" },
         }}
+        style={{ marginLeft: 20 }}
         dataSource={listData}
         bordered={false}
-        footer={<div></div>}
+        footer={<></>}
         renderItem={(item) => (
-          <List.Item
-            style={{maxWidth: 650}}
-            key={item.title}
-            actions={[
-              <IconText
-                icon={NumberOutlined}
-                text={"Id. Petición: " + Math.floor(Math.random() * 10000000)}
-                key="list-vertical-star-o"
-              />,
-              <IconText
-                icon={CalendarOutlined}
-                text="01/07/2021"
-                key="list-vertical-like-o"
-              />,
-            ]}
-            extra={
-              <>
-                <Card
-                  bordered={false}
-                  style={{ width: "100%", marginTop: "20%" }}
-                  size="small"
-                  actions={[
-                    <InfoCircleOutlined
-                      key="delete"
-                      title="Ver detalle"
-                      onClick={() =>
-                        setShowModal({
-                          ...showModal,
-                          detail: true,
-                        })
-                      }
-                    />,
-                    <SettingOutlined
-                      key="setting"
-                      title="Ajustes de petición"
-                    />,
-                    <EditOutlined key="edit" title="Editar" />,
-                    <DeleteOutlined key="delete" title="Eliminar" />,
-                  ]}
-                ></Card>
-              </>
-            }
-          >
-            <List.Item.Meta
-              //avatar={<Avatar src={item.avatar} />}
-              title={
-                <a href={item.href}>
-                  {item.title}
-                  {item.key < 3 ? (
-                    <Tag color="#87d068" className="TagNewPeticion">
-                      Nuevo
-                    </Tag>
-                  ) : null}
-                </a>
+          <>
+            <List.Item
+              style={{
+                maxWidth: 650,
+              }}
+              key={item.title}
+              actions={[
+                <IconText
+                  icon={NumberOutlined}
+                  text={"Id. Petición: " + Math.floor(Math.random() * 10000000)}
+                  key="list-vertical-star-o"
+                />,
+                <IconText
+                  icon={CalendarOutlined}
+                  text="01/07/2021"
+                  key="list-vertical-like-o"
+                />,
+              ]}
+              extra={
+                <>
+                  <Card
+                    bordered={false}
+                    style={{ width: "100%", float: "left", marginTop: "10%" }}
+                    size="default"
+                    actions={[<IconLink text=" Ver Detalle" />]}
+                  ></Card>
+                </>
               }
-              description={item.description}
-            />
-
-            {/* {item.content} */}
-          </List.Item>
+            >
+              <List.Item.Meta
+                //avatar={<Avatar src={item.avatar} />}
+                title={
+                  <a href={item.href}>
+                    {item.title}
+                    {item.key < 3 ? (
+                      <Tag color="#87d068" className="TagNewPeticion">
+                        Nuevo
+                      </Tag>
+                    ) : null}
+                  </a>
+                }
+                description={item.description}
+              />
+              {/* {item.content} */}
+            </List.Item>
+            <br />
+          </>
         )}
       />
       <br />

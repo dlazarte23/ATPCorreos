@@ -39,6 +39,7 @@ export default function HeaderPeticion(props) {
         ]}
       >
         <Descriptions size="small" column={3}></Descriptions>
+        <br />
         <Search
           placeholder="Buscar"
           allowClear
@@ -46,15 +47,15 @@ export default function HeaderPeticion(props) {
           style={{ width: "31.5%", marginBottom: "20px" }}
         />
         <br />
-        Filtros: 
+        Filtros:
         <Radio.Group
           options={options}
           onChange={onChange}
-          size={'small'}
+          size={"small"}
           value={filter.value}
           optionType="button"
           buttonStyle="solid"
-          style={{marginLeft: 10}}
+          style={{ marginLeft: 10 }}
         />
       </PageHeader>
     </>
