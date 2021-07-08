@@ -42,7 +42,7 @@ const CasosPruebasPage = () => {
             ]}>
           </PageHeader>
 
-          <div className="card-information">
+          <div className="card-information" style={{marginLeft: 57}}>
             <Space align="start">
               <InfoSvg />
               <PageHeader
