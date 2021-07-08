@@ -9,7 +9,7 @@ import {
     EditOutlined, 
     DeleteOutlined } from '@ant-design/icons'
 
-const InfoPetitcion = () => {
+const InfoPeticion = () => {
 
     const history = useHistory();
 
@@ -59,4 +59,4 @@ const InfoPetitcion = () => {
     );
 }
 
-export default InfoPetitcion;
+export default InfoPeticion;

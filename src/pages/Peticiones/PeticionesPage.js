@@ -3,11 +3,11 @@ import {
   HeaderPeticion,
   ListPeticiones,
   ModalCreatePeticion,
-  ModalDetallePeticion
+  ModalDetallePeticion,
+  InfoPeticion 
 } from "./components";
 
 import { Row, Col } from "antd";
-import InfoPetitcion from "./components/InfoPetiticion";
 
 export default function Peticionespage() {
   const [filter, setFilter] = useState({
@@ -69,7 +69,7 @@ export default function Peticionespage() {
           />
         </Col>
         <Col span={10} offset={2}>
-          <InfoPetitcion />
+          <InfoPeticion />
         </Col>
       </ Row>
 
