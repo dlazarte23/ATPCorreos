@@ -2,21 +2,21 @@ import React from 'react';
 
 import { useHistory } from 'react-router';
 
-import { Card, Typography, Descriptions, Button } from 'antd';
+import { Card, Typography, Descriptions, Button, Space, Tooltip  } from 'antd';
 import { 
     ExceptionOutlined, 
     SettingFilled, 
     EditOutlined, 
     DeleteOutlined } from '@ant-design/icons'
 
-const InfoPetitcion = () => {
+const InfoPeticion = () => {
 
     const history = useHistory();
 
     const { Title } = Typography;
 
     return(
-        <Card style={{maxWidth: 600, float: "right"}}>
+        <Card style={{maxWidth: 550, float: "right"}}>
             <div style={{textAlign: "center", width: "100%", marginBottom:40}}>
                 <Title level={4}><ExceptionOutlined /> Detalle De La Petición</Title>
             </div>
@@ -44,19 +44,22 @@ const InfoPetitcion = () => {
             </div>
 
             <div style={{marginTop: 25}}>
-                <div style={{float: "left"}}>
-                    <Button icon={<EditOutlined />} shape="round"  type="dashed" /> 
-
-                    <Button icon={<DeleteOutlined />} shape="round"  type="dashed" style={{marginLeft: 10}} />
-                </div>
-                <div style={{float: "right"}}>
+                <Space>
+                    <Tooltip placement="left" title="Editar Petición">
+                        <Button icon={<EditOutlined />} shape="round"  type="dashed" /> 
+                    </Tooltip>
+                    <Tooltip placement="right" title="Eliminar Petición">
+                        <Button icon={<DeleteOutlined />} shape="round"  type="dashed" style={{marginLeft: 10}} />
+                    </Tooltip>
+                </Space>
+                <Space style={{float: "right"}}>
                     <Button icon={<SettingFilled />} type="primary" shape="round" onClick={() => history.push('/peticiones/creacion-de-casos-de-prueba')}>
                         Configurar
                     </Button>
-                </div>
+                </Space>
             </div>
         </Card>
     );
 }
 
-export default InfoPetitcion;
+export default InfoPeticion;

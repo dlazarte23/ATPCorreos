@@ -12,6 +12,8 @@
 
 .texto-descripcion{
     height: 100px;
+    width: 100%;
+    resize: none;
 }
 
 .div-align{
@@ -32,4 +34,8 @@
 .btnExcel{
     background-color: #d3f261;
     color: black;
+}
+
+.text-export{
+    font-weight: 500;
 }

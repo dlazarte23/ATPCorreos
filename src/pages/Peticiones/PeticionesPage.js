@@ -4,10 +4,10 @@ import {
   ListPeticiones,
   ModalCreatePeticion,
   ModalDetallePeticion,
-  InfoPeticion
+  InfoPeticion 
 } from "./components";
+
 import { Row, Col } from "antd";
-import InfoPetitcion from "./components/InfoPetiticion";
 
 export default function Peticionespage() {
   const [filter, setFilter] = useState({
@@ -48,30 +48,34 @@ export default function Peticionespage() {
   }
 
   return (
-    <Row>
-      <Col>
-        <HeaderPeticion
-          filter={filter}
-          setFilter={setFilter}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
-      </Col>
-      {/* <Col lg={14} sm={24}> */}
-      <Col lg={14} sm={14}>
-        <ListPeticiones
-          listData={filter.value === "Personales" ? listData : listData2}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
-      </Col>
+    <>
+      <Row>
+        <Col span={24}>
+          <HeaderPeticion
+            filter={filter}
+            setFilter={setFilter}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+        </Col>
+      </ Row>
 
-      <Col lg={10} sm={10}>
-        <InfoPetitcion />
-      </Col>
+      <Row>
+        <Col span={12}>
+          <ListPeticiones
+            listData={filter.value === "Personales" ? listData : listData2}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+        </Col>
+        <Col span={10} offset={2}>
+          <InfoPeticion />
+        </Col>
+      </ Row>
 
       <ModalDetallePeticion showModal={showModal} setShowModal={setShowModal} />
       <ModalCreatePeticion showModal={showModal} setShowModal={setShowModal} />
-    </Row>
+
+    </>
   );
 }

@@ -8,8 +8,7 @@ import {
   Col,
   PageHeader,
   Space,
-  Descriptions,
-  Avatar,
+  Descriptions
 } from "antd";
 import { SaveFilled, LeftOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../components/common/icons";
@@ -67,7 +66,7 @@ const DetalleCPPage = () => {
               {Math.floor(Math.random() * 10000000)}
             </Descriptions.Item>
             <Descriptions.Item label="Nombre Petición">
-              <a>Configuración Footer Email</a>
+              <a href="!">Configuración Footer Email</a>
             </Descriptions.Item>
           </Descriptions>
         </PageHeader>

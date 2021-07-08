@@ -27,8 +27,8 @@ export default function MainSider() {
           <Link to="/peticiones">Peticiones</Link>
         </Menu.Item>
         <Menu.Item key="2" icon={<ProfileOutlined />}>
-          <Link to="/peticiones/creacion-de-casos-de-prueba">
-            Casos de Prueba
+          <Link to="/">
+            nav 2
           </Link>
         </Menu.Item>
         <Menu.Item key="3" icon={<UploadOutlined />}>

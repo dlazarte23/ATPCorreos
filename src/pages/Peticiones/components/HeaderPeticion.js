@@ -1,5 +1,5 @@
 import React from "react";
-import { PageHeader, Button, Input, Descriptions, Radio } from "antd";
+import { PageHeader, Button, Input, Radio, Descriptions } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 const { Search } = Input;
@@ -22,7 +22,6 @@ export default function HeaderPeticion(props) {
       <PageHeader
         className="site-page-header"
         title="Lista de Peticiones"
-        //subTitle="This is a subtitle"
         avatar={{
           src: "https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico",
         }}
@@ -31,9 +30,9 @@ export default function HeaderPeticion(props) {
             shape="round"
             key="1"
             type="primary"
+            icon={<PlusOutlined />}
             onClick={() => setShowModal({ ...showModal, create: true })}
           >
-            <PlusOutlined />
             Nueva Petición
           </Button>,
         ]}
@@ -41,10 +40,9 @@ export default function HeaderPeticion(props) {
         <Descriptions size="small" column={3}></Descriptions>
         <br />
         <Search
-          placeholder="Buscar"
+          placeholder="Buscar ..."
           allowClear
-          //onSearch={onSearch}
-          style={{ width: "31.5%", marginBottom: "20px" }}
+          style={{ maxWidth: "39%", marginBottom: "20px", marginTop: "20px" }}
         />
         <br />
         Filtros:
