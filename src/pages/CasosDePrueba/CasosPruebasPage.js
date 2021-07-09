@@ -66,7 +66,7 @@ const CasosPruebasPage = () => {
           </div>
 
           <div className="contenedor">
-            <div className="area-contenido">
+            <div>
               <FormCP />
             </div>
             <Row className="table-detalleCp">

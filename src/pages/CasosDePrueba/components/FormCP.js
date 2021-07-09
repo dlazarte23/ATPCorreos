@@ -1,5 +1,7 @@
 import React from 'react';
 
+import "../cp-styles.css";
+
 import { Input, Button, Form } from 'antd';
 
 import { PlusOutlined } from "@ant-design/icons";
@@ -10,12 +12,12 @@ import { registrarCasosPruebasAction } from '../../../stateManagement/actions/ca
 
 const FormCP = () => {
 
-    const casosPruebas = useSelector( state => state.casosPruebas.casosPruebas );
-    const loading = useSelector( state => state.casosPruebas.loading );
+    const casosPruebas = useSelector(state => state.casosPruebas.casosPruebas);
+    const loading = useSelector(state => state.casosPruebas.loading);
 
     const dispatch = useDispatch();
 
-    const registrarCasosDePrueba = (casosDePrueba) => dispatch( registrarCasosPruebasAction(casosDePrueba) );
+    const registrarCasosDePrueba = (casosDePrueba) => dispatch(registrarCasosPruebasAction(casosDePrueba));
 
     const onFinish = (values) => {
 
@@ -25,7 +27,7 @@ const FormCP = () => {
 
         //registramos el cp
         registrarCasosDePrueba(values);
-        
+
 
         console.log("DESDE NUETRO COMPONENTE => ", casosPruebas);
         console.log("DESDE NUETRO COMPONENTE => ", loading);
@@ -36,29 +38,36 @@ const FormCP = () => {
     };
 
     return (
-        <Form 
-            layout="inline"
-            name="horizontal_login"
+        <Form
+            className="area-contenido"
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}>
+            onFinishFailed={onFinishFailed}
+        >
             <div>
                 <Form.Item
+                    className="block"
                     label="Nombre De Caso De Prueba"
                     name="nomCp"
                     rules={[{ required: true, message: "Debe el nombre del casos de prueba !" }]} >
-                        <Input />
+                    <Input />
                 </Form.Item>
             </div>
             <div>
                 <Form.Item
-                    label="Nombre De Caso De Prueba"
+                    label="Descripción De Caso De Prueba"
                     name="descripcionCP"
                     rules={[{ required: true, message: "Debe el nombre del casos de prueba !" }]} >
-                        <Input.TextArea maxLength={100} showCount rows={4} />
-                </Form.Item>                
+                    <Input.TextArea maxLength={100} showCount/>
+                </Form.Item>
             </div>
             <div className="div-align">
-                <Button shape="round" icon={<PlusOutlined />}type="primary" htmlType="submit">Agregar</Button>
+                <Button
+                    shape="round"
+                    icon={<PlusOutlined />}
+                    className="btnAgregar"
+                    type="primary"
+                    htmlType="submit">Agregar
+                </Button>
             </div>
         </ Form>
     );
