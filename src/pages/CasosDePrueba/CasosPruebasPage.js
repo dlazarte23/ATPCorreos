@@ -1,9 +1,10 @@
 import React from "react";
 import "./cp-styles.css";
-import { PageHeader, Row, Col, Button, Space, Typography, Input, Descriptions } from 'antd';
-import { DownloadOutlined, FileExcelOutlined, PlusOutlined } from "@ant-design/icons";
+import { PageHeader, Row, Col, Button, Space, Typography, Descriptions } from 'antd';
+import { DownloadOutlined, FileExcelOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../components/common/icons";
 import TableListadoCP from "./components/TableListadoCP";
+import FormCP from "./components/FormCP";
 
 const CasosPruebasPage = () => {
 
@@ -66,17 +67,7 @@ const CasosPruebasPage = () => {
 
           <div className="contenedor">
             <div className="area-contenido">
-              <div>
-                <Title level={5}>Nombre del caso de prueba</Title>
-                <Input />
-              </div>
-              <div>
-                <Title level={5}>Descripcion del caso de prueba</Title>
-                <Input.TextArea maxLength={100} showCount rows={4} />
-              </div>
-              <div className="div-align">
-                <Button shape="round" icon={<PlusOutlined />} className="btnAgregar" type="primary">Agregar</Button>
-              </div>
+              <FormCP />
             </div>
             <Row className="table-detalleCp">
               <Col span={24}>
