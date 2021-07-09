@@ -1,14 +1,11 @@
 import React from "react";
-import { List, Avatar, Space, Card, Tag } from "antd";
+import { List, Space, Card, Tag } from "antd";
 import {
   NumberOutlined,
   CalendarOutlined,
-  InfoCircleOutlined,
-  SettingOutlined,
-  EditOutlined,
-  DeleteOutlined,
   RightOutlined,
 } from "@ant-design/icons";
+
 import "../peticion-style.css";
 
 const IconText = ({ icon, text }) => (
@@ -19,15 +16,15 @@ const IconText = ({ icon, text }) => (
 );
 
 const IconLink = ({ text }) => (
-  <a className="example-link" title="Ver detalle">
-    <InfoCircleOutlined />
+  <a href="!" className="example-link" title="Ver detalle">
+    
     {text}
     <RightOutlined />
   </a>
 );
 
 export default function ListPeticiones(props) {
-  const { listData, showModal, setShowModal } = props;
+  const { listData } = props;
   return (
     <>
       <List
@@ -37,7 +34,7 @@ export default function ListPeticiones(props) {
           onChange: (page) => {
             console.log(page);
           },
-          pageSize: 3,
+          pageSize: 4,
           style: { float: "left" },
         }}
         style={{ marginLeft: 20 }}
@@ -67,7 +64,7 @@ export default function ListPeticiones(props) {
                 <>
                   <Card
                     bordered={false}
-                    style={{ width: "100%", float: "left", marginTop: "10%" }}
+                    style={{ width: "100%", float: "left"}}
                     size="default"
                     actions={[<IconLink text=" Ver Detalle" />]}
                   ></Card>

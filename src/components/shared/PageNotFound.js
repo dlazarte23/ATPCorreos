@@ -1,5 +1,7 @@
 import { Result, Button } from "antd";
 
+import { ArrowLeftOutlined } from '@ant-design/icons'
+
 const PageNotFound = () => {
   return (
     <Result
@@ -7,8 +9,11 @@ const PageNotFound = () => {
       title="404"
       subTitle="Lo sentimos, la página que busca no existe."
       extra={
-        <Button type="primary" onClick={ () => window.history.back() }>
-          Volver al inicio
+        <Button 
+          icon={<ArrowLeftOutlined />}
+          type="primary" 
+          onClick={ () => window.history.back() }>
+          Volver Atras
         </Button>
       }
     />

@@ -1,1 +1,0 @@
-carpeta especial para manejar todos los estados de la app (redux o contextAPI)
