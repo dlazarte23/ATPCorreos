@@ -31,6 +31,8 @@ export default function ModalCreatePeticion(props) {
     console.log("on finsh")
   }
 
+  const loading = useSelector( state => state.peticiones.loading );
+
   // utilizamos use dispatch y nos crea una función
   const dispatch = useDispatch();
 
@@ -42,7 +44,9 @@ export default function ModalCreatePeticion(props) {
 
     console.log(values);
 
-    setConfirmLoading(true);
+    console.log("Esto es una variable llamada desde el state general => ", loading);
+
+    setConfirmLoading(!loading);
 
     setTimeout(() => {
 
@@ -51,9 +55,6 @@ export default function ModalCreatePeticion(props) {
       setShowModal({ ...showModal, create: false });
 
     }, 2000);
-
-
-    // validamos el formulario
 
     // creamos la nueva peticion
     agregarPeticion(values);
