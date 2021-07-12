@@ -39,6 +39,7 @@ const FormCP = () => {
 
     return (
         <Form
+            layout="vertical"
             className="area-contenido"
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
