@@ -1,3 +1,8 @@
+.contenedor{
+  max-width: 80%;
+  margin: 0 auto;
+}
+
 .btnGuardaCambios {
   float: right;
 }

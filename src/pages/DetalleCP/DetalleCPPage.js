@@ -100,11 +100,13 @@ const DetalleCPPage = () => {
       </Row>
 
       {/** Column para pasos (steps) */}
-      <Row className="steps-pasos">
-        <Col span={24} className="setps">
-          <FormDetalle />
-        </Col>
-      </Row>
+      <div className="contenedor">
+        <Row className="steps-pasos">
+          <Col span={24} className="setps">
+            <FormDetalle />
+          </Col>
+        </Row>
+      </div>
 
       {/** Column para la tabla */}
       <Row className="table-detalleCp">
