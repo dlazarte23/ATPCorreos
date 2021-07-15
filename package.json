@@ -8,6 +8,7 @@
     "@ckeditor/ckeditor5-react": "^3.0.2",
     "antd": "^4.16.6",
     "axios": "^0.21.1",
+    "cpr": "^3.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
@@ -19,10 +20,11 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "cpr .env.loc .env -o && npm run copy-env && react-app-rewired start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "copy-env": "env.bat && copy env-config.js public"
   },
   "eslintConfig": {
     "extends": [

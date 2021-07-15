@@ -1,5 +1,6 @@
 import React from "react";
 
+import { ProyectoBaseUrl } from "../../Api/ApiUrl";
 import "./detalle-style.css";
 import {
   Typography,
@@ -8,7 +9,7 @@ import {
   Col,
   PageHeader,
   Space,
-  Descriptions
+  Descriptions,
 } from "antd";
 import { SaveFilled, LeftOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../components/common/icons";
@@ -36,6 +37,8 @@ const extraContent = (
 
 const DetalleCPPage = () => {
   const { Title, Paragraph } = Typography;
+
+  console.log(ProyectoBaseUrl);
 
   const renderContent = () => (
     <div className="card-information">

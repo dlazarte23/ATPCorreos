@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+El presente documento explica las diferentes configuraciones y scripts que contiene.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Principales Librerías
 
-## Available Scripts
+Las librerías para desarrollar son:
 
-In the project directory, you can run:
+- [ant documentación](https://ant.design/docs/react/introduce)
+- [ant ^4.16.6](https://www.npmjs.com/package/antd)
+- [axios documentación](https://github.com/axios/axios)
+- [axios ^0.21.1](https://www.npmjs.com/package/axios)
+- [react-dom ](https://es.reactjs.org/docs/react-dom.html)
+- [react-router-dom ^5.2.0](https://reactrouter.com/web/guides/quick-start)
+- [Redux 4.0.1](https://github.com/reactjs/redux)
+- [Redux documentación](https://es.redux.js.org/)
+- [cpr 3.0.1](https://www.npmjs.com/package/cpr)
+- [react-redux documentación](https://redux.js.org/basics/usage-with-react)
+- [react-redux ^7.1.0](https://www.npmjs.com/package/react-redux/v/7.1.0)
+- […] (ir añadiendo).
 
-### `npm start`
+# La configuración de las variables de entorno
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Se añade la configuración de las variables de entorno en los correspondientes ficheros asignados para ello:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- .env.dev (Desarrollo).
+- .env.pro (Producción).
+- .env.loc (Local).
+- .env.pre (Preproducción).
+- […] (tantos archivos como entornos).
 
-### `npm test`
+Asi pues, en los [Scripts](#Scripts) del package.json se añanden las siguientes líneas (una por cada entorno _"creado"_):
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `"start_<entorno>": "cpr .env.<entorno> .env -o && react-scripts start"`.
+- `"build_<entorno>": "cpr .env.<entorno> .env -o && react-scripts build"`.

@@ -4,7 +4,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const EditorStepDetalle = (props) => {
   const { editorData, setEditorData } = props;
-  console.log(editorData);
+  //console.log(editorData);
   return (
     <CKEditor
       editor={ClassicEditor}
