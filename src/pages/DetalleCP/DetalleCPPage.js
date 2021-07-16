@@ -83,9 +83,9 @@ const DetalleCPPage = () => {
       <Row>
         <Col span={24}>
           <PageHeader
+            title="Detalle del Caso De Prueba"
             onBack={() => window.history.back()}
             backIcon={<LeftOutlined />}
-            title="Detalle del Caso De Prueba"
             extra={[
               <Button
                 key="1"
@@ -113,7 +113,7 @@ const DetalleCPPage = () => {
 
       {/** Column para la tabla */}
       <Row className="table-detalleCp">
-        <Col span={24}>
+        <Col span={22} offset={1}>
           <Title level={4}>Listado De Todos Los Pasos</Title>
           <TableDetallesCP />
         </Col>

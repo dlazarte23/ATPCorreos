@@ -1,41 +1,60 @@
-.contenedor{
-    max-width: 80%;
-    margin: 0 auto;
+.contenedor {
+  max-width: 80%;
+  margin: 0 auto;
 }
 
-.area-contenido{
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 10px;
+.card-information {
+  align-content: center;
+  margin-left: 33px;
+  margin-top: 20px !important;
 }
 
-.texto-descripcion{
-    height: 100px;
-    width: 100%;
-    resize: none;
+.area-contenido {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px;
 }
 
-.div-align{
-    grid-column: 2/3;
+.texto-descripcion {
+  height: 100px;
+  width: 100%;
+  resize: none;
 }
 
-.btnAgregar{
-    margin-top: 20px;
-    max-width: 30%;
-    float: right;
+.div-align {
+  grid-column: 2/3;
 }
 
-.btnTestLink{
-    background-color: #595959;
-    color: #fff;
+.btnAgregar {
+  margin-top: 20px;
+  max-width: 30%;
+  float: right;
 }
 
-.btnExcel{
-    background-color: #d3f261;
-    color: black;
+.btnTestLink {
+  background-color: #595959;
+  color: #fff;
 }
 
-.text-export{
-    font-weight: 500;
+.btnExcel {
+  background-color: #d3f261;
+  color: black;
+}
+
+.text-export {
+  font-weight: 500;
+}
+
+.case-header {
+  padding-top: 0px !important;
+  margin-top: 0px !important;
+}
+
+.description-info {
+  margin-left: 0px;
+}
+
+.table-detalleCp {
+  margin-top: 40px;
 }
