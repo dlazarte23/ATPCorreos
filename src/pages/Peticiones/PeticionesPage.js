@@ -4,7 +4,7 @@ import {
   ListPeticiones,
   ModalCreatePeticion,
   ModalDetallePeticion,
-  InfoPeticion 
+  InfoPeticion,
 } from "./components";
 
 import { Row, Col } from "antd";
@@ -58,24 +58,23 @@ export default function Peticionespage() {
             setShowModal={setShowModal}
           />
         </Col>
-      </ Row>
+      </Row>
 
       <Row>
-        <Col span={12}>
+        <Col span={13}>
           <ListPeticiones
             listData={filter.value === "Personales" ? listData : listData2}
             showModal={showModal}
             setShowModal={setShowModal}
           />
         </Col>
-        <Col span={10} offset={2}>
+        <Col span={10} offset={1}>
           <InfoPeticion />
         </Col>
-      </ Row>
+      </Row>
 
       <ModalDetallePeticion showModal={showModal} setShowModal={setShowModal} />
       <ModalCreatePeticion showModal={showModal} setShowModal={setShowModal} />
-
     </>
   );
 }

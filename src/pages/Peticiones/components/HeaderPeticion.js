@@ -22,9 +22,9 @@ export default function HeaderPeticion(props) {
       <PageHeader
         className="site-page-header"
         title="Lista de Peticiones"
-        avatar={{
+        /* avatar={{
           src: "https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico",
-        }}
+        }} */
         extra={[
           <Button
             shape="round"
