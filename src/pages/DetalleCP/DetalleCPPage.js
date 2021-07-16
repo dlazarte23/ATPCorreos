@@ -4,14 +4,13 @@ import { ProyectoBaseUrl } from "../../Api/ApiUrl";
 import "./detalle-style.css";
 import {
   Typography,
-  Button,
   Row,
   Col,
   PageHeader,
   Space,
   Descriptions,
 } from "antd";
-import { SaveFilled, LeftOutlined } from "@ant-design/icons";
+import { LeftOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../components/common/icons";
 import FormDetalle from "./components/FormDetalle";
 import TableDetallesCP from "./components/TableDetallesCP";
@@ -86,16 +85,6 @@ const DetalleCPPage = () => {
             title="Detalle del Caso De Prueba"
             onBack={() => window.history.back()}
             backIcon={<LeftOutlined />}
-            extra={[
-              <Button
-                key="1"
-                icon={<SaveFilled />}
-                type="primary"
-                onClick={() => alert("Botón en mantenimiento ..!!")}
-              >
-                Guardar
-              </Button>,
-            ]}
           >
             <Content extra={extraContent}>{renderContent()}</Content>
           </PageHeader>
