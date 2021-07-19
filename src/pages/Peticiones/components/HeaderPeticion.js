@@ -1,8 +1,8 @@
 import React from "react";
 import { PageHeader, Button, Input, Radio, Descriptions } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 
-const { Search } = Input;
+// const { Search } = Input;
 
 export default function HeaderPeticion(props) {
   const { filter, setFilter, showModal, setShowModal } = props;
@@ -38,12 +38,8 @@ export default function HeaderPeticion(props) {
         ]}
       >
         <Descriptions size="small" column={3}></Descriptions>
-        <br />
-        <Search
-          placeholder="Buscar ..."
-          allowClear
-          style={{ maxWidth: "39%", marginBottom: "20px", marginTop: "20px" }}
-        />
+        <br />     
+        <Input size="large" placeholder="Buscar..." prefix={<SearchOutlined /> } style={{ maxWidth: "39%", marginBottom: "20px", marginTop: "20px" }}/>
         <br />
         Filtros:
         <Radio.Group
