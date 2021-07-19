@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 
 import { Header, SiderMenu, Footer } from "../components";
 
@@ -23,7 +23,10 @@ const MainRoutes = () => (
                             style={{ padding: 24, minHeight: 578 }}
                         >
                             <Switch>
-                                <Route path={main.path} exact />
+                                <Route path={main.path} exact >
+                                    <Redirect to = "/peticiones"/>
+                                </Route>
+                                
                                 <Route
                                     path={main.peticiones.path}
                                     exact
