@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Form, Input, Button, Typography, Card } from "antd";
-import { LoginOutlined } from "@ant-design/icons";
+import { RightOutlined } from "@ant-design/icons";
 
 import { useHistory } from "react-router-dom";
 
@@ -47,7 +47,8 @@ const FormLogin = () => {
           layout="vertical"
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed} >
+          onFinishFailed={onFinishFailed} 
+          hideRequiredMark>
 
           <Form.Item
             label="Usuario o Email"
@@ -71,12 +72,12 @@ const FormLogin = () => {
 
             <Button
               shape="round"
-              icon={<LoginOutlined />}
+             
               type="primary"
               htmlType="submit" >
 
-              Vamos
-
+             Iniciar Sesión
+             <RightOutlined />
             </Button>
 
           </Form.Item>

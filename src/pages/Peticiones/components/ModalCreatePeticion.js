@@ -87,7 +87,8 @@ export default function ModalCreatePeticion(props) {
           form={form}
           name="nest-messages"
           onFinish={onFinish}
-          size="default">
+          size="default"
+          hideRequiredMark>
             <Form.Item
               name="idPeticion"
               label="Id. Petición"
