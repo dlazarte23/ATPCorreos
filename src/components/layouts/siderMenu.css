@@ -1,0 +1,23 @@
+.sider{
+    position: relative;
+    height: 90%;
+}
+
+
+.ant-layout-sider-children .ant-menu .btn-close {
+    padding-left: 24px !important;
+    background: red !important;
+    border-radius: 8px;
+    width: 80% !important;
+    margin: auto !important;
+    position: absolute;
+    bottom: 62px;
+    right: 0;
+}
+.ant-layout-sider-children .ant-menu .btn-close:hover, .sider.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected.btn-close{
+    background: rgb(209, 72, 72) !important;
+}
+
+.ant-layout-sider-children .ant-menu .btn-close a, .ant-layout-sider-children .ant-menu .btn-close span {
+ color: white;
+}
