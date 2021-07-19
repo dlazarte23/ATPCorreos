@@ -1,6 +1,6 @@
 import { Space } from "antd";
-
 import { Link } from "react-router-dom";
+import { DeleteOutlined, EditOutlined, SettingOutlined } from '@ant-design/icons';
 
 export const columns = [
   {
@@ -23,12 +23,14 @@ export const columns = [
     key: "accion",
     render: () => (
       <Space size="middle">
-        <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">Editar</Link>
         <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
-          Eliminar
+        <EditOutlined/>
+          </Link>
+        <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
+        <DeleteOutlined/>
         </Link>
         <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
-          Configurar
+        <SettingOutlined/>
         </Link>
       </Space>
     ),
