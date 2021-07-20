@@ -68,7 +68,7 @@ const DetalleCPPage = () => {
               {Math.floor(Math.random() * 10000000)}
             </Descriptions.Item>
             <Descriptions.Item label="Nombre Petición">
-              <a href="!">Configuración Footer Email</a>
+              <p>Configuración Footer Email</p>
             </Descriptions.Item>
           </Descriptions>
         </PageHeader>

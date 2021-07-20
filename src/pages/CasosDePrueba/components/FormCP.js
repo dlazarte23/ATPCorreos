@@ -71,12 +71,11 @@ const FormCP = () => {
       <div className="div-align">
         <Button
           shape="round"
-          icon={<PlusOutlined />}
           className="btnAgregar"
           type="primary"
           htmlType="submit"
         >
-          Agregar
+          Agregar <PlusOutlined />
         </Button>
       </div>
     </Form>
