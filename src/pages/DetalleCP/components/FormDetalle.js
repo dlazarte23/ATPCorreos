@@ -7,6 +7,8 @@ import {
   FileTextOutlined,
   FileProtectOutlined,
   FileImageOutlined,
+  ArrowRightOutlined,
+  SaveOutlined
 } from "@ant-design/icons";
 
 import EditorStepDetalle from "./EditorStepDetalle";
@@ -98,15 +100,18 @@ const FormDetalle = () => {
       <div className="steps-content">{steps[current].content}</div>
       <div className="steps-action">
         {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
+          <Button 
+            type="primary"
+            icon={<ArrowRightOutlined />} 
+            onClick={() => next()}>
             Siguiente
           </Button>
         )}
         {current === steps.length - 1 && (
           <Button
             type="primary"
-            onClick={() => message.success("Paso agregado!")}
-          >
+            icon={<SaveOutlined />}
+            onClick={() => message.success("Paso agregado!")} >
             Completar
           </Button>
         )}

@@ -9,7 +9,7 @@ import {
   Typography,
   Descriptions,
 } from "antd";
-import { SaveFilled, LeftOutlined } from "@ant-design/icons";
+import { LeftOutlined } from "@ant-design/icons";
 import { DownloadOutlined, FileExcelOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../components/common/icons";
 import TableListadoCP from "./components/TableListadoCP";

@@ -1,7 +1,13 @@
 import { Space } from "antd";
 import { PaperClipOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, SettingOutlined } from '@ant-design/icons';
 
 export const columns = [
+  {
+    title: "#",
+    dataIndex: "id",
+    key: "id",
+  },
   {
     title: "PreCondición",
     dataIndex: "precondicion",
@@ -27,8 +33,10 @@ export const columns = [
     key: "accion",
     render: () => (
       <Space size="middle">
-        <a href="!">Editar</a>
-        <a href="!">Eliminar</a>
+        <a href="!"><EditOutlined/></a>
+        <a href="!"><DeleteOutlined/></a>
+        
+        {/* <a href="!"><SettingOutlined/></a> */}
       </Space>
     ),
   },
@@ -43,6 +51,7 @@ export const data = [];
 for (let i = 1; i < 4; i++) {
   data.push({
     key: i,
+    id: i,
     precondicion:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
     accion:

@@ -37,6 +37,7 @@ const FormCP = () => {
       className="area-contenido"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      hideRequiredMark
     >
       <div>
         <Form.Item
