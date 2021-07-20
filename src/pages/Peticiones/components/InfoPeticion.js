@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import { useHistory } from "react-router";
 
@@ -10,10 +10,19 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 
+import 
+  ModalCreatePeticion from "./ModalEditPeticion";
+
 const InfoPeticion = () => {
   const history = useHistory();
 
   const { Title } = Typography;
+
+  const [showModal, setShowModal] = useState({
+    detail: false,
+    create: false,
+  });
+
 
   return (
     <Card style={{ maxWidth: 550, float: "right" }}>
@@ -48,7 +57,9 @@ const InfoPeticion = () => {
       <div style={{ marginTop: 25 }}>
         <Space>
           <Tooltip placement="left" title="Editar Petición">
-            <Button icon={<EditOutlined />} shape="round" type="dashed" />
+          <ModalCreatePeticion showModal={showModal} setShowModal={setShowModal} />
+         
+            <Button icon={<EditOutlined />} shape="round" type="dashed"  onClick={() => setShowModal({ ...showModal, create: true })}/>
           </Tooltip>
           <Tooltip placement="right" title="Eliminar Petición">
             <Button
