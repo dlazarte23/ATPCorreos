@@ -15,6 +15,8 @@ import { InfoSvg } from "../../components/common/icons";
 import FormDetalle from "./components/FormDetalle";
 import TableDetallesCP from "./components/TableDetallesCP";
 
+import { Scrollbars } from "react-custom-scrollbars";
+
 const Content = ({ children, extra }) => (
   <div className="content">
     <div className="main">{children}</div>
@@ -34,12 +36,13 @@ const extraContent = (
   </div>
 );
 
-const DetalleCPPage = () => {
+export default function DetalleCPPage() {
   const { Title, Paragraph } = Typography;
 
   console.log(ProyectoBaseUrl);
 
   const renderContent = () => (
+
     <div className="card-information">
       <Space align="start">
         <InfoSvg />
@@ -68,7 +71,7 @@ const DetalleCPPage = () => {
               {Math.floor(Math.random() * 10000000)}
             </Descriptions.Item>
             <Descriptions.Item label="Nombre Petición">
-              <a href="!">Configuración Footer Email</a>
+              <p>Configuración Footer Email</p>
             </Descriptions.Item>
           </Descriptions>
         </PageHeader>
@@ -78,37 +81,41 @@ const DetalleCPPage = () => {
 
   return (
     <>
-      {/** Column para el titulo y el botón general */}
-      <Row>
-        <Col span={24}>
-          <PageHeader
-            title="Detalle del Caso De Prueba"
-            onBack={() => window.history.back()}
-            backIcon={<LeftOutlined />}
-          >
-            <Content extra={extraContent}>{renderContent()}</Content>
-          </PageHeader>
-        </Col>
-      </Row>
-
-      {/** Column para pasos (steps) */}
-      <div className="contenedor">
-        <Row className="steps-pasos">
-          <Col span={24} className="setps">
-            <FormDetalle />
+      <Scrollbars
+        autoHeight={true}
+        autoHeightMax={580}
+      >
+        {/** Column para el titulo y el botón general */}
+        <Row>
+          <Col span={24}>
+            <PageHeader
+              title="Detalle del Caso De Prueba"
+              onBack={() => window.history.back()}
+              backIcon={<LeftOutlined />}
+            >
+              <Content extra={extraContent}>{renderContent()}</Content>
+            </PageHeader>
           </Col>
         </Row>
-      </div>
 
-      {/** Column para la tabla */}
-      <Row className="table-detalleCp">
-        <Col span={22} offset={1}>
-          <Title level={4}>Listado De Todos Los Pasos</Title>
-          <TableDetallesCP />
-        </Col>
-      </Row>
+        {/** Column para pasos (steps) */}
+        <div className="contenedor">
+          <Row className="steps-pasos">
+            <Col span={24} className="setps">
+              <FormDetalle />
+            </Col>
+          </Row>
+        </div>
+
+        {/** Column para la tabla */}
+        <Row className="table-detalleCp">
+          <Col span={22} offset={1}>
+            <Title level={4}>Listado De Todos Los Pasos</Title>
+            <TableDetallesCP />
+          </Col>
+        </Row>
+      </Scrollbars>
     </>
   );
 };
 
-export default DetalleCPPage;

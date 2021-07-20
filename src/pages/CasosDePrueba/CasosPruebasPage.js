@@ -15,6 +15,8 @@ import { InfoSvg } from "../../components/common/icons";
 import TableListadoCP from "./components/TableListadoCP";
 import FormCP from "./components/FormCP";
 
+import { Scrollbars } from "react-custom-scrollbars";
+
 const Content = ({ children, extra }) => (
   <div className="content">
     <div className="main">{children}</div>
@@ -34,7 +36,7 @@ const extraContent = (
   </div>
 );
 
-const CasosPruebasPage = () => {
+export default function CasosPruebasPage() {
   const { Title, Paragraph } = Typography;
 
   const renderContent = () => (
@@ -62,55 +64,59 @@ const CasosPruebasPage = () => {
 
   return (
     <>
-      {/** Column para el titulo y el botón general */}
-      <Row>
-        <Col span={24}>
-          <PageHeader
-            title="Creación De Casos De Prueba"
-            onBack={() => window.history.back()}
-            backIcon={<LeftOutlined />}
-            extra={[
-              <Space>
-                <Paragraph className="text-export">Exportar en</Paragraph>
-              </Space>,
-              <Button
-                shape="round"
-                type="dashed"
-                icon={<DownloadOutlined />}
-                className="btnTestLink"
-                onClick={() => alert("Botón en mantenimiento ..!!")}
-              >
-                Test Link
-              </Button>,
-              <Space>
-                <Paragraph className="text-export"> o </Paragraph>
-              </Space>,
-              <Button
-                shape="round"
-                type="dashed"
-                icon={<FileExcelOutlined />}
-                className="btnExcel"
-                onClick={() => alert("Botón en mantenimiento ..!!")}
-              >
-                Excel
-              </Button>,
-            ]}
-          >
-            <Content extra={extraContent}>{renderContent()}</Content>
-          </PageHeader>
-          <div className="contenedor">
-            <FormCP />
-          </div>
-          <Row className="table-detalleCp">
-            <Col span={22} offset={1}>
-              <Title level={4}>Listado De Plan de Pruebas</Title>
-              <TableListadoCP />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+      <Scrollbars
+        autoHeight={true}
+        autoHeightMax={580}
+      >
+        {/** Column para el titulo y el botón general */}
+        <Row>
+          <Col span={24}>
+            <PageHeader
+              title="Creación De Casos De Prueba"
+              onBack={() => window.history.back()}
+              backIcon={<LeftOutlined />}
+              extra={[
+                <Space>
+                  <Paragraph className="text-export">Exportar en</Paragraph>
+                </Space>,
+                <Button
+                  shape="round"
+                  type="dashed"
+                  icon={<DownloadOutlined />}
+                  className="btnTestLink"
+                  onClick={() => alert("Botón en mantenimiento ..!!")}
+                >
+                  Test Link
+                </Button>,
+                <Space>
+                  <Paragraph className="text-export"> o </Paragraph>
+                </Space>,
+                <Button
+                  shape="round"
+                  type="dashed"
+                  icon={<FileExcelOutlined />}
+                  className="btnExcel"
+                  onClick={() => alert("Botón en mantenimiento ..!!")}
+                >
+                  Excel
+                </Button>,
+              ]}
+            >
+              <Content extra={extraContent}>{renderContent()}</Content>
+            </PageHeader>
+            <div className="contenedor">
+              <FormCP />
+            </div>
+            <Row className="table-detalleCp">
+              <Col span={22} offset={1}>
+                <Title level={4}>Listado De Plan de Pruebas</Title>
+                <TableListadoCP />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Scrollbars>
     </>
   );
 };
 
-export default CasosPruebasPage;

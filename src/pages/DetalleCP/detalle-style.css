@@ -57,6 +57,7 @@
 
 .steps-action {
   margin-top: 24px;
+  text-align: right;
 }
 
 .ant-upload.ant-upload-drag .ant-upload-btn {
