@@ -1,6 +1,14 @@
 import { Space } from "antd";
 import { Link } from "react-router-dom";
 import { DeleteOutlined, EditOutlined, SettingOutlined } from '@ant-design/icons';
+import { Popconfirm } from 'antd';
+
+
+const handleDelete = (key) => {
+  console.log("eliminar", key)
+  // const dataSource = [...this.state.dataSource];
+  // this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
+};
 
 export const columns = [
   {
@@ -21,18 +29,20 @@ export const columns = [
   {
     title: "Acciones",
     key: "accion",
-    render: () => (
+    render: (_, record) => (
       <Space size="middle">
         <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
-        <EditOutlined/>
-          </Link>
-        <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
-        <DeleteOutlined/>
+          <EditOutlined />
         </Link>
-        <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
-        <SettingOutlined/>
-        </Link>
-      </Space>
+        
+        <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+        <a href="!">   <DeleteOutlined />       </a>
+        </Popconfirm >
+
+  <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
+    <SettingOutlined />
+  </Link>
+      </Space >
     ),
   },
 ];

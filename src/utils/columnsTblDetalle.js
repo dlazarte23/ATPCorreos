@@ -1,6 +1,12 @@
 import { Space } from "antd";
-import { PaperClipOutlined } from "@ant-design/icons";
-import { DeleteOutlined, EditOutlined, SettingOutlined } from '@ant-design/icons';
+import { PaperClipOutlined, DeleteOutlined, EditOutlined, SettingOutlined } from '@ant-design/icons';
+import { Popconfirm } from 'antd';
+
+const handleDelete = (key) => {
+  console.log("eliminar", key)
+  // const dataSource = [...this.state.dataSource];
+  // this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
+};
 
 export const columns = [
   {
@@ -31,11 +37,15 @@ export const columns = [
   {
     title: "Acciones",
     key: "accion",
-    render: () => (
+    render: (_, record) => (
       <Space size="middle">
-        <a href="!"><EditOutlined/></a>
-        <a href="!"><DeleteOutlined/></a>
-        
+        <a href="!"><EditOutlined /></a>
+        <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+          <a href="!">
+            <DeleteOutlined />
+          </a>
+        </Popconfirm>
+
         {/* <a href="!"><SettingOutlined/></a> */}
       </Space>
     ),
