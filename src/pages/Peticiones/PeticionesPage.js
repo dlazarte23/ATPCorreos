@@ -7,6 +7,7 @@ import {
   InfoPeticion,
 } from "./components";
 
+import { Scrollbars } from "react-custom-scrollbars";
 import { Row, Col } from "antd";
 
 export default function Peticionespage() {
@@ -49,32 +50,42 @@ export default function Peticionespage() {
 
   return (
     <>
-      <Row>
-        <Col span={24}>
-          <HeaderPeticion
-            filter={filter}
-            setFilter={setFilter}
-            showModal={showModal}
-            setShowModal={setShowModal}
-          />
-        </Col>
-      </Row>
+      <Scrollbars
+        autoHeight={true}
+        autoHeightMax={580}
+      >
+        <Row>
+          <Col span={24}>
+            <HeaderPeticion
+              filter={filter}
+              setFilter={setFilter}
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col span={13}>
-          <ListPeticiones
-            listData={filter.value === "Personales" ? listData : listData2}
-            showModal={showModal}
-            setShowModal={setShowModal}
-          />
-        </Col>
-        <Col span={10} offset={1}>
-          <InfoPeticion />
-        </Col>
-      </Row>
+        <Row>
+          <Col span={13}>
+            <ListPeticiones
+              listData={filter.value === "Personales" ? listData : listData2}
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
+          </Col>
+          <Col span={10} offset={1}>
+            <InfoPeticion />
+          </Col>
+        </Row>
 
-      <ModalDetallePeticion showModal={showModal} setShowModal={setShowModal} />
-      <ModalCreatePeticion showModal={showModal} setShowModal={setShowModal} />
+        <ModalDetallePeticion showModal={showModal} setShowModal={setShowModal} />
+        <ModalCreatePeticion showModal={showModal} setShowModal={setShowModal} />
+      </Scrollbars>
     </>
   );
 }
+
+
+
+
+
