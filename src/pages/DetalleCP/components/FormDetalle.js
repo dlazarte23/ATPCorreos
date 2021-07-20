@@ -28,6 +28,12 @@ const FormDetalle = () => {
   );
 
   const [current, setCurrent] = React.useState(0);
+  const [stepData, setStepData] = useState({
+    precondition: "",
+    action: "",
+    expectedResult: "",
+    evidences: [],
+  });
 
   const steps = [
     {
@@ -35,8 +41,10 @@ const FormDetalle = () => {
       icon: <FileExclamationOutlined />,
       content: (
         <EditorStepDetalle
-          editorData={dataPrecondicion}
-          setEditorData={setDataPrecondicion}
+          stepData={stepData}
+          setStepData={setStepData}
+          initialData={stepData.precondition}
+          current="precondition"
           key="1"
         />
       ),
@@ -46,8 +54,10 @@ const FormDetalle = () => {
       icon: <FileTextOutlined />,
       content: (
         <EditorStepDetalle
-          editorData={dataAccion}
-          setEditorData={setDataAccion}
+          stepData={stepData}
+          setStepData={setStepData}
+          initialData={stepData.action}
+          current="action"
           key="2"
         />
       ),
@@ -57,8 +67,10 @@ const FormDetalle = () => {
       icon: <FileProtectOutlined />,
       content: (
         <EditorStepDetalle
-          editorData={dataResultado}
-          setEditorData={setDataResultado}
+          stepData={stepData}
+          setStepData={setStepData}
+          initialData={stepData.expectedResult}
+          current="expectedResult"
           key="3"
         />
       ),

@@ -23,6 +23,7 @@ export default function MainSider() {
 
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} >
+      
       <div className="logo" />
       <img src={logo} className="appLogo" alt="ATPCorreos"></img>
       <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]} className="sider">
