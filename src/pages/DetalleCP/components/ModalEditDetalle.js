@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
+import {  Modal, Input, InputNumber, Form, Row, Col, Button } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 
 export default function ModalEditListado(props) {
-const result = props.record.resultado
 
+  const action = props.record.accion
+  const precondition = props.record.precondicion
+  const result = props.record.resultado
 
+const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -20,11 +23,16 @@ const result = props.record.resultado
     setIsModalVisible(false);
   };
 
+  const onFinish = () => {
+    console.log("on finsh")
+  }
+
+
   return (
     <>
-      <EditOutlined onClick={showModal} />
+      <a> <EditOutlined onClick={showModal} /> </a>
 
-      <Modal title="Editar Nombre CP" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} centered
+      <Modal title="Editar Paso" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} centered
         footer={[
           <Button key="back" onClick={handleCancel}>
             Cancelar
@@ -33,9 +41,35 @@ const result = props.record.resultado
             Guardar
           </Button>,
         ]}>
-        <p>{result}</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+          <Form
+          layout="vertical"
+          form={form}
+          name="nest-messages"
+          onFinish={onFinish}
+          size="default"
+          centered={true}
+          hideRequiredMark>
+          <Row justify="space-between">
+            <Col span={10}><Form.Item
+              name="precondicion"
+              label="Pre-Condición"
+              rules={[{ required: true, message: "Debe ingresar la Pre-Condición del Paso !" }]} >
+              <Input defaultValue={precondition} />
+            </Form.Item></Col>
+            <Col span={12}>   <Form.Item
+              name="accion"
+              label="Acción"
+              rules={[{ required: true, message: "Debe ingresar la Acción del Paso !" }]} >
+              <Input defaultValue={action} />
+            </Form.Item></Col>
+          </Row>
+          <Form.Item
+            name="resEsperado"
+            label="Resultado Esperado"
+            rules={[{ required: true, message: "Debe ingresar el Resultado Esperado del Paso" }]} >
+            <Input defaultValue={result} />
+          </Form.Item>
+        </Form>
       </Modal>
     </>
   );
