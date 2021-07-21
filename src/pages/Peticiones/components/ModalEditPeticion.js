@@ -8,6 +8,7 @@ import { crearNuevaPeticionAction } from '../../../stateManagement/actions/petic
 export default function ModalEditPeticion(props) {
 
   const { showModal, setShowModal, dataPeticion } = props;
+  const {title, sprint, key} = dataPeticion;
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();
@@ -68,7 +69,7 @@ export default function ModalEditPeticion(props) {
   return (
     <>
       <Modal
-        title={"Editar " + dataPeticion.title}
+        title={"Editar " + title}
         visible={showModal.create}
         onCancel={handleCancel}
         confirmLoading={confirmLoading}
@@ -92,25 +93,24 @@ export default function ModalEditPeticion(props) {
           hideRequiredMark>
           <Row justify="space-between">
             <Col span={10}>
-           
               <Form.Item
               name="idPeticion"
               label="Id. Petición"
               rules={[{ required: true, message: "Debe ingresar el id de la petición !" }]} >
-              <Input />
+              <Input defaultValue={key}/>
             </Form.Item></Col>
             <Col span={12}>   <Form.Item
               name="nomPeticion"
               label="Nombre Petición"
               rules={[{ required: true, message: "Debe ingresar el nombre de la petición !" }]} >
-              <Input />
+              <Input defaultValue={title}/>
             </Form.Item></Col>
           </Row>
           <Form.Item
             name="sprint"
             label="Sprint"
             rules={[{ required: true, type: "number", min: 0, max: 99, message: "El numero de sprint debe estar entre 0 a 99 !" }]} >
-            <InputNumber />
+            <InputNumber defaultValue={sprint}/>
           </Form.Item>
         </Form>
       </Modal>

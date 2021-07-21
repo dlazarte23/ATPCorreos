@@ -74,7 +74,7 @@ const ListItem = ({ item, handleDetalle }) => {
           description={
             <Descriptions size="small" column={2}>
               <Descriptions.Item label="Id. Petición">
-                {Math.floor(Math.random() * 10000000)}
+                {item.key}
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <IconText

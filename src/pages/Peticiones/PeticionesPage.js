@@ -25,7 +25,7 @@ export default function Peticionespage() {
   const listData = [];
   for (let i = 1; i < 8; i++) {
     listData.push({
-      key: i,
+      key: i*26,
       href: "https://ant.design",
       title: `Nombre de la Petición ${i}`,
       sprint: i * 3,
