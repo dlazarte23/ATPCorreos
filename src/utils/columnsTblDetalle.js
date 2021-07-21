@@ -1,6 +1,7 @@
 import { Space } from "antd";
-import { PaperClipOutlined, DeleteOutlined, EditOutlined, SettingOutlined } from '@ant-design/icons';
+import { PaperClipOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Popconfirm } from 'antd';
+import ModalEditListado from "../pages/DetalleCP/components/ModalEditDetalle"
 
 const handleDelete = (key) => {
   console.log("eliminar", key)
@@ -39,7 +40,9 @@ export const columns = [
     key: "accion",
     render: (_, record) => (
       <Space size="middle">
-        <a href="!"><EditOutlined /></a>
+         <ModalEditListado record={record}/> 
+      
+
         <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
           <a href="!">
             <DeleteOutlined />

@@ -1,7 +1,8 @@
 import { Space } from "antd";
 import { Link } from "react-router-dom";
-import { DeleteOutlined, EditOutlined, SettingOutlined } from '@ant-design/icons';
+import { DeleteOutlined, SettingOutlined } from '@ant-design/icons';
 import { Popconfirm } from 'antd';
+import ModalEditListado from "../pages/CasosDePrueba/components/ModalEditListado"
 
 
 const handleDelete = (key) => {
@@ -31,17 +32,17 @@ export const columns = [
     key: "accion",
     render: (_, record) => (
       <Space size="middle">
-        <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
-          <EditOutlined />
-        </Link>
-        
+       
+        <ModalEditListado record={record}/> 
+      
+
         <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
-        <a href="!">   <DeleteOutlined />       </a>
+          <a href="!">   <DeleteOutlined />       </a>
         </Popconfirm >
 
-  <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
-    <SettingOutlined />
-  </Link>
+        <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
+          <SettingOutlined />
+        </Link>
       </Space >
     ),
   },
