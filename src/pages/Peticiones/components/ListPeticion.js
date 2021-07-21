@@ -21,6 +21,8 @@ const IconText = ({ icon, text }) => (
 
 export default function ListPeticiones(props) {
   const { listData } = props;
+
+
   return (
     <List
       itemLayout="horizontal"
@@ -39,22 +41,22 @@ export default function ListPeticiones(props) {
       renderItem={(item) =>
         item.key < 3 ? (
           <Badge.Ribbon text="Nuevo" color="#87d068">
-            <ListItem item={item} />
+            <ListItem item={item}  handleDetalle={props.handleDetalle}/>
           </Badge.Ribbon>
         ) : (
-          <ListItem item={item} />
+          <ListItem item={item} handleDetalle={props.handleDetalle}/>
         )
       }
     />
   );
 }
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, handleDetalle }) => {
   return (
     <List.Item
       actions={[
         <Space>
-          <Button type="text">
+          <Button type="text" onClick={() => handleDetalle({ item })} >
             Ver detalle <RightOutlined />
           </Button>
         </Space>,
