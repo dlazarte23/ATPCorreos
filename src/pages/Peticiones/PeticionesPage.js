@@ -20,21 +20,19 @@ export default function Peticionespage() {
     create: false,
   });
 
-
-
   const listData = [];
   for (let i = 1; i < 8; i++) {
     listData.push({
-      key: i*26,
+      key: i * 26,
       href: "https://ant.design",
       title: `Nombre de la Petición ${i}`,
       sprint: i * 3,
       avatar:
         "https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico",
       description: "Creador: Diego Antonio Lazarte Peláez ",
-      dateGeneracion: '01/07/2021',
-      dateActualizacion: '20/07/2021',
-      create: 'Diego Antonio Lazarte Peláez',
+      dateGeneracion: "01/07/2021",
+      dateActualizacion: "20/07/2021",
+      create: "Diego Antonio Lazarte Peláez",
       numberPrueba: i * 32,
       content:
         "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
@@ -50,26 +48,23 @@ export default function Peticionespage() {
       avatar:
         "https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico",
       description: "Creador: Diego Antonio Lazarte Peláez ",
-      dateGeneracion: '01/07/2021',
-      dateActualizacion: '20/07/2021',
-      create: 'Diego Antonio Lazarte Peláez',
+      dateGeneracion: "01/07/2021",
+      dateActualizacion: "20/07/2021",
+      create: "Diego Antonio Lazarte Peláez",
       numberPrueba: i * 32,
       content:
         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
     });
   }
 
-
-
-
-  const [detallePeticion, setDetallePeticion] = useState('')
+  const [detallePeticion, setDetallePeticion] = useState("");
   const handleDetalle = (value) => {
-    setDetallePeticion(value.item)
-  }
+    setDetallePeticion(value.item);
+  };
 
   return (
     <>
-      <Scrollbars autoHeight={true} autoHeightMax={580}>
+      <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
         <Row>
           <Col span={24}>
             <HeaderPeticion
@@ -94,6 +89,7 @@ export default function Peticionespage() {
             <InfoPeticion peticion={detallePeticion} />
           </Col>
         </Row>
+        <br />
 
         <ModalDetallePeticion
           showModal={showModal}

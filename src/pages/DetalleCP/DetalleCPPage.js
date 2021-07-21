@@ -73,7 +73,7 @@ export default function DetalleCPPage() {
 
   return (
     <>
-      <Scrollbars autoHeight={true} autoHeightMax={580}>
+      <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
         {/** Column para el titulo y el botón general */}
         <Row>
           <Col span={24}>

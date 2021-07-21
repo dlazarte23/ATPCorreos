@@ -49,12 +49,13 @@
 
 .site-layout-background {
   background: #fff;
+  height: "100vh" !important;
 }
 
 .content-layout {
   box-shadow: 0 0.14em 0.57em rgba(0, 0, 0, 0.185);
-  min-height: 20em;
-  margin: 24px 16px 0;
+  margin: 10;
+  height: "100vh" !important;
 }
 
 #components-page-header-demo-content .image {
@@ -150,7 +151,7 @@ ant-layout-sider-children {
 }
 
 .ant-layout-sider-trigger {
-  position: absolute !important;
+  position: fixed;
   bottom: 0;
   z-index: 1;
   height: 48px;

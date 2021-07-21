@@ -1,7 +1,7 @@
-.sider {
+/* .sider {
   position: relative;
-  height: 96%;
-}
+  height: 100%;
+} */
 
 .ant-layout-sider-children .ant-menu .btn-close {
   padding-left: 24px !important;

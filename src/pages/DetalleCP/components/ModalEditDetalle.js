@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import {  Modal, Input, InputNumber, Form, Row, Col, Button } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
+import { Modal, Input, InputNumber, Form, Row, Col, Button } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 
 export default function ModalEditListado(props) {
+  const action = props.record.accion;
+  const precondition = props.record.precondicion;
+  const result = props.record.resultado;
 
-  const action = props.record.accion
-  const precondition = props.record.precondicion
-  const result = props.record.resultado
-
-const [form] = Form.useForm();
+  const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -24,15 +23,22 @@ const [form] = Form.useForm();
   };
 
   const onFinish = () => {
-    console.log("on finsh")
-  }
-
+    console.log("on finsh");
+  };
 
   return (
     <>
-      <a> <EditOutlined onClick={showModal} /> </a>
+      <a>
+        {" "}
+        <EditOutlined onClick={showModal} />{" "}
+      </a>
 
-      <Modal title="Editar Paso" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} centered
+      <Modal
+        title="Editar Paso"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        centered={true}
         footer={[
           <Button key="back" onClick={handleCancel}>
             Cancelar
@@ -40,37 +46,65 @@ const [form] = Form.useForm();
           <Button key="submit" type="primary" onClick={handleOk}>
             Guardar
           </Button>,
-        ]}>
-          <Form
+        ]}
+      >
+        <Form
           layout="vertical"
           form={form}
           name="nest-messages"
           onFinish={onFinish}
           size="default"
           centered={true}
-          hideRequiredMark>
+          hideRequiredMark
+        >
           <Row justify="space-between">
-            <Col span={10}><Form.Item
-              name="precondicion"
-              label="Pre-Condición"
-              rules={[{ required: true, message: "Debe ingresar la Pre-Condición del Paso !" }]} >
-              <Input defaultValue={precondition} />
-            </Form.Item></Col>
-            <Col span={12}>   <Form.Item
-              name="accion"
-              label="Acción"
-              rules={[{ required: true, message: "Debe ingresar la Acción del Paso !" }]} >
-              <Input defaultValue={action} />
-            </Form.Item></Col>
+            <Col span={10}>
+              <Form.Item
+                name="precondicion"
+                label="Pre-Condición"
+                rules={[
+                  {
+                    required: true,
+                    message: "Debe ingresar la Pre-Condición del Paso !",
+                  },
+                ]}
+                initialValue={precondition}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              {" "}
+              <Form.Item
+                name="accion"
+                label="Acción"
+                rules={[
+                  {
+                    required: true,
+                    message: "Debe ingresar la Acción del Paso !",
+                  },
+                ]}
+                initialValue={action}
+              >
+                <Input />
+              </Form.Item>
+            </Col>
           </Row>
           <Form.Item
             name="resEsperado"
             label="Resultado Esperado"
-            rules={[{ required: true, message: "Debe ingresar el Resultado Esperado del Paso" }]} >
-            <Input defaultValue={result} />
+            rules={[
+              {
+                required: true,
+                message: "Debe ingresar el Resultado Esperado del Paso",
+              },
+            ]}
+            initialValue={result}
+          >
+            <Input />
           </Form.Item>
         </Form>
       </Modal>
     </>
   );
-};
+}

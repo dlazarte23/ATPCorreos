@@ -22,7 +22,17 @@ export default function MainSider() {
   };
 
   return (
-    <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+    <Sider
+      breakpoint="lg"
+      collapsedWidth="0"
+      onBreakpoint={(broken) => {
+        console.log(broken);
+      }}
+      onCollapse={(collapsed, type) => {
+        console.log(collapsed, type);
+      }}
+      style={{ position: "sticky", height: "100vh" }}
+    >
       <div className="logo">
         <img src={logo} className="appLogo" alt="ATPCorreos"></img>
       </div>
@@ -44,9 +54,9 @@ export default function MainSider() {
         <Menu.Item key="4" icon={<UserOutlined />}>
           <Link to="/">nav 4</Link>
         </Menu.Item>
-        <Menu.Item key="5" icon={<ExportOutlined />} className="btn-close">
+        {/* <Menu.Item key="5" icon={<ExportOutlined />} className="btn-close">
           <Link to="/">Cerrar Sesión </Link>
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu>
     </Sider>
   );
