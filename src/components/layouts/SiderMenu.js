@@ -44,9 +44,9 @@ export default function MainSider() {
         <Menu.Item key="4" icon={<UserOutlined />}>
           <Link to="/">nav 4</Link>
         </Menu.Item>
-        {/* <Menu.Item key="5" icon={<ExportOutlined />} className="btn-close">
+        <Menu.Item key="5" icon={<ExportOutlined />} className="btn-close">
           <Link to="/">Cerrar Sesión </Link>
-        </Menu.Item> */}
+        </Menu.Item>
       </Menu>
     </Sider>
   );

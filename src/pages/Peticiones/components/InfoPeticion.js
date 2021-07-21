@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 import { useHistory } from "react-router";
 
@@ -10,10 +10,14 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 
-import 
-  ModalCreatePeticion from "./ModalEditPeticion";
+import
+ModalEditPeticion from "./ModalEditPeticion";
 
-const InfoPeticion = () => {
+const InfoPeticion = (props) => {
+  console.log(props.peticion)
+const dataPeticion = props.peticion
+
+
   const history = useHistory();
 
   const { Title } = Typography;
@@ -22,6 +26,8 @@ const InfoPeticion = () => {
     detail: false,
     create: false,
   });
+
+
 
 
   return (
@@ -35,21 +41,21 @@ const InfoPeticion = () => {
       <div>
         <Descriptions layout="horizontal" column={1}>
           <Descriptions.Item label="Nombre">
-            Nombre de la petición 1
+            {dataPeticion.title}
           </Descriptions.Item>
-          <Descriptions.Item label="id Petición">9676417</Descriptions.Item>
-          <Descriptions.Item label="Sprint">18</Descriptions.Item>
+          <Descriptions.Item label="id Petición">{dataPeticion.key}</Descriptions.Item>
+          <Descriptions.Item label="Sprint">{dataPeticion.sprint}</Descriptions.Item>
           <Descriptions.Item label="Fecha generación">
-            01/01/2021
+            {dataPeticion.dateGeneracion}
           </Descriptions.Item>
           <Descriptions.Item label="Fecha actualización">
-            21/05/2021
+            {dataPeticion.dateActualizacion}
           </Descriptions.Item>
           <Descriptions.Item label="Creador por">
-            Diego Antonio Lazarte Peláez
+            {dataPeticion.create}
           </Descriptions.Item>
           <Descriptions.Item label="N° de Casos de prueba">
-            16
+            {dataPeticion.numberPrueba}
           </Descriptions.Item>
         </Descriptions>
       </div>
@@ -57,9 +63,9 @@ const InfoPeticion = () => {
       <div style={{ marginTop: 25 }}>
         <Space>
           <Tooltip placement="left" title="Editar Petición">
-          <ModalCreatePeticion showModal={showModal} setShowModal={setShowModal} />
-         
-            <Button icon={<EditOutlined />} shape="round" type="dashed"  onClick={() => setShowModal({ ...showModal, create: true })}/>
+            <ModalEditPeticion showModal={showModal} setShowModal={setShowModal} />
+
+            <Button icon={<EditOutlined />} shape="round" type="dashed" onClick={() => setShowModal({ ...showModal, create: true })} />
           </Tooltip>
           <Tooltip placement="right" title="Eliminar Petición">
             <Button
