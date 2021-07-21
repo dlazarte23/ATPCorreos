@@ -70,9 +70,14 @@ button {
   color: #000 !important;
 }
 
+button.ant-btn.disablednext {
+  background-color: #a7a7a7 !important;
+  border-color: #b6b6b6 !important;
+}
+
 button.ant-btn.ant-btn-primary {
-  background-color: #ffcd00 !important;
-  border-color: #ffcd00 !important;
+  background-color: #ffcd00 ;
+  border-color: #ffcd00 ;
 }
 
 .ant-page-header-content {

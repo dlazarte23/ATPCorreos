@@ -99,19 +99,34 @@ const FormDetalle = () => {
       </Steps>
       <div className="steps-content">{steps[current].content}</div>
       <div className="steps-action">
-      {current > 0 && (
+        {current > 0 && (
           <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
             Anterior
           </Button>
         )}
-        {current < steps.length - 1 && (
-          <Button 
+        {current == 0 && (
+
+          <Button
             type="primary"
-            icon={<ArrowRightOutlined />} 
+            disabled={stepData.precondition == '' ? true : false}
+            className={stepData.precondition == '' ? "disablednext" : ''}
+            icon={<ArrowRightOutlined />}
             onClick={() => next()}>
             Siguiente
           </Button>
         )}
+        {current == 1 && (
+
+          <Button
+            type="primary"
+            disabled={stepData.action == '' ? true : false}
+            className={stepData.action == '' ? "disablednext" : ''}
+            icon={<ArrowRightOutlined />}
+            onClick={() => next()}>
+            Siguiente
+          </Button>
+        )}
+
         {current === steps.length - 1 && (
           <Button
             type="primary"
@@ -120,7 +135,7 @@ const FormDetalle = () => {
             Completar
           </Button>
         )}
-        
+
       </div>
     </>
   );

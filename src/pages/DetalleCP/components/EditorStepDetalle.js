@@ -4,9 +4,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const EditorStepDetalle = (props) => {
   const { stepData, setStepData, initialData, current } = props;
-  console.log(stepData);
+
   const handleChangeContent = (data) => {
-    console.log("en handleChangeContent");
     switch (current) {
       case "precondition":
         setStepData({
@@ -37,7 +36,6 @@ const EditorStepDetalle = (props) => {
       }}
       onChange={(event, editor) => {
         handleChangeContent(editor.getData());
-        //console.log({ event, editor, data });
       }}
       onBlur={(event, editor) => {
         //console.log("Blur.", editor);
