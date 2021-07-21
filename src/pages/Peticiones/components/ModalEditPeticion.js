@@ -7,7 +7,7 @@ import { crearNuevaPeticionAction } from '../../../stateManagement/actions/petic
 
 export default function ModalEditPeticion(props) {
 
-  const { showModal, setShowModal } = props;
+  const { showModal, setShowModal, dataPeticion } = props;
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();
@@ -68,7 +68,7 @@ export default function ModalEditPeticion(props) {
   return (
     <>
       <Modal
-        title="Editar Petición"
+        title={"Editar " + dataPeticion.title}
         visible={showModal.create}
         onCancel={handleCancel}
         confirmLoading={confirmLoading}
@@ -91,7 +91,9 @@ export default function ModalEditPeticion(props) {
           centered={true}
           hideRequiredMark>
           <Row justify="space-between">
-            <Col span={10}><Form.Item
+            <Col span={10}>
+           
+              <Form.Item
               name="idPeticion"
               label="Id. Petición"
               rules={[{ required: true, message: "Debe ingresar el id de la petición !" }]} >

@@ -63,7 +63,7 @@ const dataPeticion = props.peticion
       <div style={{ marginTop: 25 }}>
         <Space>
           <Tooltip placement="left" title="Editar Petición">
-            <ModalEditPeticion showModal={showModal} setShowModal={setShowModal} />
+            <ModalEditPeticion showModal={showModal} setShowModal={setShowModal} dataPeticion={dataPeticion}/>
 
             <Button icon={<EditOutlined />} shape="round" type="dashed" onClick={() => setShowModal({ ...showModal, create: true })} />
           </Tooltip>
