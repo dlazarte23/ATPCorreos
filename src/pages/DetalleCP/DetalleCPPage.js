@@ -2,20 +2,13 @@ import React from "react";
 
 import { ProyectoBaseUrl } from "../../Api/ApiUrl";
 import "./detalle-style.css";
-import {
-  Typography,
-  Row,
-  Col,
-  PageHeader,
-  Space,
-  Descriptions,
-} from "antd";
+import { Typography, Row, Col, PageHeader, Space, Descriptions } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../components/common/icons";
 import FormDetalle from "./components/FormDetalle";
 import TableDetallesCP from "./components/TableDetallesCP";
 
-import { Scrollbars } from "react-custom-scrollbars";
+import { Scrollbars } from "react-custom-scrollbars-2";
 
 const Content = ({ children, extra }) => (
   <div className="content">
@@ -42,7 +35,6 @@ export default function DetalleCPPage() {
   console.log(ProyectoBaseUrl);
 
   const renderContent = () => (
-
     <div className="card-information">
       <Space align="start">
         <InfoSvg />
@@ -81,10 +73,7 @@ export default function DetalleCPPage() {
 
   return (
     <>
-      <Scrollbars
-        autoHeight={true}
-        autoHeightMax={580}
-      >
+      <Scrollbars autoHeight={true} autoHeightMax={580}>
         {/** Column para el titulo y el botón general */}
         <Row>
           <Col span={24}>
@@ -117,5 +106,4 @@ export default function DetalleCPPage() {
       </Scrollbars>
     </>
   );
-};
-
+}

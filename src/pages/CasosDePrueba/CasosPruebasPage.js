@@ -15,7 +15,7 @@ import { InfoSvg } from "../../components/common/icons";
 import TableListadoCP from "./components/TableListadoCP";
 import FormCP from "./components/FormCP";
 
-import { Scrollbars } from "react-custom-scrollbars";
+import { Scrollbars } from "react-custom-scrollbars-2";
 
 const Content = ({ children, extra }) => (
   <div className="content">
@@ -64,10 +64,7 @@ export default function CasosPruebasPage() {
 
   return (
     <>
-      <Scrollbars
-        autoHeight={true}
-        autoHeightMax={580}
-      >
+      <Scrollbars autoHeight={true} autoHeightMax={580}>
         {/** Column para el titulo y el botón general */}
         <Row>
           <Col span={24}>
@@ -118,5 +115,4 @@ export default function CasosPruebasPage() {
       </Scrollbars>
     </>
   );
-};
-
+}

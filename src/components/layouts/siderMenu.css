@@ -1,33 +1,35 @@
-.sider{
-    position: relative;
-    height: 90%;
+.sider {
+  position: relative;
+  height: 100%;
 }
-
 
 .ant-layout-sider-children .ant-menu .btn-close {
-    padding-left: 24px !important;
-    background: red !important;
-    border-radius: 8px;
-    width: 80% !important;
-    margin: auto !important;
-    position: absolute;
-    bottom: 62px;
-    right: 0;
+  padding-left: 24px !important;
+  background: red !important;
+  border-radius: 8px;
+  width: 80% !important;
+  margin: auto !important;
+  position: absolute;
+  bottom: 100px;
+  right: 0;
 }
-.ant-layout-sider-children .ant-menu .btn-close:hover, .sider.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected.btn-close{
-    background: rgb(209, 72, 72) !important;
-}
-
-.ant-layout-sider-children .ant-menu .btn-close a, .ant-layout-sider-children .ant-menu .btn-close span {
- color: white;
+.ant-layout-sider-children .ant-menu .btn-close:hover,
+.sider.ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal)
+  .ant-menu-item-selected.btn-close {
+  background: rgb(209, 72, 72) !important;
 }
 
-.ant-row{
-margin-top: 8px;
-margin-right: 15px;
-margin-bottom: -5px ;
+.ant-layout-sider-children .ant-menu .btn-close a,
+.ant-layout-sider-children .ant-menu .btn-close span {
+  color: white;
 }
-.appLogo{
-    margin-left: 80px;
-    margin-bottom: 30px;
+
+.ant-row {
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: -5px;
+}
+.appLogo {
+  margin-left: 20px;
+  margin-bottom: 30px;
 }

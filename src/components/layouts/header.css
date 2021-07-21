@@ -1,0 +1,26 @@
+.avatar-item {
+  margin: 0;
+}
+
+.avatar-item:hover {
+  cursor: pointer;
+}
+
+.site-layout .site-layout-background {
+  background: #fff !important;
+}
+
+.ant-layout-header.ant-layout-header {
+  padding: 0 50px;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 44px;
+  background: #fff !important;
+  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+  height: 72px;
+  overflow: hidden;
+}
+
+.btn-close {
+  background: rgb(209, 72, 72) !important;
+  color: #fff !important;
+}
