@@ -7,7 +7,7 @@ import {
   InfoPeticion,
 } from "./components";
 
-import { Scrollbars } from "react-custom-scrollbars";
+import { Scrollbars } from "react-custom-scrollbars-2";
 import { Row, Col } from "antd";
 
 export default function Peticionespage() {
@@ -50,10 +50,7 @@ export default function Peticionespage() {
 
   return (
     <>
-      <Scrollbars
-        autoHeight={true}
-        autoHeightMax={580}
-      >
+      <Scrollbars autoHeight={true} autoHeightMax={580}>
         <Row>
           <Col span={24}>
             <HeaderPeticion
@@ -78,14 +75,15 @@ export default function Peticionespage() {
           </Col>
         </Row>
 
-        <ModalDetallePeticion showModal={showModal} setShowModal={setShowModal} />
-        <ModalCreatePeticion showModal={showModal} setShowModal={setShowModal} />
+        <ModalDetallePeticion
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
+        <ModalCreatePeticion
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
       </Scrollbars>
     </>
   );
 }
-
-
-
-
-
