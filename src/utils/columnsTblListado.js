@@ -32,11 +32,11 @@ export const columns = [
     key: "accion",
     render: (_, record) => (
       <Space size="middle">
-       
-        <ModalEditListado record={record}/> 
-      
 
-        <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+        <ModalEditListado record={record} />
+
+
+        <Popconfirm cancelText="Cancelar" title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
           <a href="!">   <DeleteOutlined />       </a>
         </Popconfirm >
 
