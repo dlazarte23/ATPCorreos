@@ -129,14 +129,14 @@ const FormDetalle = () => {
 
         {current == 2 && (
 
-        <Button
-          type="primary"
-          disabled={stepData.expectedResult == '' ? true : false}
-          className={stepData.expectedResult == '' ? "disablednext" : ''}
-          icon={<ArrowRightOutlined />}
-          onClick={() => next()}>
-          Siguiente
-        </Button>
+          <Button
+            type="primary"
+            disabled={stepData.expectedResult == '' ? true : false}
+            className={stepData.expectedResult == '' ? "disablednext" : ''}
+            icon={<ArrowRightOutlined />}
+            onClick={() => next()}>
+            Siguiente
+          </Button>
         )}
 
         {current === steps.length - 1 && (

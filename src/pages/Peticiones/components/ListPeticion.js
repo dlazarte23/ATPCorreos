@@ -21,8 +21,7 @@ const IconText = ({ icon, text }) => (
 
 export default function ListPeticiones(props) {
   const { listData } = props;
-
-
+  
   return (
     <List
       itemLayout="horizontal"

@@ -1,11 +1,23 @@
 import React from "react";
-import { PageHeader, Button, Input, Radio, Descriptions } from "antd";
+import {
+  PageHeader,
+  Button,
+  Input,
+  Radio,
+  Descriptions,
+  Row,
+  Col,
+  Select,
+  Space,
+} from "antd";
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
+import "../peticion-style.css";
 
 // const { Search } = Input;
+const { Option } = Select;
 
 export default function HeaderPeticion(props) {
-  const { filter, setFilter, showModal, setShowModal } = props;
+  const { filter, setFilter, showModal, setShowModal, setSearchTerm } = props;
   const options = [
     { label: "Personales", value: "Personales" },
     { label: "Grupales", value: "Grupales" },
@@ -17,41 +29,69 @@ export default function HeaderPeticion(props) {
     });
   };
 
+  const handleChangeSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
-    <>
-      <PageHeader
-        className="site-page-header"
-        title="Lista de Peticiones"
-        /* avatar={{
-          src: "https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico",
-        }} */
-        extra={[
-          <Button
-            shape="round"
-            key="1"
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => setShowModal({ ...showModal, create: true })}
-          >
-            Nueva Petición
-          </Button>,
-        ]}
-      >
-        <Descriptions size="small" column={3}></Descriptions>
-        <br />     
-        <Input size="large" placeholder="Buscar..." prefix={<SearchOutlined /> } style={{ maxWidth: "39%", marginBottom: "20px", marginTop: "20px" }}/>
-        <br />
-        Filtros:
+    <PageHeader
+      className="site-page-header"
+      title="Lista de Peticiones"
+      style={{ paddingLeft: "50px" }}
+      extra={[
+        <Button
+          shape="round"
+          key="1"
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => setShowModal({ ...showModal, create: true })}
+        >
+          Nueva Petición
+        </Button>,
+      ]}
+    >
+      <Descriptions size="large" column={2} />
+      <br />
+      <Space align="start">
+        <Input
+          size="default"
+          placeholder="Buscar"
+          style={{ width: "400px" }}
+          prefix={<SearchOutlined />}
+          onChange={(e) => handleChangeSearch(e)}
+        />
+        <Select
+          showSearch
+          style={{ width: "200px" }}
+          placeholder="Seleccione un proyecto"
+          optionFilterProp="children"
+          /* onChange={onChange}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              onSearch={onSearch} */
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+        >
+          <Option value="Citypaq">Citypaq</Option>
+          <Option value="Shiva">Shiva</Option>
+          <Option value="Sgie">Sgie</Option>
+          <Option value="Minerva">Minerva</Option>
+          <Option value="Gnomo">Gnomo</Option>
+          <Option value="Glacier">Glacier</Option>
+          <Option value="Duapost">Duapost</Option>
+        </Select>
         <Radio.Group
           options={options}
           onChange={onChange}
-          size={"small"}
+          size={"middle"}
           value={filter.value}
           optionType="button"
           buttonStyle="solid"
           style={{ marginLeft: 10 }}
         />
-      </PageHeader>
-    </>
+      </Space>
+      <br />
+    </PageHeader>
   );
 }

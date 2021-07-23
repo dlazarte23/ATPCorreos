@@ -9,54 +9,43 @@ const { Content } = Layout;
 
 const MainRoutes = () => (
   <div>
-    <Layout>
-      <BrowserRouter>
-        <Layout style={{ position: "fixed" /* backgroundColor: "red" */ }}>
-          <Row>
-            <Col lg={3}>
-              <SiderMenu />
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={24}>
-              <Content className="content-layout">
-                <Header />
-                <div className="site-layout-background">
-                  <Switch>
-                    <Route path={main.path} exact>
-                      <Redirect to="/peticiones" />
-                    </Route>
-
-                    <Route
-                      path={main.peticiones.path}
-                      exact
-                      component={main.peticiones.component}
-                    />
-                    <Route
-                      path={main.creacionCp.path}
-                      exact
-                      component={main.creacionCp.component}
-                    />
-                    <Route
-                      path={main.creacionDetalleCp.path}
-                      exact
-                      component={main.creacionDetalleCp.component}
-                    />
-                    <Route
-                      path={main.error404.path}
-                      component={main.error404.component}
-                    />
-                  </Switch>
-                </div>
-              </Content>
-            </Col>
-            <Col lg={24}>
-              <Footer />
-            </Col>
-          </Row>
+    <BrowserRouter>
+      <Layout>
+        <SiderMenu />
+        <Layout>
+          <Content className="content-layout">
+            <Header />
+            <div className="site-layout-background">
+              <Switch>
+                <Route path={main.path} exact>
+                  <Redirect to="/peticiones" />
+                </Route>
+                <Route
+                  path={main.peticiones.path}
+                  exact
+                  component={main.peticiones.component}
+                />
+                <Route
+                  path={main.creacionCp.path}
+                  exact
+                  component={main.creacionCp.component}
+                />
+                <Route
+                  path={main.creacionDetalleCp.path}
+                  exact
+                  component={main.creacionDetalleCp.component}
+                />
+                <Route
+                  path={main.error404.path}
+                  component={main.error404.component}
+                />
+              </Switch>
+            </div>
+          </Content>
+          <Footer />
         </Layout>
-      </BrowserRouter>
-    </Layout>
+      </Layout>
+    </BrowserRouter>
   </div>
 );
 
