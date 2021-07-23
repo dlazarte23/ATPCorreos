@@ -34,7 +34,7 @@ const InfoPeticion = (props) => {
         <div>
           <Descriptions layout="horizontal" column={1}>
             <Descriptions.Item label="Nombre">
-              {dataPeticion.title}
+              {dataPeticion.nombre}
             </Descriptions.Item>
             <Descriptions.Item label="id Petición">
               {dataPeticion.key}

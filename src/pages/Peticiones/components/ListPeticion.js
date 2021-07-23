@@ -27,6 +27,13 @@ export default function ListPeticiones(props) {
   const [showDetalle, setShowDetalle] = useState(false);
 
   const handleDetalle = (value) => {
+    //AQUI SE DEBERÍA HACER LLAMADO A API PARA RECUPERAR DETALLE DE LA PETICIÓN POR ID_PETICION
+    const detalle = value.item;
+    detalle.sprint = Math.floor(Math.random() * 10);
+    detalle.dateGeneracion = "01/07/2021";
+    detalle.dateActualizacion = "20/07/2021";
+    detalle.create = "Diego Antonio Lazarte Peláez";
+    detalle.numberPrueba = Math.floor(Math.random() * 100);
     setDetallePeticion(value.item);
     setShowDetalle(true);
   };
@@ -100,16 +107,16 @@ const ListItem = ({ item, handleDetalle }) => {
               title={"Creador: Diego Lazarte Peláez"}
             />
           }
-          title={<a href={item.href}>{item.title}</a>}
+          title={item.nombre}
           description={
             <Descriptions size="small" column={2}>
               <Descriptions.Item label="Id. Petición">
-                {item.key}
+                {item.codPeticion}
               </Descriptions.Item>
               <Descriptions.Item label="">
                 <IconText
                   icon={CalendarOutlined}
-                  text="01/07/2021"
+                  text={item.fecCreacion}
                   key="list-vertical-like-o"
                 />
               </Descriptions.Item>
