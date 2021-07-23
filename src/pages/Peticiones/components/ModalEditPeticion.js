@@ -17,15 +17,6 @@ export default function ModalEditPeticion(props) {
     setShowModal({ ...showModal, create: false });
   };
 
-  const layout = {
-    labelCol: {
-      span: 7,
-    },
-    wrapperCol: {
-      span: 17,
-    },
-  };
-
   const onFinish = () => {
     console.log("on finsh")
   }

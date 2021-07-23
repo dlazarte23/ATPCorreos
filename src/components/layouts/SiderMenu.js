@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Menu, Layout } from "antd";
 import { Link } from "react-router-dom";
-import { ExportOutlined } from "@ant-design/icons";
+//import { ExportOutlined } from "@ant-design/icons";
 import logo from "../../../public/images/logo_correos.png";
 //import css
 import "./siderMenu.css";
@@ -24,13 +24,16 @@ export default function MainSider() {
   return (
     <Sider
       breakpoint="lg"
-      collapsedWidth="0"
+      //collapsedWidth="0"
       onBreakpoint={(broken) => {
         console.log(broken);
       }}
       onCollapse={(collapsed, type) => {
         console.log(collapsed, type);
       }}
+      /* collapsible
+      collapsed={collapsed}
+      onCollapse={onCollapse} */
       style={{ position: "sticky", height: "100vh" }}
     >
       <div className="logo">

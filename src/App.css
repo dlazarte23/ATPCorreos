@@ -199,4 +199,5 @@ ant-layout-sider-children {
   box-shadow: 0 0.14em 0.57em rgba(0, 0, 0, 0.185);
   margin: 0px 0px 0px 15px !important;
   height: "100vh" !important;
+  background-color: #fff !important;
 }

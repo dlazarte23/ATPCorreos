@@ -8,7 +8,7 @@ import {
   FileProtectOutlined,
   FileImageOutlined,
   ArrowRightOutlined,
-  SaveOutlined
+  SaveOutlined,
 } from "@ant-design/icons";
 
 import EditorStepDetalle from "./EditorStepDetalle";
@@ -17,7 +17,7 @@ import UploadEvidencias from "./UploadEvidencias";
 const FormDetalle = () => {
   const { Step } = Steps;
 
-  const [dataPrecondicion, setDataPrecondicion] = useState(
+ /*  const [dataPrecondicion, setDataPrecondicion] = useState(
     "<ul><li>Precondición del caso de prueba!</li><li>Segunda precondición.</li><li>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</li></ul>"
   );
   const [dataAccion, setDataAccion] = useState(
@@ -25,7 +25,7 @@ const FormDetalle = () => {
   );
   const [dataResultado, setDataResultado] = useState(
     "<ul><li>Resultado esperado!</li></ul>"
-  );
+  ); */
 
   const [current, setCurrent] = React.useState(0);
   const [stepData, setStepData] = useState({
@@ -92,7 +92,10 @@ const FormDetalle = () => {
 
   return (
     <>
-      <Steps current={current} labelPlacement="vertical" /* percent={(current + 1) * 25} */>
+      <Steps
+        current={current}
+        labelPlacement="vertical" /* percent={(current + 1) * 25} */
+      >
         {steps.map((item) => (
           <Step key={item.title} title={item.title} icon={item.icon} />
         ))}
@@ -104,37 +107,37 @@ const FormDetalle = () => {
             Anterior
           </Button>
         )}
-        {current == 0 && (
-
+        {current === 0 && (
           <Button
             type="primary"
-            disabled={stepData.precondition == '' ? true : false}
-            className={stepData.precondition == '' ? "disablednext" : ''}
+            disabled={stepData.precondition === "" ? true : false}
+            className={stepData.precondition === "" ? "disablednext" : ""}
             icon={<ArrowRightOutlined />}
-            onClick={() => next()}>
+            onClick={() => next()}
+          >
             Siguiente
           </Button>
         )}
-        {current == 1 && (
-
+        {current === 1 && (
           <Button
             type="primary"
-            disabled={stepData.action == '' ? true : false}
-            className={stepData.action == '' ? "disablednext" : ''}
+            disabled={stepData.action === "" ? true : false}
+            className={stepData.action === "" ? "disablednext" : ""}
             icon={<ArrowRightOutlined />}
-            onClick={() => next()}>
+            onClick={() => next()}
+          >
             Siguiente
           </Button>
         )}
 
-        {current == 2 && (
-
+        {current === 2 && (
           <Button
             type="primary"
-            disabled={stepData.expectedResult == '' ? true : false}
-            className={stepData.expectedResult == '' ? "disablednext" : ''}
+            disabled={stepData.expectedResult === "" ? true : false}
+            className={stepData.expectedResult === "" ? "disablednext" : ""}
             icon={<ArrowRightOutlined />}
-            onClick={() => next()}>
+            onClick={() => next()}
+          >
             Siguiente
           </Button>
         )}
@@ -143,11 +146,11 @@ const FormDetalle = () => {
           <Button
             type="primary"
             icon={<SaveOutlined />}
-            onClick={() => message.success("Paso agregado!")} >
+            onClick={() => message.success("Paso agregado!")}
+          >
             Completar
           </Button>
         )}
-
       </div>
     </>
   );

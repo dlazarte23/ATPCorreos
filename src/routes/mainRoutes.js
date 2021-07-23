@@ -3,14 +3,14 @@ import React from "react";
 import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 import { Header, SiderMenu, Footer } from "../components";
 import { main } from "./routes";
-import { Layout, Row, Col } from "antd";
+import { Layout } from "antd";
 
 const { Content } = Layout;
 
 const MainRoutes = () => (
   <div>
     <BrowserRouter>
-      <Layout>
+      <Layout /*   */>
         <SiderMenu />
         <Layout>
           <Content className="content-layout">

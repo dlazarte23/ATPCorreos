@@ -25,6 +25,8 @@ const EditorStepDetalle = (props) => {
           expectedResult: data,
         });
         break;
+      default:
+        console.log("");
     }
   };
   return (

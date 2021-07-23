@@ -4,16 +4,15 @@ import {
   ListPeticiones,
   ModalCreatePeticion,
   ModalDetallePeticion,
-  InfoPeticion,
 } from "./components";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { Row, Col } from "antd";
 
 const listData = [];
-for (let i = 1; i < 8; i++) {
+for (let i = 1; i < 21; i++) {
   listData.push({
-    key: i * 26,
+    key: i * 1050020,
     href: "https://ant.design",
     title: `Nombre de la Petición ${i}`,
     sprint: i * 3,
@@ -59,18 +58,13 @@ export default function Peticionespage() {
 
   const [listPeticiones, setListPeticiones] = useState(listData);
   const [searchTerm, setSearchTerm] = useState("");
-  const [detallePeticion, setDetallePeticion] = useState("");
 
-  useEffect(() => {
+  /* useEffect(() => {
     const results = listData.filter((peticion) =>
       peticion.title.includes(searchTerm.toLowerCase())
     );
     setListPeticiones(results);
-  }, [searchTerm]);
-
-  const handleDetalle = (value) => {
-    setDetallePeticion(value.item);
-  };
+  }, [searchTerm]); */
 
   return (
     <>
@@ -88,17 +82,16 @@ export default function Peticionespage() {
         </Row>
 
         <Row>
-          <Col span={13}>
+          <Col span={24}>
             <ListPeticiones
               listData={listPeticiones}
               showModal={showModal}
               setShowModal={setShowModal}
-              handleDetalle={handleDetalle}
             />
           </Col>
-          <Col span={10} offset={1}>
+          {/* <Col span={10} offset={1}>
             <InfoPeticion peticion={detallePeticion} />
-          </Col>
+          </Col> */}
         </Row>
         <br />
 
