@@ -6,6 +6,7 @@ import {
 
 const initialState = {
     usuario: {},
+    loggedIn: false,
     loading: false,
     error: null
 }
@@ -25,6 +26,7 @@ export default function ( state = initialState, action) {
             return {
                 ...state,
                 loading: false,
+                loggedIn: true,
                 usuario: action.payload,
                 error: null
             }
