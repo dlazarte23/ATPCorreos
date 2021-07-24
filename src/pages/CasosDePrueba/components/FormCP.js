@@ -4,7 +4,7 @@ import "../cp-styles.css";
 import { Input, Button, Form } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { registrarCasosPruebasAction } from "../../../stateManagement/actions/casosPruebasActions";
+import { registrarCasosPruebasAction } from "../../../stateManagement/actions/casosPruebasAction";
 
 const FormCP = () => {
   const casosPruebas = useSelector((state) => state.casosPruebas.casosPruebas);

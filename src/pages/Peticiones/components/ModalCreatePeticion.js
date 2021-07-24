@@ -22,20 +22,18 @@ export default function ModalCreatePeticion(props) {
     console.log("on finsh");
   };
 
-  const loading = useSelector((state) => state.peticiones.loading);
+  const loading = useSelector( state => state.peticiones.loading );
+  const codProyecto = useSelector( state => state.peticiones.proyectoSeleccionado );
 
-  // utilizamos use dispatch y nos crea una función
   const dispatch = useDispatch();
 
-  // mandamos a llamar el action de peticionesAction
-  const agregarPeticion = (peticion) =>
-    dispatch(crearNuevaPeticionAction(peticion));
+  const agregarPeticion = (peticion) => dispatch(crearNuevaPeticionAction(peticion));
 
   // cuando el usuario haga clic en guardar cambios
   const handleOk = () => {
     form
       .validateFields()
-      .then((values) => {
+      .then(async (values) => {
         form.resetFields();
 
         setConfirmLoading(!loading);
@@ -46,11 +44,32 @@ export default function ModalCreatePeticion(props) {
           setShowModal({ ...showModal, create: false });
         }, 2000);
 
+        const peticion = {
+
+          codOt: values.nomPeticion,
+          codPeticion: values.idPeticion,
+          codProyecto,
+          fecEntrega: "2021-07-24T19:57:33.239Z",
+          fecInicio: "2021-07-24T19:57:33.239Z",
+          fecPrevistaEntrega: "2021-07-24T19:57:33.239Z",
+          horasEstimadas: 150,
+          numero: values.sprint,
+          usuarioCorto: 'kpeinado'
+
+        };
+
+        console.log(peticion)
+
         // creamos la nueva peticion
-        agregarPeticion(values);
+        const response = await agregarPeticion(peticion);
+
+        console.log(response);
+
       })
       .catch((info) => {
+
         console.log("Error al validar: ", info);
+        
       });
   };
 

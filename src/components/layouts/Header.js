@@ -5,6 +5,8 @@ import { UserOutlined, ExportOutlined } from "@ant-design/icons";
 import "./header.css";
 import { Row, Col } from "antd";
 
+import { useSelector } from "react-redux";
+
 const { Header } = Layout;
 
 const content = (
@@ -42,6 +44,9 @@ const menu = (
 );
 
 export default function MainHeader() {
+
+  const usuario = useSelector( state => state.usuario.usuario );
+
   return (
     <Header
       className="site-layout-sub-header-background"
@@ -62,7 +67,7 @@ export default function MainHeader() {
         </Col>
         <Col span={1} offset={12}>
           <span>
-            <Popover content={content} title="admin@everis.com">
+            <Popover content={content} title={`${usuario.username}@everis.com`}>
               <Badge dot>
                 <Avatar
                   src={avatarwomen}

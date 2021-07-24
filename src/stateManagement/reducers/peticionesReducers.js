@@ -4,7 +4,8 @@ import {
     AGREGAR_PETICION_ERROR,
     LISTAR_PROYECTOS,
     LISTAR_PROYECTOS_EXITO,
-    LISTAR_PROYECTOS_ERROR
+    LISTAR_PROYECTOS_ERROR,
+    SELECCION_PROYECTO
 } from '../types/peitcionesType';
 
 /**
@@ -13,6 +14,7 @@ import {
 const initialState = {
 
     proyectos: [],
+    proyectoSeleccionado: null,
     peticiones: [],
     loading: false,
     error: null
@@ -43,6 +45,12 @@ export default function ( state = initialState, action ) {
                 ...state,
                 loading: false,
                 proyectos: action.payload
+            }
+
+        case SELECCION_PROYECTO:
+            return {
+                ...state,
+                proyectoSeleccionado: action.payload
             }
 
         case LISTAR_PROYECTOS_ERROR:

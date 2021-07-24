@@ -14,7 +14,7 @@ import {
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import "../peticion-style.css";
 
-import { listarProyectoAction } from "../../../stateManagement/actions/peticionesAction";
+import { listarProyectoAction, seleccionarProyectoAction } from "../../../stateManagement/actions/peticionesAction";
 
 const { Option } = Select;
 
@@ -22,17 +22,23 @@ export default function HeaderPeticion(props) {
 
   const { filter, setFilter, showModal, setShowModal, setSearchTerm } = props;
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch( );
 
-  const obtenerProyectos = () => dispatch( listarProyectoAction() );
+  const obtenerProyectos = ( ) => dispatch( listarProyectoAction( ) );
 
-  useEffect( async () => {
+  // eslint-disable-next-line
+  useEffect( async ( ) => {
 
-    await obtenerProyectos();
-
-  }, []);
+    await obtenerProyectos( );
+  
+    // eslint-disable-next-line
+  }, [ ]);
 
   const proyectos = useSelector( state => state.peticiones.proyectos );
+
+  const seleccionarProyecto = codProyecto => dispatch( seleccionarProyectoAction( codProyecto ) );
+  
+  const buscarPeticiones = value => seleccionarProyecto( value );
 
   const options = [
     { label: "Personales", value: "Personales" },
@@ -82,17 +88,18 @@ export default function HeaderPeticion(props) {
           style={{ width: "200px" }}
           placeholder="Seleccione un proyecto"
           optionFilterProp="children"
+          onChange={buscarPeticiones}
           filterOption={(input, option) =>
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          {
-            proyectos.map( item => (
-              <Option key={item.codProyecto} value={item.codProyecto}>
-                {item.nombre}
-              </Option>
-            ))
-          }
+          } >
+
+            {
+              proyectos.map( item => (
+                <Option key={item.codProyecto} value={item.codProyecto}>
+                  {item.nombre}
+                </Option>
+              ))
+            }
         </Select>
 
         <Radio.Group

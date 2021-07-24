@@ -5,24 +5,26 @@ import { RightOutlined } from "@ant-design/icons";
 
 import { useHistory } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+
+import { logearUsuario } from '../../../stateManagement/actions/usuarioAction';
+
 const FormLogin = () => {
 
   const { Title } = Typography;
 
-  const history = useHistory();
+  const history = useHistory( );
 
-  const onFinish = (values) => {
+  const dispatch = useDispatch( );
 
-    console.log("Success:", values);
+  const loginUsuario = usuario => dispatch( logearUsuario( usuario ) );
 
-    if ( values.username === "admin" && values.password === "admin" ) { 
-      
-      history.push('/');
+  const onFinish = async ( values ) => {
 
-    } else {
-      
-      console.error("No se existe el usuario..!!");
+    const response = await loginUsuario( values );
 
+    if ( response === "200" ) {
+      history.push('/peticiones');
     }
 
   };
