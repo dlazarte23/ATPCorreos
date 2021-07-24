@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   PageHeader,
   Button,
@@ -11,11 +14,26 @@ import {
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import "../peticion-style.css";
 
-// const { Search } = Input;
+import { listarProyectoAction } from "../../../stateManagement/actions/peticionesAction";
+
 const { Option } = Select;
 
 export default function HeaderPeticion(props) {
+
   const { filter, setFilter, showModal, setShowModal, setSearchTerm } = props;
+
+  const dispatch = useDispatch();
+
+  const obtenerProyectos = () => dispatch( listarProyectoAction() );
+
+  useEffect( async () => {
+
+    await obtenerProyectos();
+
+  }, []);
+
+  const proyectos = useSelector( state => state.peticiones.proyectos );
+
   const options = [
     { label: "Personales", value: "Personales" },
     { label: "Grupales", value: "Grupales" },
@@ -58,27 +76,25 @@ export default function HeaderPeticion(props) {
           prefix={<SearchOutlined />}
           onChange={(e) => handleChangeSearch(e)}
         />
+        
         <Select
           showSearch
           style={{ width: "200px" }}
           placeholder="Seleccione un proyecto"
           optionFilterProp="children"
-          /* onChange={onChange}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              onSearch={onSearch} */
           filterOption={(input, option) =>
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
         >
-          <Option value="Citypaq">Citypaq</Option>
-          <Option value="Shiva">Shiva</Option>
-          <Option value="Sgie">Sgie</Option>
-          <Option value="Minerva">Minerva</Option>
-          <Option value="Gnomo">Gnomo</Option>
-          <Option value="Glacier">Glacier</Option>
-          <Option value="Duapost">Duapost</Option>
+          {
+            proyectos.map( item => (
+              <Option key={item.codProyecto} value={item.codProyecto}>
+                {item.nombre}
+              </Option>
+            ))
+          }
         </Select>
+
         <Radio.Group
           options={options}
           onChange={onChange}

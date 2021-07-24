@@ -1,7 +1,9 @@
 /*eslint-env node*/
 
 const ProyectoBaseUrl = {
-  getProyecto: process.env.REACT_APP_ATPCORREOS + "sprint/proyecto/",
+
+  getProyectos: `${process.env.REACT_APP_ATPCORREOS}proyecto`, 
+
 };
 
 module.exports = {
