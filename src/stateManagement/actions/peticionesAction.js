@@ -5,7 +5,10 @@ import {
     LISTAR_PROYECTOS,
     LISTAR_PROYECTOS_EXITO,
     LISTAR_PROYECTOS_ERROR,
-    SELECCION_PROYECTO
+    SELECCION_PROYECTO,
+    COMENZAR_DESCARGA_PETICIONES,
+    DESCARGA_PETICIONES_EXITO,
+    DESCARGA_PETICIONES_ERROR
 } from '../types/peitcionesType';
 
 import { ProyectoBaseUrl as uri  } from '../../Api/ApiUrl';
@@ -74,6 +77,44 @@ export function seleccionarProyectoAction ( codProyecto ) {
 const seleccionarProyecto = codProyecto => ({
     type: SELECCION_PROYECTO,
     payload: codProyecto
+});
+
+export function obtenerPeticionesAction ( codProyecto ) {
+
+    return async ( dispatch ) => {
+
+        dispatch( obtenerPeticion( ) );
+
+        try {
+
+            const response = get(`${uri.getPeticiones}/${codProyecto}`);
+
+            console.log ( response.responseSprints );
+
+            dispatch( obtenerPeticionExito( response.responseSprints ) );
+
+        } catch ( error ) {
+
+            dispatch( obtenerPeticionError( error ) );
+
+        }
+
+    }
+
+}
+
+const obtenerPeticion = () => ({
+    type: COMENZAR_DESCARGA_PETICIONES
+});
+
+const obtenerPeticionExito = peticiones => ({
+    type: DESCARGA_PETICIONES_EXITO,
+    payload: peticiones
+});
+
+const obtenerPeticionError = error => ({
+    type: DESCARGA_PETICIONES_ERROR,
+    payload: error
 });
 
 /**

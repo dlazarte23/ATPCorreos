@@ -7,12 +7,13 @@ import {
   Descriptions,
   Badge,
   Button,
-  Drawer,
-  Pagination,
+  Drawer
 } from "antd";
 import { CalendarOutlined, RightOutlined } from "@ant-design/icons";
 import { InfoPeticion } from "../components";
 import "../peticion-style.css";
+
+import { useSelector } from "react-redux";
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -25,6 +26,9 @@ export default function ListPeticiones(props) {
   const { listData } = props;
   const [detallePeticion, setDetallePeticion] = useState("");
   const [showDetalle, setShowDetalle] = useState(false);
+
+  // obtenemos la lista de peticiones de nuestro state general
+  const peticiones = useSelector( state => state.peticiones.peticiones );
 
   const handleDetalle = (value) => {
     //AQUI SE DEBERÍA HACER LLAMADO A API PARA RECUPERAR DETALLE DE LA PETICIÓN POR ID_PETICION
