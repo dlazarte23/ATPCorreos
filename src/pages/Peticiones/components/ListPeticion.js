@@ -47,7 +47,6 @@ export default function ListPeticiones(props) {
       <List
         itemLayout="horizontal"
         dataSource={listData}
-        style={{ marginLeft: 20 }}
         bordered={false}
         size="default"
         footer={false}

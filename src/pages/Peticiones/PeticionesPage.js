@@ -54,8 +54,8 @@ export default function Peticionespage() {
           </Col>
         </Row>
 
-        <Row>
-          <Col span={24}>
+        <Row style={{marginTop: 60}}>
+          <Col span={12} offset={6}>
             <ListPeticiones
               listData={listPeticiones}
               showModal={showModal}
