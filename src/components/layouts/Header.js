@@ -15,12 +15,6 @@ import { UserOutlined, ExportOutlined } from "@ant-design/icons";
 import routes from "../../routes/routes";
 import "./header.css";
 
-const test = ("correct routes are exported", () => {
-  expect(routes.map(({ name, path }) => (
-    `${name}: ${path}`
-  )).toMatchSnapshot()
-);
-
 import { useSelector } from "react-redux";
 
 const { Header } = Layout;
