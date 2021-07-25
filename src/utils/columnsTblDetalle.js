@@ -1,61 +1,5 @@
-import { Space } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
-import { Popconfirm, Upload } from "antd";
-import ModalEditListado from "../pages/DetalleCP/components/ModalEditDetalle";
-
-const handleDelete = (key) => {
-  console.log("eliminar", key);
-  // const dataSource = [...this.state.dataSource];
-  // this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
-};
-
-export const columns = [
-  {
-    title: "#",
-    dataIndex: "id",
-    key: "id",
-  },
-  {
-    title: "Precondición",
-    dataIndex: "precondicion",
-    key: "precondicion",
-  },
-  {
-    title: "Acción",
-    dataIndex: "accion",
-    key: "accion",
-  },
-  {
-    title: "Resultado Esperado",
-    dataIndex: "resultado",
-    key: "resultado",
-  },
-  {
-    title: "Evidencias",
-    dataIndex: "evidencia",
-    key: "evidencia",
-  },
-  {
-    title: "Acciones",
-    key: "accion",
-    render: (_, record) => (
-      <Space size="middle">
-        <ModalEditListado record={record} />
-
-        <Popconfirm
-          title="Está seguro de eliminar?"
-          onConfirm={() => handleDelete(record.key)}
-          cancelText="Cancelar"
-          okText="Confirmar"
-        >
-          <a href="!">
-            <DeleteOutlined />
-          </a>
-        </Popconfirm>
-      </Space>
-    ),
-  },
-];
+import { Upload } from "antd";
+/* import ModalEditListado from "../pages/DetalleCP/components/ModalEditDetalle"; */
 
 /**
  * Esta data solo sera momentanea, despues de conectar
@@ -92,7 +36,7 @@ const props = {
 };
 
 export const data = [];
-for (let i = 1; i < 4; i++) {
+for (let i = 1; i < 8; i++) {
   data.push({
     key: i,
     id: i,

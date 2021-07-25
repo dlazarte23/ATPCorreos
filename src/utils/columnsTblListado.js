@@ -34,7 +34,7 @@ export const columns = [
         <ModalEditListado record={record} />
 
         <Popconfirm
-          title="Está seguro de eliminar?"
+          title="¿Está seguro de eliminar?"
           onConfirm={() => handleDelete(record.key)}
           okText="Confirmar"
           cancelText="Cancelar"

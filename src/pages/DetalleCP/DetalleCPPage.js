@@ -32,7 +32,7 @@ const extraContent = (
 export default function DetalleCPPage() {
   const { Title, Paragraph } = Typography;
 
-  console.log(ProyectoBaseUrl);
+  //console.log(ProyectoBaseUrl);
 
   const renderContent = () => (
     <div className="card-information">
