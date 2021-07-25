@@ -201,3 +201,7 @@ ant-layout-sider-children {
   height: "100vh" !important;
   background-color: #fff !important;
 }
+
+span.anticon {
+  color: #002e6d;
+}

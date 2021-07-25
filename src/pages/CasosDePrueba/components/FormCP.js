@@ -47,7 +47,7 @@ const FormCP = () => {
           rules={[
             {
               required: true,
-              message: "Debe ingresar el nombre del casos de prueba !",
+              message: "Debe ingresar el nombre del caso de prueba",
             },
           ]}
         >
@@ -61,7 +61,7 @@ const FormCP = () => {
           rules={[
             {
               required: true,
-              message: "Debe ingresar la descripción de prueba !",
+              message: "Debe ingresar la descripción del caso de prueba",
             },
           ]}
         >

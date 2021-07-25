@@ -17,16 +17,6 @@ import UploadEvidencias from "./UploadEvidencias";
 const FormDetalle = () => {
   const { Step } = Steps;
 
- /*  const [dataPrecondicion, setDataPrecondicion] = useState(
-    "<ul><li>Precondición del caso de prueba!</li><li>Segunda precondición.</li><li>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</li></ul>"
-  );
-  const [dataAccion, setDataAccion] = useState(
-    "<ul><li>Acciones del caso de prueba!</li></ul>"
-  );
-  const [dataResultado, setDataResultado] = useState(
-    "<ul><li>Resultado esperado!</li></ul>"
-  ); */
-
   const [current, setCurrent] = React.useState(0);
   const [stepData, setStepData] = useState({
     precondition: "",
@@ -94,7 +84,9 @@ const FormDetalle = () => {
     <>
       <Steps
         current={current}
-        labelPlacement="vertical" /* percent={(current + 1) * 25} */
+        size="small"
+        className="site-navigation-steps"
+        labelPlacement="horizontal" /* percent={(current + 1) * 25} */
       >
         {steps.map((item) => (
           <Step key={item.title} title={item.title} icon={item.icon} />

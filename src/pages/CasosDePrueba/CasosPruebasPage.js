@@ -64,12 +64,12 @@ export default function CasosPruebasPage() {
 
   return (
     <>
-      <Scrollbars autoHeight={true}  autoHeightMin={"80vh"}>
+      <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
         {/** Column para el titulo y el botón general */}
         <Row>
           <Col span={24}>
             <PageHeader
-              title="Creación De Casos De Prueba"
+              title="Creación de Casos de Prueba"
               onBack={() => window.history.back()}
               backIcon={<LeftOutlined />}
               extra={[
@@ -106,7 +106,7 @@ export default function CasosPruebasPage() {
             </div>
             <Row className="table-detalleCp">
               <Col span={22} offset={1}>
-                <Title level={4}>Listado De Plan de Pruebas</Title>
+                <Title level={4}>Listado de Casos de Prueba</Title>
                 <TableListadoCP />
               </Col>
             </Row>

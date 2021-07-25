@@ -1,12 +1,11 @@
 import { Space } from "antd";
 import { Link } from "react-router-dom";
-import { DeleteOutlined, SettingOutlined } from '@ant-design/icons';
-import { Popconfirm } from 'antd';
-import ModalEditListado from "../pages/CasosDePrueba/components/ModalEditListado"
-
+import { DeleteOutlined, SettingOutlined } from "@ant-design/icons";
+import { Popconfirm } from "antd";
+import ModalEditListado from "../pages/CasosDePrueba/components/ModalEditListado";
 
 const handleDelete = (key) => {
-  console.log("eliminar", key)
+  console.log("eliminar", key);
   // const dataSource = [...this.state.dataSource];
   // this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
 };
@@ -23,7 +22,7 @@ export const columns = [
     key: "nombre",
   },
   {
-    title: "Descripcion",
+    title: "Descripción",
     dataIndex: "descripcion",
     key: "descripcion",
   },
@@ -32,49 +31,35 @@ export const columns = [
     key: "accion",
     render: (_, record) => (
       <Space size="middle">
-
         <ModalEditListado record={record} />
 
-
-        <Popconfirm cancelText="Cancelar" title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
-          <a href="!">   <DeleteOutlined />       </a>
-        </Popconfirm >
+        <Popconfirm
+          title="Está seguro de eliminar?"
+          onConfirm={() => handleDelete(record.key)}
+          okText="Confirmar"
+          cancelText="Cancelar"
+        >
+          <a href="!">
+            {" "}
+            <DeleteOutlined />{" "}
+          </a>
+        </Popconfirm>
 
         <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
           <SettingOutlined />
         </Link>
-      </Space >
+      </Space>
     ),
   },
 ];
 
-export const data = [
-  {
-    key: "1",
-    id: "1",
-    nombre: "Nombre CP",
+export const data = [];
+for (let i = 1; i < 21; i++) {
+  data.push({
+    key: i,
+    id: i,
+    nombre: `Nombre CP #${i}`,
     descripcion:
       "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).",
-  },
-  {
-    key: "2",
-    id: "2",
-    nombre: "Nombre CP",
-    descripcion:
-      "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).",
-  },
-  {
-    key: "3",
-    id: "3",
-    nombre: "Nombre CP",
-    descripcion:
-      "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).",
-  },
-  {
-    key: "4",
-    id: "4",
-    nombre: "Nombre CP",
-    descripcion:
-      "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).",
-  },
-];
+  });
+}

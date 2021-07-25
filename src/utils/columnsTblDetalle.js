@@ -16,7 +16,7 @@ export const columns = [
     key: "id",
   },
   {
-    title: "PreCondición",
+    title: "Precondición",
     dataIndex: "precondicion",
     key: "precondicion",
   },
@@ -43,9 +43,10 @@ export const columns = [
         <ModalEditListado record={record} />
 
         <Popconfirm
-          cancelText="Cancelar"
-          title="Sure to delete?"
+          title="Está seguro de eliminar?"
           onConfirm={() => handleDelete(record.key)}
+          cancelText="Cancelar"
+          okText="Confirmar"
         >
           <a href="!">
             <DeleteOutlined />

@@ -1,9 +1,25 @@
 import React from "react";
-import { Layout, Popover, Button, Avatar, Badge, Menu, Breadcrumb } from "antd";
+import {
+  Layout,
+  Popover,
+  Button,
+  Avatar,
+  Badge,
+  Menu,
+  Breadcrumb,
+  Row,
+  Col,
+} from "antd";
 import avatarwomen from "../../../public/images/avatar.jpg";
 import { UserOutlined, ExportOutlined } from "@ant-design/icons";
+import routes from "../../routes/routes";
 import "./header.css";
-import { Row, Col } from "antd";
+
+const test = ("correct routes are exported", () => {
+  expect(routes.map(({ name, path }) => (
+    `${name}: ${path}`
+  )).toMatchSnapshot()
+);
 
 import { useSelector } from "react-redux";
 
@@ -44,8 +60,7 @@ const menu = (
 );
 
 export default function MainHeader() {
-
-  const usuario = useSelector( state => state.usuario.usuario );
+  const usuario = useSelector((state) => state.usuario.usuario);
 
   return (
     <Header

@@ -99,7 +99,7 @@ export default function DetalleCPPage() {
         {/** Column para la tabla */}
         <Row className="table-detalleCp">
           <Col span={22} offset={1}>
-            <Title level={4}>Listado De Todos Los Pasos</Title>
+            <Title level={4}>Listado de Todos los Pasos</Title>
             <TableDetallesCP />
           </Col>
         </Row>
