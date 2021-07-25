@@ -5,7 +5,10 @@ import {
     LISTAR_PROYECTOS,
     LISTAR_PROYECTOS_EXITO,
     LISTAR_PROYECTOS_ERROR,
-    SELECCION_PROYECTO
+    SELECCION_PROYECTO,
+    COMENZAR_DESCARGA_PETICIONES,
+    DESCARGA_PETICIONES_EXITO,
+    DESCARGA_PETICIONES_ERROR
 } from '../types/peitcionesType';
 
 /**
@@ -28,6 +31,7 @@ export default function ( state = initialState, action ) {
 
         case LISTAR_PROYECTOS:
         case AGREGAR_PETICION:
+        case COMENZAR_DESCARGA_PETICIONES:
             return {
                 ...state,
                 loading: true
@@ -53,8 +57,16 @@ export default function ( state = initialState, action ) {
                 proyectoSeleccionado: action.payload
             }
 
+        case DESCARGA_PETICIONES_EXITO:
+            return {
+                ...state,
+                loading: false,
+                peticiones: action.payload
+            }
+
         case LISTAR_PROYECTOS_ERROR:
         case AGREGAR_PETICION_ERROR:
+        case DESCARGA_PETICIONES_ERROR:
             return {
                 ...state,
                 loading: false,

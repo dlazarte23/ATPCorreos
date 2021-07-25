@@ -14,7 +14,11 @@ import {
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import "../peticion-style.css";
 
-import { listarProyectoAction, seleccionarProyectoAction } from "../../../stateManagement/actions/peticionesAction";
+import { 
+  listarProyectoAction, 
+  obtenerPeticionesAction,
+  seleccionarProyectoAction 
+} from "../../../stateManagement/actions/peticionesAction";
 
 const { Option } = Select;
 
@@ -27,9 +31,9 @@ export default function HeaderPeticion(props) {
   const obtenerProyectos = ( ) => dispatch( listarProyectoAction( ) );
 
   // eslint-disable-next-line
-  useEffect( async ( ) => {
+  useEffect( ( ) => {
 
-    await obtenerProyectos( );
+    obtenerProyectos( );
   
     // eslint-disable-next-line
   }, [ ]);
@@ -37,8 +41,17 @@ export default function HeaderPeticion(props) {
   const proyectos = useSelector( state => state.peticiones.proyectos );
 
   const seleccionarProyecto = codProyecto => dispatch( seleccionarProyectoAction( codProyecto ) );
-  
-  const buscarPeticiones = value => seleccionarProyecto( value );
+  const obtenerPeticiones = codProyecto => dispatch( obtenerPeticionesAction( codProyecto ) );
+
+  const buscarPeticiones = value => {
+
+    // setteamos el proyecto para almacenar el general
+    seleccionarProyecto( value );
+
+    // actualizamos la lista de peticiones dependiendo el tipo de proyecto q le pasemos
+    //obtenerPeticiones( value );
+
+  }
 
   const options = [
     { label: "Personales", value: "Personales" },
