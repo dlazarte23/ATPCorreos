@@ -14,7 +14,7 @@ for (let i = 1; i < 21; i++) {
   listData.push({
     key: i,
     codPeticion: i * 1050020,
-    nombre: `Nombre de la Petición ${i}`,
+    nombre: `Nombre de la Petición Lorem Ipsum is simply dummy text. ${i}`,
     fecCreacion: "01/07/2021",
   });
 }
@@ -54,7 +54,7 @@ export default function Peticionespage() {
           </Col>
         </Row>
 
-        <Row style={{marginTop: 60}}>
+        <Row style={{ marginTop: 20 }}>
           <Col span={12} offset={6}>
             <ListPeticiones
               listData={listPeticiones}

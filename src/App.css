@@ -201,3 +201,7 @@ ant-layout-sider-children {
   height: "100vh" !important;
   background-color: #fff !important;
 }
+
+.ant-ribbon {
+  background-color: #1890ff;
+}

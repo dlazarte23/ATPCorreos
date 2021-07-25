@@ -7,9 +7,17 @@ import {
   Descriptions,
   Badge,
   Button,
-  Drawer
+  Drawer,
+  Card,
+  Row,
+  Col,
+  Typography,
 } from "antd";
-import { CalendarOutlined, RightOutlined } from "@ant-design/icons";
+import {
+  CalendarOutlined,
+  RightOutlined,
+  NumberOutlined,
+} from "@ant-design/icons";
 import { InfoPeticion } from "../components";
 import "../peticion-style.css";
 
@@ -28,7 +36,7 @@ export default function ListPeticiones(props) {
   const [showDetalle, setShowDetalle] = useState(false);
 
   // obtenemos la lista de peticiones de nuestro state general
-  const peticiones = useSelector( state => state.peticiones.peticiones );
+  const peticiones = useSelector((state) => state.peticiones.peticiones);
 
   const handleDetalle = (value) => {
     //AQUI SE DEBERÍA HACER LLAMADO A API PARA RECUPERAR DETALLE DE LA PETICIÓN POR ID_PETICION
@@ -67,15 +75,9 @@ export default function ListPeticiones(props) {
           defaultCurrent: 1,
         }}
         style={{ paddingLeft: 50, paddingRight: 50 }}
-        renderItem={(item) =>
-          item.key < 3 ? (
-            <Badge.Ribbon text="Nuevo" color="#87d068">
-              <ListItem item={item} handleDetalle={handleDetalle} />
-            </Badge.Ribbon>
-          ) : (
-            <ListItem item={item} handleDetalle={handleDetalle} />
-          )
-        }
+        renderItem={(item) => (
+          <ListItem item={item} handleDetalle={handleDetalle} />
+        )}
       >
         <Drawer
           width={400}
@@ -93,7 +95,43 @@ export default function ListPeticiones(props) {
 
 const ListItem = ({ item, handleDetalle }) => {
   return (
-    <List.Item
+    <>
+      <Badge.Ribbon text="Nuevo" color="green">
+        <Card title={item.nombre} size="small" style={{ borderRadius: 20 }}>
+          <Row>
+            <Col span={18}>
+              <Descriptions size="small" column={1}>
+                <Descriptions.Item label="Id. Petición">
+                  <IconText
+                    icon={NumberOutlined}
+                    text={item.codPeticion}
+                    key={item.key}
+                  />
+                </Descriptions.Item>
+                <Descriptions.Item label="Creación">
+                  <IconText
+                    icon={CalendarOutlined}
+                    text={item.fecCreacion}
+                    key={item.key}
+                  />
+                </Descriptions.Item>
+              </Descriptions>
+            </Col>
+            <Col span={6}>
+              <Descriptions size="small" column={1}>
+                <Descriptions.Item label="">
+                  <Button type="text" onClick={() => handleDetalle({ item })}>
+                    Ver detalle <RightOutlined />
+                  </Button>
+                </Descriptions.Item>
+              </Descriptions>
+            </Col>
+          </Row>
+        </Card>
+      </Badge.Ribbon>
+      <br />
+    </>
+    /* <List.Item
       actions={[
         <Space>
           <Button type="text" onClick={() => handleDetalle({ item })}>
@@ -127,6 +165,6 @@ const ListItem = ({ item, handleDetalle }) => {
           }
         />
       </Skeleton>
-    </List.Item>
+    </List.Item> */
   );
 };
