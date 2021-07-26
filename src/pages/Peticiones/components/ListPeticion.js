@@ -42,8 +42,10 @@ export default function ListPeticiones(props) {
     //AQUI SE DEBERÍA HACER LLAMADO A API PARA RECUPERAR DETALLE DE LA PETICIÓN POR ID_PETICION
     const detalle = value.item;
     detalle.sprint = Math.floor(Math.random() * 10);
-    detalle.dateGeneracion = "01/07/2021";
-    detalle.dateActualizacion = "20/07/2021";
+    detalle.fecEntrega = "10/07/2021";
+    detalle.fecInicio = "20/07/2021";
+    detalle.fecPrevistaEntrega =   "30/07/2021";
+    detalle.horasEstimadas = "4:30";
     detalle.create = "Diego Antonio Lazarte Peláez";
     detalle.numberPrueba = Math.floor(Math.random() * 100);
     setDetallePeticion(value.item);

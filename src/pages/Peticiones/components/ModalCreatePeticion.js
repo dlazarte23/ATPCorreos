@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Modal, Input, InputNumber, Form, Row, Col, Button } from "antd";
+import { Modal, Input, InputNumber, Form, Row, Col, Button, DatePicker, TimePicker } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 import { SaveOutlined } from "@ant-design/icons";
@@ -22,8 +22,8 @@ export default function ModalCreatePeticion(props) {
     console.log("on finsh");
   };
 
-  const loading = useSelector( state => state.peticiones.loading );
-  const codProyecto = useSelector( state => state.peticiones.proyectoSeleccionado );
+  const loading = useSelector(state => state.peticiones.loading);
+  const codProyecto = useSelector(state => state.peticiones.proyectoSeleccionado);
 
   const dispatch = useDispatch();
 
@@ -48,14 +48,13 @@ export default function ModalCreatePeticion(props) {
 
           codOt: values.nomPeticion,
           codPeticion: values.idPeticion,
-          codProyecto,
-          fecEntrega: "2021-07-24T19:57:33.239Z",
-          fecInicio: "2021-07-24T19:57:33.239Z",
-          fecPrevistaEntrega: "2021-07-24T19:57:33.239Z",
-          horasEstimadas: 150,
+          codProyecto: values.idPeticion,
+          fecEntrega: values.fecEntrega,
+          fecInicio: values.fecInicio,
+          fecPrevistaEntrega: values.fecPrevistaEntrega,
+          horasEstimadas: values.horasEstimadas,
           numero: values.sprint,
           usuarioCorto: 'kpeinado'
-
         };
 
         console.log(peticion)
@@ -69,7 +68,7 @@ export default function ModalCreatePeticion(props) {
       .catch((info) => {
 
         console.log("Error al validar: ", info);
-        
+
       });
   };
 
@@ -105,8 +104,85 @@ export default function ModalCreatePeticion(props) {
           centered={true}
           hideRequiredMark
         >
-          <Row justify="space-between">
-            <Col span={10}>
+          <Form.Item
+            name="nomPeticion"
+            label="Nombre Petición"
+            rules={[
+              {
+                required: true,
+                message: "Debe ingresar el nombre de la petición !",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item name="fecEntrega" label="Fecha de entrega" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Selecione una fecha'
+                },
+              ]}>
+                <DatePicker placeholder="--/--/--" showToday={false} />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="fecInicio" label="Fecha de inicio" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Selecione una fecha'
+                },
+              ]}>
+                <DatePicker placeholder="--/--/--" showToday={false} />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="fecPrevistaEntrega" label="Fecha prevista" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Selecione una fecha'
+                },
+              ]}>
+                <DatePicker placeholder="--/--/--" showToday={false} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item name="horasEstimadas" label="Horas Estimadas" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Ingresar hora'
+                },
+              ]}>
+                <TimePicker placeholder="--:--" showNow={false} className="input-string" />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="sprint"
+                label="Sprint"
+
+                rules={[
+                  {
+                    required: true,
+                    type: "number",
+                    min: 0,
+                    max: 99,
+                    message: "El numero de sprint debe estar entre 0 a 99 !",
+                  },
+                ]}
+              >
+                <InputNumber className="input-string" />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
               <Form.Item
                 name="idPeticion"
                 label="Id. Petición"
@@ -120,37 +196,7 @@ export default function ModalCreatePeticion(props) {
                 <Input />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              {" "}
-              <Form.Item
-                name="nomPeticion"
-                label="Nombre Petición"
-                rules={[
-                  {
-                    required: true,
-                    message: "Debe ingresar el nombre de la petición !",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
           </Row>
-          <Form.Item
-            name="sprint"
-            label="Sprint"
-            rules={[
-              {
-                required: true,
-                type: "number",
-                min: 0,
-                max: 99,
-                message: "El numero de sprint debe estar entre 0 a 99 !",
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
         </Form>
       </Modal>
     </>
