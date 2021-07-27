@@ -38,7 +38,7 @@ export default function ModalEditListado(props) {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        centered={true}
+        centered="true"
         footer={[
           <Button key="back" onClick={handleCancel}>
             Cancelar
@@ -54,7 +54,7 @@ export default function ModalEditListado(props) {
           name="nest-messages"
           onFinish={onFinish}
           size="default"
-          centered={true}
+          centered="true"
           hideRequiredMark
         >
           <Row justify="space-between">
