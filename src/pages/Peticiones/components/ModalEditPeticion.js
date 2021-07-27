@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { Modal, Input, InputNumber, Form, Row, Col, Button } from "antd";
+import { Modal, Input, InputNumber, Form, Row, Col, Button, DatePicker, TimePicker } from "antd";
 import { useDispatch, useSelector } from 'react-redux';
 
 // actions de redux
 import { crearNuevaPeticionAction } from '../../../stateManagement/actions/peticionesAction';
-
+import moment from 'moment';
 export default function ModalEditPeticion(props) {
 
-  const { showModal, setShowModal, dataPeticion } = props;
-  const {title, sprint, key} = dataPeticion;
+  const { showModal, setShowModal, dataPeticion, } = props;
+  
+  
+  const {nombre, sprint, key, fecEntrega, fecInicio, fecPrevistaEntrega, horasEstimadas } = dataPeticion;
+
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();
@@ -60,12 +63,12 @@ export default function ModalEditPeticion(props) {
   return (
     <>
       <Modal
-        title={"Editar " + title}
+        title={"Editar " + nombre}
         visible={showModal.create}
         onCancel={handleCancel}
         confirmLoading={confirmLoading}
         destroyOnClose={true}
-        centered
+        centered={true}
         footer={[
           <Button key="back" onClick={handleCancel}>
             Cancelar
@@ -82,27 +85,100 @@ export default function ModalEditPeticion(props) {
           size="default"
           centered={true}
           hideRequiredMark>
-          <Row justify="space-between">
-            <Col span={10}>
               <Form.Item
-              name="idPeticion"
-              label="Id. Petición"
-              rules={[{ required: true, message: "Debe ingresar el id de la petición !" }]} >
-              <Input defaultValue={key}/>
-            </Form.Item></Col>
-            <Col span={12}>   <Form.Item
-              name="nomPeticion"
-              label="Nombre Petición"
-              rules={[{ required: true, message: "Debe ingresar el nombre de la petición !" }]} >
-              <Input defaultValue={title}/>
-            </Form.Item></Col>
-          </Row>
-          <Form.Item
-            name="sprint"
-            label="Sprint"
-            rules={[{ required: true, type: "number", min: 0, max: 99, message: "El numero de sprint debe estar entre 0 a 99 !" }]} >
-            <InputNumber defaultValue={sprint}/>
+            name="nomPeticion"
+            label="Nombre Petición"
+            rules={[
+              {
+                required: true,
+                message: "Debe ingresar el nombre de la petición !",
+              },
+            ]}
+          >
+            <Input defaultValue={nombre}/>
           </Form.Item>
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item name="fecEntrega" label="Fecha de entrega" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Selecione una fecha'
+                },
+              ]}>
+                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecEntrega, 'YYYY/MM/DD')}/>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="fecInicio" label="Fecha de inicio" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Selecione una fecha'
+                },
+              ]}>
+                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecInicio, 'YYYY/MM/DD')}/>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="fecPrevistaEntrega" label="Fecha prevista" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Selecione una fecha'
+                },
+              ]}>
+                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecPrevistaEntrega, 'YYYY/MM/DD')}/>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item name="horasEstimadas" label="Horas Estimadas" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Ingresar hora'
+                },
+              ]}>
+                <TimePicker placeholder="--:--" showNow={false} className="input-string"/>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="sprint"
+                label="Sprint"
+
+                rules={[
+                  {
+                    required: true,
+                    type: "number",
+                    min: 0,
+                    max: 99,
+                    message: "El numero de sprint debe estar entre 0 a 99 !",
+                  },
+                ]}
+              >
+                <InputNumber className="input-string" defaultValue={sprint}/>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="idPeticion"
+                label="Id. Petición"
+                rules={[
+                  {
+                    required: true,
+                    message: "Debe ingresar el id de la petición !",
+                  },
+                ]}
+              >
+                <Input defaultValue={key}/>
+              </Form.Item>
+            </Col>
+          </Row>
+       
         </Form>
       </Modal>
     </>

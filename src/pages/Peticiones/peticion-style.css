@@ -1,3 +1,16 @@
 .TagNewPeticion {
   margin-left: 10px !important;
 }
+
+.ant-modal-title {
+  width: 400px;
+}
+
+
+.ant-drawer-body .ant-card {
+  margin: 30px 0 0;
+}
+
+.ant-form-item-control-input-content .input-string {
+  width: 148px;
+}
