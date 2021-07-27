@@ -5,6 +5,9 @@ import {
   DESLOGEO_USUARIO,
   DESLOGEO_USUARIO_EXITO,
   DESLOGEO_USUARIO_ERROR,
+  VERIFICAR_USUARIO,
+  VERIFICAR_USUARIO_EXITO,
+  VERIFICAR_USUARIO_ERROR
 } from "../types/usuarioType";
 
 import { message } from "antd";
@@ -13,41 +16,48 @@ import { UsuarioBaseUrl as uri } from "../../Api/ApiUrl";
 
 import { get } from "../../utils/confAxios/petitionGet";
 
-export function logearUsuario(usuario) {
+/**
+ * Action unicamente para el logeo del usuario
+ * @param {*} usuario 
+ */
+export function logearUsuarioAction( usuario ) {
   return async (dispatch) => {
-    dispatch(logeandoUsuario());
+
+    dispatch( logeandoUsuario( ) );
 
     try {
-      const response = await get(
-        `${uri.setLoginUser}?usuarioCorto=${usuario.username}&password=${usuario.password}`
-      );
 
-      if (response.code === 1) {
+      const endpoint = `${uri.setLoginUser}?usuarioCorto=${usuario.username}&password=${usuario.password}`;
+      
+      const response = await get( endpoint );
+
+      if ( response.code === 1 ) {
+
         message.success(`Bienvenido ${response.usuarioCorto} !`);
 
-        dispatch(logearUsuarioExito(usuario));
+        dispatch( logearUsuarioExito ( response ) );
+
+        localStorage.setItem("IS_AUTHENTICATED", true);
+        localStorage.setItem("DATA_SESION", JSON.stringify(response));
 
         return "200";
+
       } else {
+
         message.error("Ops. Credenciales incorrectas !");
 
-        dispatch(logearUsuarioError("Credenciales incorrectas"));
-      }
-    } catch (error) {
-      dispatch(logearUsuarioError(error));
-    }
-  };
-}
+        dispatch( logearUsuarioError( "Credenciales incorrectas" ) );
 
-export function deslogearUsuario(usuario) {
-  return async (dispatch) => {
-    dispatch(deslogeandoUsuario());
-    try {
-      dispatch(deslogearUsuarioExito());
-    } catch (error) {
-      dispatch(deslogearUsuarioError(error));
+      }
+
+    } catch ( error ) {
+
+      dispatch( logearUsuarioError( error ) );
+
     }
+
   };
+
 }
 
 const logeandoUsuario = () => ({
@@ -64,6 +74,17 @@ const logearUsuarioError = (error) => ({
   payload: error,
 });
 
+export function deslogearUsuario(usuario) {
+  return async (dispatch) => {
+    dispatch(deslogeandoUsuario());
+    try {
+      dispatch(deslogearUsuarioExito());
+    } catch (error) {
+      dispatch(deslogearUsuarioError(error));
+    }
+  };
+}
+
 const deslogeandoUsuario = () => ({
   type: DESLOGEO_USUARIO,
 });
@@ -75,4 +96,43 @@ const deslogearUsuarioExito = (usuario) => ({
 const deslogearUsuarioError = (error) => ({
   type: DESLOGEO_USUARIO_ERROR,
   payload: error,
+});
+
+/**
+ * Action par la verificación del usuario cuando se encuentre data
+ * en el local storage
+ * @param {*} usuario 
+ */
+export function verificarLogeoAction ( usuario ) {
+
+  return ( dispatch ) => {
+
+    dispatch( verificarLogeo( ) );
+
+    try {
+
+      dispatch( verificarLogeoExito( usuario ) );
+
+    } catch ( error ) {
+
+      dispatch( verificarLogeoError( error ) );
+
+    }
+
+  }
+
+}
+
+const verificarLogeo = ( ) => ({
+  type: VERIFICAR_USUARIO
+});
+
+const verificarLogeoExito = usuario => ({
+  type: VERIFICAR_USUARIO_EXITO,
+  payload: usuario
+});
+
+const verificarLogeoError = error => ({
+  type: VERIFICAR_USUARIO_ERROR,
+  payload: error
 });

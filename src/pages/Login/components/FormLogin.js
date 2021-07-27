@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
-import { logearUsuario } from "../../../stateManagement/actions/usuarioAction";
+import { logearUsuarioAction } from "../../../stateManagement/actions/usuarioAction";
 
 const FormLogin = () => {
   const { Title } = Typography;
@@ -17,19 +17,25 @@ const FormLogin = () => {
 
   const dispatch = useDispatch();
 
-  const loginUsuario = (usuario) => dispatch(logearUsuario(usuario));
+  const loginUsuario = usuario => dispatch( logearUsuarioAction ( usuario ) );
 
-  const onFinish = async (values) => {
+  const onFinish = async ( values ) => {
+
     setIsLogging(true);
-    const response = await loginUsuario(values);
+    
+    const response = await loginUsuario( values );
 
     if (response === "200") {
-      localStorage.setItem("IS_AUTHENTICATED", true);
+
       //Redirigiendo al home...
       history.push("/peticiones");
+
     } else {
+
       setIsLogging(false);
+
     }
+
   };
 
   const onFinishFailed = (errorInfo) => {
