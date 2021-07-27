@@ -27,6 +27,8 @@ const FormLogin = () => {
       localStorage.setItem("IS_AUTHENTICATED", true);
       //Redirigiendo al home...
       history.push("/peticiones");
+    } else {
+      setIsLogging(false);
     }
   };
 
