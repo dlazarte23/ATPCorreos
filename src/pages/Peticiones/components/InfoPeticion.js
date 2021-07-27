@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useHistory } from "react-router";
 
-import { Card, Typography, Descriptions, Button, Space, Tooltip } from "antd";
+import { Card, Typography, Descriptions, Button, Space, Tooltip,Popconfirm } from "antd";
 import {
   ExceptionOutlined,
   SettingFilled,
@@ -82,6 +82,13 @@ const InfoPeticion = (props) => {
                     onClick={() => setShowModal({ ...showModal, create: true })}
                   />
                 </Tooltip>
+                
+                <Popconfirm
+                title="¿Está seguro de eliminar?"
+                /* onConfirm={() => handleDelete(record.key)} */
+                okText="Confirmar"
+                cancelText="Cancelar">
+
                 <Tooltip placement="right" title="Eliminar Petición">
                   <Button
                     icon={<DeleteOutlined />}
@@ -90,6 +97,12 @@ const InfoPeticion = (props) => {
                     style={{ marginLeft: 10 }}
                   />
                 </Tooltip>
+                </Popconfirm>
+
+
+
+
+
               </Space>
               <Space style={{ float: "right" }}>
                 <Button

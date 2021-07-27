@@ -1,21 +1,21 @@
 import React from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
-const editorConfiguration = {
-  toolbar: [
-    "bold",
-    "italic",
-    "underLine",
-    "|",
-    "bulletedList",
-    "numberedList",
-    "|",
-    "undo",
-    "redo",
-  ],
-};
-
+import { Input } from 'antd';
+// const editorConfiguration = {
+//   toolbar: [
+//     "bold",
+//     "italic",
+//     "underLine",
+//     "|",
+//     "bulletedList",
+//     "numberedList",
+//     "|",
+//     "undo",
+//     "redo",
+//   ],
+// };
+const { TextArea } = Input;
 const EditorStepDetalle = (props) => {
   const { stepData, setStepData, initialData, current } = props;
 
@@ -43,25 +43,41 @@ const EditorStepDetalle = (props) => {
         console.log("");
     }
   };
+
+ 
   return (
-    <CKEditor
-      editor={ClassicEditor}
-      data={initialData}
-      config={editorConfiguration}
-      onReady={(editor) => {
-        //console.log("Editor is ready to use!", editor);
-      }}
-      onChange={(event, editor) => {
-        handleChangeContent(editor.getData());
-        console.log(editor.getData());
-      }}
-      onBlur={(event, editor) => {
-        //console.log("Blur.", editor);
-      }}
-      onFocus={(event, editor) => {
-        //console.log("Focus.", editor);
-      }}
-    />
+    
+
+      <TextArea 
+      rows={9} 
+      onChange={(e) => {
+             handleChangeContent(e.target.value); 
+           }}
+
+      />
+      
+
+    //usando el CK-Editor 5
+    // <CKEditor
+    //   editor={ClassicEditor}
+    //   data={initialData}
+    //   config={editorConfiguration}
+    //   onReady={(editor) => {
+    //     //console.log("Editor is ready to use!", editor);
+    //   }}
+    //   onChange={(event, editor) => {
+    //     handleChangeContent(editor.getData());
+    //     console.log(editor.getData());
+    //   }}
+    //   onBlur={(event, editor) => {
+    //     //console.log("Blur.", editor);
+    //   }}
+    //   onFocus={(event, editor) => {
+    //     //console.log("Focus.", editor);
+    //   }}
+    // />
+
+
   );
 };
 

@@ -100,14 +100,15 @@ export default function ModalEditPeticion(props) {
           </Form.Item>
           <Row gutter={16}>
             <Col span={8}>
-              <Form.Item name="fecEntrega" label="Fecha de entrega" rules={[
+              <Form.Item name="fecEntrega" label="Fecha de Entrega" rules={[
                 {
                   required: true,
                   type: "object",
                   message: 'Selecione una fecha'
                 },
               ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecEntrega, 'YYYY/MM/DD')}/>
+
+                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecEntrega, 'DD/MM/YYYY')}/>
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -118,7 +119,7 @@ export default function ModalEditPeticion(props) {
                   message: 'Selecione una fecha'
                 },
               ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecInicio, 'YYYY/MM/DD')}/>
+                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecInicio, 'DD/MM/YYYY')}/>
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -129,7 +130,7 @@ export default function ModalEditPeticion(props) {
                   message: 'Selecione una fecha'
                 },
               ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecPrevistaEntrega, 'YYYY/MM/DD')}/>
+                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecPrevistaEntrega, 'DD/MM/YYYY')}/>
               </Form.Item>
             </Col>
           </Row>

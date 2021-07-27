@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Layout,
   Popover,
@@ -14,27 +14,39 @@ import avatarwomen from "../../../public/images/avatar.jpg";
 import { UserOutlined, ExportOutlined } from "@ant-design/icons";
 import Breadcrumbs from "./Breadcrumbs";
 import "./header.css";
-
-import { useSelector } from "react-redux";
+import { deslogearUsuario } from "../../stateManagement/actions/usuarioAction";
+import { useSelector, useDispatch } from "react-redux";
 
 const { Header } = Layout;
 
-const content = (
-  <div>
-    <p>Content</p>
-    <p>Content</p>
-    <p>Content</p>
-    <p>
-      <Button type="link" className="btn-close">
-        <ExportOutlined />
-        &nbsp;Cerrar Sesión
-      </Button>
-    </p>
-  </div>
-);
-
 export default function MainHeader() {
   const usuario = useSelector((state) => state.usuario.usuario);
+  const dispatch = useDispatch();
+
+  const logoutUsuario = () => dispatch(deslogearUsuario());
+
+  const handleLogOut = () => {
+    localStorage.removeItem("IS_AUTHENTICATED");
+    logoutUsuario();
+  };
+
+  const content = (
+    <div>
+      <p>Content</p>
+      <p>Content</p>
+      <p>Content</p>
+      <p>
+        <Button
+          type="link"
+          className="btn-close"
+          onClick={() => handleLogOut()}
+        >
+          <ExportOutlined />
+          &nbsp;Cerrar Sesión
+        </Button>
+      </p>
+    </div>
+  );
 
   return (
     <Header
