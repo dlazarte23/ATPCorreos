@@ -80,7 +80,7 @@ export default function ModalCreatePeticion(props) {
         onCancel={handleCancel}
         confirmLoading={confirmLoading}
         destroyOnClose={true}
-        centered
+        centered="true"
         footer={[
           <Button key="back" onClick={handleCancel}>
             Cancelar
@@ -101,7 +101,7 @@ export default function ModalCreatePeticion(props) {
           name="nest-messages"
           onFinish={onFinish}
           size="default"
-          centered={true}
+          centered="true"
           hideRequiredMark
         >
           <Form.Item

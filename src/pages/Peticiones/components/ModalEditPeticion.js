@@ -8,10 +8,11 @@ import moment from 'moment';
 export default function ModalEditPeticion(props) {
 
   const { showModal, setShowModal, dataPeticion, } = props;
-  
-  
-  const {nombre, sprint, key, fecEntrega, fecInicio, fecPrevistaEntrega, horasEstimadas } = dataPeticion;
 
+  const {nombre, sprint, key, fecEntrega, fecInicio, fecPrevistaEntrega, horasEstimadas } = dataPeticion;
+  console.log("1", fecEntrega)
+  console.log("2", fecInicio)
+  console.log("3", fecPrevistaEntrega)
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();
@@ -68,7 +69,7 @@ export default function ModalEditPeticion(props) {
         onCancel={handleCancel}
         confirmLoading={confirmLoading}
         destroyOnClose={true}
-        centered={true}
+        centered="true"
         footer={[
           <Button key="back" onClick={handleCancel}>
             Cancelar
@@ -83,7 +84,7 @@ export default function ModalEditPeticion(props) {
           name="nest-messages"
           onFinish={onFinish}
           size="default"
-          centered={true}
+          centered="true"
           hideRequiredMark>
               <Form.Item
             name="nomPeticion"
@@ -142,7 +143,7 @@ export default function ModalEditPeticion(props) {
                   message: 'Ingresar hora'
                 },
               ]}>
-                <TimePicker placeholder="--:--" showNow={false} className="input-string"/>
+                <TimePicker placeholder="--:--" showNow={false} className="input-string" defaultValue={moment(horasEstimadas, 'HH:mm:ss')}/>
               </Form.Item>
             </Col>
             <Col span={8}>
