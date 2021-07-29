@@ -9,7 +9,7 @@ import {
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 
-import { Row, Col } from "antd";
+import { Row, Col, Spin } from "antd";
 
 import { useSelector } from "react-redux";
 
@@ -20,7 +20,8 @@ import alertError from '../../assets/img/alertError.png';
 
 export default function Peticionespage() {
 
-  // obtenemos la lista de peticiones de nuestro state general
+  const loading = useSelector( state => state.peticiones.loading );
+
   const peticiones = useSelector( state => state.peticiones.peticiones );
 
   const proyectos = useSelector( state => state.peticiones.proyectos );
@@ -77,7 +78,7 @@ export default function Peticionespage() {
   };
 
   return (
-    <>
+    <Spin spinning={loading} tip="Cargando...">
       <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
         <Row>
           <Col span={24}>
@@ -127,6 +128,6 @@ export default function Peticionespage() {
           setShowModal={setShowModal}
         />
       </Scrollbars>
-    </>
+    </Spin>
   );
 }
