@@ -78,7 +78,7 @@ export default function Peticionespage() {
   };
 
   return (
-    <Spin spinning={loading} tip="Cargando...">
+    <Spin spinning={loading} tip="Cargando..." size="large">
       <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
         <Row>
           <Col span={24}>
