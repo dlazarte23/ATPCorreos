@@ -39,14 +39,18 @@ export default function HeaderPeticion(props) {
   }, [ ]);
 
   const proyectos = useSelector( state => state.peticiones.proyectos );
+  const proyectoSeleccionado = useSelector( state => state.peticiones.proyectoSeleccionado );
 
   const seleccionarProyecto = codProyecto => dispatch( seleccionarProyectoAction( codProyecto ) );
-  const obtenerPeticiones = codProyecto => dispatch( obtenerPeticionesAction( codProyecto ) );
+  const obtenerPeticiones = codProyecto => dispatch( obtenerPeticionesAction( codProyecto ) );  
 
   const buscarPeticiones = value => {
 
     // setteamos el proyecto para almacenar el general
-    seleccionarProyecto( value );
+
+    const proyecto = proyectos.filter(proyecto => proyecto.id === value );
+
+    seleccionarProyecto( proyecto[0] );
 
     // actualizamos la lista de peticiones dependiendo el tipo de proyecto q le pasemos
     obtenerPeticiones( value );
@@ -97,6 +101,7 @@ export default function HeaderPeticion(props) {
         />
         
         <Select
+          defaultValue={ proyectoSeleccionado === null ? null : proyectoSeleccionado.id }
           showSearch
           style={{ width: "200px" }}
           placeholder="Seleccione un proyecto"

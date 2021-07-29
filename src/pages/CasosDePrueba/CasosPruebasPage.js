@@ -36,8 +36,11 @@ const extraContent = (
   </div>
 );
 
-export default function CasosPruebasPage() {
+export default function CasosPruebasPage( props ) {
+
   const { Title, Paragraph } = Typography;
+
+  const { peticion } = props.location.state;
 
   const renderContent = () => (
     <div className="card-information">
@@ -49,10 +52,10 @@ export default function CasosPruebasPage() {
             <Title level={5}>
               <Descriptions size="small" column={1}>
                 <Descriptions.Item label="Nombre Petición">
-                  <a href="!">Configuración Footer Email</a>
+                  <span style={{color: '#1890ff'}}>{ peticion.nombre }</span>
                 </Descriptions.Item>
                 <Descriptions.Item label="Id. Petición">
-                  {Math.floor(Math.random() * 10000000)}
+                  {peticion.codPeticion }
                 </Descriptions.Item>
               </Descriptions>
             </Title>

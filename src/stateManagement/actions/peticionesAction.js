@@ -129,30 +129,23 @@ const obtenerPeticionError = error => ({
  * Actión para poder hacer el registro de las peticiónes
  * @param {*} peticion  => recibe un objeto con la petición que se va a mandar a crear
  */
-export function crearNuevaPeticionAction ( peticion ) {
+export function crearNuevaPeticionAction ( peticion, idProyecto ) {
 
-    return async ( dispatch ) => {
+    return ( dispatch ) => {
 
         dispatch( agregarPeticion( ) );
 
         try {
 
-            const response = await post( uri.setPeticion, peticion );
+            post( uri.setPeticion, peticion );
 
-            /**console.log(response);
+            dispatch( agregarPeticionExito( ) );
 
-            const usuario = {
-                codigoUsuario: 147800,
-                email: "kpeinado@everis.com",
-                idTipoUsuario: 1,
-                nombre: "kevin",
-                password: "123456",
-                usuarioCorto: "kpeinado"
-            }
-
-            const response = await post("http://localhost:8087/s3link/usuario", usuario);
-*/
-            dispatch( agregarPeticionExito( peticion ) );
+            /**
+             * En esta situación se esta mandao a llamar al action de obtener
+             * peiticiones unicamente por temas de que necesitamos el id de esta petición
+             */
+            dispatch ( obtenerPeticionesAction ( idProyecto ) );
 
         } catch ( error ) {
 
@@ -171,9 +164,8 @@ const agregarPeticion = ( ) => ({
 });
 
 // si se ah guardado en BBDD correctamente
-const agregarPeticionExito = peticion => ({
-    type: AGREGAR_PETICION_EXITO,
-    payload: peticion
+const agregarPeticionExito = ( ) => ({
+    type: AGREGAR_PETICION_EXITO
 });
 
 // si hubo un error al guardar en la BBDD

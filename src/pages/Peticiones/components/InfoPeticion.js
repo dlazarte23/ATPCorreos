@@ -110,7 +110,10 @@ const InfoPeticion = (props) => {
                   type="primary"
                   shape="round"
                   onClick={() =>
-                    history.push("/peticiones/creacion-de-casos-de-prueba")
+                    history.push({
+                      pathname: "/peticiones/creacion-de-casos-de-prueba",
+                      state: { peticion: dataPeticion }
+                    })
                   }
                 >
                   Configurar

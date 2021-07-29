@@ -39,9 +39,7 @@ export default function ( state = initialState, action ) {
 
         case AGREGAR_PETICION_EXITO:
             return {
-                ...state,
-                loading: false,
-                peticiones: [...state.peticiones, action.payload]
+                ...state
             }
 
         case LISTAR_PROYECTOS_EXITO:
