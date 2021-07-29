@@ -79,6 +79,10 @@ const seleccionarProyecto = codProyecto => ({
     payload: codProyecto
 });
 
+/**
+ * Actión para traernos todas las peticiones por el cod de proyecto que exista.
+ * @param {*} codProyecto 
+ */
 export function obtenerPeticionesAction ( codProyecto ) {
 
     return async ( dispatch ) => {
@@ -87,9 +91,7 @@ export function obtenerPeticionesAction ( codProyecto ) {
 
         try {
 
-            const response = get(`${uri.getPeticiones}/${codProyecto}`);
-
-            console.log ( response.responseSprints );
+            const response = await get(`${uri.getPeticiones}/${codProyecto}`);
 
             dispatch( obtenerPeticionExito( response.responseSprints ) );
 

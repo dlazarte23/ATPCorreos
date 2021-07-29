@@ -55,6 +55,7 @@ export default function ModalCreatePeticion(props) {
           horasEstimadas: values.horasEstimadas,
           numero: values.sprint,
           usuarioCorto: 'kpeinado'
+          
         };
 
         console.log(peticion)

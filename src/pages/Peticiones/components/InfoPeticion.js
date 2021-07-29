@@ -36,11 +36,14 @@ const InfoPeticion = (props) => {
             <Descriptions.Item label="Nombre">
               {dataPeticion.nombre}
             </Descriptions.Item>
-            <Descriptions.Item label="id Petición">
-              {dataPeticion.key}
+            <Descriptions.Item label="Id Petición">
+              {dataPeticion.codPeticion}
+            </Descriptions.Item>
+            <Descriptions.Item label="Codigo OT">
+              {dataPeticion.codOt}
             </Descriptions.Item>
             <Descriptions.Item label="Sprint">
-              {dataPeticion.sprint}
+              {dataPeticion.numero}
             </Descriptions.Item>
             <Descriptions.Item label="Fecha de Entrega">
               {dataPeticion.fecEntrega}
@@ -52,15 +55,12 @@ const InfoPeticion = (props) => {
               {dataPeticion.fecPrevistaEntrega}
             </Descriptions.Item>
             <Descriptions.Item label="Horas Estimadas">
-              {dataPeticion.horasEstimadas}
+              {`${dataPeticion.horasEstimadas} h.`}
             </Descriptions.Item>
 
             
             <Descriptions.Item label="Creador por">
               {dataPeticion.create}
-            </Descriptions.Item>
-            <Descriptions.Item label="N° de Casos de prueba">
-              {dataPeticion.numberPrueba}
             </Descriptions.Item>
           </Descriptions>
         </div>

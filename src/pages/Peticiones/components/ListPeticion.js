@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import {
   List,
   Space,
-  Skeleton,
-  Avatar,
   Descriptions,
   Badge,
   Button,
   Drawer,
   Card,
   Row,
-  Col,
-  Typography,
+  Col
 } from "antd";
 import {
   CalendarOutlined,
@@ -21,8 +18,6 @@ import {
 import { InfoPeticion } from "../components";
 import "../peticion-style.css";
 
-import { useSelector } from "react-redux";
-
 const IconText = ({ icon, text }) => (
   <Space>
     {React.createElement(icon)}
@@ -30,24 +25,12 @@ const IconText = ({ icon, text }) => (
   </Space>
 );
 
-export default function ListPeticiones(props) {
-  const { listData } = props;
+export default function ListPeticiones({ peticiones }) {
+
   const [detallePeticion, setDetallePeticion] = useState("");
   const [showDetalle, setShowDetalle] = useState(false);
 
-  // obtenemos la lista de peticiones de nuestro state general
-  const peticiones = useSelector((state) => state.peticiones.peticiones);
-
   const handleDetalle = (value) => {
-    //AQUI SE DEBERÍA HACER LLAMADO A API PARA RECUPERAR DETALLE DE LA PETICIÓN POR ID_PETICION
-    const detalle = value.item;
-    detalle.sprint = Math.floor(Math.random() * 10);
-    detalle.fecEntrega = "10/07/2021";
-    detalle.fecInicio = "20/07/2021";
-    detalle.fecPrevistaEntrega =   "30/07/2021";
-    detalle.horasEstimadas = "4:30";
-    detalle.create = "Diego Antonio Lazarte Peláez";
-    detalle.numberPrueba = Math.floor(Math.random() * 100);
     setDetallePeticion(value.item);
     setShowDetalle(true);
   };
@@ -60,7 +43,7 @@ export default function ListPeticiones(props) {
     <>
       <List
         itemLayout="horizontal"
-        dataSource={listData}
+        dataSource={peticiones}
         bordered={false}
         size="default"
         footer={false}
@@ -107,14 +90,14 @@ const ListItem = ({ item, handleDetalle }) => {
                   <IconText
                     icon={NumberOutlined}
                     text={item.codPeticion}
-                    key={item.key}
+                    key={item.id}
                   />
                 </Descriptions.Item>
-                <Descriptions.Item label="Creación">
+                <Descriptions.Item label="Fecha Inicio">
                   <IconText
                     icon={CalendarOutlined}
-                    text={item.fecCreacion}
-                    key={item.key}
+                    text={item.fecInicio}
+                    key={item.id}
                   />
                 </Descriptions.Item>
               </Descriptions>

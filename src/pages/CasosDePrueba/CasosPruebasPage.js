@@ -11,7 +11,7 @@ import {
 } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { DownloadOutlined, FileExcelOutlined } from "@ant-design/icons";
-import { InfoSvg } from "../../components/common/icons";
+import { InfoSvg } from "../../assets/icons/InfoSvg";
 import TableListadoCP from "./components/TableListadoCP";
 import FormCP from "./components/FormCP";
 

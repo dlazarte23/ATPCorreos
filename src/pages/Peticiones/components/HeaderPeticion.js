@@ -49,7 +49,7 @@ export default function HeaderPeticion(props) {
     seleccionarProyecto( value );
 
     // actualizamos la lista de peticiones dependiendo el tipo de proyecto q le pasemos
-    //obtenerPeticiones( value );
+    obtenerPeticiones( value );
 
   }
 
@@ -108,7 +108,7 @@ export default function HeaderPeticion(props) {
 
             {
               proyectos.map( item => (
-                <Option key={item.codProyecto} value={item.codProyecto}>
+                <Option key={item.codProyecto} value={item.id}>
                   {item.nombre}
                 </Option>
               ))

@@ -4,7 +4,7 @@ import { ProyectoBaseUrl } from "../../Api/ApiUrl";
 import "./detalle-style.css";
 import { Typography, Row, Col, PageHeader, Space, Descriptions } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
-import { InfoSvg } from "../../components/common/icons";
+import { InfoSvg } from "../../assets/icons/InfoSvg";
 import FormDetalle from "./components/FormDetalle";
 import TableDetallesCP from "./components/TableDetallesCP";
 

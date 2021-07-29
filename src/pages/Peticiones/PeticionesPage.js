@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
 import {
   HeaderPeticion,
   ListPeticiones,
@@ -7,19 +8,24 @@ import {
 } from "./components";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
+
 import { Row, Col } from "antd";
 
-const listData = [];
-for (let i = 1; i < 21; i++) {
-  listData.push({
-    key: i,
-    codPeticion: i * 1050020,
-    nombre: `Nombre de la Petición Lorem Ipsum is simply dummy text. ${i}`,
-    fecCreacion: "01/07/2021",
-  });
-}
+import { useSelector } from "react-redux";
+
+import { DataNotFound } from '../../components';
 
 export default function Peticionespage() {
+
+  // obtenemos la lista de peticiones de nuestro state general
+  const peticiones = useSelector( state => state.peticiones.peticiones );
+
+  const proyectos = useSelector( state => state.peticiones.proyectos );
+
+  const proyectoSeleccionado = useSelector( state => state.peticiones.proyectoSeleccionado );
+
+  const proyecto = proyectos.filter( proyecto => proyecto.id == proyectoSeleccionado);
+
   const [filter, setFilter] = useState({
     value: "Personales",
   });
@@ -29,7 +35,7 @@ export default function Peticionespage() {
     create: false,
   });
 
-  const [listPeticiones, setListPeticiones] = useState(listData);
+  //const [listPeticiones, setListPeticiones] = useState(listData);
   const [searchTerm, setSearchTerm] = useState("");
 
   /* useEffect(() => {
@@ -90,13 +96,20 @@ export default function Peticionespage() {
         </Row>
 
         <Row style={{ marginTop: 20 }}>
-          <Col span={getSpan()} offset={getOffset()}>
-            <ListPeticiones
-              listData={listPeticiones}
-              showModal={showModal}
-              setShowModal={setShowModal}
-            />
-          </Col>
+
+          {
+            peticiones.length !== 0 ? 
+            <Col span={getSpan()} offset={getOffset()}>
+              <ListPeticiones
+                peticiones={peticiones}
+                showModal={showModal}
+                setShowModal={setShowModal}
+              />
+            </Col>
+            :
+            <DataNotFound mensaje={ proyectoSeleccionado === null ? 'Debe seleccionar un proyecto.' : `No existe peticiones creadas en el proyecto: ${proyecto[0].nombre}.`} />
+          }
+          
         </Row>
         <br />
 
