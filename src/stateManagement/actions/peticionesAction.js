@@ -11,6 +11,8 @@ import {
     DESCARGA_PETICIONES_ERROR
 } from '../types/peitcionesType';
 
+import { message } from "antd";
+
 import { ProyectoBaseUrl as uri  } from '../../Api/ApiUrl';
 
 import { get } from '../../utils/confAxios/petitionGet';
@@ -38,6 +40,8 @@ export function listarProyectoAction ( ) {
 
             // si ocurrió un error se manda a registrar el error
             dispatch( proyectosDescargadosError( error ) );
+
+            message.error("Error al obtener los proyectos!");
 
         }
 
@@ -97,6 +101,8 @@ export function obtenerPeticionesAction ( codProyecto ) {
 
         } catch ( error ) {
 
+            message.error("Error al obtener las peticiones!");
+
             dispatch( obtenerPeticionError( error ) );
 
         }
@@ -149,6 +155,8 @@ export function crearNuevaPeticionAction ( peticion ) {
             dispatch( agregarPeticionExito( peticion ) );
 
         } catch ( error ) {
+
+            message.error("Error al crear la petición!");
 
             dispatch( agregarPeticionError( error ) );
 

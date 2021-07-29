@@ -28,7 +28,7 @@ export default function Peticionespage() {
 
   const proyectoSeleccionado = useSelector( state => state.peticiones.proyectoSeleccionado );
 
-  const proyecto = proyectos.filter( proyecto => proyecto.id == proyectoSeleccionado );
+  const proyecto = proyectos.filter( proyecto => proyecto.id === proyectoSeleccionado );
 
   const [filter, setFilter] = useState({
     value: "Personales",
@@ -99,17 +99,17 @@ export default function Peticionespage() {
 
               peticiones.length !== 0 ? 
 
-              <Col span={getSpan()} offset={getOffset()}>
-                <ListPeticiones
-                  peticiones={peticiones}
-                  showModal={showModal}
-                  setShowModal={setShowModal}
-                />
-              </Col>
+                <Col span={getSpan()} offset={getOffset()}>
+                  <ListPeticiones
+                    peticiones={peticiones}
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                  />
+                </Col>
 
-              :
+                :
 
-              <MessageError icono={dataNotFound} mensaje={ proyectoSeleccionado === null ? 'Debe seleccionar un proyecto.' : `No existe peticiones creadas en el proyecto: ${proyecto[0].nombre}.`} />
+                <MessageError icono={dataNotFound} mensaje={ proyectoSeleccionado === null ? 'Debe seleccionar un proyecto.' : `No existe peticiones creadas en el proyecto: ${proyecto[0].nombre}.`} />
               
               :
             
