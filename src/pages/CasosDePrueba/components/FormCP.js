@@ -3,28 +3,28 @@ import React from "react";
 import "../cp-styles.css";
 import { Input, Button, Form } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useDispatch } from "react-redux";
+
 import { registrarCasosPruebasAction } from "../../../stateManagement/actions/casosPruebasAction";
 
-const FormCP = () => {
-  const casosPruebas = useSelector((state) => state.casosPruebas.casosPruebas);
-  const loading = useSelector((state) => state.casosPruebas.loading);
+const FormCP = ({ peticion }) => {
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch( );
 
-  const registrarCasosDePrueba = (casosDePrueba) =>
-    dispatch(registrarCasosPruebasAction(casosDePrueba));
+  const registrarCasosDePrueba = ( casosDePrueba, descripcion ) => dispatch( registrarCasosPruebasAction( casosDePrueba, descripcion ) );
 
-  const onFinish = (values) => {
+  const onFinish = ( values ) => {
     console.log("Success:", values);
 
-    // loading componetn etc
+    const casoDePrueba = {
+      sprintId: peticion.id,
+      subject: peticion.nombre,
+      testName: values.nomCp
+    }
 
-    //registramos el cp
-    registrarCasosDePrueba(values);
+    registrarCasosDePrueba(casoDePrueba, values.descripcionCP );
 
-    console.log("DESDE NUETRO COMPONENTE => ", casosPruebas);
-    console.log("DESDE NUETRO COMPONENTE => ", loading);
   };
 
   const onFinishFailed = (errorInfo) => {
