@@ -1,12 +1,8 @@
 import React from 'react';
 
-import { DataNotFoundSvg } from '../../assets/icons/DataNotFountSvg';
-
 import { Typography } from 'antd';
 
-
-
-const DataNotFound = ({ mensaje }) => {
+const MessageError = ({ mensaje, icono }) => {
 
     const { Title } = Typography;
 
@@ -18,10 +14,10 @@ const DataNotFound = ({ mensaje }) => {
                 textAlign: 'center',
                 marginTop: 50}}>
 
-            <DataNotFoundSvg /> 
+            <img alt="not_found_data" src={icono} style={{width: 210, height: 210}}/>
             <br />
-            <Title level={4} style={{color: '#8c8c8c'}} >{ mensaje }</Title>
+            <Title level={4} style={{color: '#8c8c8c', marginTop: 20}} >{ mensaje }</Title>
         </div>
     );
 }
-export default DataNotFound;
+export default MessageError;

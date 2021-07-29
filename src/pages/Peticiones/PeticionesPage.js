@@ -13,7 +13,10 @@ import { Row, Col } from "antd";
 
 import { useSelector } from "react-redux";
 
-import { DataNotFound } from '../../components';
+import { MessageError } from '../../components';
+
+import dataNotFound from '../../assets/img/dataNotFound.png';
+import alertError from '../../assets/img/alertError.png';
 
 export default function Peticionespage() {
 
@@ -24,7 +27,7 @@ export default function Peticionespage() {
 
   const proyectoSeleccionado = useSelector( state => state.peticiones.proyectoSeleccionado );
 
-  const proyecto = proyectos.filter( proyecto => proyecto.id == proyectoSeleccionado);
+  const proyecto = proyectos.filter( proyecto => proyecto.id == proyectoSeleccionado );
 
   const [filter, setFilter] = useState({
     value: "Personales",
@@ -35,15 +38,8 @@ export default function Peticionespage() {
     create: false,
   });
 
-  //const [listPeticiones, setListPeticiones] = useState(listData);
   const [searchTerm, setSearchTerm] = useState("");
 
-  /* useEffect(() => {
-    const results = listData.filter((peticion) =>
-      peticion.title.includes(searchTerm.toLowerCase())
-    );
-    setListPeticiones(results);
-  }, [searchTerm]); */
   console.log(
     window.screen.width > 1280
       ? "mayor a 1280"
@@ -98,16 +94,25 @@ export default function Peticionespage() {
         <Row style={{ marginTop: 20 }}>
 
           {
-            peticiones.length !== 0 ? 
-            <Col span={getSpan()} offset={getOffset()}>
-              <ListPeticiones
-                peticiones={peticiones}
-                showModal={showModal}
-                setShowModal={setShowModal}
-              />
-            </Col>
-            :
-            <DataNotFound mensaje={ proyectoSeleccionado === null ? 'Debe seleccionar un proyecto.' : `No existe peticiones creadas en el proyecto: ${proyecto[0].nombre}.`} />
+            proyectos.length !==0 ?
+
+              peticiones.length !== 0 ? 
+
+              <Col span={getSpan()} offset={getOffset()}>
+                <ListPeticiones
+                  peticiones={peticiones}
+                  showModal={showModal}
+                  setShowModal={setShowModal}
+                />
+              </Col>
+
+              :
+
+              <MessageError icono={dataNotFound} mensaje={ proyectoSeleccionado === null ? 'Debe seleccionar un proyecto.' : `No existe peticiones creadas en el proyecto: ${proyecto[0].nombre}.`} />
+              
+              :
+            
+            <MessageError icono={alertError} mensaje={'Oops, error con el servidor!'} />
           }
           
         </Row>
