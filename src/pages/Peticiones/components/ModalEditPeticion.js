@@ -10,9 +10,7 @@ export default function ModalEditPeticion(props) {
   const { showModal, setShowModal, dataPeticion, } = props;
 
   const {nombre, sprint, key, fecEntrega, fecInicio, fecPrevistaEntrega, horasEstimadas } = dataPeticion;
-  console.log("1", fecEntrega)
-  console.log("2", fecInicio)
-  console.log("3", fecPrevistaEntrega)
+
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();

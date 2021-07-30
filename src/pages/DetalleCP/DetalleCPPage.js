@@ -29,10 +29,10 @@ const extraContent = (
   </div>
 );
 
-export default function DetalleCPPage() {
+export default function DetalleCPPage(props) {
   const { Title, Paragraph } = Typography;
+  const { detalle } = props.location.state;
 
-  //console.log(ProyectoBaseUrl);
 
   const renderContent = () => (
     <div className="card-information">
@@ -100,7 +100,7 @@ export default function DetalleCPPage() {
         <Row className="table-detalleCp">
           <Col span={22} offset={1}>
             <Title level={4}>Listado de Todos los Pasos</Title>
-            <TableDetallesCP />
+            <TableDetallesCP detalle={detalle}/>
           </Col>
         </Row>
       </Scrollbars>

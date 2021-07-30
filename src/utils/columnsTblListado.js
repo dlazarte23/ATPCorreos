@@ -45,9 +45,15 @@ export const columns = [
           </a>
         </Popconfirm>
 
-        <Link to="/peticiones/creacion-de-casos-de-prueba/detalle">
-          <SettingOutlined />
-        </Link>
+        <Link
+          to={{
+            pathname: '/peticiones/creacion-de-casos-de-prueba/detalle', state: {
+              detalle: record.responseTestSteps
+            }
+          }}
+          className="btn-yellow-link"
+        >  <SettingOutlined /> </Link>
+
       </Space>
     ),
   },

@@ -6,15 +6,12 @@ import {
   Form,
   Popconfirm,
   Typography,
-  Button,
   Divider,
 } from "antd";
 import {
   DeleteOutlined,
   EditOutlined,
-  SearchOutlined,
 } from "@ant-design/icons";
-import { data } from "../../../utils/columnsTblDetalle";
 const { TextArea } = Input;
 const EditableContext = React.createContext();
 
@@ -67,9 +64,10 @@ const EditableCell = (props) => {
   return <EditableContext.Consumer>{renderCell}</EditableContext.Consumer>;
 };
 
-const TableDetallesCP = () => {
+const TableDetallesCP = ({detalle}) => {
+
   const [form] = Form.useForm();
-  const [dataTable, setDataTable] = useState(data);
+  const [dataTable, setDataTable] = useState(detalle);
   const [editingKey, setEditingKey] = useState("");
 
   const isEditing = (record) => record.key === editingKey;
@@ -91,7 +89,7 @@ const TableDetallesCP = () => {
   const save = async (key) => {
     try {
       const row = await form.validateFields();
-      const newData = [...data];
+      const newData = [...detalle];
       const index = newData.findIndex((item) => key === item.key);
 
       if (index > -1) {
@@ -112,27 +110,27 @@ const TableDetallesCP = () => {
   const columns = [
     {
       title: "#",
-      dataIndex: "id",
+      dataIndex: "key",
       editable: false,
     },
     {
       title: "Precondición",
-      dataIndex: "precondicion",
+      dataIndex: "testComments",
       editable: true,
     },
     {
       title: "Acción",
-      dataIndex: "accion",
+      dataIndex: "testDescription",
       editable: true,
     },
     {
       title: "Resultado Esperado",
-      dataIndex: "resultado",
+      dataIndex: "testDescription",
       editable: true,
     },
     {
       title: "Evidencias",
-      dataIndex: "evidencia",
+      dataIndex: "",
       editable: false,
     },
     {
