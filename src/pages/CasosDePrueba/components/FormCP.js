@@ -23,7 +23,8 @@ const FormCP = ({ peticion }) => {
       testName: values.nomCp
     }
 
-    registrarCasosDePrueba(casoDePrueba, values.descripcionCP );
+    console.log(peticion)
+    //registrarCasosDePrueba(casoDePrueba, values.descripcionCP );
 
   };
 

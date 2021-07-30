@@ -97,6 +97,36 @@ export function obtenerPeticionesAction ( codProyecto ) {
 
             const response = await get(`${uri.getPeticiones}/${codProyecto}`);
 
+            // recorremos las peticiones
+            response.responseSprints.forEach( casoDePrueba => {
+
+                console.log("imprimiendo casos de prueba");
+
+                console.log(casoDePrueba.responseTests);
+
+                // recorremos los casos de prueba
+                casoDePrueba.responseTests.forEach( detalleCP => {
+
+                    console.log("imprimiendo detalle de caso de prueba");
+
+                    console.log(detalleCP.responseTestSteps);
+
+                    // reocorremos el detalle del caso de prueba
+                    detalleCP.responseTestSteps.forEach( detalle => {
+
+                        console.log("Objeto del detalleeeeeeeeeeeeee");
+
+                        console.log(detalle.testDescription);
+
+                    });
+
+                });
+
+            });
+
+            
+            console.log(response.responseSprints.responseTests);
+
             dispatch( obtenerPeticionExito( response.responseSprints ) );
 
         } catch ( error ) {

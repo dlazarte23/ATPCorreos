@@ -12,6 +12,10 @@ import { LeftOutlined } from "@ant-design/icons";
 import { DownloadOutlined, FileExcelOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../../assets/icons/InfoSvg";
 
+import { useDispatch } from 'react-redux';
+
+import { descargarDocumento } from '../../../stateManagement/actions/casosPruebasAction';
+
 const Content = ({ children, extra }) => (
     <div className="content">
         <div className="main">{children}</div>
@@ -33,7 +37,11 @@ const extraContent = (
 
 const HeaderCP = ({ peticion }) => {
 
+    const dispatch = useDispatch();
+
     const { Title, Paragraph } = Typography;
+
+    const descargaDocumento = ( idPeticion, tipoDocumento ) => dispatch( descargarDocumento( idPeticion, tipoDocumento ) );
 
     const renderContent = () => (
         <div className="card-information">
@@ -72,7 +80,7 @@ const HeaderCP = ({ peticion }) => {
                     type="dashed"
                     icon={<DownloadOutlined />}
                     className="btnTestLink"
-                    onClick={() => alert("Botón en mantenimiento ..!!")}
+                    onClick={( ) => descargaDocumento( peticion.id, 'xml' ) }
                 >
                     Test Link
                 </Button>,
@@ -84,7 +92,7 @@ const HeaderCP = ({ peticion }) => {
                     type="dashed"
                     icon={<FileExcelOutlined />}
                     className="btnExcel"
-                    onClick={() => alert("Botón en mantenimiento ..!!")}
+                    onClick={( ) => descargaDocumento(peticion.id, 'excel') }
                 >
                     Excel
                 </Button>,
