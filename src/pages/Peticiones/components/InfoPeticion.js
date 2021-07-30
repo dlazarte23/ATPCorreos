@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 
-import { useHistory } from "react-router";
-
-import { Card, Typography, Descriptions, Button, Space, Tooltip,Popconfirm } from "antd";
+import { Card, Typography, Descriptions, Button, Space, Tooltip, Popconfirm } from "antd";
 import {
   ExceptionOutlined,
-  SettingFilled,
   EditOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
 
 import ModalEditPeticion from "./ModalEditPeticion";
+import ListPlandePrueba from "./ListPlandePrueba"
 
 const InfoPeticion = (props) => {
   const dataPeticion = props.peticion;
-  const history = useHistory();
 
   const { Title } = Typography;
 
@@ -58,14 +55,18 @@ const InfoPeticion = (props) => {
               {`${dataPeticion.horasEstimadas} h.`}
             </Descriptions.Item>
 
-            
+
             <Descriptions.Item label="Creador por">
               {dataPeticion.create}
             </Descriptions.Item>
           </Descriptions>
         </div>
-        {dataPeticion !== "" ? (
+        {dataPeticion.responseTests.length > 0 ? (
           <>
+            <p>Planes de Prueba: </p>
+            <Space>
+              <ListPlandePrueba peticion={dataPeticion} />
+            </Space>
             <div style={{ marginTop: 25 }}>
               <Space>
                 <Tooltip placement="left" title="Editar Petición">
@@ -82,46 +83,30 @@ const InfoPeticion = (props) => {
                     onClick={() => setShowModal({ ...showModal, create: true })}
                   />
                 </Tooltip>
-                
-                <Popconfirm
-                title="¿Está seguro de eliminar?"
-                /* onConfirm={() => handleDelete(record.key)} */
-                okText="Confirmar"
-                cancelText="Cancelar">
 
-                <Tooltip placement="right" title="Eliminar Petición">
-                  <Button
-                    icon={<DeleteOutlined />}
-                    shape="round"
-                    type="dashed"
-                    style={{ marginLeft: 10 }}
-                  />
-                </Tooltip>
+                <Popconfirm
+                  title="¿Está seguro de eliminar?"
+                  /* onConfirm={() => handleDelete(record.key)} */
+                  okText="Confirmar"
+                  cancelText="Cancelar">
+
+                  <Tooltip placement="right" title="Eliminar Petición">
+                    <Button
+                      icon={<DeleteOutlined />}
+                      shape="round"
+                      type="dashed"
+                      style={{ marginLeft: 10 }}
+                    />
+                  </Tooltip>
                 </Popconfirm>
 
-
-
-
-
               </Space>
-              <Space style={{ float: "right" }}>
-                <Button
-                  icon={<SettingFilled />}
-                  type="primary"
-                  shape="round"
-                  onClick={() =>
-                    history.push({
-                      pathname: "/peticiones/creacion-de-casos-de-prueba",
-                      state: { peticion: dataPeticion }
-                    })
-                  }
-                >
-                  Configurar
-                </Button>
-              </Space>
+
             </div>
+
           </>
         ) : null}
+
       </Card>
     </>
   );

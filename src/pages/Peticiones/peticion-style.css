@@ -14,3 +14,8 @@
 .ant-form-item-control-input-content .input-string {
   width: 148px;
 }
+
+
+.ant-list-item-meta-content{
+  width: auto !important;
+}

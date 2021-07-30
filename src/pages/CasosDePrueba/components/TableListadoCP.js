@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Table } from "antd";
-import { columns, data } from "../../../utils/columnsTblListado";
+import { columns } from "../../../utils/columnsTblListado";
 
 const paginationProps = {
   defaultPageSize: 5,
@@ -13,13 +13,15 @@ const paginationProps = {
   defaultCurrent: 1,
 };
 
-const TableListadoCP = () => (
+const TableListadoCP = ({dataTable}) => {
+
+  return (
   <Table
     columns={columns}
-    dataSource={data}
+    dataSource={dataTable}
     size="middle"
     pagination={paginationProps}
   />
-);
+)};
 
 export default TableListadoCP;

@@ -21,6 +21,8 @@ export default function CasosPruebasPage( props ) {
 
   const { peticion } = props.location.state;
 
+  const { responseTests } =  peticion
+
   const loading = useSelector( state => state.casosPruebas.loading );
 
   return (
@@ -39,7 +41,7 @@ export default function CasosPruebasPage( props ) {
             <Row className="table-detalleCp">
               <Col span={22} offset={1}>
                 <Title level={4}>Listado de Casos de Prueba</Title>
-                <TableListadoCP />
+                <TableListadoCP dataTable={responseTests}/>
               </Col>
             </Row>
 

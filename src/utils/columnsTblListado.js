@@ -13,13 +13,14 @@ const handleDelete = (key) => {
 export const columns = [
   {
     title: "#",
-    dataIndex: "id",
+    dataIndex: "requestCode",
     key: "id",
   },
   {
     title: "Nombre",
-    dataIndex: "nombre",
+    dataIndex: "testName",
     key: "nombre",
+    with: "200"
   },
   {
     title: "Descripción",
@@ -32,7 +33,6 @@ export const columns = [
     render: (_, record) => (
       <Space size="middle">
         <ModalEditListado record={record} />
-
         <Popconfirm
           title="¿Está seguro de eliminar?"
           onConfirm={() => handleDelete(record.key)}
@@ -53,13 +53,4 @@ export const columns = [
   },
 ];
 
-export const data = [];
-for (let i = 1; i < 21; i++) {
-  data.push({
-    key: i,
-    id: i,
-    nombre: `Nombre CP #${i}`,
-    descripcion:
-      "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).",
-  });
-}
+
