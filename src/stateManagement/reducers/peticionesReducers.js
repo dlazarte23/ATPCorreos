@@ -8,8 +8,18 @@ import {
     SELECCION_PROYECTO,
     COMENZAR_DESCARGA_PETICIONES,
     DESCARGA_PETICIONES_EXITO,
-    DESCARGA_PETICIONES_ERROR
+    DESCARGA_PETICIONES_ERROR,
+    LISTAR_CASOS_PRUEBA,
+    LISTAR_CASOS_PRUEBA_EXITO,
+    LISTAR_CASOS_PRUEBA_ERROR
 } from '../types/peitcionesType';
+
+import {
+    DESCARGAR_DOCUMENTO,
+    DESCARGAR_DOCUMENTO_EXITO,
+    DESCARGAR_DOCUMENTO_ERROR
+} from '../types/casosPruebasType'
+
 
 /**
  * Cada reducer tiene su propio state
@@ -29,9 +39,11 @@ export default function ( state = initialState, action ) {
 
     switch (action.type) {
 
+        case LISTAR_CASOS_PRUEBA:
         case LISTAR_PROYECTOS:
         case AGREGAR_PETICION:
         case COMENZAR_DESCARGA_PETICIONES:
+        case DESCARGAR_DOCUMENTO:
             return {
                 ...state,
                 loading: true
@@ -62,6 +74,20 @@ export default function ( state = initialState, action ) {
                 peticiones: action.payload
             }
 
+        case LISTAR_CASOS_PRUEBA_EXITO:
+            return {
+                ...state,
+                loading: false
+            }
+
+        case DESCARGAR_DOCUMENTO_EXITO:
+            return {
+                ...state,
+                loading: false
+            }
+         
+        case DESCARGAR_DOCUMENTO_ERROR:
+        case LISTAR_CASOS_PRUEBA_ERROR:
         case LISTAR_PROYECTOS_ERROR:
         case AGREGAR_PETICION_ERROR:
         case DESCARGA_PETICIONES_ERROR:
