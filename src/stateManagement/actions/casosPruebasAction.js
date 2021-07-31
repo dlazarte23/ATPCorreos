@@ -144,7 +144,7 @@ export function descargarDocumento ( idPeticion, tipoDocumento ) {
             
         } catch ( error ) {
 
-            message.error(`Ocurrió al intentar descargar el archivo ${tipoDocumento}!`);
+            message.error(`Ocurrió un error al intentar descargar el archivo ${tipoDocumento}!`);
 
             dispatch( descargaDocumentoError() );
 
