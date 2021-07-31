@@ -41,6 +41,8 @@ const HeaderCP = ({ peticion }) => {
 
     const { Title, Paragraph } = Typography;
 
+    
+
     const descargaDocumento = ( idPeticion, tipoDocumento ) => dispatch( descargarDocumento( idPeticion, tipoDocumento ) );
 
     const renderContent = () => (
@@ -50,13 +52,18 @@ const HeaderCP = ({ peticion }) => {
                 <PageHeader
                     className="case-header"
                     title={
-                        <Title level={5}>
+                        <Title level={5} style={{maxWidth: 600}}>
                             <Descriptions size="small" column={1}>
-                                <Descriptions.Item label="Nombre Petición">
-                                    <span style={{ color: '#1890ff' }}>{peticion.nombre}</span>
+                                <Descriptions.Item label="Plan de pruebas">
+                                    <span style={{ color: '#1890ff' }}>Agrupación Textos Email</span>
                                 </Descriptions.Item>
+                            </Descriptions>
+                            <Descriptions size="small" column={2}>
                                 <Descriptions.Item label="Id. Petición">
                                     {peticion.codPeticion}
+                                </Descriptions.Item>
+                                <Descriptions.Item label="Nombre Petición">
+                                    {peticion.nombre}
                                 </Descriptions.Item>
                             </Descriptions>
                         </Title>
