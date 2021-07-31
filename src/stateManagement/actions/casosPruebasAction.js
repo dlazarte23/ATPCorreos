@@ -128,24 +128,13 @@ export function descargarDocumento ( idPeticion, tipoDocumento ) {
 
                 const response = await get(`${uri.getDocumentoXml}?sprint=${idPeticion}`);
 
-                FileSaver.saveAs(new Blob([response], {type: "text/plain;charset=utf-8"}), nombreArchivo);
+                FileSaver.saveAs(new Blob( [ response ] ), nombreArchivo );
                 
             } else if ( tipoDocumento === 'excel' ) {
 
                 const response = await getEnriched(`${uri.getDocumentoExcel}?sprint=${idPeticion}`, { responseType : 'blob' });
 
-                const url = window.URL.createObjectURL( new Blob( [ response.data ] ) );
-
-                const link = document.createElement('a');
-                link.href = url
-
-                link.setAttribute('download', `${nombreArchivo}`);
-
-                document.body.appendChild(link);
-
-                link.click();
-
-                document.body.removeChild(link);
+                FileSaver.saveAs( new Blob( [ response.data ] ), nombreArchivo );
 
             }
 
