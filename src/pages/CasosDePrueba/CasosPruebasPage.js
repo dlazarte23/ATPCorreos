@@ -23,7 +23,7 @@ export default function CasosPruebasPage( props ) {
 
   const { responseTests } =  peticion
 
-  const loading = useSelector( state => state.casosPruebas.loading );
+  const loading = useSelector( state => state.peticiones.loading );
 
   return (
     <Spin spinning={loading} tip="Cargando..." size="large" >

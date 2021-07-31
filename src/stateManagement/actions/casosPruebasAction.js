@@ -15,7 +15,7 @@ import { message } from "antd";
 import { ProyectoBaseUrl as uri  } from '../../Api/ApiUrl';
 
 import { post } from '../../utils/confAxios/petitionPost';
-import { get } from '../../utils/confAxios/petitionGet';
+import { get, getEnriched } from '../../utils/confAxios/petitionGet';
 
 import FileSaver from 'file-saver';
 
@@ -122,24 +122,43 @@ export function descargarDocumento ( idPeticion, tipoDocumento ) {
     
         try {
 
-            const response = await get(
-                                tipoDocumento === 'xml' ? 
-                                    `${uri.getDocumentoXml}?sprint=${idPeticion}` : 
-                                        tipoDocumento === 'excel' ? 
-                                            `${uri.getDocumentoExcel}?sprint=${idPeticion}` : 
-                                            null
-                                );
+            const nombreArchivo = tipoDocumento === 'xml' ? `exportado_xml_${idPeticion}.xml` : `exportado_excel_${idPeticion}.xlsx`;
 
-            console.log(response);
+            if ( tipoDocumento === 'xml' ) {
 
-            const nombreArchivo = tipoDocumento === 'xml' ? `exportadoXml${idPeticion}.xml` : `exportadoExcel${idPeticion}.xlsx`;
+                const response = await get(`${uri.getDocumentoXml}?sprint=${idPeticion}`);
 
-            FileSaver.saveAs(new Blob([response], {type: "text/plain;charset=utf-8"}), nombreArchivo);
+                FileSaver.saveAs(new Blob([response], {type: "text/plain;charset=utf-8"}), nombreArchivo);
+                
+            } else if ( tipoDocumento === 'excel' ) {
 
-            dispatch( descargaDocumentoExito() );
+                const response = await getEnriched(`${uri.getDocumentoExcel}?sprint=${idPeticion}`, { responseType : 'blob' });
+
+                const url = window.URL.createObjectURL( new Blob( [ response.data ] ) );
+
+                const link = document.createElement('a');
+                link.href = url
+
+                link.setAttribute('download', `${nombreArchivo}`);
+
+                document.body.appendChild(link);
+
+                link.click();
+
+                document.body.removeChild(link);
+
+            }
+
+            message.success(`Archivo ${tipoDocumento} descargado correctamente!`);
+
+            dispatch( descargaDocumentoExito( ) );
             
         } catch ( error ) {
+
+            message.error(`Ocurrió al intentar descargar el archivo ${tipoDocumento}!`);
+
             dispatch( descargaDocumentoError() );
+
         }
 
     }
