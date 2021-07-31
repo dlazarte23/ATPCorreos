@@ -39,6 +39,7 @@ export default function HeaderPeticion(props) {
   }, [ ]);
 
   const proyectos = useSelector( state => state.peticiones.proyectos );
+
   const proyectoSeleccionado = useSelector( state => state.peticiones.proyectoSeleccionado );
 
   const seleccionarProyecto = codProyecto => dispatch( seleccionarProyectoAction( codProyecto ) );
@@ -80,6 +81,7 @@ export default function HeaderPeticion(props) {
       extra={[
         <Button
           shape="round"
+          disabled={ proyectoSeleccionado === null ? true : false }
           key="1"
           type="primary"
           icon={<PlusOutlined />}
