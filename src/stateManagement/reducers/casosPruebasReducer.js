@@ -1,23 +1,38 @@
 import {
     AGREGAR_CASOS_PRUEBA,
     AGREGAR_CASOS_PRUEBA_EXITO,
-    AGREGAR_CASOS_PRUEBA_ERROR
+    AGREGAR_CASOS_PRUEBA_ERROR,
+    DESCARGAR_DOCUMENTO,
+    DESCARGAR_DOCUMENTO_EXITO,
+    DESCARGAR_DOCUMENTO_ERROR,
+    LISTAR_CASOS_PRUEBA,
+    LISTAR_CASOS_PRUEBA_EXITO,
+    LISTAR_CASOS_PRUEBA_ERROR
 } from '../types/casosPruebasType';
 
 const initialState = {
-    casosPruebas: [],
+    casosPruebas: [ ],
     loading: false,
     error: null
 }
 
 // eslint-disable-next-line
-export default function ( state = initialState, action) {
+export default function ( state = initialState, action ) {
     switch (action.type) {
 
+        case LISTAR_CASOS_PRUEBA:
+        case DESCARGAR_DOCUMENTO:
         case AGREGAR_CASOS_PRUEBA:
             return {
                 ...state,
                 loading: true
+            }
+
+        case LISTAR_CASOS_PRUEBA_EXITO:
+            return {
+                ...state,
+                loading: false,
+                casosPruebas: action.payload
             }
             
         case AGREGAR_CASOS_PRUEBA_EXITO:
@@ -27,6 +42,14 @@ export default function ( state = initialState, action) {
                 casosPruebas: [...state.casosPruebas, action.payload]
             }
 
+        case DESCARGAR_DOCUMENTO_EXITO:
+            return {
+                ...state,
+                loading: false
+            }
+
+        case LISTAR_CASOS_PRUEBA_ERROR:
+        case DESCARGAR_DOCUMENTO_ERROR:
         case AGREGAR_CASOS_PRUEBA_ERROR:
             return {
                 ...state,

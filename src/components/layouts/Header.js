@@ -21,7 +21,7 @@ export default function MainHeader() {
   
   const dispatch = useDispatch();
 
-  const usuario = useSelector( ( state ) => state.usuario.usuario );
+  const usuario = useSelector( state => state.usuario.usuario );
 
   const verificarLogeo = usuario => dispatch( verificarLogeoAction( usuario ) );
 
@@ -80,7 +80,7 @@ export default function MainHeader() {
         <Col span={1} offset={12}>
           <span>
             <Popover content={content} title={`${usuario.usuarioCorto}@everis.com`}>
-              <Badge dot>
+              <Badge dot={true}>
                 <Avatar
                   src={avatarwomen}
                   icon={<UserOutlined />}

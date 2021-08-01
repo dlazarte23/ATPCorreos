@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./cp-styles.css";
 import { Row, Col, Typography, Spin } from "antd";
 
@@ -8,16 +8,28 @@ import FormCP from "./components/FormCP";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function CasosPruebasPage(props) {
+import { listarCasosDePruebaAction } from "../../stateManagement/actions/casosPruebasAction";
+
+export default function CasosPruebasPage( props ) {
+
   const { Title } = Typography;
 
   const { peticion } = props.location.state;
 
-  const { responseTests } = peticion;
+  const dispatch = useDispatch( );
 
-  const loading = useSelector((state) => state.peticiones.loading);
+  const obtenerCasosDePrueba = idPeticion => dispatch( listarCasosDePruebaAction( idPeticion ) );
+
+  useEffect( () => {
+
+    obtenerCasosDePrueba( peticion.id );
+
+    // eslint-disable-next-line
+  }, [ ]);
+
+  const loading = useSelector((state) => state.casosPruebas.loading);
 
   return (
     <Spin spinning={loading} tip="Cargando..." size="large">
@@ -34,7 +46,7 @@ export default function CasosPruebasPage(props) {
             <Row className="table-detalleCp">
               <Col span={22} offset={1}>
                 <Title level={4}>Listado de Casos de Prueba</Title>
-                <TableListadoCP dataTable={responseTests} />
+                <TableListadoCP />
               </Col>
             </Row>
           </Col>

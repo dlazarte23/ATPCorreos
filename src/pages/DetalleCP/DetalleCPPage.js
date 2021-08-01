@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ProyectoBaseUrl } from "../../Api/ApiUrl";
 import "./detalle-style.css";
-import { Typography, Row, Col, PageHeader, Space, Descriptions } from "antd";
+import { Typography, Row, Col, PageHeader, Space, Descriptions, Spin } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../assets/icons/InfoSvg";
 import FormDetalle from "./components/FormDetalle";
@@ -13,6 +12,7 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import {
   crearNuevoStepAction,
   actualizarNuevoStepAction,
+  descargarDetalleCPAction
 } from "../../stateManagement/actions/stepsAction";
 
 const Content = ({ children, extra }) => (
@@ -35,14 +35,28 @@ const extraContent = (
 );
 
 export default function DetalleCPPage(props) {
+
   const { Title, Paragraph } = Typography;
   const { detalle } = props.location.state;
 
-  const loading = useSelector((state) => state.peticiones.loading);
+  const loading = useSelector((state) => state.detalleCasoPrueba.loading);
+
   const dispatch = useDispatch();
   const crearStep = (step) => dispatch(crearNuevoStepAction(step));
   const actualizarStep = (step, id) =>
     dispatch(actualizarNuevoStepAction(step, id));
+
+  const obtenerDetalleCP = idCasosPrueba => dispatch( descargarDetalleCPAction( idCasosPrueba ) );
+
+  useEffect(( ) => {
+
+    // ah este metodo pasarle el id del caso de uso, que por ahora no se puede ya que viene en null
+    obtenerDetalleCP(2);
+
+  }, [ ]);
+
+  // aqui ya tendriamos lo que seria la lista de casos de prueba
+  const stepss = useSelector( state => state.detalleCasoPrueba.detallesCasoPrueba );
 
   const renderContent = () => (
     <div className="card-information">
@@ -82,7 +96,7 @@ export default function DetalleCPPage(props) {
   );
 
   return (
-    <>
+    <Spin spinning={loading} tip="Cargando..." size="large">
       <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
         {/** Column para el titulo y el botón general */}
         <Row>
@@ -117,6 +131,6 @@ export default function DetalleCPPage(props) {
           </Col>
         </Row>
       </Scrollbars>
-    </>
+    </Spin>
   );
 }

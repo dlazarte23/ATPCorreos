@@ -3,6 +3,8 @@ import React from "react";
 import { Table } from "antd";
 import { columns } from "../../../utils/columnsTblListado";
 
+import { useSelector } from "react-redux";
+
 const paginationProps = {
   defaultPageSize: 5,
   pageSizeOptions: [5, 10, 20, 50],
@@ -13,12 +15,14 @@ const paginationProps = {
   defaultCurrent: 1,
 };
 
-const TableListadoCP = ({dataTable}) => {
+const TableListadoCP = ( ) => {
+
+  const casosDePruebas = useSelector( state => state.casosPruebas.casosPruebas );
 
   return (
   <Table
     columns={columns}
-    dataSource={dataTable}
+    dataSource={casosDePruebas}
     size="middle"
     pagination={paginationProps}
   />

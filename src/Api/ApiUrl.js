@@ -9,6 +9,7 @@ const ProyectoBaseUrl = {
   getDocumentoXml: `${process.env.REACT_APP_ATPCORREOS}export/xml`,
   getDocumentoExcel: `${process.env.REACT_APP_ATPCORREOS}export/informe`,
   setTestStep: `${process.env.REACT_APP_ATPCORREOS}teststep`,
+  getTestSteps: `${process.env.REACT_APP_ATPCORREOS}teststep/test`,
 };
 
 const UsuarioBaseUrl = {

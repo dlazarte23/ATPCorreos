@@ -19,6 +19,10 @@ import { get, getEnriched } from '../../utils/confAxios/petitionGet';
 
 import FileSaver from 'file-saver';
 
+/**
+ * Action para el listado de todos los casos de pruebas
+ * @param {*} idPeticion
+ */
 export function listarCasosDePruebaAction ( idPeticion ) {
 
     return async ( dispatch ) => {
@@ -28,13 +32,12 @@ export function listarCasosDePruebaAction ( idPeticion ) {
         try {
 
             const response = await get(`${uri.getCasosDePrueba}/${idPeticion}`);
-
-            console.log(response);
-
+            
             dispatch( listarCasosPruebaExito ( response ) );
 
         } catch( error ) {
         
+            message.error("Error al tratar de obtener los casos de pruebas!");
             dispatch( listarCasosPruebaError ( error ) );
 
         }

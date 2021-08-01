@@ -5,13 +5,16 @@ import {
   ACTUALIZAR_STEP,
   ACTUALIZAR_STEP_EXITO,
   ACTUALIZAR_STEP_ERROR,
+  DESCARGAR_STEP,
+  DESCARGAR_STEP_EXITO,
+  DESCARGAR_STEP_ERROR
 } from "../types/stepsType";
 
 import { message } from "antd";
 
 import { ProyectoBaseUrl as uri } from "../../Api/ApiUrl";
 
-//import { get } from "../../utils/confAxios/petitionGet";
+import { get } from "../../utils/confAxios/petitionGet";
 import { post } from "../../utils/confAxios/petitionPost";
 import { put } from "../../utils/confAxios/petitionPut";
 
@@ -89,4 +92,46 @@ const actualizarStepExito = () => ({
 const actualizarStepError = (error) => ({
   type: ACTUALIZAR_STEP_ERROR,
   payload: error,
+});
+
+/**
+ * Action para descargar el detalle de cada petición por su id de peticion
+ * @param {*} idCasoDePrueba
+ */
+export function descargarDetalleCPAction ( idCasoDePrueba ) {
+
+  return async ( dispatch ) => {
+
+    dispatch( descargarStep( ) );
+
+    try {
+
+      const response = await get(`${uri.getTestSteps}/${idCasoDePrueba}`);
+
+      console.log(response);
+    
+      dispatch( descargarStepExito( response ) );
+
+    } catch ( error ) {
+
+      dispatch( descargarStepError( error ) );
+
+    }
+
+  }
+
+}
+
+const descargarStep = () => ({
+  type: DESCARGAR_STEP
+});
+
+const descargarStepExito = steps => ({
+  type: DESCARGAR_STEP_EXITO,
+  payload: steps
+});
+
+const descargarStepError = error => ({
+  type: DESCARGAR_STEP_ERROR,
+  payload: error
 });
