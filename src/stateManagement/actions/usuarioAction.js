@@ -52,6 +52,8 @@ export function logearUsuarioAction( usuario ) {
 
     } catch ( error ) {
 
+      message.error("Error con el servidor!");
+
       dispatch( logearUsuarioError( error ) );
 
     }
@@ -78,9 +80,15 @@ export function deslogearUsuario(usuario) {
   return async (dispatch) => {
     dispatch(deslogeandoUsuario());
     try {
+
+      message.success("Ah cerrado sesión correctamente!");
       dispatch(deslogearUsuarioExito());
+
     } catch (error) {
+
+      message.success("Error al tratar de cerrar la sesión!");
       dispatch(deslogearUsuarioError(error));
+      
     }
   };
 }
