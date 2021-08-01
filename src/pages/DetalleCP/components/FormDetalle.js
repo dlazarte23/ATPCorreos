@@ -10,20 +10,30 @@ import {
   ArrowRightOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-
+import { useDispatch, useSelector } from "react-redux";
 import EditorStepDetalle from "./EditorStepDetalle";
 import UploadEvidencias from "./UploadEvidencias";
 
-const FormDetalle = () => {
-  const { Step } = Steps;
+// actions de redux
+import { crearNuevoStepAction } from "../../../stateManagement/actions/stepsAction";
 
-  const [current, setCurrent] = React.useState(0);
+const { Step } = Steps;
+
+const FormDetalle = ({ detalle, crearStep }) => {
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [current, setCurrent] = useState(0);
   const [stepData, setStepData] = useState({
     precondition: "",
     action: "",
     expectedResult: "",
-    evidences: [],
+    evidences: "",
   });
+
+  //console.log(detalle);
+
+  const loading = useSelector((state) => state.peticiones.loading);
+  const dispatch = useDispatch();
+  //const crearStep = (step) => dispatch(crearNuevoStepAction(step));
 
   const steps = [
     {
@@ -68,7 +78,9 @@ const FormDetalle = () => {
     {
       title: "Evidencias",
       icon: <FileImageOutlined />,
-      content: <UploadEvidencias />,
+      content: (
+        <UploadEvidencias stepData={stepData} setStepData={setStepData} />
+      ),
     },
   ];
 
@@ -80,13 +92,39 @@ const FormDetalle = () => {
     setCurrent(current - 1);
   };
 
+  const onSaveNewStep = () => {
+    //message.success("Paso agregado!");
+    setConfirmLoading(!loading);
+    setTimeout(() => {
+      setConfirmLoading(false);
+    }, 2000);
+
+    const newStep = {
+      step: [
+        {
+          result: stepData.evidences,
+          stepDescription: stepData.precondition,
+          stepExpectedResults: stepData.expectedResult,
+          stepName: detalle.length + 1,
+          testStatus: 1,
+        },
+      ],
+      testComments: stepData.action,
+      testDescription: detalle[0].testDescription,
+      testId: detalle[0].testId,
+    };
+
+    //Creamos el nuevo step
+    crearStep(newStep);
+  };
+
   return (
     <>
       <Steps
         current={current}
         size="small"
         className="site-navigation-steps"
-        labelPlacement="horizontal" /* percent={(current + 1) * 25} */
+        labelPlacement="horizontal"
       >
         {steps.map((item) => (
           <Step key={item.title} title={item.title} icon={item.icon} />
@@ -102,7 +140,7 @@ const FormDetalle = () => {
         {current === 0 && (
           <Button
             type="primary"
-            disabled={stepData.precondition === "" ? true : false}
+            disabled={stepData.precondition === ""}
             className={stepData.precondition === "" ? "disablednext" : ""}
             icon={<ArrowRightOutlined />}
             onClick={() => next()}
@@ -138,7 +176,9 @@ const FormDetalle = () => {
           <Button
             type="primary"
             icon={<SaveOutlined />}
-            onClick={() => message.success("Paso agregado!")}
+            disabled={stepData.evidences === "" ? true : false}
+            className={stepData.evidences === "" ? "disablednext" : ""}
+            onClick={() => onSaveNewStep()}
           >
             Completar
           </Button>

@@ -7,11 +7,10 @@ import {
   Popconfirm,
   Typography,
   Divider,
+  Image,
+  Upload,
 } from "antd";
-import {
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 const { TextArea } = Input;
 const EditableContext = React.createContext();
 
@@ -37,23 +36,29 @@ const EditableCell = (props) => {
       children,
       ...restProps
     } = props;
+    const inputNode =
+      title === "Evidencias" ? (
+        <Upload listType="picture-card" style={{ width: 80, height: 80 }} />
+      ) : (
+        <TextArea autoSize={{ minRows: 5, maxRows: 5 }} />
+      );
     return (
       <td {...restProps}>
         {editing ? (
-          <Form>
-            <Form.Item
-              name={dataIndex}
-              rules={[
-                {
-                  required: true,
-                  message: `Por favor, introduzca ${title}!`,
-                },
-              ]}
-              initialValue={record[dataIndex]}
-            >
-              <TextArea autoSize={{ minRows: 5, maxRows: 5 }} />
-            </Form.Item>
-          </Form>
+          <Form.Item
+            name={dataIndex}
+            rules={[
+              {
+                required: true,
+                message: `Por favor, introduzca ${title}!`,
+              },
+            ]}
+            style={{
+              margin: 0,
+            }}
+          >
+            {inputNode}
+          </Form.Item>
         ) : (
           children
         )}
@@ -64,22 +69,21 @@ const EditableCell = (props) => {
   return <EditableContext.Consumer>{renderCell}</EditableContext.Consumer>;
 };
 
-const TableDetallesCP = ({detalle}) => {
-
+const TableDetallesCP = ({ detalle, actualizarStep }) => {
   const [form] = Form.useForm();
   const [dataTable, setDataTable] = useState(detalle);
   const [editingKey, setEditingKey] = useState("");
-
-  const isEditing = (record) => record.key === editingKey;
+  const isEditing = (record) => record.step.stepName === editingKey;
 
   const edit = (record) => {
+    //console.log(record);
     form.setFieldsValue({
-      precondicion: "",
-      accion: "",
-      resultado: "",
+      result: "", //evidencias|
+      stepDescription: "", //acción
+      stepExpectedResults: "", //resultado esperado
       ...record,
     });
-    setEditingKey(record.key);
+    setEditingKey(record.step.stepName);
   };
 
   const cancel = () => {
@@ -89,49 +93,78 @@ const TableDetallesCP = ({detalle}) => {
   const save = async (key) => {
     try {
       const row = await form.validateFields();
-      const newData = [...detalle];
-      const index = newData.findIndex((item) => key === item.key);
-
+      const newData = [...dataTable];
+      const index = newData.findIndex((item) => key === item.step.stepName);
       if (index > -1) {
         const item = newData[index];
-        newData.splice(index, 1, { ...item, ...row });
-        setDataTable(newData);
+        const newStep = {
+          step: [
+            {
+              result: item.step.result,
+              stepDescription: row.step.stepDescription,
+              stepExpectedResults: row.step.stepExpectedResults,
+              stepName: item.step.stepName,
+              testStatus: 1,
+            },
+          ],
+          testComments: row.testComments,
+          testDescription: item.testDescription,
+          testId: item.testId,
+        };
+        console.log(newStep);
         setEditingKey("");
-      } else {
+        actualizarStep(newStep, item.testId);
+      } /*  else {
         newData.push(row);
+        console.log(row);
         setDataTable(newData);
         setEditingKey("");
-      }
+      } */
     } catch (errInfo) {
-      //console.log("Validate Failed:", errInfo);
+      console.log("Validate Failed:", errInfo);
     }
   };
 
   const columns = [
     {
       title: "#",
-      dataIndex: "key",
+      //dataIndex: ["step", "id"],
+      dataIndex: ["step", "stepName"],
+      key: "stepName",
       editable: false,
     },
     {
       title: "Precondición",
       dataIndex: "testComments",
+      key: "testComments",
       editable: true,
     },
     {
       title: "Acción",
-      dataIndex: "testDescription",
+      dataIndex: ["step", "stepDescription"],
+      key: ["step", "stepDescription"],
       editable: true,
     },
     {
       title: "Resultado Esperado",
-      dataIndex: "testDescription",
+      dataIndex: ["step", "stepExpectedResults"],
+      key: ["step", "stepExpectedResults"],
       editable: true,
     },
     {
       title: "Evidencias",
-      dataIndex: "",
+      dataIndex: ["step", "result"],
+      key: ["step", "result"],
       editable: false,
+      render: (record) => {
+        return (
+          <Image
+            width={80}
+            height={80}
+            source={{ uri: `data:image/jpeg;base64,${record}` }}
+          />
+        );
+      },
     },
     {
       title: "Acciones",
@@ -141,15 +174,14 @@ const TableDetallesCP = ({detalle}) => {
         return editable ? (
           <span>
             <a
-              href="javascript:;"
-              onClick={() => save(record.key)}
+              onClick={() => save(record.step.stepName)}
               style={{
                 marginRight: 8,
               }}
             >
               Guardar
             </a>
-            <Popconfirm title="¿Está seguro de eliminar?" onConfirm={cancel}>
+            <Popconfirm title="¿Descartar los cambios?" onConfirm={cancel}>
               <a>Cancelar</a>
             </Popconfirm>
           </span>
@@ -204,16 +236,20 @@ const TableDetallesCP = ({detalle}) => {
   };
 
   return (
-    <Table
-      components={components}
-      bordered
-      size="middle"
-      columns={cols}
-      dataSource={dataTable}
-      rowKey="key"
-      rowClassName="editable-row"
-      pagination={paginationProps}
-    />
+    <Form form={form} component={false}>
+      <Table
+        components={components}
+        bordered
+        size="middle"
+        columns={cols}
+        dataSource={dataTable}
+        //rowKey="id"
+        rowKey={(record) => record.key}
+        //rowKey={["step", "stepName"]}
+        rowClassName="editable-row"
+        pagination={paginationProps}
+      />
+    </Form>
   );
 };
 

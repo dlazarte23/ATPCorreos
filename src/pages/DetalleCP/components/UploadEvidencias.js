@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../detalle-style.css";
 import { Upload, message } from "antd";
@@ -6,38 +6,50 @@ import { InboxOutlined } from "@ant-design/icons";
 
 const { Dragger } = Upload;
 
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  accept: ".jpg,.png,.gif",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
+//Conversión del imagen a Base64
+const getBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      let encoded = reader.result.toString().replace(/^data:(.*,)?/, "");
+      if (encoded.length % 4 > 0) {
+        encoded += "=".repeat(4 - (encoded.length % 4));
+      }
+      resolve(encoded);
+    };
+    reader.onerror = (error) => reject(error);
+  });
 };
 
-const UploadEvidencias = () => {
+const UploadEvidencias = (props) => {
+  const { stepData, setStepData } = props;
+
+  const draggerProps = {
+    multiple: false,
+    maxCount: 1,
+    accept: ".jpg,.png,.gif",
+    beforeUpload: async (file) => {
+      const base64Img = await getBase64(file);
+      setStepData({ ...stepData, evidences: base64Img });
+      return false;
+    },
+    onDrop(e) {
+      setStepData({ ...stepData, evidences: [] });
+      //console.log("Dropped files", e.dataTransfer.files);
+    },
+  };
+
   return (
-    <Dragger {...props} className="uploadDragger">
+    <Dragger {...draggerProps} className="uploadDragger">
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
       <p className="ant-upload-text">
-        Haga click o arrastre una imagen a esta área para cargar.
+        Haga click o arrastre una imagen a esta área.
       </p>
       <p className="ant-upload-hint">
-        Cargar evidencia del caso de prueba. Formatos aceptados: png, jpg, gif.
+        Adjuntar evidencia del step. Formatos aceptados: png, jpg, gif.
       </p>
     </Dragger>
   );

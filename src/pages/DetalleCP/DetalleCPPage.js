@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 import { ProyectoBaseUrl } from "../../Api/ApiUrl";
 import "./detalle-style.css";
 import { Typography, Row, Col, PageHeader, Space, Descriptions } from "antd";
@@ -7,8 +7,13 @@ import { LeftOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../assets/icons/InfoSvg";
 import FormDetalle from "./components/FormDetalle";
 import TableDetallesCP from "./components/TableDetallesCP";
-
 import { Scrollbars } from "react-custom-scrollbars-2";
+
+// actions de redux
+import {
+  crearNuevoStepAction,
+  actualizarNuevoStepAction,
+} from "../../stateManagement/actions/stepsAction";
 
 const Content = ({ children, extra }) => (
   <div className="content">
@@ -33,6 +38,11 @@ export default function DetalleCPPage(props) {
   const { Title, Paragraph } = Typography;
   const { detalle } = props.location.state;
 
+  const loading = useSelector((state) => state.peticiones.loading);
+  const dispatch = useDispatch();
+  const crearStep = (step) => dispatch(crearNuevoStepAction(step));
+  const actualizarStep = (step, id) =>
+    dispatch(actualizarNuevoStepAction(step, id));
 
   const renderContent = () => (
     <div className="card-information">
@@ -91,7 +101,7 @@ export default function DetalleCPPage(props) {
         <div className="contenedor">
           <Row className="steps-pasos">
             <Col span={24} className="setps">
-              <FormDetalle />
+              <FormDetalle detalle={detalle} crearStep={crearStep} />
             </Col>
           </Row>
         </div>
@@ -100,7 +110,10 @@ export default function DetalleCPPage(props) {
         <Row className="table-detalleCp">
           <Col span={22} offset={1}>
             <Title level={4}>Listado de Todos los Pasos</Title>
-            <TableDetallesCP detalle={detalle}/>
+            <TableDetallesCP
+              detalle={detalle}
+              actualizarStep={actualizarStep}
+            />
           </Col>
         </Row>
       </Scrollbars>
