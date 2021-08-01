@@ -97,6 +97,7 @@ export default function HeaderPeticion(props) {
         <Input
           size="default"
           placeholder="Buscar"
+          disabled={ proyectoSeleccionado === null ? true : false }
           style={{ width: "400px" }}
           prefix={<SearchOutlined />}
           onChange={(e) => handleChangeSearch(e)}
@@ -125,6 +126,7 @@ export default function HeaderPeticion(props) {
         <Radio.Group
           options={options}
           onChange={onChange}
+          disabled={ proyectoSeleccionado === null ? true : false }
           size={"middle"}
           value={filter.value}
           optionType="button"
