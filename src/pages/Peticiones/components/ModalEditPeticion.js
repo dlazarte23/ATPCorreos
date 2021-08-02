@@ -3,7 +3,7 @@ import { Modal, Input, InputNumber, Form, Row, Col, Button, DatePicker, TimePick
 import { useDispatch, useSelector } from 'react-redux';
 
 // actions de redux
-import { crearNuevaPeticionAction } from '../../../stateManagement/actions/peticionesAction';
+import { editarPeticionAction } from '../../../stateManagement/actions/peticionesAction';
 import moment from 'moment';
 export default function ModalEditPeticion(props) {
 
@@ -29,7 +29,7 @@ export default function ModalEditPeticion(props) {
   const dispatch = useDispatch();
 
   // mandamos a llamar el action de peticionesAction
-  const agregarPeticion = peticion => dispatch(crearNuevaPeticionAction(peticion));
+  const editarPeticion = peticion => dispatch(editarPeticionAction(peticion));
 
   // cuando el usuario haga clic en guardar cambios
   const handleOk = () => {
@@ -50,7 +50,7 @@ export default function ModalEditPeticion(props) {
         }, 2000);
 
         // creamos la nueva peticion
-        agregarPeticion(values);
+        editarPeticion(values);
       })
       .catch(info => {
         console.log("Error al validar: ", info)

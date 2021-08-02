@@ -11,7 +11,10 @@ import {
     DESCARGA_PETICIONES_ERROR,
     ELIMINAR_PETICION,
     ELIMINAR_PETICION_EXITO,
-    ELIMINAR_PETICION_ERROR
+    ELIMINAR_PETICION_ERROR,
+    EDITAR_PETICION,
+    EDITAR_PETICION_EXITO,
+    EDITAR_PETICION_ERROR
 } from '../types/peticionesType';
 
 import { message } from "antd";
@@ -144,6 +147,8 @@ export function crearNuevaPeticionAction ( peticion, idProyecto ) {
 
             dispatch( agregarPeticionExito( ) );
 
+            message.success("Petición creada correctamente!");
+
             /**
              * En esta situación se esta mandao a llamar al action de obtener
              * peiticiones unicamente por temas de que necesitamos el id de esta petición
@@ -178,6 +183,51 @@ const agregarPeticionError = error => ({
 });
 
 /**
+ * Action para la edición de la peticion
+ * @param {*} peticion 
+ */
+export function editarPeticionAction( peticion ) {
+
+    return( dispatch ) => {
+
+        dispatch( editarPeticion( ) );
+        
+        try {
+
+            /**
+             * Aqui se debe hacer la petición a la API
+             * si esta API devuelve como respuesta un 200 o la petición modificada
+             * pasarsela a la función del dispatch, dentro del if
+             */            
+            message.success("Petición modificada correctamente!");
+
+            dispatch( editarPeticionExito( peticion ) );
+            
+        } catch ( error ) {
+
+            dispatch( editarPeticionError( ) );
+            
+            message.error("Error al trata de editar la petición!");
+
+        }
+
+    }
+
+}
+
+const editarPeticion = ( ) => ({
+    type: EDITAR_PETICION
+});
+const editarPeticionExito = peticion => ({
+    type: EDITAR_PETICION_EXITO,
+    payload: peticion
+});
+const editarPeticionError = error => ({
+    type: EDITAR_PETICION_ERROR,
+    payload: error
+});
+
+/**
  * Action para la eliminación de la petición
  * @param {*} idPeticion 
  */
@@ -192,7 +242,7 @@ export function eliminarPeticionAction( idPeticion ) {
             // aqui se debe hacer la consulta a la API
 
             // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
-            message.success("Petición eliminado correctamente!");
+            message.success("Petición eliminada correctamente!");
 
             dispatch( eliminarPeticionExito( idPeticion ) );
 

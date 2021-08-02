@@ -11,7 +11,10 @@ import {
   DESCARGA_PETICIONES_ERROR,
   ELIMINAR_PETICION,
   ELIMINAR_PETICION_EXITO,
-  ELIMINAR_PETICION_ERROR
+  ELIMINAR_PETICION_ERROR,
+  EDITAR_PETICION,
+  EDITAR_PETICION_EXITO,
+  EDITAR_PETICION_ERROR
 } from "../types/peticionesType";
 
 /**
@@ -31,6 +34,7 @@ export default function (state = initialState, action) {
     
     case LISTAR_PROYECTOS:
     case AGREGAR_PETICION:
+    case EDITAR_PETICION:
     case ELIMINAR_PETICION:
     case COMENZAR_DESCARGA_PETICIONES:
       return {
@@ -64,6 +68,13 @@ export default function (state = initialState, action) {
         peticiones: action.payload,
       };
 
+    case EDITAR_PETICION_EXITO:
+      return {
+        ...state,
+        loading: false,
+        peticiones: state.peticiones.map( peticion => peticion.id === action.payload.id ? peticion = action.payload : peticion )
+      }
+
     case ELIMINAR_PETICION_EXITO:
       return {
         ...state,
@@ -73,6 +84,8 @@ export default function (state = initialState, action) {
       
     case LISTAR_PROYECTOS_ERROR:
     case AGREGAR_PETICION_ERROR:
+    case ELIMINAR_PETICION_ERROR:
+    case EDITAR_PETICION_ERROR:
     case DESCARGA_PETICIONES_ERROR:
       return {
         ...state,

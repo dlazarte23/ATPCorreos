@@ -19,7 +19,17 @@ export const LISTAR_PROYECTOS = 'LISTAR_PROYECTOS';
 export const LISTAR_PROYECTOS_EXITO = 'LISTAR_PROYECTOS_EXITO';
 export const LISTAR_PROYECTOS_ERROR = 'LISTAR_PROYECTOS_ERROR';
 
+/**
+ * Type para seleccionar un proyecto
+ */
 export const SELECCION_PROYECTO = 'SELECCION_PROYECTO';
+
+/**
+ * Type para editar la peticción
+ */
+export const EDITAR_PETICION = 'EDITAR_PETICION';
+export const EDITAR_PETICION_EXITO = 'EDITAR_PETICION_EXITO';
+export const EDITAR_PETICION_ERROR = 'EDITAR_PETICION_ERROR';
 
 /**
  * Types para eliminar la petición
