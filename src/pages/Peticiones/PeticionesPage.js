@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   HeaderPeticion,
@@ -20,9 +20,7 @@ import alertError from "../../assets/img/alertError.png";
 
 export default function Peticionespage() {
   const loading = useSelector((state) => state.peticiones.loading);
-
   const peticiones = useSelector((state) => state.peticiones.peticiones);
-
   const proyectos = useSelector((state) => state.peticiones.proyectos);
 
   const proyectoSeleccionado = useSelector(
@@ -38,7 +36,15 @@ export default function Peticionespage() {
     create: false,
   });
 
+  const [filteredData, setFilteredData] = useState(peticiones);
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const results = peticiones.filter((peticion) =>
+      peticion.codPeticion.includes(searchTerm.toLowerCase())
+    );
+    setFilteredData(results);
+  }, [searchTerm]);
 
   const getSpan = () => {
     const width = window.screen.width;
@@ -62,6 +68,8 @@ export default function Peticionespage() {
     }
   };
 
+  const data = searchTerm !== "" ? filteredData : peticiones;
+
   return (
     <Spin spinning={loading} tip="Cargando..." size="large">
       <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
@@ -79,10 +87,10 @@ export default function Peticionespage() {
 
         <Row style={{ marginTop: 20 }}>
           {proyectos.length !== 0 ? (
-            peticiones.length !== 0 ? (
+            data.length !== 0 ? (
               <Col span={getSpan()} offset={getOffset()}>
                 <ListPeticiones
-                  peticiones={peticiones}
+                  peticiones={data}
                   showModal={showModal}
                   setShowModal={setShowModal}
                 />
