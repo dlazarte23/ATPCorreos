@@ -10,8 +10,17 @@ import {
 import ModalEditPeticion from "./ModalEditPeticion";
 import ListPlandePrueba from "./ListPlandePrueba"
 
+import { useDispatch } from "react-redux";
+
+import { eliminarPeticionAction } from "../../../stateManagement/actions/peticionesAction";
+
 const InfoPeticion = (props) => {
+
+  const dispatch = useDispatch( );
+
   const dataPeticion = props.peticion;
+
+  const { onCloseDetalle } = props;
 
   const { Title } = Typography;
 
@@ -19,6 +28,13 @@ const InfoPeticion = (props) => {
     detail: false,
     create: false,
   });
+
+  const eliminarPeticion = idPeticion => dispatch( eliminarPeticionAction(idPeticion) );
+
+  const confirmDeletePeticion = idPeticion => {
+    eliminarPeticion(idPeticion);
+    onCloseDetalle();
+  }
 
   return (
     <>
@@ -86,7 +102,7 @@ const InfoPeticion = (props) => {
 
                 <Popconfirm
                   title="¿Está seguro de eliminar?"
-                  /* onConfirm={() => handleDelete(record.key)} */
+                  onConfirm={() => confirmDeletePeticion(dataPeticion.id)}
                   okText="Confirmar"
                   cancelText="Cancelar">
 

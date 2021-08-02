@@ -8,8 +8,11 @@ import {
   SELECCION_PROYECTO,
   COMENZAR_DESCARGA_PETICIONES,
   DESCARGA_PETICIONES_EXITO,
-  DESCARGA_PETICIONES_ERROR
-} from "../types/peitcionesType";
+  DESCARGA_PETICIONES_ERROR,
+  ELIMINAR_PETICION,
+  ELIMINAR_PETICION_EXITO,
+  ELIMINAR_PETICION_ERROR
+} from "../types/peticionesType";
 
 /**
  * Cada reducer tiene su propio state
@@ -28,6 +31,7 @@ export default function (state = initialState, action) {
     
     case LISTAR_PROYECTOS:
     case AGREGAR_PETICION:
+    case ELIMINAR_PETICION:
     case COMENZAR_DESCARGA_PETICIONES:
       return {
         ...state,
@@ -37,6 +41,7 @@ export default function (state = initialState, action) {
     case AGREGAR_PETICION_EXITO:
       return {
         ...state,
+        // aqui hace falta agregar al array
       };
 
     case LISTAR_PROYECTOS_EXITO:
@@ -58,6 +63,13 @@ export default function (state = initialState, action) {
         loading: false,
         peticiones: action.payload,
       };
+
+    case ELIMINAR_PETICION_EXITO:
+      return {
+        ...state,
+        loading: false,
+        peticiones: state.peticiones.filter( peticion => peticion.id !== action.payload )
+      }
       
     case LISTAR_PROYECTOS_ERROR:
     case AGREGAR_PETICION_ERROR:

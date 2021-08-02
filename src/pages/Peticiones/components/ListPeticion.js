@@ -71,7 +71,7 @@ export default function ListPeticiones({ peticiones }) {
           onClose={onCloseDetalle}
           visible={showDetalle}
         >
-          <InfoPeticion peticion={detallePeticion} />
+          <InfoPeticion peticion={detallePeticion} onCloseDetalle={onCloseDetalle} />
         </Drawer>
       </List>
     </>

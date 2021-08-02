@@ -8,8 +8,11 @@ import {
     SELECCION_PROYECTO,
     COMENZAR_DESCARGA_PETICIONES,
     DESCARGA_PETICIONES_EXITO,
-    DESCARGA_PETICIONES_ERROR
-} from '../types/peitcionesType';
+    DESCARGA_PETICIONES_ERROR,
+    ELIMINAR_PETICION,
+    ELIMINAR_PETICION_EXITO,
+    ELIMINAR_PETICION_ERROR
+} from '../types/peticionesType';
 
 import { message } from "antd";
 
@@ -171,5 +174,50 @@ const agregarPeticionExito = ( ) => ({
 // si hubo un error al guardar en la BBDD
 const agregarPeticionError = error => ({
     type: AGREGAR_PETICION_ERROR,
+    payload: error
+});
+
+/**
+ * Action para la eliminación de la petición
+ * @param {*} idPeticion 
+ */
+export function eliminarPeticionAction( idPeticion ) {
+
+    return( dispatch ) => {
+
+        dispatch ( eliminarPeticion( ) );
+
+        try {
+
+            // aqui se debe hacer la consulta a la API
+
+            // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+            message.success("Petición eliminado correctamente!");
+
+            dispatch( eliminarPeticionExito( idPeticion ) );
+
+        } catch ( error ) {
+
+            message.error("Error al tratar de eliminar esta petición!");
+
+            dispatch( eliminarPeticionError( error ) );
+
+        }
+
+    }
+
+}
+
+const eliminarPeticion = () => ({
+    type: ELIMINAR_PETICION
+});
+
+const eliminarPeticionExito = idPeticion => ({
+    type: ELIMINAR_PETICION_EXITO,
+    payload: idPeticion
+});
+
+const eliminarPeticionError = error => ({
+    type: ELIMINAR_PETICION_ERROR,
     payload: error
 });
