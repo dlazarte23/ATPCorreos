@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-import { Card, Typography, Descriptions, Button, Space, Tooltip, Popconfirm } from "antd";
+import { Card, Typography, Descriptions, Button, Space, Tooltip, Popconfirm, Input  } from "antd";
 import {
   ExceptionOutlined,
   EditOutlined,
   DeleteOutlined,
+  PlusOutlined
 } from "@ant-design/icons";
 
 import ModalEditPeticion from "./ModalEditPeticion";
@@ -77,12 +78,13 @@ const InfoPeticion = (props) => {
             </Descriptions.Item>
           </Descriptions>
         </div>
-        {dataPeticion.responseTests.length > 0 ? (
           <>
             <p>Planes de Prueba: </p>
-            <Space>
               <ListPlandePrueba peticion={dataPeticion} />
-            </Space>
+              <Space>
+              <Input placeholder="Agregar plan de prueba" bordered={false}/> 
+              <a><PlusOutlined /></a>
+              </Space>
             <div style={{ marginTop: 25 }}>
               <Space>
                 <Tooltip placement="left" title="Editar Petición">
@@ -121,7 +123,6 @@ const InfoPeticion = (props) => {
             </div>
 
           </>
-        ) : null}
 
       </Card>
     </>
