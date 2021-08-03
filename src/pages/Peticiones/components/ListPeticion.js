@@ -65,7 +65,7 @@ export default function ListPeticiones({ peticiones }) {
         )}
       >
         <Drawer
-          width={400}
+          width={500}
           placement="right"
           closable={true}
           onClose={onCloseDetalle}

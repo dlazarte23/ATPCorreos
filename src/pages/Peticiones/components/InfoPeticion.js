@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 
 import { Card, Typography, Descriptions, Button, Space, Tooltip, Popconfirm, Input  } from "antd";
+
 import {
   ExceptionOutlined,
   EditOutlined,
   DeleteOutlined,
-  PlusOutlined
+  PlusOutlined,
+  UnorderedListOutlined
 } from "@ant-design/icons";
 
 import ModalEditPeticion from "./ModalEditPeticion";
-import ListPlandePrueba from "./ListPlandePrueba"
+import PlanesPrueba from "./PlanesPrueba";
 
 import { useDispatch } from "react-redux";
 
@@ -29,6 +31,13 @@ const InfoPeticion = (props) => {
     detail: false,
     create: false,
   });
+
+  // variables unicamente para abrir el 2 drawer del listado de planes de prueba
+  const [showPP, setShowPP] = useState(false);
+
+  const onCloseDetallePP = () => {
+      setShowPP(false);
+  };
 
   const eliminarPeticion = idPeticion => dispatch( eliminarPeticionAction(idPeticion) );
 
@@ -79,12 +88,6 @@ const InfoPeticion = (props) => {
           </Descriptions>
         </div>
           <>
-            <p>Planes de Prueba: </p>
-              <ListPlandePrueba peticion={dataPeticion} />
-              <Space>
-              <Input placeholder="Agregar plan de prueba" bordered={false}/> 
-              <a><PlusOutlined /></a>
-              </Space>
             <div style={{ marginTop: 25 }}>
               <Space>
                 <Tooltip placement="left" title="Editar Petición">
@@ -119,6 +122,14 @@ const InfoPeticion = (props) => {
                 </Popconfirm>
 
               </Space>
+
+              <Space style={{float: 'right'}}>
+                <Button type="primary" icon={<UnorderedListOutlined />} onClick={() => setShowPP( true )} >
+                  Planes De Prueba
+                </Button>
+              </Space>
+
+              <PlanesPrueba showPP={showPP} onCloseDetallePP={onCloseDetallePP} data={dataPeticion}/>
 
             </div>
 
