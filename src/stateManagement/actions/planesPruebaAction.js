@@ -73,7 +73,7 @@ export function agregarPlanPrueba( idPeticion ) {
              * su id generado por la BBDD
              */
             dispatch( agregarPlanesPruebaExito( { } ) );
-            message.error("Plan de prueba registrado correctamente!");   
+            message.success("Plan de prueba registrado correctamente!");   
             
         } catch ( error ) {
             

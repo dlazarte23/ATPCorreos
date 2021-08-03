@@ -7,10 +7,12 @@ import peticionesReducer from './peticionesReducers';
 import casosPruebasReducer from './casosPruebasReducer';
 import detalleCPReducer from './detalleCPReducer';
 import usuarioReducer from './usuarioReducer';
+import planesPrueba from './planesPruebaReducer';
 
 export default combineReducers ( {
     usuario: usuarioReducer,
     peticiones: peticionesReducer,
     casosPruebas: casosPruebasReducer,
-    detalleCasoPrueba: detalleCPReducer
+    detalleCasoPrueba: detalleCPReducer,
+    planesPrueba: planesPrueba
 } );
