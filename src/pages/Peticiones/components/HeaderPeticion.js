@@ -76,7 +76,7 @@ export default function HeaderPeticion(props) {
   return (
     <PageHeader
       className="site-page-header"
-      title="Lista de peticiones"
+      title="Lista de Peticiones"
       style={{ paddingLeft: "50px" }}
       extra={[
         <Button
@@ -87,7 +87,7 @@ export default function HeaderPeticion(props) {
           icon={<PlusOutlined />}
           onClick={() => setShowModal({ ...showModal, create: true })}
         >
-          Nueva petición
+          Nueva Petición
         </Button>,
       ]}
     >

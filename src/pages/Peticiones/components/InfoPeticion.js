@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Card, Typography, Descriptions, Button, Space, Tooltip, Popconfirm, Input  } from "antd";
+import { Card, Typography, Descriptions, Button, Space, Tooltip, Popconfirm, Input } from "antd";
 
 import {
   ExceptionOutlined,
@@ -19,7 +19,7 @@ import { eliminarPeticionAction } from "../../../stateManagement/actions/peticio
 
 const InfoPeticion = (props) => {
 
-  const dispatch = useDispatch( );
+  const dispatch = useDispatch();
 
   const dataPeticion = props.peticion;
 
@@ -36,10 +36,10 @@ const InfoPeticion = (props) => {
   const [showPP, setShowPP] = useState(false);
 
   const onCloseDetallePP = () => {
-      setShowPP(false);
+    setShowPP(false);
   };
 
-  const eliminarPeticion = idPeticion => dispatch( eliminarPeticionAction(idPeticion) );
+  const eliminarPeticion = idPeticion => dispatch(eliminarPeticionAction(idPeticion));
 
   const confirmDeletePeticion = idPeticion => {
     eliminarPeticion(idPeticion);
@@ -87,53 +87,53 @@ const InfoPeticion = (props) => {
             </Descriptions.Item>
           </Descriptions>
         </div>
-          <>
-            <div style={{ marginTop: 25 }}>
-              <Space>
-                <Tooltip placement="left" title="Editar Petición">
-                  <ModalEditPeticion
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                    dataPeticion={dataPeticion}
-                  />
+        <>
+          <div style={{ marginTop: 25 }}>
+            <Space>
 
+              <ModalEditPeticion
+                showModal={showModal}
+                setShowModal={setShowModal}
+                dataPeticion={dataPeticion}
+              />
+              <Tooltip placement="left" title="Editar Petición">
+                <Button
+                  icon={<EditOutlined />}
+                  shape="round"
+                  type="dashed"
+                  onClick={() => setShowModal({ ...showModal, create: true })}
+                />
+              </Tooltip>
+
+              <Popconfirm
+                title="¿Está seguro de eliminar?"
+                onConfirm={() => confirmDeletePeticion(dataPeticion.id)}
+                okText="Confirmar"
+                cancelText="Cancelar">
+
+                <Tooltip placement="right" title="Eliminar Petición">
                   <Button
-                    icon={<EditOutlined />}
+                    icon={<DeleteOutlined />}
                     shape="round"
                     type="dashed"
-                    onClick={() => setShowModal({ ...showModal, create: true })}
+                    style={{ marginLeft: 10 }}
                   />
                 </Tooltip>
+              </Popconfirm>
 
-                <Popconfirm
-                  title="¿Está seguro de eliminar?"
-                  onConfirm={() => confirmDeletePeticion(dataPeticion.id)}
-                  okText="Confirmar"
-                  cancelText="Cancelar">
+            </Space>
 
-                  <Tooltip placement="right" title="Eliminar Petición">
-                    <Button
-                      icon={<DeleteOutlined />}
-                      shape="round"
-                      type="dashed"
-                      style={{ marginLeft: 10 }}
-                    />
-                  </Tooltip>
-                </Popconfirm>
+            <Space style={{ float: 'right' }}>
+              <Button type="primary" icon={<UnorderedListOutlined />} onClick={() => setShowPP(true)} >
+                Planes De Prueba
+              </Button>
+            </Space>
 
-              </Space>
+            <PlanesPrueba showPP={showPP} onCloseDetallePP={onCloseDetallePP} data={dataPeticion} />
 
-              <Space style={{float: 'right'}}>
-                <Button type="primary" icon={<UnorderedListOutlined />} onClick={() => setShowPP( true )} >
-                  Planes De Prueba
-                </Button>
-              </Space>
+          </div>
 
-              <PlanesPrueba showPP={showPP} onCloseDetallePP={onCloseDetallePP} data={dataPeticion}/>
-
-            </div>
-
-          </>
+        </>
 
       </Card>
     </>

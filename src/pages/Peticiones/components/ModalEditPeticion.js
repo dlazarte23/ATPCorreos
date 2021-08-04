@@ -9,7 +9,7 @@ export default function ModalEditPeticion(props) {
 
   const { showModal, setShowModal, dataPeticion, } = props;
 
-  const {nombre, sprint, key, fecEntrega, fecInicio, fecPrevistaEntrega, horasEstimadas } = dataPeticion;
+  const {nombre, numero, fecEntrega, fecInicio, fecPrevistaEntrega, horasEstimadas, codPeticion } = dataPeticion;
 
   const [confirmLoading, setConfirmLoading] = useState(false);
 
@@ -160,7 +160,7 @@ export default function ModalEditPeticion(props) {
                   },
                 ]}
               >
-                <InputNumber className="input-string" defaultValue={sprint}/>
+                <InputNumber className="input-string" defaultValue={numero}/>
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -174,7 +174,7 @@ export default function ModalEditPeticion(props) {
                   },
                 ]}
               >
-                <Input defaultValue={key}/>
+                <Input defaultValue={codPeticion}/>
               </Form.Item>
             </Col>
           </Row>
