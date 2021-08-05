@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import { Modal, Input, InputNumber, Form, Row, Col, Button, DatePicker, Tooltip } from "antd";
 import { useDispatch, useSelector } from 'react-redux';
 
-import {  EditOutlined} from "@ant-design/icons";
+import { EditOutlined } from "@ant-design/icons";
 // actions de redux
 import { editarPeticionAction } from '../../../stateManagement/actions/peticionesAction';
 import moment from 'moment';
 export default function ModalEditPeticion(props) {
 
-  const { dataPeticion, } = props;
+  const { dataPeticion } = props;
 
-  const { petitionName, petitionCode, number, finishDate, startDate, expectedFinishDate, estimatedHours, otCode } = dataPeticion;
+  const { petitionName, petitionCode, number, finishDate, startDate, expectedFinishDate, estimatedHours, otCode, id } = dataPeticion;
 
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();
 
-  
+
 
   const onFinish = () => {
     console.log("on finsh")
@@ -28,7 +28,7 @@ export default function ModalEditPeticion(props) {
   const dispatch = useDispatch();
 
   // mandamos a llamar el action de peticionesAction
-  const editarPeticion = peticion => dispatch(editarPeticionAction(peticion));
+  const editarPeticion = (peticion, id) => dispatch(editarPeticionAction(peticion, id));
 
   // cuando el usuario haga clic en guardar cambios
   const handleOk = () => {
@@ -36,6 +36,7 @@ export default function ModalEditPeticion(props) {
     form
       .validateFields()
       .then(values => {
+
         form.resetFields();
 
         setConfirmLoading(!loading);
@@ -47,9 +48,8 @@ export default function ModalEditPeticion(props) {
           setShowModal({ ...showModal, create: false });
 
         }, 2000);
-
         // creamos la nueva peticion
-        editarPeticion(values);
+        editarPeticion(values, id);
       })
       .catch(info => {
         console.log("Error al validar: ", info)
@@ -65,11 +65,11 @@ export default function ModalEditPeticion(props) {
       startDate: moment(startDate, 'YYYY-MM-DD'),
       finishDate: moment(finishDate, 'YYYY-MM-DD'),
       expectedFinishDate: moment(expectedFinishDate, 'YYYY-MM-DD'),
-      idPeticion: petitionCode,
-      nomPeticion: petitionName,
+      petitionCode: petitionCode,
+      petitionName: petitionName,
       estimatedHours: estimatedHours,
       sprint: number,
-      codOt: otCode,
+      otCode: otCode,
     });
   }
   const handleCancel = () => {
@@ -113,7 +113,7 @@ export default function ModalEditPeticion(props) {
           <Row gutter={16}>
             <Col span={6}>
               <Form.Item
-                name="idPeticion"
+                name="petitionCode"
                 label="Id. Petición"
                 rules={[
                   {
@@ -127,7 +127,7 @@ export default function ModalEditPeticion(props) {
             </Col>
             <Col span={18}>
               <Form.Item
-                name="nomPeticion"
+                name="petitionName"
                 label="Nombre Petición"
                 rules={[
                   {
@@ -192,7 +192,7 @@ export default function ModalEditPeticion(props) {
             </Col>
             <Col span={8}>
               <Form.Item
-                name="sprint"
+                name="number"
                 label="Sprint"
 
                 rules={[
@@ -210,7 +210,7 @@ export default function ModalEditPeticion(props) {
             </Col>
             <Col span={8}>
               <Form.Item
-                name="codOt"
+                name="otCode"
                 label="Cod. Ot"
                 rules={[
                   {

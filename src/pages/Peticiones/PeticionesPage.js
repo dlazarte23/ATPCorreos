@@ -69,9 +69,11 @@ export default function Peticionespage() {
   };
 
   const data = searchTerm !== "" ? filteredData : peticiones;
+  const loadingPP = useSelector(state => state.planesPrueba.loading);
 
   return (
     <Spin spinning={loading} tip="Cargando..." size="large">
+      <Spin spinning={loadingPP} tip="Un momento..." size="large">
       <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
         <Row>
           <Col span={24}>
@@ -123,6 +125,7 @@ export default function Peticionespage() {
           setShowModal={setShowModal}
         />
       </Scrollbars>
+      </Spin>
     </Spin>
   );
 }
