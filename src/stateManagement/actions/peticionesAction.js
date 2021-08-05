@@ -27,7 +27,7 @@ import { post } from '../../utils/confAxios/petitionPost';
 /**
  * Actión para obtener la lista de proyectos
  */
-export function listarProyectoAction ( ) {
+export function listarProyectoAction ( usuarioCorto ) {
 
     return async ( dispatch ) => {
 
@@ -37,7 +37,7 @@ export function listarProyectoAction ( ) {
         try {
 
             // consultamos a la endpoint
-            const response = await get( uri.getProyectos );
+            const response = await get(` ${uri.getProyectos}/` );
 
             // le pasamos todos los proyectos obtenidos
             dispatch( proyectosDescargadosExito( response.proyectoDTOS ) );
