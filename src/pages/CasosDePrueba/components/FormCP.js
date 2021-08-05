@@ -8,24 +8,21 @@ import { useDispatch } from "react-redux";
 
 import { registrarCasosPruebasAction } from "../../../stateManagement/actions/casosPruebasAction";
 
-const FormCP = ({ peticion }) => {
+const FormCP = ({ peticion, subject }) => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch( );
+  const registrarCasosDePrueba = (casosDePrueba) =>
+    dispatch(registrarCasosPruebasAction(casosDePrueba));
 
-  const registrarCasosDePrueba = ( casosDePrueba, descripcion ) => dispatch( registrarCasosPruebasAction( casosDePrueba, descripcion ) );
-
-  const onFinish = ( values ) => {
-    console.log("Success:", values);
-
+  const onFinish = (values) => {
     const casoDePrueba = {
-      sprintId: peticion.id,
-      subject: peticion.nombre,
-      testName: values.nomCp
-    }
+      shortUsername: subject.user,
+      subjectId: subject.id,
+      testDescription: values.descripcionCP,
+      testName: values.nomCp,
+    };
 
-    console.log(peticion)
-    //registrarCasosDePrueba(casoDePrueba, values.descripcionCP );
-
+    registrarCasosDePrueba(casoDePrueba);
   };
 
   const onFinishFailed = (errorInfo) => {
