@@ -4,7 +4,10 @@ import {
     OBTENER_PLANES_PRUEBA_ERROR,
     AGREGAR_PLAN_PRUEBA,
     AGREGAR_PLAN_PRUEBA_EXITO,
-    AGREGAR_PLAN_PRUEBA_ERROR
+    AGREGAR_PLAN_PRUEBA_ERROR,
+    EDITAR_PLAN_PRUEBA,
+    EDITAR_PLAN_PRUEBA_EXITO,
+    EDITAR_PLAN_PRUEBA_ERROR
 } from '../types/planesPruebaType';
 
 import { message } from 'antd';
@@ -97,5 +100,51 @@ const agregarPlanesPruebaExito = subject => ({
 
 const agregarPlanesPruebaError = error => ({
     type: AGREGAR_PLAN_PRUEBA_ERROR,
+    payload: error
+});
+
+/**
+ * Type para la actualización del plan de prueba
+ * @param {*} idPlanPrueb 
+ * @param {*} planPrueba 
+ */
+ export function editarPlanDePruebaAction ( idPlanPrueb, planPrueba ) {
+
+    return ( dispatch ) => {
+        
+        dispatch( editarPlanDePrueba() );
+        
+        try {
+            
+            // llamada al servicio
+            // const response = put(uri +idPlanPrueb, planPrueba);
+            //  if ( response.status == 200 ) { }
+            // response.data
+            
+            dispatch( editarPlanDePruebaExito( planPrueba ) );
+            
+            
+        } catch ( error ) {
+            
+            message.error("Error al actualizar tu plan de prueba!");
+            dispatch( editarPlanDePruebaError( error ) );
+
+        }
+
+    } 
+    
+}
+
+const editarPlanDePrueba = () => ({
+    type: EDITAR_PLAN_PRUEBA
+});
+
+const editarPlanDePruebaExito = planPrueba => ({
+    type: EDITAR_PLAN_PRUEBA_EXITO,
+    payload: planPrueba
+});
+
+const editarPlanDePruebaError = error => ({
+    type: EDITAR_PLAN_PRUEBA_ERROR,
     payload: error
 });
