@@ -66,12 +66,11 @@ export function registrarCasosPruebasAction(casoDePrueba) {
 
     try {
       const response = await post(uri.setCasoDePrueba, casoDePrueba);
-      //console.log("registrarCasosPruebasAction", response);
 
       if (response.status === 201) {
         message.success("Caso de Prueba creado correctamente!");
 
-        dispatch(registrarCasosPruebaExito(casoDePrueba));
+        dispatch(registrarCasosPruebaExito(response.data));
       }
     } catch (error) {
       message.error("Ocurrió un error al registrar el caso de prueba!");
