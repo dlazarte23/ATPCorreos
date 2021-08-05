@@ -29,7 +29,6 @@ export function listarCasosDePruebaAction(idPeticion) {
 
     try {
       const response = await get(`${uri.getCasosDePrueba}/${idPeticion}`);
-      //console.log("listarCasosDePruebaAction", response)
 
       dispatch(listarCasosPruebaExito(response));
     } catch (error) {
@@ -109,13 +108,13 @@ export function descargarDocumento(idPeticion, tipoDocumento) {
 
       if (tipoDocumento === "xml") {
         const response = await get(
-          `${uri.getDocumentoXml}?sprint=${idPeticion}`
+          `${uri.getDocumentoXml}?testplan=${idPeticion}`
         );
 
         FileSaver.saveAs(new Blob([response]), nombreArchivo);
       } else if (tipoDocumento === "excel") {
         const response = await getEnriched(
-          `${uri.getDocumentoExcel}?sprint=${idPeticion}`,
+          `${uri.getDocumentoExcel}?id=${idPeticion}`,
           { responseType: "blob" }
         );
 
