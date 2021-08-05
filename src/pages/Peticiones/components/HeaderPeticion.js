@@ -28,13 +28,12 @@ export default function HeaderPeticion(props) {
 
   const dispatch = useDispatch( );
 
-  const obtenerProyectos = usuarioCorto => dispatch( listarProyectoAction(usuarioCorto ) );
+  const obtenerProyectos = usuarioCorto => dispatch( listarProyectoAction( usuarioCorto ) );  
 
-  const usuario = useSelector(state => state.usuario.usuario.usuarioCorto)
   // eslint-disable-next-line
   useEffect( ( ) => {
 
-    obtenerProyectos(usuario);
+    obtenerProyectos( );
   
     // eslint-disable-next-line
   }, [ ]);
