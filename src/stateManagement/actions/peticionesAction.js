@@ -210,16 +210,33 @@ const editarPeticionError = (error) => ({
  * @param {*} idPeticion
  */
 export function eliminarPeticionAction(idPeticion) {
-  return (dispatch) => {
+  return async (dispatch) => {
+
     dispatch(eliminarPeticion());
 
     try {
       // aqui se debe hacer la consulta a la API
 
-      // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
-      message.success("Petición eliminada correctamente!");
+      const usuario = localStorage.getItem("DATA_SESION");
 
-      dispatch(eliminarPeticionExito(idPeticion));
+      const { shortUser } = JSON.parse(usuario);
+      
+
+      const response = await patch(`${uri.deletePeticiones}/${shortUser}/${idPeticion}`);
+
+      console.log( response );
+
+
+      if ( response.status === 200 ) {
+
+       // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+       message.success("Petición eliminada correctamente!");
+
+       dispatch(eliminarPeticionExito(idPeticion));
+
+    }
+
+     
     } catch (error) {
       message.error("Error al tratar de eliminar esta petición!");
 
