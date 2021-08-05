@@ -35,13 +35,11 @@ const extraContent = (
     </div>
 );
 
-const HeaderCP = ({ peticion }) => {
+const HeaderCP = ({ peticion, subject }) => {
 
     const dispatch = useDispatch();
 
-    const { Title, Paragraph } = Typography;
-
-    
+    const { Title, Paragraph } = Typography;    
 
     const descargaDocumento = ( idPeticion, tipoDocumento ) => dispatch( descargarDocumento( idPeticion, tipoDocumento ) );
 
@@ -55,15 +53,15 @@ const HeaderCP = ({ peticion }) => {
                         <Title level={5} style={{maxWidth: 600}}>
                             <Descriptions size="small" column={1}>
                                 <Descriptions.Item label="Plan de pruebas">
-                                    <span style={{ color: '#1890ff' }}>Agrupación Textos Email</span>
+                                    <span style={{ color: '#1890ff' }}>{subject.subject}</span>
                                 </Descriptions.Item>
                             </Descriptions>
                             <Descriptions size="small" column={2}>
                                 <Descriptions.Item label="Id. Petición">
-                                    {peticion.codPeticion}
+                                    {peticion.petitionCode}
                                 </Descriptions.Item>
                                 <Descriptions.Item label="Nombre Petición">
-                                    {peticion.nombre}
+                                    {peticion.petitionName}
                                 </Descriptions.Item>
                             </Descriptions>
                         </Title>

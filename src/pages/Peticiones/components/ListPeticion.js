@@ -18,6 +18,11 @@ import {
 import { InfoPeticion } from "../components";
 import "../peticion-style.css";
 
+import { useDispatch } from "react-redux";
+
+import { obtenerPlanesDePruebaAction } from "../../../stateManagement/actions/planesPruebaAction";
+import { useSelector } from "react-redux";
+
 const IconText = ({ icon, text }) => (
   <Space>
     {React.createElement(icon)}
@@ -30,8 +35,16 @@ export default function ListPeticiones({ peticiones }) {
   const [detallePeticion, setDetallePeticion] = useState("");
   const [showDetalle, setShowDetalle] = useState(false);
 
-  const handleDetalle = (value) => {
-    setDetallePeticion(value.item);
+  const dispatch = useDispatch( );
+
+  const obtenerPlanesDePrueba = idPeticion => dispatch( obtenerPlanesDePruebaAction( idPeticion ) );
+
+  const handleDetalle = async (value) => {
+
+    const response = await obtenerPlanesDePrueba(value.item.id);
+    
+    setDetallePeticion(response);
+
     setShowDetalle(true);
   };
 
@@ -39,6 +52,7 @@ export default function ListPeticiones({ peticiones }) {
     setShowDetalle(false);
   };
 
+  
   return (
     <>
       <List
@@ -63,7 +77,7 @@ export default function ListPeticiones({ peticiones }) {
         renderItem={(item) => (
           <ListItem item={item} handleDetalle={handleDetalle} />
         )}
-      >
+        >
         <Drawer
           width={500}
           placement="right"
@@ -79,24 +93,27 @@ export default function ListPeticiones({ peticiones }) {
 }
 
 const ListItem = ({ item, handleDetalle }) => {
+
+  const stateLoading = useSelector(state => state.planesPrueba.loading);
+  
   return (
     <>
       <Badge.Ribbon text="Nuevo" color="green">
-        <Card title={item.nombre} size="small" style={{ borderRadius: 20 }}>
+        <Card title={item.petitionName} size="small" style={{ borderRadius: 20 }}>
           <Row>
             <Col span={18}>
               <Descriptions size="small" column={1}>
                 <Descriptions.Item label="Id. Petición">
                   <IconText
                     icon={NumberOutlined}
-                    text={item.codPeticion}
+                    text={item.petitionCode}
                     key={item.id}
                   />
                 </Descriptions.Item>
                 <Descriptions.Item label="Fecha Inicio">
                   <IconText
                     icon={CalendarOutlined}
-                    text={item.fecInicio}
+                    text={item.startDate}
                     key={item.id}
                   />
                 </Descriptions.Item>
@@ -105,7 +122,7 @@ const ListItem = ({ item, handleDetalle }) => {
             <Col span={6}>
               <Descriptions size="small" column={1}>
                 <Descriptions.Item label="">
-                  <Button type="text" onClick={() => handleDetalle({ item })}>
+                  <Button type="text" onClick={() => handleDetalle({ item })} loading={stateLoading}>
                     Ver detalle <RightOutlined />
                   </Button>
                 </Descriptions.Item>

@@ -87,7 +87,7 @@ export default function Peticionespage() {
 
         <Row style={{ marginTop: 20 }}>
           {proyectos.length !== 0 ? (
-            data.length !== 0 ? (
+            data.length !== 0 && !loading ? (
               <Col span={getSpan()} offset={getOffset()}>
                 <ListPeticiones
                   peticiones={data}
@@ -101,7 +101,7 @@ export default function Peticionespage() {
                 mensaje={
                   proyectoSeleccionado === null
                     ? "Debe seleccionar un proyecto."
-                    : `No existe peticiones creadas en el proyecto: ${proyectoSeleccionado.nombre}.`
+                    : `No existe peticiones creadas en el proyecto: ${proyectoSeleccionado.name}.`
                 }
               />
             )

@@ -57,33 +57,33 @@ const InfoPeticion = (props) => {
         <div>
           <Descriptions layout="horizontal" column={1}>
             <Descriptions.Item label="Nombre">
-              {dataPeticion.nombre}
+              {dataPeticion.petitionName}
             </Descriptions.Item>
             <Descriptions.Item label="Id Petición">
-              {dataPeticion.codPeticion}
+              {dataPeticion.petitionCode}
             </Descriptions.Item>
             <Descriptions.Item label="Codigo OT">
-              {dataPeticion.codOt}
+              {dataPeticion.otCode}
             </Descriptions.Item>
             <Descriptions.Item label="Sprint">
-              {dataPeticion.numero}
+              {dataPeticion.number}
             </Descriptions.Item>
             <Descriptions.Item label="Fecha de Entrega">
-              {dataPeticion.fecEntrega}
+              {dataPeticion.finishDate}
             </Descriptions.Item>
             <Descriptions.Item label="Fecha de Inicio">
-              {dataPeticion.fecInicio}
+              {dataPeticion.startDate}
             </Descriptions.Item>
             <Descriptions.Item label="Fecha Prevista de Entrega">
-              {dataPeticion.fecPrevistaEntrega}
+              {dataPeticion.expectedFinishDate}
             </Descriptions.Item>
             <Descriptions.Item label="Horas Estimadas">
-              {`${dataPeticion.horasEstimadas} h.`}
+              {`${dataPeticion.estimatedHours} h.`}
             </Descriptions.Item>
 
 
             <Descriptions.Item label="Creador por">
-              {dataPeticion.create}
+              {dataPeticion.user}
             </Descriptions.Item>
           </Descriptions>
         </div>

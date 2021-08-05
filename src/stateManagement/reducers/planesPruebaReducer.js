@@ -12,6 +12,7 @@ import {
 
 const initialState = {
     planesPrueba: [],
+    peticion: {},
     loading: false,
     error: null
 }
@@ -31,7 +32,8 @@ export default function ( state = initialState, action ) {
             return {
                 ...state,
                 loading: false,
-                planesPrueba: action.payload
+                planesPrueba: action.payload.testPlanList,
+                peticion: action.payload.spring
             }
 
         case AGREGAR_PLAN_PRUEBA_EXITO:

@@ -28,7 +28,7 @@ export default function HeaderPeticion(props) {
 
   const dispatch = useDispatch( );
 
-  const obtenerProyectos = ( ) => dispatch( listarProyectoAction( ) );
+  const obtenerProyectos = usuarioCorto => dispatch( listarProyectoAction( usuarioCorto ) );  
 
   // eslint-disable-next-line
   useEffect( ( ) => {
@@ -116,8 +116,8 @@ export default function HeaderPeticion(props) {
 
             {
               proyectos.map( item => (
-                <Option key={item.codProyecto} value={item.id}>
-                  {item.nombre}
+                <Option key={item.projectCode} value={item.id}>
+                  {item.name}
                 </Option>
               ))
             }
