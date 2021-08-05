@@ -22,17 +22,20 @@ export default function ModalCreatePeticion(props) {
     console.log("on finsh");
   };
 
-  const dateFormat = 'DD/MM/YYYY';
+  const dateFormat = "DD/MM/YYYY";
 
-  const loading = useSelector( state => state.peticiones.loading );
+  const loading = useSelector((state) => state.peticiones.loading);
 
-  const proyecto = useSelector( state => state.peticiones.proyectoSeleccionado );
+  const proyecto = useSelector(
+    (state) => state.peticiones.proyectoSeleccionado
+  );
 
-  const usuario = useSelector( state => state.usuario.usuario.usuarioCorto );
+  const usuario = useSelector((state) => state.usuario.usuario.shortUser);
 
   const dispatch = useDispatch();
 
-  const agregarPeticion = ( peticion, idProyecto ) => dispatch(crearNuevaPeticionAction(peticion, idProyecto));
+  const agregarPeticion = (peticion, idProyecto) =>
+    dispatch(crearNuevaPeticionAction(peticion, idProyecto));
 
   // cuando el usuario haga clic en guardar cambios
   const handleOk = () => {
@@ -59,17 +62,14 @@ export default function ModalCreatePeticion(props) {
           petitionName: values.nomPeticion,
           project: proyecto.id,
           startDate: values.fecInicio._d,
-          user: usuario
+          user: usuario,
         };
 
         // creamos la nueva peticion
-        agregarPeticion( peticion, proyecto.id );
-
+        agregarPeticion(peticion, proyecto.id);
       })
       .catch((info) => {
-
         console.log("Error al validar: ", info);
-
       });
   };
 
@@ -108,15 +108,15 @@ export default function ModalCreatePeticion(props) {
           <Row gutter={16}>
             <Col span={6}>
               <Form.Item
-                  name="idPeticion"
-                  label="Id. Petición"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Debe ingresar el id de la petición!",
-                    },
-                  ]}
-                >
+                name="idPeticion"
+                label="Id. Petición"
+                rules={[
+                  {
+                    required: true,
+                    message: "Debe ingresar el id de la petición!",
+                  },
+                ]}
+              >
                 <Input />
               </Form.Item>
             </Col>
@@ -131,57 +131,85 @@ export default function ModalCreatePeticion(props) {
                   },
                 ]}
               >
-              <Input />
-            </Form.Item>
-            </Col>
-          </Row>
-          
-          <Row gutter={16}>
-            <Col span={8}>
-                <Form.Item name="fecInicio" label="Fecha de inicio" rules={[
-                  {
-                    required: true,
-                    type: "object",
-                    message: 'Selecione una fecha'
-                  },
-                ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} format={dateFormat} />
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item name="fecEntrega" label="Fecha de entrega" rules={[
-                {
-                  required: true,
-                  type: "object",
-                  message: 'Selecione una fecha'
-                },
-              ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} format={dateFormat} />
-              </Form.Item>
-            </Col>            
-            <Col span={8}>
-              <Form.Item name="fecPrevistaEntrega" label="Fecha prevista" rules={[
-                {
-                  required: true,
-                  type: "object",
-                  message: 'Selecione una fecha'
-                },
-              ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} format={dateFormat} />
+                <Input />
               </Form.Item>
             </Col>
           </Row>
 
           <Row gutter={16}>
             <Col span={8}>
-              <Form.Item name="horasEstimadas" label="Horas Estimadas" rules={[
-                {
-                  required: true,
-                  type: "number",
-                  min: 0,
-                  message: 'Ingresar hora'
-                },
-              ]}>
+              <Form.Item
+                name="fecInicio"
+                label="Fecha de inicio"
+                rules={[
+                  {
+                    required: true,
+                    type: "object",
+                    message: "Selecione una fecha",
+                  },
+                ]}
+              >
+                <DatePicker
+                  placeholder="--/--/--"
+                  showToday={false}
+                  format={dateFormat}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="fecEntrega"
+                label="Fecha de entrega"
+                rules={[
+                  {
+                    required: true,
+                    type: "object",
+                    message: "Selecione una fecha",
+                  },
+                ]}
+              >
+                <DatePicker
+                  placeholder="--/--/--"
+                  showToday={false}
+                  format={dateFormat}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                name="fecPrevistaEntrega"
+                label="Fecha prevista"
+                rules={[
+                  {
+                    required: true,
+                    type: "object",
+                    message: "Selecione una fecha",
+                  },
+                ]}
+              >
+                <DatePicker
+                  placeholder="--/--/--"
+                  showToday={false}
+                  format={dateFormat}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item
+                name="horasEstimadas"
+                label="Horas Estimadas"
+                rules={[
+                  {
+                    required: true,
+                    type: "number",
+                    min: 0,
+                    message: "Ingresar hora",
+                  },
+                ]}
+              >
                 <InputNumber className="input-string" />
               </Form.Item>
             </Col>
@@ -189,7 +217,6 @@ export default function ModalCreatePeticion(props) {
               <Form.Item
                 name="sprint"
                 label="Sprint"
-
                 rules={[
                   {
                     required: true,

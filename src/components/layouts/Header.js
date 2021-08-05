@@ -1,53 +1,41 @@
 import React, { useEffect } from "react";
-import {
-  Layout,
-  Popover,
-  Button,
-  Avatar,
-  Badge,
-  Row,
-  Col,
-} from "antd";
+import { Layout, Popover, Button, Avatar, Badge, Row, Col } from "antd";
 import avatarwomen from "../../../public/images/avatar.jpg";
 import { UserOutlined, ExportOutlined } from "@ant-design/icons";
 import Breadcrumbs from "./Breadcrumbs";
 import "./header.css";
-import { deslogearUsuario, verificarLogeoAction } from "../../stateManagement/actions/usuarioAction";
+import {
+  deslogearUsuario,
+  verificarLogeoAction,
+} from "../../stateManagement/actions/usuarioAction";
 import { useSelector, useDispatch } from "react-redux";
 
 const { Header } = Layout;
 
 export default function MainHeader() {
-  
   const dispatch = useDispatch();
 
-  const usuario = useSelector( state => state.usuario.usuario );
+  const usuario = useSelector((state) => state.usuario.usuario);
 
-  const verificarLogeo = usuario => dispatch( verificarLogeoAction( usuario ) );
+  const verificarLogeo = (usuario) => dispatch(verificarLogeoAction(usuario));
 
-  useEffect( ( ) => {
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("IS_AUTHENTICATED");
 
-    const isAuthenticated = localStorage.getItem( "IS_AUTHENTICATED" );
+    if (isAuthenticated && Object.keys(usuario).length === 0) {
+      const usuario = localStorage.getItem("DATA_SESION");
 
-    if ( isAuthenticated && Object.keys(usuario).length === 0 ) {
-
-      const usuario = localStorage.getItem( "DATA_SESION" );
-
-      verificarLogeo( JSON.parse( usuario ) );
-
+      verificarLogeo(JSON.parse(usuario));
     }
-
-  }, [ ]);
+  }, []);
 
   const logoutUsuario = () => dispatch(deslogearUsuario());
 
   const handleLogOut = () => {
-
     localStorage.removeItem("IS_AUTHENTICATED");
     localStorage.removeItem("DATA_SESION");
 
     logoutUsuario();
-
   };
 
   const content = (
@@ -79,7 +67,10 @@ export default function MainHeader() {
         </Col>
         <Col span={1} offset={12}>
           <span>
-            <Popover content={content} title={`${usuario.usuarioCorto}@everis.com`}>
+            <Popover
+              content={content}
+              title={`${usuario.shortUser}@everis.com`}
+            >
               <Badge dot={true}>
                 <Avatar
                   src={avatarwomen}
