@@ -220,15 +220,23 @@ export function eliminarPeticionAction(idPeticion) {
       const usuario = localStorage.getItem("DATA_SESION");
 
       const { shortUser } = JSON.parse(usuario);
+      
 
       const response = await patch(`${uri.deletePeticiones}/${shortUser}/${idPeticion}`);
 
       console.log( response );
 
-      // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
-      message.success("Petición eliminada correctamente!");
 
-      dispatch(eliminarPeticionExito(idPeticion));
+      if ( response.status === 200 ) {
+
+       // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+       message.success("Petición eliminada correctamente!");
+
+       dispatch(eliminarPeticionExito(idPeticion));
+
+    }
+
+     
     } catch (error) {
       message.error("Error al tratar de eliminar esta petición!");
 
