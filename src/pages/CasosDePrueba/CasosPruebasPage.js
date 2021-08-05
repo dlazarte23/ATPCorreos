@@ -17,6 +17,7 @@ export default function CasosPruebasPage( props ) {
   const { Title } = Typography;
 
   const { peticion } = props.location.state;
+  const { subject } = props.location.state;
 
   const dispatch = useDispatch( );
 
@@ -37,7 +38,7 @@ export default function CasosPruebasPage( props ) {
         {/** Column para el titulo y el botón general */}
         <Row>
           <Col span={24}>
-            <HeaderCP peticion={peticion} />
+            <HeaderCP peticion={peticion} subject={subject} />
 
             <div className="contenedor">
               <FormCP peticion={peticion} />

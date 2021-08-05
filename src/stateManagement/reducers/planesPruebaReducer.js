@@ -4,11 +4,15 @@ import {
     OBTENER_PLANES_PRUEBA_ERROR,
     AGREGAR_PLAN_PRUEBA,
     AGREGAR_PLAN_PRUEBA_EXITO,
-    AGREGAR_PLAN_PRUEBA_ERROR
+    AGREGAR_PLAN_PRUEBA_ERROR,
+    EDITAR_PLAN_PRUEBA,
+    EDITAR_PLAN_PRUEBA_EXITO,
+    EDITAR_PLAN_PRUEBA_ERROR
 } from '../types/planesPruebaType';
 
 const initialState = {
     planesPrueba: [],
+    peticion: {},
     loading: false,
     error: null
 }
@@ -18,6 +22,7 @@ export default function ( state = initialState, action ) {
 
         case AGREGAR_PLAN_PRUEBA:
         case OBTENER_PLANES_PRUEBA:
+        case EDITAR_PLAN_PRUEBA:
             return {
                 ...state,
                 loading: true
@@ -27,7 +32,8 @@ export default function ( state = initialState, action ) {
             return {
                 ...state,
                 loading: false,
-                planesPrueba: action.payload
+                planesPrueba: action.payload.testPlanList,
+                peticion: action.payload.spring
             }
 
         case AGREGAR_PLAN_PRUEBA_EXITO:
@@ -37,6 +43,14 @@ export default function ( state = initialState, action ) {
                 planesPrueba: [...state.planesPrueba, action.payload]
             }
 
+        case EDITAR_PLAN_PRUEBA_EXITO:
+            return {
+                ...state,
+                loading: false,
+                planesPrueba: state.planesPrueba.map( planPrueba => planPrueba.id === action.payload.id ? planPrueba = action.payload : planPrueba )
+            }
+
+        case EDITAR_PLAN_PRUEBA_ERROR:
         case AGREGAR_PLAN_PRUEBA_ERROR:
         case OBTENER_PLANES_PRUEBA_ERROR:
             return {

@@ -39,8 +39,12 @@ export function listarProyectoAction ( usuarioCorto ) {
             // consultamos a la endpoint
             const response = await get(` ${uri.getProyectos}/` );
 
+            const { usuarioCorto } = JSON.parse(usuario);
+
+            const response = await get( `${uri.getProyectos}/${usuarioCorto}` );
+            
             // le pasamos todos los proyectos obtenidos
-            dispatch( proyectosDescargadosExito( response.proyectoDTOS ) );
+            dispatch( proyectosDescargadosExito( response ) );
 
         } catch ( error ) {
 
@@ -93,7 +97,7 @@ const seleccionarProyecto = codProyecto => ({
  * Actión para traernos todas las peticiones por el cod de proyecto que exista.
  * @param {*} codProyecto 
  */
-export function obtenerPeticionesAction ( codProyecto ) {
+export function obtenerPeticionesAction ( idProyecto ) {
 
     return async ( dispatch ) => {
 
@@ -101,9 +105,9 @@ export function obtenerPeticionesAction ( codProyecto ) {
 
         try {
 
-            const response = await get(`${uri.getPeticiones}/${codProyecto}`);
+            const response = await get(`${uri.getPeticiones}/${idProyecto}`);
             
-            dispatch( obtenerPeticionExito( response.responseSprints ) );
+            dispatch( obtenerPeticionExito( response.springList ) );
 
         } catch ( error ) {
 
@@ -135,25 +139,22 @@ const obtenerPeticionError = error => ({
  * Actión para poder hacer el registro de las peticiónes
  * @param {*} peticion  => recibe un objeto con la petición que se va a mandar a crear
  */
-export function crearNuevaPeticionAction ( peticion, idProyecto ) {
+export function crearNuevaPeticionAction ( peticion ) {
 
-    return ( dispatch ) => {
+    return async ( dispatch ) => {
 
         dispatch( agregarPeticion( ) );
 
         try {
 
-            post( uri.setPeticion, peticion );
+            const response = await post( uri.setPeticion, peticion );
 
-            dispatch( agregarPeticionExito( ) );
+            if ( response.status === 201 ) {
 
-            message.success("Petición creada correctamente!");
+                message.success("Petición creada correctamente!");
+                dispatch( agregarPeticionExito( response.data ) );
 
-            /**
-             * En esta situación se esta mandao a llamar al action de obtener
-             * peiticiones unicamente por temas de que necesitamos el id de esta petición
-             */
-            dispatch ( obtenerPeticionesAction ( idProyecto ) );
+            }
 
         } catch ( error ) {
 
@@ -172,8 +173,9 @@ const agregarPeticion = ( ) => ({
 });
 
 // si se ah guardado en BBDD correctamente
-const agregarPeticionExito = ( ) => ({
-    type: AGREGAR_PETICION_EXITO
+const agregarPeticionExito = peticion => ({
+    type: AGREGAR_PETICION_EXITO,
+    payload: peticion
 });
 
 // si hubo un error al guardar en la BBDD

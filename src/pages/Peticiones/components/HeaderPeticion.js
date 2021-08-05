@@ -117,8 +117,8 @@ export default function HeaderPeticion(props) {
 
             {
               proyectos.map( item => (
-                <Option key={item.codProyecto} value={item.id}>
-                  {item.nombre}
+                <Option key={item.projectCode} value={item.id}>
+                  {item.name}
                 </Option>
               ))
             }

@@ -4,10 +4,18 @@ import {
     OBTENER_PLANES_PRUEBA_ERROR,
     AGREGAR_PLAN_PRUEBA,
     AGREGAR_PLAN_PRUEBA_EXITO,
-    AGREGAR_PLAN_PRUEBA_ERROR
+    AGREGAR_PLAN_PRUEBA_ERROR,
+    EDITAR_PLAN_PRUEBA,
+    EDITAR_PLAN_PRUEBA_EXITO,
+    EDITAR_PLAN_PRUEBA_ERROR
 } from '../types/planesPruebaType';
 
 import { message } from 'antd';
+
+import { ProyectoBaseUrl as uri } from '../../Api/ApiUrl';
+
+import { get } from '../../utils/confAxios/petitionGet';
+import { post } from '../../utils/confAxios/petitionPost';
 
 /**
  * Action para obtener todos los planes de prueba por el id de la petición
@@ -22,12 +30,11 @@ export function obtenerPlanesDePruebaAction ( idPeticion ) {
         
         try {
             
-            /**
-             * Aqui hacer el llamado al servicio y lo que retorne pasarlo al dispatch
-             * que se encuentra en la linea 22
-             */
-            // Aqui ---------------------------|°|
-            dispatch( obtenerPlanesPruebaExito( [ ] ) );
+            const response = await get(`${uri.getTestPlan}/${idPeticion}`);
+
+            dispatch( obtenerPlanesPruebaExito( response ) );
+
+            return response.spring;
             
         } catch ( error ) {
 
@@ -59,7 +66,7 @@ const obtenerPlanesPruebaError = error => ({
  * @param {*} idPeticion 
  * @returns 
  */
-export function agregarPlanPrueba( idPeticion ) {
+export function agregarPlanPruebaAction( subject ) {
     
     return async ( dispatch ) => {
 
@@ -67,13 +74,14 @@ export function agregarPlanPrueba( idPeticion ) {
         
         try {
             
-            /**
-             * Aqui hacer la llamada a la petición y del response que devuelve dicha petición
-             * pasarsela al dispatch unicamente el objeto nuevo creado, ya que este devuelve 
-             * su id generado por la BBDD
-             */
-            dispatch( agregarPlanesPruebaExito( { } ) );
-            message.success("Plan de prueba registrado correctamente!");   
+            const response = await post(uri.setTestPlan, subject);
+
+            if ( response.status === 201 ) {
+                
+                dispatch( agregarPlanesPruebaExito( response.data ) );
+                message.success("Plan de prueba registrado correctamente!"); 
+
+            }
             
         } catch ( error ) {
             
@@ -97,5 +105,51 @@ const agregarPlanesPruebaExito = subject => ({
 
 const agregarPlanesPruebaError = error => ({
     type: AGREGAR_PLAN_PRUEBA_ERROR,
+    payload: error
+});
+
+/**
+ * Type para la actualización del plan de prueba
+ * @param {*} idPlanPrueb 
+ * @param {*} planPrueba 
+ */
+ export function editarPlanDePruebaAction ( idPlanPrueb, planPrueba ) {
+
+    return ( dispatch ) => {
+        
+        dispatch( editarPlanDePrueba() );
+        
+        try {
+            
+            // llamada al servicio
+            // const response = put(uri +idPlanPrueb, planPrueba);
+            //  if ( response.status == 200 ) { }
+            // response.data
+            
+            dispatch( editarPlanDePruebaExito( planPrueba ) );
+            
+            
+        } catch ( error ) {
+            
+            message.error("Error al actualizar tu plan de prueba!");
+            dispatch( editarPlanDePruebaError( error ) );
+
+        }
+
+    } 
+    
+}
+
+const editarPlanDePrueba = () => ({
+    type: EDITAR_PLAN_PRUEBA
+});
+
+const editarPlanDePruebaExito = planPrueba => ({
+    type: EDITAR_PLAN_PRUEBA_EXITO,
+    payload: planPrueba
+});
+
+const editarPlanDePruebaError = error => ({
+    type: EDITAR_PLAN_PRUEBA_ERROR,
     payload: error
 });

@@ -50,17 +50,16 @@ export default function ModalCreatePeticion(props) {
         }, 2000);
 
         const peticion = {
-
-          codOt: values.codOt,
-          codPeticion: values.idPeticion,
-          codProyecto: proyecto.codProyecto,
-          fecEntrega: values.fecEntrega._d,
-          fecInicio: values.fecInicio._d,
-          fecPrevistaEntrega: values.fecPrevistaEntrega._d,
-          horasEstimadas: values.horasEstimadas,
-          numero: values.sprint,
-          usuarioCorto: usuario
-          
+          estimatedHours: values.horasEstimadas,
+          expectedFinishDate: values.fecPrevistaEntrega._d,
+          finishDate: values.fecEntrega._d,
+          number: values.sprint,
+          otCode: values.codOt,
+          petitionCode: values.idPeticion,
+          petitionName: values.nomPeticion,
+          project: proyecto.id,
+          startDate: values.fecInicio._d,
+          user: usuario
         };
 
         // creamos la nueva peticion

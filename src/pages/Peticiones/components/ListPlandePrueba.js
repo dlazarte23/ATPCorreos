@@ -1,23 +1,24 @@
 import { List } from 'antd';
+import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-const ListPlandePrueba = (props) => {
+const ListPlandePrueba = ({subjects}) => {
 
-  const plandeprueba = props.peticion.responseTests;
+  const peticion = useSelector( state => state.planesPrueba.peticion );
 
   return (
 
     <List
       style={{marginTop: 20}}
       itemLayout="horizontal"
-      dataSource={plandeprueba}
+      dataSource={subjects}
       renderItem={item => (
         <List.Item>
 
           <Link to={{
             pathname: "/peticiones/creacion-de-casos-de-prueba",
-            state: { peticion: props.peticion }
+            state: { peticion, subject: item }
           }}>           
               
             {item.subject} 
