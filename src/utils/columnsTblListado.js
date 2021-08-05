@@ -13,18 +13,18 @@ const handleDelete = (key) => {
 export const columns = [
   {
     title: "#",
-    dataIndex: "requestCode",
+    dataIndex: "testId",
     key: "id",
   },
   {
     title: "Nombre",
     dataIndex: "testName",
     key: "nombre",
-    with: "200"
+    with: "200",
   },
   {
     title: "Descripción",
-    dataIndex: "descripcion",
+    dataIndex: "testDescription",
     key: "descripcion",
   },
   {
@@ -47,16 +47,17 @@ export const columns = [
 
         <Link
           to={{
-            pathname: '/peticiones/creacion-de-casos-de-prueba/detalle', state: {
-              detalle: record.responseTestSteps
-            }
+            pathname: "/peticiones/creacion-de-casos-de-prueba/detalle",
+            state: {
+              detalle: record.responseTestSteps,
+            },
           }}
           className="btn-yellow-link"
-        >  <SettingOutlined /> </Link>
-
+        >
+          {" "}
+          <SettingOutlined />{" "}
+        </Link>
       </Space>
     ),
   },
 ];
-
-
