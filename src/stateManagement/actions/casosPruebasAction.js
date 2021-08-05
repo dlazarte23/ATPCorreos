@@ -32,6 +32,7 @@ export function listarCasosDePruebaAction ( idPeticion ) {
         try {
 
             const response = await get(`${uri.getCasosDePrueba}/${idPeticion}`);
+            //console.log("listarCasosDePruebaAction", response)
             
             dispatch( listarCasosPruebaExito ( response ) );
 
