@@ -19,39 +19,38 @@ import {
 
 import { message } from "antd";
 
-import { ProyectoBaseUrl as uri  } from '../../Api/ApiUrl';
+import { ProyectoBaseUrl as uri } from '../../Api/ApiUrl';
 
 import { get } from '../../utils/confAxios/petitionGet';
 import { post } from '../../utils/confAxios/petitionPost';
 
 /**
- * Actión para obtener la lista de proyectos
+ * Actión para obtener la lista de proyectos
  */
-export function listarProyectoAction ( usuarioCorto ) {
+export function listarProyectoAction() {
 
-    return async ( dispatch ) => {
+    return async (dispatch) => {
 
-        // Avisamos que se esta iniciando la descarga de proyectos
-        dispatch( comenzarDecargarProyectos( ) );
+        // Avisamos que se esta iniciando la descarga de proyectos
+        dispatch(comenzarDecargarProyectos());
 
         try {
 
-            // consultamos a la endpoint
-            const response = await get(` ${uri.getProyectos}/` );
+            const usuario = localStorage.getItem("DATA_SESION");
 
             const { usuarioCorto } = JSON.parse(usuario);
 
-            const response = await get( `${uri.getProyectos}/${usuarioCorto}` );
-            
-            // le pasamos todos los proyectos obtenidos
-            dispatch( proyectosDescargadosExito( response ) );
+            const response = await get(`${uri.getProyectos}​/${usuarioCorto}​`);
 
-        } catch ( error ) {
+            // le pasamos todos los proyectos obtenidos
+            dispatch(proyectosDescargadosExito(response));
 
-            // si ocurrió un error se manda a registrar el error
-            dispatch( proyectosDescargadosError( error ) );
+        } catch (error) {
 
-            message.error("Error al obtener los proyectos!");
+            // si ocurrió un error se manda a registrar el error
+            dispatch(proyectosDescargadosError(error));
+
+            message.error("Error al obtener los proyectos!");
 
         }
 
@@ -59,7 +58,7 @@ export function listarProyectoAction ( usuarioCorto ) {
 
 }
 
-const comenzarDecargarProyectos = ( ) => ({
+const comenzarDecargarProyectos = () => ({
     type: LISTAR_PROYECTOS
 });
 
@@ -74,15 +73,15 @@ const proyectosDescargadosError = error => ({
 });
 
 /**
- * Actión para seleccionar el proyecto y almacenarlo de manera global
- * para identificar en base a que proyecto se esta trabajando todas las operaciones
- * @param {*} codProyecto 
+ * Actión para seleccionar el proyecto y almacenarlo de manera global
+ * para identificar en base a que proyecto se esta trabajando todas las operaciones
+ * @param {​*}​ codProyecto 
  */
-export function seleccionarProyectoAction ( codProyecto ) {
-    
-    return ( dispatch ) => {
+export function seleccionarProyectoAction(codProyecto) {
 
-        dispatch( seleccionarProyecto( codProyecto ) );
+    return (dispatch) => {
+
+        dispatch(seleccionarProyecto(codProyecto));
 
     }
 
@@ -94,26 +93,26 @@ const seleccionarProyecto = codProyecto => ({
 });
 
 /**
- * Actión para traernos todas las peticiones por el cod de proyecto que exista.
- * @param {*} codProyecto 
+ * Actión para traernos todas las peticiones por el cod de proyecto que exista.
+ * @param {​*}​ codProyecto 
  */
-export function obtenerPeticionesAction ( idProyecto ) {
+export function obtenerPeticionesAction(idProyecto) {
 
-    return async ( dispatch ) => {
+    return async (dispatch) => {
 
-        dispatch( obtenerPeticion( ) );
+        dispatch(obtenerPeticion());
 
         try {
 
-            const response = await get(`${uri.getPeticiones}/${idProyecto}`);
-            
-            dispatch( obtenerPeticionExito( response.springList ) );
+            const response = await get(`${uri.getPeticiones}​/${idProyecto}​`);
 
-        } catch ( error ) {
+            dispatch(obtenerPeticionExito(response.springList));
 
-            message.error("Error al obtener las peticiones!");
+        } catch (error) {
 
-            dispatch( obtenerPeticionError( error ) );
+            message.error("Error al obtener las peticiones!");
+
+            dispatch(obtenerPeticionError(error));
 
         }
 
@@ -136,80 +135,80 @@ const obtenerPeticionError = error => ({
 });
 
 /**
- * Actión para poder hacer el registro de las peticiónes
- * @param {*} peticion  => recibe un objeto con la petición que se va a mandar a crear
+ * Actión para poder hacer el registro de las peticiónes
+ * @param {​*}​ peticion  => recibe un objeto con la petición que se va a mandar a crear
  */
-export function crearNuevaPeticionAction ( peticion ) {
+export function crearNuevaPeticionAction(peticion) {
 
-    return async ( dispatch ) => {
+    return async (dispatch) => {
 
-        dispatch( agregarPeticion( ) );
+        dispatch(agregarPeticion());
 
         try {
 
-            const response = await post( uri.setPeticion, peticion );
+            const response = await post(uri.setPeticion, peticion);
 
-            if ( response.status === 201 ) {
+            if (response.status === 201) {
 
-                message.success("Petición creada correctamente!");
-                dispatch( agregarPeticionExito( response.data ) );
+                message.success("Petición creada correctamente!");
+                dispatch(agregarPeticionExito(response.data));
 
             }
 
-        } catch ( error ) {
+        } catch (error) {
 
-            message.error("Error al crear la petición!");
+            message.error("Error al crear la petición!");
 
-            dispatch( agregarPeticionError( error ) );
+            dispatch(agregarPeticionError(error));
 
         }
     }
 
 }
 
-// avisamos que esta empezando el proceso para guardar la peticion
-const agregarPeticion = ( ) => ({
+// avisamos que esta empezando el proceso para guardar la peticion
+const agregarPeticion = () => ({
     type: AGREGAR_PETICION,
 });
 
-// si se ah guardado en BBDD correctamente
+// si se ah guardado en BBDD correctamente
 const agregarPeticionExito = peticion => ({
     type: AGREGAR_PETICION_EXITO,
     payload: peticion
 });
 
-// si hubo un error al guardar en la BBDD
+// si hubo un error al guardar en la BBDD
 const agregarPeticionError = error => ({
     type: AGREGAR_PETICION_ERROR,
     payload: error
 });
 
 /**
- * Action para la edición de la peticion
- * @param {*} peticion 
+ * Action para la edición de la peticion
+ * @param {​*}​ peticion 
  */
-export function editarPeticionAction( peticion ) {
+export function editarPeticionAction(peticion) {
 
-    return( dispatch ) => {
+    return (dispatch) => {
 
-        dispatch( editarPeticion( ) );
-        
+        dispatch(editarPeticion());
+
         try {
 
             /**
-             * Aqui se debe hacer la petición a la API
-             * si esta API devuelve como respuesta un 200 o la petición modificada
-             * pasarsela a la función del dispatch, dentro del if
-             */            
-            message.success("Petición modificada correctamente!");
+             * Aqui se debe hacer la petición a la API
+             * si esta API devuelve como respuesta un 200 o la petición modificada
+             * pasarsela a la función del dispatch, dentro del if
+             */
+            message.success("Petición modificada correctamente!");
 
-            dispatch( editarPeticionExito( peticion ) );
-            
-        } catch ( error ) {
+            dispatch(editarPeticionExito(peticion));
 
-            dispatch( editarPeticionError( ) );
-            
-            message.error("Error al trata de editar la petición!");
+        } catch (error) {
+
+            dispatch(editarPeticionError());
+
+            message.error("Error al trata de editar la petición!");
 
         }
 
@@ -217,7 +216,7 @@ export function editarPeticionAction( peticion ) {
 
 }
 
-const editarPeticion = ( ) => ({
+const editarPeticion = () => ({
     type: EDITAR_PETICION
 });
 const editarPeticionExito = peticion => ({
@@ -230,29 +229,29 @@ const editarPeticionError = error => ({
 });
 
 /**
- * Action para la eliminación de la petición
- * @param {*} idPeticion 
+ * Action para la eliminación de la petición
+ * @param {​*}​ idPeticion 
  */
-export function eliminarPeticionAction( idPeticion ) {
+export function eliminarPeticionAction(idPeticion) {
 
-    return( dispatch ) => {
+    return (dispatch) => {
 
-        dispatch ( eliminarPeticion( ) );
+        dispatch(eliminarPeticion());
 
         try {
 
-            // aqui se debe hacer la consulta a la API
+            // aqui se debe hacer la consulta a la API
 
-            // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
-            message.success("Petición eliminada correctamente!");
+            // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+            message.success("Petición eliminada correctamente!");
 
-            dispatch( eliminarPeticionExito( idPeticion ) );
+            dispatch(eliminarPeticionExito(idPeticion));
 
-        } catch ( error ) {
+        } catch (error) {
 
-            message.error("Error al tratar de eliminar esta petición!");
+            message.error("Error al tratar de eliminar esta petición!");
 
-            dispatch( eliminarPeticionError( error ) );
+            dispatch(eliminarPeticionError(error));
 
         }
 
