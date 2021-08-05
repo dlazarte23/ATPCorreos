@@ -5,6 +5,9 @@ import {
   LISTAR_CASOS_PRUEBA,
   LISTAR_CASOS_PRUEBA_EXITO,
   LISTAR_CASOS_PRUEBA_ERROR,
+  ELIMINAR_CASOS_PRUEBA,
+  ELIMINAR_CASOS_PRUEBA_EXITO,
+  ELIMINAR_CASOS_PRUEBA_ERROR,
   DESCARGAR_DOCUMENTO,
   DESCARGAR_DOCUMENTO_EXITO,
   DESCARGAR_DOCUMENTO_ERROR,
@@ -16,6 +19,7 @@ import { ProyectoBaseUrl as uri } from "../../Api/ApiUrl";
 
 import { post } from "../../utils/confAxios/petitionPost";
 import { get, getEnriched } from "../../utils/confAxios/petitionGet";
+import { patch } from "../../utils/confAxios/petitionPatch";
 
 import FileSaver from "file-saver";
 
@@ -89,6 +93,45 @@ const registrarCasosPruebaExito = (casoDePrueba) => ({
 
 const registrarCasosPruebaError = (error) => ({
   type: AGREGAR_CASOS_PRUEBA_ERROR,
+  payload: error,
+});
+
+/**
+ * Action para la eliminación del caso de prueba
+ * @param {*} shortUsername
+ * @param {*} idTestCase
+ */
+export function eliminarCasosPruebaAction(shortUsername, idTestCase) {
+  return async (dispatch) => {
+    dispatch(eliminarCasosPrueba());
+
+    try {
+      const response = await patch(
+        `${uri.setCasoDePrueba}/${shortUsername}/${idTestCase}`
+      );
+
+      if (response.status === 200) {
+        dispatch(eliminarCasosPruebaExito(idTestCase));
+      }
+    } catch (error) {
+      message.error("Error al tratar de eliminar este Caso de Prueba!");
+
+      dispatch(eliminarCasosPruebaError(error));
+    }
+  };
+}
+
+const eliminarCasosPrueba = () => ({
+  type: ELIMINAR_CASOS_PRUEBA,
+});
+
+const eliminarCasosPruebaExito = (idTestCase) => ({
+  type: ELIMINAR_CASOS_PRUEBA_EXITO,
+  payload: idTestCase,
+});
+
+const eliminarCasosPruebaError = (error) => ({
+  type: ELIMINAR_CASOS_PRUEBA_ERROR,
   payload: error,
 });
 

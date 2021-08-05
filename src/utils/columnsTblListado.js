@@ -2,10 +2,11 @@ import { Space } from "antd";
 import { Link } from "react-router-dom";
 import { DeleteOutlined, SettingOutlined } from "@ant-design/icons";
 import { Popconfirm } from "antd";
+
 import ModalEditListado from "../pages/CasosDePrueba/components/ModalEditListado";
 
-const handleDelete = (key) => {
-  console.log("eliminar", key);
+const handleDelete = (testId) => {
+  console.log("eliminar", testId);
   // const dataSource = [...this.state.dataSource];
   // this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
 };
@@ -35,7 +36,7 @@ export const columns = [
         <ModalEditListado record={record} />
         <Popconfirm
           title="¿Está seguro de eliminar?"
-          onConfirm={() => handleDelete(record.key)}
+          onConfirm={() => handleDelete(record.testId)}
           okText="Confirmar"
           cancelText="Cancelar"
         >
