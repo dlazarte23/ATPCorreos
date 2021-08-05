@@ -30,6 +30,7 @@ export default function CasosPruebasPage(props) {
   }, []);
 
   const loading = useSelector((state) => state.casosPruebas.loading);
+  const usuario = useSelector((state) => state.usuario.usuario);
 
   return (
     <Spin spinning={loading} tip="Cargando..." size="large">
@@ -46,7 +47,7 @@ export default function CasosPruebasPage(props) {
             <Row className="table-detalleCp">
               <Col span={22} offset={1}>
                 <Title level={4}>Listado de Casos de Prueba</Title>
-                <TableListadoCP />
+                <TableListadoCP usuario={usuario} />
               </Col>
             </Row>
           </Col>
