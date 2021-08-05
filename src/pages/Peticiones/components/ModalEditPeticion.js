@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { Modal, Input, InputNumber, Form, Row, Col, Button, DatePicker, TimePicker } from "antd";
+import { Modal, Input, InputNumber, Form, Row, Col, Button, DatePicker, Tooltip } from "antd";
 import { useDispatch, useSelector } from 'react-redux';
 
+import {  EditOutlined} from "@ant-design/icons";
 // actions de redux
 import { editarPeticionAction } from '../../../stateManagement/actions/peticionesAction';
 import moment from 'moment';
 export default function ModalEditPeticion(props) {
 
-  const { showModal, setShowModal, dataPeticion, } = props;
+  const { dataPeticion, } = props;
 
-  const {nombre, numero, fecEntrega, fecInicio, fecPrevistaEntrega, horasEstimadas, codPeticion } = dataPeticion;
+  const { petitionName, petitionCode, number, finishDate, startDate, expectedFinishDate, estimatedHours, otCode } = dataPeticion;
 
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();
 
-  const handleCancel = () => {
-    setShowModal({ ...showModal, create: false });
-  };
+  
 
   const onFinish = () => {
     console.log("on finsh")
@@ -58,12 +57,38 @@ export default function ModalEditPeticion(props) {
 
 
   };
+  const [showModal, setShowModal] = useState(false)
+
+  const openModal = () => {
+    setShowModal(true)
+    form.setFieldsValue({
+      startDate: moment(startDate, 'YYYY-MM-DD'),
+      finishDate: moment(finishDate, 'YYYY-MM-DD'),
+      expectedFinishDate: moment(expectedFinishDate, 'YYYY-MM-DD'),
+      idPeticion: petitionCode,
+      nomPeticion: petitionName,
+      estimatedHours: estimatedHours,
+      sprint: number,
+      codOt: otCode,
+    });
+  }
+  const handleCancel = () => {
+    setShowModal(false)
+  }
 
   return (
     <>
+      <Tooltip placement="left" title="Editar Petición">
+        <Button
+          icon={<EditOutlined />}
+          shape="round"
+          type="dashed"
+          onClick={() => openModal()}
+        />
+      </Tooltip>
       <Modal
-        title={"Editar " + nombre}
-        visible={showModal.create}
+        title={"Editar " + petitionName}
+        visible={showModal}
         onCancel={handleCancel}
         confirmLoading={confirmLoading}
         destroyOnClose={true}
@@ -73,7 +98,7 @@ export default function ModalEditPeticion(props) {
             Cancelar
           </Button>,
           <Button key="submit" type="primary" loading={loading} onClick={handleOk}>
-           Guardar
+            Guardar
           </Button>,
         ]}>
         <Form
@@ -83,66 +108,86 @@ export default function ModalEditPeticion(props) {
           onFinish={onFinish}
           size="default"
           centered="true"
-          hideRequiredMark>
-              <Form.Item
-            name="nomPeticion"
-            label="Nombre Petición"
-            rules={[
-              {
-                required: true,
-                message: "Debe ingresar el nombre de la petición !",
-              },
-            ]}
-          >
-            <Input defaultValue={nombre}/>
-          </Form.Item>
+          hideRequiredMark
+        >
           <Row gutter={16}>
-            <Col span={8}>
-              <Form.Item name="fecEntrega" label="Fecha de Entrega" rules={[
-                {
-                  required: true,
-                  type: "object",
-                  message: 'Selecione una fecha'
-                },
-              ]}>
-
-                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecEntrega, 'DD/MM/YYYY')}/>
+            <Col span={6}>
+              <Form.Item
+                name="idPeticion"
+                label="Id. Petición"
+                rules={[
+                  {
+                    required: true,
+                    message: "Debe ingresar el id de la petición!",
+                  },
+                ]}
+              >
+                <Input />
               </Form.Item>
             </Col>
-            <Col span={8}>
-              <Form.Item name="fecInicio" label="Fecha de inicio" rules={[
-                {
-                  required: true,
-                  type: "object",
-                  message: 'Selecione una fecha'
-                },
-              ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecInicio, 'DD/MM/YYYY')}/>
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item name="fecPrevistaEntrega" label="Fecha prevista" rules={[
-                {
-                  required: true,
-                  type: "object",
-                  message: 'Selecione una fecha'
-                },
-              ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} defaultValue={moment(fecPrevistaEntrega, 'DD/MM/YYYY')}/>
+            <Col span={18}>
+              <Form.Item
+                name="nomPeticion"
+                label="Nombre Petición"
+                rules={[
+                  {
+                    required: true,
+                    message: "Debe ingresar el nombre de la petición !",
+                  },
+                ]}
+              >
+                <Input />
               </Form.Item>
             </Col>
           </Row>
 
           <Row gutter={16}>
             <Col span={8}>
-              <Form.Item name="horasEstimadas" label="Horas Estimadas" rules={[
+              <Form.Item name="startDate" label="Fecha de inicio" rules={[
                 {
                   required: true,
                   type: "object",
+                  message: 'Selecione una fecha'
+                },
+              ]}>
+                <DatePicker placeholder="--/--/--" showToday={false} />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="finishDate" label="Fecha de entrega" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Selecione una fecha'
+                },
+              ]}>
+                <DatePicker placeholder="--/--/--" showToday={false} />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item name="expectedFinishDate" label="Fecha prevista" rules={[
+                {
+                  required: true,
+                  type: "object",
+                  message: 'Selecione una fecha'
+                },
+              ]}>
+                <DatePicker placeholder="--/--/--" showToday={false} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item name="estimatedHours" label="Horas Estimadas" rules={[
+                {
+                  required: true,
+                  type: "number",
+                  min: 0,
                   message: 'Ingresar hora'
                 },
               ]}>
-                <TimePicker placeholder="--:--" showNow={false} className="input-string" defaultValue={moment(horasEstimadas, 'HH:mm:ss')}/>
+                <InputNumber className="input-string" />
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -160,25 +205,24 @@ export default function ModalEditPeticion(props) {
                   },
                 ]}
               >
-                <InputNumber className="input-string" defaultValue={numero}/>
+                <InputNumber className="input-string" />
               </Form.Item>
             </Col>
             <Col span={8}>
               <Form.Item
-                name="idPeticion"
-                label="Id. Petición"
+                name="codOt"
+                label="Cod. Ot"
                 rules={[
                   {
                     required: true,
-                    message: "Debe ingresar el id de la petición !",
+                    message: "Debe ingresar el codigo de la Ot!",
                   },
                 ]}
               >
-                <Input defaultValue={codPeticion}/>
+                <Input />
               </Form.Item>
             </Col>
           </Row>
-       
         </Form>
       </Modal>
     </>

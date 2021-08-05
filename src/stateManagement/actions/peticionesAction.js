@@ -201,7 +201,7 @@ export function editarPeticionAction( peticion ) {
              * si esta API devuelve como respuesta un 200 o la petición modificada
              * pasarsela a la función del dispatch, dentro del if
              */      
-            const response = await patch(uri.editCasosDePrueba, peticion);     
+            const response = await patch(uri.editPeticiones, peticion);     
             
             if ( response.status === 201 ) {
 

@@ -6,9 +6,6 @@ import logo from "../../../public/images/logo_correos.png";
 //import css
 import "./siderMenu.css";
 import {
-  UploadOutlined,
-  UserOutlined,
-  ProfileOutlined,
   ReconciliationOutlined,
 } from "@ant-design/icons";
 

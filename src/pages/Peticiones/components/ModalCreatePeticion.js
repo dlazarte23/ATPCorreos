@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Modal, Input, InputNumber, Form, Row, Col, Button, DatePicker, TimePicker } from "antd";
+import { Modal, Input, InputNumber, Form, Row, Col, Button, DatePicker } from "antd";
 
 import { useDispatch, useSelector } from "react-redux";
 import { SaveOutlined } from "@ant-design/icons";

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 
-import { Card, Typography, Descriptions, Button, Space, Tooltip, Popconfirm, Input } from "antd";
+import { Card, Typography, Descriptions, Button, Space, Tooltip, Popconfirm } from "antd";
 
 import {
   ExceptionOutlined,
-  EditOutlined,
   DeleteOutlined,
-  PlusOutlined,
   UnorderedListOutlined
 } from "@ant-design/icons";
 
@@ -27,10 +25,7 @@ const InfoPeticion = (props) => {
 
   const { Title } = Typography;
 
-  const [showModal, setShowModal] = useState({
-    detail: false,
-    create: false,
-  });
+ 
 
   // variables unicamente para abrir el 2 drawer del listado de planes de prueba
   const [showPP, setShowPP] = useState(false);
@@ -92,19 +87,9 @@ const InfoPeticion = (props) => {
             <Space>
 
               <ModalEditPeticion
-                showModal={showModal}
-                setShowModal={setShowModal}
                 dataPeticion={dataPeticion}
               />
-              <Tooltip placement="left" title="Editar Petición">
-                <Button
-                  icon={<EditOutlined />}
-                  shape="round"
-                  type="dashed"
-                  onClick={() => setShowModal({ ...showModal, create: true })}
-                />
-              </Tooltip>
-
+            
               <Popconfirm
                 title="¿Está seguro de eliminar?"
                 onConfirm={() => confirmDeletePeticion(dataPeticion.id)}
