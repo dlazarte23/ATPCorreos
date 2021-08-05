@@ -25,7 +25,7 @@ export default function CasosPruebasPage( props ) {
 
   useEffect( () => {
 
-    obtenerCasosDePrueba( peticion.id );
+    obtenerCasosDePrueba( subject.id );
 
     // eslint-disable-next-line
   }, [ ]);
