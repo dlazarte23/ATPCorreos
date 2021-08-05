@@ -136,7 +136,7 @@ export function descargarDocumento ( idPeticion, tipoDocumento ) {
                 
             } else if ( tipoDocumento === 'excel' ) {
 
-                const response = await getEnriched(`${uri.getDocumentoExcel}?sprint=${idPeticion}`, { responseType : 'blob' });
+                const response = await getEnriched(`${uri.getDocumentoExcel}?id=${idPeticion}`, { responseType : 'blob' });
 
                 FileSaver.saveAs( new Blob( [ response.data ] ), nombreArchivo );
 

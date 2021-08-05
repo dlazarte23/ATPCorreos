@@ -23,6 +23,7 @@ import { ProyectoBaseUrl as uri  } from '../../Api/ApiUrl';
 
 import { get } from '../../utils/confAxios/petitionGet';
 import { post } from '../../utils/confAxios/petitionPost';
+import { patch } from '../../utils/confAxios/petitionPatch';
 
 /**
  * Actión para obtener la lista de proyectos
@@ -189,7 +190,7 @@ const agregarPeticionError = error => ({
  */
 export function editarPeticionAction( peticion ) {
 
-    return( dispatch ) => {
+    return async ( dispatch ) => {
 
         dispatch( editarPeticion( ) );
         
@@ -199,11 +200,17 @@ export function editarPeticionAction( peticion ) {
              * Aqui se debe hacer la petición a la API
              * si esta API devuelve como respuesta un 200 o la petición modificada
              * pasarsela a la función del dispatch, dentro del if
-             */            
-            message.success("Petición modificada correctamente!");
-
-            dispatch( editarPeticionExito( peticion ) );
+             */      
+            const response = await patch(uri.editCasosDePrueba, peticion);     
             
+            if ( response.status === 201 ) {
+
+                message.success("Petición modificada correctamente!");
+
+                dispatch( editarPeticionExito( peticion ) );
+
+            }
+
         } catch ( error ) {
 
             dispatch( editarPeticionError( ) );

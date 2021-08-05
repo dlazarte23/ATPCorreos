@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const ListPlandePrueba = ({subjects}) => {
 
   const peticion = useSelector( state => state.planesPrueba.peticion );
+ 
 
   return (
 

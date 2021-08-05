@@ -37,6 +37,7 @@ const extraContent = (
 
 const HeaderCP = ({ peticion, subject }) => {
 
+
     const dispatch = useDispatch();
 
     const { Title, Paragraph } = Typography;    
@@ -99,7 +100,7 @@ const HeaderCP = ({ peticion, subject }) => {
                     className="btnExcel"
                     onClick={( ) => descargaDocumento(peticion.id, 'excel') }
                 >
-                    Excel
+                    Excel 
                 </Button>,
             ]}
         >
