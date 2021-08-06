@@ -166,19 +166,19 @@ const editarPlanDePruebaError = error => ({
  
      return async (dispatch) => {
         console.log("servicio", id)
-     }
     //   dispatch(eliminarPlandePrueba());
   
-    //   try {
-    //     // aqui se debe hacer la consulta a la API
+       try {
+         // aqui se debe hacer la consulta a la API
   
-    //     const usuario = localStorage.getItem("DATA_SESION");
+        const usuario = localStorage.getItem("DATA_SESION");
   
-    //     const { shortUser } = JSON.parse(usuario);
+     const { shortUser } = JSON.parse(usuario);
   
-    //     const response = await patch(
-    //       `${uri.deletePeticiones}/${shortUser}/${id}`
-    //     );
+        const response = await patch(
+          `${uri.deleteTestPlan}/${shortUser}/${id}`
+        );
+    console.log(response)
   
     //     if (response.status === 200) {
     //       // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
@@ -186,13 +186,14 @@ const editarPlanDePruebaError = error => ({
   
     //       dispatch(eliminarPeticionExito(id));
     //     }
-    //   } catch (error) {
-    //     message.error("Error al tratar de eliminar esta petición!");
+    } catch (error) {
+     message.error("Error al tratar de eliminar esta petición!");
   
     //     dispatch(eliminarPeticionError(error));
-    //   }
+      }
     // };
   }
+}
   
 //   const eliminarPlandePrueba = () => ({
 //     type: ELIMINAR_PETICION,

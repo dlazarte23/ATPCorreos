@@ -35,7 +35,7 @@ const ListPlandePrueba = ({subjects}) => {
           </Link>
               <Popconfirm
                 title="¿Está seguro de eliminar?"
-                 onConfirm={() => eliminarPlandePrueba(item)}
+                 onConfirm={() => eliminarPlandePrueba(item.id)}
                 okText="Confirmar"
                 cancelText="Cancelar"
               >
