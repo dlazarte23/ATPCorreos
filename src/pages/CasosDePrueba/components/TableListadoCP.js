@@ -18,7 +18,7 @@ const paginationProps = {
   defaultCurrent: 1,
 };
 
-const TableListadoCP = ({ usuario, loading, subject }) => {
+const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
   const dispatch = useDispatch();
 
   const casosDePruebas = useSelector(
@@ -73,6 +73,8 @@ const TableListadoCP = ({ usuario, loading, subject }) => {
               pathname: "/peticiones/creacion-de-casos-de-prueba/detalle",
               state: {
                 detalle: record,
+                peticion: peticion,
+                subject: subject
                 /* testDescription: record.testDescription,
                 testId: record.testDescription,
                 testName: record.testDescription, */

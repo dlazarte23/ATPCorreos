@@ -45,9 +45,7 @@ const extraContent = (
 
 export default function DetalleCPPage(props) {
   const { Title, Paragraph } = Typography;
-  const { detalle } = props.location.state;
-
-  //console.log(detalle);
+  const { detalle, peticion, subject } = props.location.state;
 
   const loading = useSelector((state) => state.detalleCasoPrueba.loading);
 
@@ -81,28 +79,22 @@ export default function DetalleCPPage(props) {
           className="case-header"
           title={
             <Title level={5} className="description-info">
-              CP - 001 Crear Nueva Ventana Configuración.
+              {detalle.testName}
             </Title>
           }
         >
           <Paragraph className="description-info">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a. Lorem Ipsum is simply dummy
-            text of the printing and typesetting industry.
-          </Paragraph>
-          <Paragraph className="description-info">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a. Lorem Ipsum is simply dummy
-            text of the printing and typesetting industry.
+            {detalle.testDescription}
           </Paragraph>
           <Descriptions size="small" column={3} className="description-info">
-            <Descriptions.Item label="Id. Petición">
-              {Math.floor(Math.random() * 10000000)}
+            <Descriptions.Item label="Id. petición">
+              {subject.subject}
             </Descriptions.Item>
-            <Descriptions.Item label="Nombre Petición">
-              <p>Configuración Footer Email</p>
+            <Descriptions.Item label="Id. petición">
+              {peticion.petitionCode}
+            </Descriptions.Item>
+            <Descriptions.Item label="Nombre petición">
+              <p>{peticion.petitionName}</p>
             </Descriptions.Item>
           </Descriptions>
         </PageHeader>
@@ -117,7 +109,7 @@ export default function DetalleCPPage(props) {
         <Row>
           <Col span={24}>
             <PageHeader
-              title="Detalle del Caso De Prueba"
+              title="Detalle del caso de prueba"
               onBack={() => window.history.back()}
               backIcon={<LeftOutlined />}
             >

@@ -48,6 +48,7 @@ export default function CasosPruebasPage(props) {
               <Col span={22} offset={1}>
                 <Title level={4}>Listado de casos de prueba</Title>
                 <TableListadoCP
+                  peticion={peticion}
                   usuario={usuario}
                   loading={loading}
                   subject={subject}

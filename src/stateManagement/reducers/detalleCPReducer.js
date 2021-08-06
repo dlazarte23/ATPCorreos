@@ -31,28 +31,31 @@ export default function (state = initialState, action) {
       };
 
     case DESCARGAR_STEP_EXITO:
+      return {
+        ...state,
+        loading: false,
+        detallesCasoPrueba: action.payload
+      };
+
     case ACTUALIZAR_STEP_EXITO:
       return {
         ...state,
         loading: false,
-        detallesCasoPrueba: action.payload,
-      };
+        detallesCasoPrueba: state.detallesCasoPrueba.map( step => step.stepId === action.payload.stepId ? step = action.payload : step )
+      }
 
     case GUARDAR_STEP_EXITO:
       return {
         ...state,
         loading: false,
-        detallesCasoPrueba: [
-          ...state.detalleCasoPrueba.detallesCasoPrueba,
-          action.payload,
-        ],
+        detallesCasoPrueba: [ ...state.detallesCasoPrueba, action.payload ]
       };
 
     case ELIMINAR_STEP_EXITO:
       return {
         ...state,
         loading: false,
-        detallesCasoPrueba: state.detalleCasoPrueba.detallesCasoPrueba.filter(
+        detallesCasoPrueba: state.detallesCasoPrueba.filter(
           (step) => step.stepId !== action.payload
         ),
       };

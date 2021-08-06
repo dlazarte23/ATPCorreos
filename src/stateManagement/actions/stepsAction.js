@@ -155,7 +155,7 @@ export function eliminarStepAction(idStep) {
         dispatch(eliminarStepExito(idStep));
       }
     } catch (error) {
-      message.error("Error al tratar de eliminar el Paso!");
+      message.error("Error al tratar de eliminar el paso!");
 
       dispatch(eliminarStepError(error));
     }
