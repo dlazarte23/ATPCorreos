@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../detalle-style.css";
-import { Upload, message } from "antd";
+import { Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 
 const { Dragger } = Upload;

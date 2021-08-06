@@ -53,10 +53,10 @@ export default function DetalleCPPage(props) {
     // ah este metodo pasarle el id del caso de uso, que por ahora no se puede ya que viene en null
     obtenerDetalleCP(2);
 
-  }, [ ]);
+  }, []);
 
   // aqui ya tendriamos lo que seria la lista de casos de prueba
-  const stepss = useSelector( state => state.detalleCasoPrueba.detallesCasoPrueba );
+  // const stepss = useSelector( state => state.detalleCasoPrueba.detallesCasoPrueba );
 
   const renderContent = () => (
     <div className="card-information">
