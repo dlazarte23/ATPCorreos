@@ -40,8 +40,8 @@ export default function Peticionespage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const results = peticiones.filter((peticion) =>
-      peticion.codPeticion.includes(searchTerm.toLowerCase())
+    const results = peticiones.filter( peticion =>
+      peticion.petitionCode.includes(searchTerm.toLowerCase())
     );
     setFilteredData(results);
   }, [searchTerm]);
