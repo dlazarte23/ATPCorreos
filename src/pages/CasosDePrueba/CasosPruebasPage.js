@@ -41,13 +41,17 @@ export default function CasosPruebasPage(props) {
             <HeaderCP peticion={peticion} subject={subject} />
 
             <div className="contenedor">
-              <FormCP peticion={peticion} subject={subject} />
+              <FormCP subject={subject} usuario={usuario} loading={loading} />
             </div>
 
             <Row className="table-detalleCp">
               <Col span={22} offset={1}>
-                <Title level={4}>Listado de Casos de Prueba</Title>
-                <TableListadoCP usuario={usuario} />
+                <Title level={4}>Listado de casos de prueba</Title>
+                <TableListadoCP
+                  usuario={usuario}
+                  loading={loading}
+                  subject={subject}
+                />
               </Col>
             </Row>
           </Col>

@@ -21,7 +21,6 @@ import "../peticion-style.css";
 import { useDispatch } from "react-redux";
 
 import { obtenerPlanesDePruebaAction } from "../../../stateManagement/actions/planesPruebaAction";
-import { useSelector } from "react-redux";
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -51,8 +50,7 @@ export default function ListPeticiones({ peticiones }) {
   const onCloseDetalle = () => {
     setShowDetalle(false);
   };
-
-  
+    
   return (
     <>
       <List
@@ -94,23 +92,20 @@ export default function ListPeticiones({ peticiones }) {
 
 const ListItem = ({ item, handleDetalle }) => {
 
-  const stateLoading = useSelector(state => state.planesPrueba.loading);
-  
   return (
     <>
-      <Badge.Ribbon text="Nuevo" color="green">
-        <Card title={item.petitionName} size="small" style={{ borderRadius: 20 }}>
+        <Card title={item.petitionName} size="small" style={{ borderRadius: 20}}>
           <Row>
             <Col span={18}>
               <Descriptions size="small" column={1}>
-                <Descriptions.Item label="Id. Petición">
+                <Descriptions.Item label="Id. petición">
                   <IconText
                     icon={NumberOutlined}
                     text={item.petitionCode}
                     key={item.id}
                   />
                 </Descriptions.Item>
-                <Descriptions.Item label="Fecha Inicio">
+                <Descriptions.Item label="Fecha inicio">
                   <IconText
                     icon={CalendarOutlined}
                     text={item.startDate}
@@ -122,7 +117,7 @@ const ListItem = ({ item, handleDetalle }) => {
             <Col span={6}>
               <Descriptions size="small" column={1}>
                 <Descriptions.Item label="">
-                  <Button type="text" onClick={() => handleDetalle({ item })} loading={stateLoading}>
+                  <Button type="text" onClick={() => handleDetalle({ item })} >
                     Ver detalle <RightOutlined />
                   </Button>
                 </Descriptions.Item>
@@ -130,43 +125,7 @@ const ListItem = ({ item, handleDetalle }) => {
             </Col>
           </Row>
         </Card>
-      </Badge.Ribbon>
       <br />
     </>
-    /* <List.Item
-      actions={[
-        <Space>
-          <Button type="text" onClick={() => handleDetalle({ item })}>
-            Ver detalle <RightOutlined />
-          </Button>
-        </Space>,
-      ]}
-    >
-      <Skeleton avatar title={false} loading={item.loading} active>
-        <List.Item.Meta
-          avatar={
-            <Avatar
-              src="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico"
-              title={"Creador: Diego Lazarte Peláez"}
-            />
-          }
-          title={item.nombre}
-          description={
-            <Descriptions size="small" column={2}>
-              <Descriptions.Item label="Id. Petición">
-                {item.codPeticion}
-              </Descriptions.Item>
-              <Descriptions.Item label="">
-                <IconText
-                  icon={CalendarOutlined}
-                  text={item.fecCreacion}
-                  key="list-vertical-like-o"
-                />
-              </Descriptions.Item>
-            </Descriptions>
-          }
-        />
-      </Skeleton>
-    </List.Item> */
   );
 };

@@ -5,6 +5,9 @@ import {
   LISTAR_CASOS_PRUEBA,
   LISTAR_CASOS_PRUEBA_EXITO,
   LISTAR_CASOS_PRUEBA_ERROR,
+  EDITAR_CASOS_PRUEBA,
+  EDITAR_CASOS_PRUEBA_EXITO,
+  EDITAR_CASOS_PRUEBA_ERROR,
   ELIMINAR_CASOS_PRUEBA,
   ELIMINAR_CASOS_PRUEBA_EXITO,
   ELIMINAR_CASOS_PRUEBA_ERROR,
@@ -68,7 +71,7 @@ export function registrarCasosPruebasAction(casoDePrueba) {
       const response = await post(uri.setCasoDePrueba, casoDePrueba);
 
       if (response.status === 201) {
-        message.success("Caso de Prueba creado correctamente!");
+        message.success("Caso de prueba creado correctamente!");
 
         dispatch(registrarCasosPruebaExito(response.data));
       }
@@ -95,6 +98,46 @@ const registrarCasosPruebaError = (error) => ({
 });
 
 /**
+ * Action para la edición del caso de prueba
+ * @param {*} idTestCase
+ * @param {*} data
+ */
+export function editarCasosPruebaAction(idTestCase, data) {
+  return async (dispatch) => {
+    dispatch(editarCasosPrueba());
+
+    try {
+      const response = await patch(
+        `${uri.setCasoDePrueba}/${idTestCase}`,
+        data
+      );
+
+      if (response.status === 200) {
+        message.success("Caso de prueba modificada correctamente!");
+
+        dispatch(editarCasosPruebaExito(response.data));
+      }
+    } catch (error) {
+      dispatch(editarCasosPruebaError());
+
+      message.error("Error al trata de editar el Caso de Prueba!");
+    }
+  };
+}
+
+const editarCasosPrueba = () => ({
+  type: EDITAR_CASOS_PRUEBA,
+});
+const editarCasosPruebaExito = (testCase) => ({
+  type: EDITAR_CASOS_PRUEBA_EXITO,
+  payload: testCase,
+});
+const editarCasosPruebaError = (error) => ({
+  type: EDITAR_CASOS_PRUEBA_ERROR,
+  payload: error,
+});
+
+/**
  * Action para la eliminación del caso de prueba
  * @param {*} shortUsername
  * @param {*} idTestCase
@@ -109,6 +152,7 @@ export function eliminarCasosPruebaAction(shortUsername, idTestCase) {
       );
 
       if (response.status === 200) {
+        message.success("Caso de prueba eliminado correctamente!");
         dispatch(eliminarCasosPruebaExito(idTestCase));
       }
     } catch (error) {
@@ -143,10 +187,14 @@ export function descargarDocumento(idPeticion, tipoDocumento) {
     dispatch(descargaDocumento());
 
     try {
+      const date = new Date();
+
+      const nomCorrelativo = `${date.getDate()}${date.getMonth()}${date.getFullYear()}-${date.getSeconds()}`;
+
       const nombreArchivo =
         tipoDocumento === "xml"
-          ? `exportado_xml_${idPeticion}.xml`
-          : `exportado_excel_${idPeticion}.xlsx`;
+          ? `exportado_xml_${nomCorrelativo}.xml`
+          : `exportado_excel_${nomCorrelativo}.xlsx`;
 
       if (tipoDocumento === "xml") {
         const response = await get(
@@ -167,11 +215,21 @@ export function descargarDocumento(idPeticion, tipoDocumento) {
 
       dispatch(descargaDocumentoExito());
     } catch (error) {
-      message.error(
-        `Ocurrió un error al intentar descargar el archivo ${tipoDocumento}!`
-      );
+      const { status } = error.response;
 
-      dispatch(descargaDocumentoError());
+      if (status === 400) {
+        message.warning(
+          `No puede descargar el documento, aún le faltan completar los pasos!`
+        );
+
+        dispatch(descargaDocumentoError(error));
+      } else if (status === 500) {
+        message.error(
+          `Ocurrió un error al intentar descargar el archivo ${tipoDocumento}!`
+        );
+
+        dispatch(descargaDocumentoError(error));
+      }
     }
   };
 }
@@ -184,6 +242,7 @@ const descargaDocumentoExito = () => ({
   type: DESCARGAR_DOCUMENTO_EXITO,
 });
 
-const descargaDocumentoError = () => ({
+const descargaDocumentoError = (error) => ({
   type: DESCARGAR_DOCUMENTO_ERROR,
+  payload: error,
 });

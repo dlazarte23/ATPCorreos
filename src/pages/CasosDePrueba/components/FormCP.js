@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../cp-styles.css";
 import { Input, Button, Form } from "antd";
@@ -8,7 +8,8 @@ import { useDispatch } from "react-redux";
 
 import { registrarCasosPruebasAction } from "../../../stateManagement/actions/casosPruebasAction";
 
-const FormCP = ({ peticion, subject }) => {
+const FormCP = ({ subject, usuario, loading }) => {
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
 
   const registrarCasosDePrueba = (casosDePrueba) =>
@@ -16,7 +17,7 @@ const FormCP = ({ peticion, subject }) => {
 
   const onFinish = (values) => {
     const casoDePrueba = {
-      shortUsername: subject.user,
+      shortUsername: usuario.shortUser,
       subjectId: subject.id,
       testDescription: values.descripcionCP,
       testName: values.nomCp,
@@ -29,9 +30,14 @@ const FormCP = ({ peticion, subject }) => {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {
+    !loading && form.resetFields();
+  }, [loading]);
+
   return (
     <Form
       layout="vertical"
+      form={form}
       className="area-contenido"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -40,7 +46,7 @@ const FormCP = ({ peticion, subject }) => {
       <div>
         <Form.Item
           className="block"
-          label="Nombre De Caso De Prueba"
+          label="Nombre de caso de prueba"
           name="nomCp"
           rules={[
             {
@@ -54,7 +60,7 @@ const FormCP = ({ peticion, subject }) => {
       </div>
       <div>
         <Form.Item
-          label="Descripción De Caso De Prueba"
+          label="Descripción de caso de prueba"
           name="descripcionCP"
           rules={[
             {

@@ -18,7 +18,7 @@ const paginationProps = {
   defaultCurrent: 1,
 };
 
-const TableListadoCP = ({ usuario }) => {
+const TableListadoCP = ({ usuario, loading, subject }) => {
   const dispatch = useDispatch();
 
   const casosDePruebas = useSelector(
@@ -50,7 +50,12 @@ const TableListadoCP = ({ usuario }) => {
       key: "accion",
       render: (_, record) => (
         <Space size="middle">
-          <ModalEditListado record={record} />
+          <ModalEditListado
+            {...record}
+            usuario={usuario}
+            loading={loading}
+            subject={subject}
+          />
           <Popconfirm
             title="¿Está seguro de eliminar?"
             onConfirm={() => handleDelete(record.testId)}

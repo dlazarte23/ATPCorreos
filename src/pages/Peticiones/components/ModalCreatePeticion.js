@@ -76,7 +76,7 @@ export default function ModalCreatePeticion(props) {
   return (
     <>
       <Modal
-        title="Crear Nueva Petición"
+        title="Crear nueva petición"
         visible={showModal.create}
         onCancel={handleCancel}
         confirmLoading={confirmLoading}
@@ -123,7 +123,7 @@ export default function ModalCreatePeticion(props) {
             <Col span={18}>
               <Form.Item
                 name="nomPeticion"
-                label="Nombre Petición"
+                label="Nombre petición"
                 rules={[
                   {
                     required: true,
@@ -200,7 +200,7 @@ export default function ModalCreatePeticion(props) {
             <Col span={8}>
               <Form.Item
                 name="horasEstimadas"
-                label="Horas Estimadas"
+                label="Horas estimadas"
                 rules={[
                   {
                     required: true,

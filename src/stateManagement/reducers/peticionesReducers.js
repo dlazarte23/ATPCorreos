@@ -1,4 +1,4 @@
-import {
+ import {
   AGREGAR_PETICION,
   AGREGAR_PETICION_EXITO,
   AGREGAR_PETICION_ERROR,
@@ -16,6 +16,10 @@ import {
   EDITAR_PETICION_EXITO,
   EDITAR_PETICION_ERROR
 } from "../types/peticionesType";
+
+import { 
+  DESLOGEO_USUARIO_EXITO
+} from "../types/usuarioType";
 
 /**
  * Cada reducer tiene su propio state
@@ -81,6 +85,14 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         peticiones: state.peticiones.filter( peticion => peticion.id !== action.payload )
+      }
+
+    case DESLOGEO_USUARIO_EXITO:
+      return {
+        ...state,
+        peticiones: [ ],
+        proyectoSeleccionado: null,
+        proyectos: [ ]
       }
       
     case LISTAR_PROYECTOS_ERROR:

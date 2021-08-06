@@ -30,7 +30,6 @@ export default function HeaderPeticion(props) {
   const obtenerProyectos = (shortUser) =>
     dispatch(listarProyectoAction(shortUser));
 
-  // eslint-disable-next-line
   useEffect(() => {
     obtenerProyectos();
 
@@ -78,7 +77,7 @@ export default function HeaderPeticion(props) {
   return (
     <PageHeader
       className="site-page-header"
-      title="Lista de Peticiones"
+      title="Lista de peticiones"
       style={{ paddingLeft: "50px" }}
       extra={[
         <Button
@@ -89,7 +88,7 @@ export default function HeaderPeticion(props) {
           icon={<PlusOutlined />}
           onClick={() => setShowModal({ ...showModal, create: true })}
         >
-          Nueva Petición
+          Nueva petición
         </Button>,
       ]}
     >

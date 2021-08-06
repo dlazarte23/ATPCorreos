@@ -65,6 +65,11 @@ const logearUsuarioError = (error) => ({
   payload: error,
 });
 
+/**
+ * Type para deslogear al usuario
+ * @param {*} usuario 
+ * @returns 
+ */
 export function deslogearUsuario(usuario) {
   return async (dispatch) => {
     dispatch(deslogeandoUsuario());
@@ -82,7 +87,7 @@ const deslogeandoUsuario = () => ({
   type: DESLOGEO_USUARIO,
 });
 
-const deslogearUsuarioExito = (usuario) => ({
+const deslogearUsuarioExito = () => ({
   type: DESLOGEO_USUARIO_EXITO,
 });
 

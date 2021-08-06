@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import "../detalle-style.css";
-import { Steps, Button, message } from "antd";
+import { Steps, Button } from "antd";
 import {
   FileExclamationOutlined,
   FileTextOutlined,
@@ -10,12 +10,9 @@ import {
   ArrowRightOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import EditorStepDetalle from "./EditorStepDetalle";
 import UploadEvidencias from "./UploadEvidencias";
-
-// actions de redux
-import { crearNuevoStepAction } from "../../../stateManagement/actions/stepsAction";
 
 const { Step } = Steps;
 
@@ -29,11 +26,9 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
     evidences: [],
   });
 
-  //console.log(detalle);
-
   const loading = useSelector((state) => state.peticiones.loading);
   const usuario = useSelector((state) => state.usuario.usuario);
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const steps = [
     {

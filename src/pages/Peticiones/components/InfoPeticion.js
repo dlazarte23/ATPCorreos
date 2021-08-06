@@ -46,7 +46,7 @@ const InfoPeticion = (props) => {
       <Card style={{ maxWidth: 550, float: "right" }}>
         <div style={{ textAlign: "center", width: "100%", marginBottom: 40 }}>
           <Title level={4}>
-            <ExceptionOutlined /> Detalle de la Petición
+            <ExceptionOutlined /> Detalle de la petición
           </Title>
         </div>
         <div>
@@ -54,25 +54,25 @@ const InfoPeticion = (props) => {
             <Descriptions.Item label="Nombre">
               {dataPeticion.petitionName}
             </Descriptions.Item>
-            <Descriptions.Item label="Id Petición">
+            <Descriptions.Item label="Id. petición">
               {dataPeticion.petitionCode}
             </Descriptions.Item>
-            <Descriptions.Item label="Codigo OT">
+            <Descriptions.Item label="Codigo ot">
               {dataPeticion.otCode}
             </Descriptions.Item>
             <Descriptions.Item label="Sprint">
               {dataPeticion.number}
             </Descriptions.Item>
-            <Descriptions.Item label="Fecha de Entrega">
+            <Descriptions.Item label="Fecha de entrega">
               {dataPeticion.finishDate}
             </Descriptions.Item>
-            <Descriptions.Item label="Fecha de Inicio">
+            <Descriptions.Item label="Fecha de inicio">
               {dataPeticion.startDate}
             </Descriptions.Item>
-            <Descriptions.Item label="Fecha Prevista de Entrega">
+            <Descriptions.Item label="Fecha prevista de entrega">
               {dataPeticion.expectedFinishDate}
             </Descriptions.Item>
-            <Descriptions.Item label="Horas Estimadas">
+            <Descriptions.Item label="Horas estimadas">
               {`${dataPeticion.estimatedHours} h.`}
             </Descriptions.Item>
 
@@ -96,7 +96,7 @@ const InfoPeticion = (props) => {
                 okText="Confirmar"
                 cancelText="Cancelar">
 
-                <Tooltip placement="right" title="Eliminar Petición">
+                <Tooltip placement="right" title="Eliminar petición">
                   <Button
                     icon={<DeleteOutlined />}
                     shape="round"
@@ -110,7 +110,7 @@ const InfoPeticion = (props) => {
 
             <Space style={{ float: 'right' }}>
               <Button type="primary" icon={<UnorderedListOutlined />} onClick={() => setShowPP(true)} >
-                Planes De Prueba
+                Planes de prueba
               </Button>
             </Space>
 

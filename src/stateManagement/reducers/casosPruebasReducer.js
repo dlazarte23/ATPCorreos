@@ -11,6 +11,9 @@ import {
   ELIMINAR_CASOS_PRUEBA,
   ELIMINAR_CASOS_PRUEBA_EXITO,
   ELIMINAR_CASOS_PRUEBA_ERROR,
+  EDITAR_CASOS_PRUEBA,
+  EDITAR_CASOS_PRUEBA_EXITO,
+  EDITAR_CASOS_PRUEBA_ERROR,
 } from "../types/casosPruebasType";
 
 const initialState = {
@@ -24,6 +27,7 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case LISTAR_CASOS_PRUEBA:
     case DESCARGAR_DOCUMENTO:
+    case EDITAR_CASOS_PRUEBA:
     case ELIMINAR_CASOS_PRUEBA:
     case AGREGAR_CASOS_PRUEBA:
       return {
@@ -50,6 +54,18 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
       };
+
+    case EDITAR_CASOS_PRUEBA_EXITO:
+      return {
+        ...state,
+        loading: false,
+        casosPruebas: state.casosPruebas.map((casoPrueba) =>
+          casoPrueba.testId === action.payload.testId
+            ? (casoPrueba = action.payload)
+            : casoPrueba
+        ),
+      };
+
     case ELIMINAR_CASOS_PRUEBA_EXITO:
       return {
         ...state,
@@ -62,6 +78,7 @@ export default function (state = initialState, action) {
     case LISTAR_CASOS_PRUEBA_ERROR:
     case DESCARGAR_DOCUMENTO_ERROR:
     case AGREGAR_CASOS_PRUEBA_ERROR:
+    case EDITAR_CASOS_PRUEBA_ERROR:
     case ELIMINAR_CASOS_PRUEBA_ERROR:
       return {
         ...state,

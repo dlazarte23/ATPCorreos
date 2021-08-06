@@ -1,38 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Modal, Input, Form, Row, Col, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
-export default function ModalEditListado(props) {
-  const nombre = props.record.nombre;
-  const descripcion = props.record.descripcion;
+import { editarCasosPruebaAction } from "../../../stateManagement/actions/casosPruebasAction";
+
+export default function ModalEditListado({
+  testId,
+  testName,
+  testDescription,
+  usuario,
+  loading,
+  subject,
+}) {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
+    form.setFieldsValue({
+      testName: testName,
+      testDescription: testDescription,
+    });
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  const onFinish = () => {
-    console.log("on finsh");
+  const onFinish = (values) => {
+    console.log("on finsh", values);
   };
+
+  const handleOk = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        dispatch(
+          editarCasosPruebaAction(testId, {
+            ...values,
+            shortUsername: usuario.shortUser,
+            subjectId: subject.id,
+          })
+        );
+      })
+      .catch((info) => {
+        console.log("Error al validar: ", info);
+      });
+  };
+
+  useEffect(() => {
+    !loading && setIsModalVisible(loading);
+  }, [loading]);
 
   return (
     <>
-      <a href="!">
+      <a>
         {" "}
         <EditOutlined onClick={showModal} />{" "}
       </a>
 
       <Modal
-        title={"Editar " + nombre}
+        title={"Editar " + testName}
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -41,7 +71,12 @@ export default function ModalEditListado(props) {
           <Button key="back" onClick={handleCancel}>
             Cancelar
           </Button>,
-          <Button key="submit" type="primary" onClick={handleOk}>
+          <Button
+            key="submit"
+            type="primary"
+            loading={loading}
+            onClick={handleOk}
+          >
             Guardar
           </Button>,
         ]}
@@ -58,7 +93,7 @@ export default function ModalEditListado(props) {
           <Row justify="space-between">
             <Col span={10}>
               <Form.Item
-                name="nomPrueba"
+                name="testName"
                 label="Nombre de la Prueba"
                 rules={[
                   {
@@ -67,14 +102,14 @@ export default function ModalEditListado(props) {
                   },
                 ]}
               >
-                <Input defaultValue={nombre} />
+                <Input />
               </Form.Item>
             </Col>
             <Col span={12}>
               {" "}
               <Form.Item
-                name="contprueba"
-                label="Contenido de la Prueba"
+                name="testDescription"
+                label="Descripción de la Prueba"
                 rules={[
                   {
                     required: true,
@@ -83,7 +118,7 @@ export default function ModalEditListado(props) {
                   },
                 ]}
               >
-                <Input defaultValue={descripcion} />
+                <Input />
               </Form.Item>
             </Col>
           </Row>
