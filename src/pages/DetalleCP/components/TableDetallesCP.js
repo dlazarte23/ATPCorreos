@@ -117,7 +117,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
           stepComments: row.stepComments,
           stepDescription: row.stepDescription,
           stepExpectedResult: row.stepExpectedResult,
-          stepOrder: record.stepId,
+          stepOrder: /* record.stepId */ row.stepOrder,
         };
 
         console.log(newStep);
@@ -135,7 +135,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       //dataIndex: ["step", "id"],
       dataIndex: "stepOrder",
       key: "stepOrder",
-      editable: false,
+      editable: true,
       defaultSortOrder: "ascend",
       sorter: (a, b) => a.stepOrder - b.stepOrder,
     },
