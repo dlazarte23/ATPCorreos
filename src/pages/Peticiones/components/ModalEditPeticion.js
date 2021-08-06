@@ -12,6 +12,9 @@ export default function ModalEditPeticion(props) {
 
   const { petitionName, petitionCode, number, finishDate, startDate, expectedFinishDate, estimatedHours, otCode, id } = dataPeticion;
 
+  const proyecto = useSelector(
+    (state) => state.peticiones.proyectoSeleccionado
+  );
 
 
   const [form] = Form.useForm();
@@ -28,7 +31,7 @@ export default function ModalEditPeticion(props) {
   const dispatch = useDispatch();
 
   // mandamos a llamar el action de peticionesAction
-  const editarPeticion = (peticion, id) => dispatch(editarPeticionAction(peticion, id));
+  const editarPeticion = (peticion, id, idProyecto) => dispatch(editarPeticionAction(peticion, id, idProyecto));
 
   // cuando el usuario haga clic en guardar cambios
   const handleOk = () => {
@@ -40,8 +43,9 @@ export default function ModalEditPeticion(props) {
         form.resetFields();
 
         setShowModal(false)
+
         // creamos la nueva peticion
-        editarPeticion(values, id);
+        editarPeticion(values, id, proyecto.id);
       })
       .catch(info => {
         console.log("Error al validar: ", info)
