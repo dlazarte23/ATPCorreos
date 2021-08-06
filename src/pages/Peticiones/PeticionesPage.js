@@ -88,7 +88,7 @@ export default function Peticionespage() {
 
           <Row style={{ marginTop: 20 }}>
             {proyectos.length !== 0 ? (
-              data.length !== 0 && !loading ? (
+              data.length !== 0 ? (
                 <Col span={getSpan()} offset={getOffset()}>
                   <ListPeticiones
                     peticiones={data}
