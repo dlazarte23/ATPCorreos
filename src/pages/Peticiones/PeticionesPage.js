@@ -43,7 +43,7 @@ export default function Peticionespage() {
       peticion.petitionCode.includes(searchTerm.toLowerCase())
     );
     setFilteredData(results);
-  }, [searchTerm]);
+  }, [peticiones, searchTerm]);
 
   const getSpan = () => {
     const width = window.screen.width;

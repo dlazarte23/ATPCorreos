@@ -31,8 +31,6 @@ export function crearNuevoStepAction(step) {
 
     try {
       const response = await post(uri.setTestStep, step);
-      console.log(response.status);
-      console.log(response.data);
 
       if (response.status === 201) {
         message.success("Paso creado correctamente!");

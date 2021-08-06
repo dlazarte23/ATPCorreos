@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 import {
   Table,
@@ -10,6 +10,7 @@ import {
   Divider,
   Image,
   Upload,
+  Button
 } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
@@ -109,7 +110,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       const newData = [...dataTable];
       const index = newData.findIndex((item) => record.stepId === item.stepId);
       if (index > -1) {
-        const item = newData[index];
+        
         const newStep = {
           idTestCase: detalle.testId,
           results: record.results,
@@ -180,19 +181,19 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
-          <span>
-            <a
+          <>
+            <Button type="link"
               onClick={() => save(record)}
               style={{
                 marginRight: 8,
               }}
             >
               Guardar
-            </a>
+            </Button>
             <Popconfirm title="¿Descartar los cambios?" onConfirm={cancel}>
-              <a>Cancelar</a>
+            <Button type="link">Cancelar</Button>
             </Popconfirm>
-          </span>
+          </>
         ) : (
           <>
             <Typography.Link
