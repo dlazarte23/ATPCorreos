@@ -30,7 +30,6 @@ export default function HeaderPeticion(props) {
   const obtenerProyectos = (shortUser) =>
     dispatch(listarProyectoAction(shortUser));
 
-  // eslint-disable-next-line
   useEffect(() => {
     obtenerProyectos();
 

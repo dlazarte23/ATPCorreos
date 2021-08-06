@@ -71,7 +71,7 @@ export function registrarCasosPruebasAction(casoDePrueba) {
       const response = await post(uri.setCasoDePrueba, casoDePrueba);
 
       if (response.status === 201) {
-        message.success("Caso de Prueba creado correctamente!");
+        message.success("Caso de prueba creado correctamente!");
 
         dispatch(registrarCasosPruebaExito(response.data));
       }
@@ -113,7 +113,7 @@ export function editarCasosPruebaAction(idTestCase, data) {
       );
 
       if (response.status === 200) {
-        message.success("Caso de Prueba modificada correctamente!");
+        message.success("Caso de prueba modificada correctamente!");
 
         dispatch(editarCasosPruebaExito(response.data));
       }
@@ -152,7 +152,7 @@ export function eliminarCasosPruebaAction(shortUsername, idTestCase) {
       );
 
       if (response.status === 200) {
-        message.success("Caso de Prueba eliminado correctamente!");
+        message.success("Caso de prueba eliminado correctamente!");
         dispatch(eliminarCasosPruebaExito(idTestCase));
       }
     } catch (error) {

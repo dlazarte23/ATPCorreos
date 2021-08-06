@@ -58,10 +58,10 @@ const HeaderCP = ({ peticion, subject }) => {
                                 </Descriptions.Item>
                             </Descriptions>
                             <Descriptions size="small" column={2}>
-                                <Descriptions.Item label="Id. Petición">
+                                <Descriptions.Item label="Id. petición">
                                     {peticion.petitionCode}
                                 </Descriptions.Item>
-                                <Descriptions.Item label="Nombre Petición">
+                                <Descriptions.Item label="Nombre petición">
                                     {peticion.petitionName}
                                 </Descriptions.Item>
                             </Descriptions>
@@ -74,7 +74,7 @@ const HeaderCP = ({ peticion, subject }) => {
 
     return (
         <PageHeader
-            title="Creación de Casos de Prueba"
+            title="Creación de casos de prueba"
             onBack={() => window.history.back()}
             backIcon={<LeftOutlined />}
             extra={[
@@ -86,19 +86,19 @@ const HeaderCP = ({ peticion, subject }) => {
                     type="dashed"
                     icon={<DownloadOutlined />}
                     className="btnTestLink"
-                    onClick={( ) => descargaDocumento( peticion.id, 'xml' ) }
+                    onClick={( ) => descargaDocumento( subject.id, 'xml' ) }
                 >
                     Test Link
                 </Button>,
                 <Space>
-                    <Paragraph className="text-export"> o </Paragraph>
+                    <Paragraph className="text-export"> ó </Paragraph>
                 </Space>,
                 <Button
                     shape="round"
                     type="dashed"
                     icon={<FileExcelOutlined />}
                     className="btnExcel"
-                    onClick={( ) => descargaDocumento(peticion.id, 'excel') }
+                    onClick={( ) => descargaDocumento( subject.id, 'excel') }
                 >
                     Excel 
                 </Button>,

@@ -46,7 +46,7 @@ export default function CasosPruebasPage(props) {
 
             <Row className="table-detalleCp">
               <Col span={22} offset={1}>
-                <Title level={4}>Listado de Casos de Prueba</Title>
+                <Title level={4}>Listado de casos de prueba</Title>
                 <TableListadoCP
                   usuario={usuario}
                   loading={loading}

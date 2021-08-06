@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Form, Input, Button, Typography, Card } from "antd";
-import { RightOutlined } from "@ant-design/icons";
+import { RightOutlined, UserOutlined, UnlockOutlined } from "@ant-design/icons";
 
 import { useHistory } from "react-router-dom";
 
@@ -61,13 +61,13 @@ const FormLogin = () => {
           hideRequiredMark
         >
           <Form.Item
-            label="Usuario o Email"
+            label="Nombre de usuario"
             name="username"
             rules={[
               { required: true, message: "Debe ingresar su usuario o email!" },
             ]}
           >
-            <Input />
+            <Input prefix={<UserOutlined />} placeholder=""/>
           </Form.Item>
 
           <Form.Item
@@ -77,7 +77,7 @@ const FormLogin = () => {
               { required: true, message: "Debe ingresar su contraseña!" },
             ]}
           >
-            <Input.Password />
+            <Input.Password prefix={<UnlockOutlined />} />
           </Form.Item>
 
           <Form.Item className="btnVamos">

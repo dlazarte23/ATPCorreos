@@ -50,8 +50,7 @@ export default function ListPeticiones({ peticiones }) {
   const onCloseDetalle = () => {
     setShowDetalle(false);
   };
-
-  
+    
   return (
     <>
       <List
@@ -93,12 +92,9 @@ export default function ListPeticiones({ peticiones }) {
 
 const ListItem = ({ item, handleDetalle }) => {
 
-
-  
   return (
     <>
-      <Badge.Ribbon text="Nuevo" color="green">
-        <Card title={item.petitionName} size="small" style={{ borderRadius: 20 }}>
+        <Card title={item.petitionName} size="small" style={{ borderRadius: 20}}>
           <Row>
             <Col span={18}>
               <Descriptions size="small" column={1}>
@@ -129,43 +125,7 @@ const ListItem = ({ item, handleDetalle }) => {
             </Col>
           </Row>
         </Card>
-      </Badge.Ribbon>
       <br />
     </>
-    /* <List.Item
-      actions={[
-        <Space>
-          <Button type="text" onClick={() => handleDetalle({ item })}>
-            Ver detalle <RightOutlined />
-          </Button>
-        </Space>,
-      ]}
-    >
-      <Skeleton avatar title={false} loading={item.loading} active>
-        <List.Item.Meta
-          avatar={
-            <Avatar
-              src="https://www.correos.es/content/dam/correos/imagenes/iconos/CORREOS-favicon.ico"
-              title={"Creador: Diego Lazarte Peláez"}
-            />
-          }
-          title={item.nombre}
-          description={
-            <Descriptions size="small" column={2}>
-              <Descriptions.Item label="Id. Petición">
-                {item.codPeticion}
-              </Descriptions.Item>
-              <Descriptions.Item label="">
-                <IconText
-                  icon={CalendarOutlined}
-                  text={item.fecCreacion}
-                  key="list-vertical-like-o"
-                />
-              </Descriptions.Item>
-            </Descriptions>
-          }
-        />
-      </Skeleton>
-    </List.Item> */
   );
 };

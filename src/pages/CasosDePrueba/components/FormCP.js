@@ -46,7 +46,7 @@ const FormCP = ({ subject, usuario, loading }) => {
       <div>
         <Form.Item
           className="block"
-          label="Nombre De Caso De Prueba"
+          label="Nombre de caso de prueba"
           name="nomCp"
           rules={[
             {
@@ -60,7 +60,7 @@ const FormCP = ({ subject, usuario, loading }) => {
       </div>
       <div>
         <Form.Item
-          label="Descripción De Caso De Prueba"
+          label="Descripción de caso de prueba"
           name="descripcionCP"
           rules={[
             {
