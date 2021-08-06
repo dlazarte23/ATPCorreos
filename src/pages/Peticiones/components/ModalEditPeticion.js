@@ -44,7 +44,7 @@ export default function ModalEditPeticion(props) {
 
           setConfirmLoading(false);
 
-          setShowModal({ ...showModal, create: false });
+          
 
         }, 2000);
 
