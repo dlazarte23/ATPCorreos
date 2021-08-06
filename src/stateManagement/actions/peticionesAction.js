@@ -182,9 +182,7 @@ export function editarPeticionAction( values, id) {
                 dispatch( editarPeticionExito( values ) );
             }
 
-           
-
-
+          
         } catch ( error ) {
 
             dispatch( editarPeticionError( ) );
@@ -226,9 +224,6 @@ export function eliminarPeticionAction(idPeticion) {
       
 
       const response = await patch(`${uri.deletePeticiones}/${shortUser}/${idPeticion}`);
-
-      console.log( response );
-
 
       if ( response.status === 200 ) {
 

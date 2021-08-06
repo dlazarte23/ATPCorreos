@@ -12,7 +12,7 @@ export default function ModalEditPeticion(props) {
 
   const { petitionName, petitionCode, number, finishDate, startDate, expectedFinishDate, estimatedHours, otCode, id } = dataPeticion;
 
-  const [confirmLoading, setConfirmLoading] = useState(false);
+
 
   const [form] = Form.useForm();
 
@@ -39,15 +39,7 @@ export default function ModalEditPeticion(props) {
 
         form.resetFields();
 
-        setConfirmLoading(!loading);
-
-        setTimeout(() => {
-
-          setConfirmLoading(false);
-
-          setShowModal({ ...showModal, create: false });
-
-        }, 2000);
+        setShowModal(false)
         // creamos la nueva peticion
         editarPeticion(values, id);
       })
@@ -90,7 +82,6 @@ export default function ModalEditPeticion(props) {
         title={"Editar " + petitionName}
         visible={showModal}
         onCancel={handleCancel}
-        confirmLoading={confirmLoading}
         destroyOnClose={true}
         centered="true"
         footer={[
