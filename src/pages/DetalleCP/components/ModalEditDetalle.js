@@ -28,10 +28,8 @@ export default function ModalEditListado(props) {
 
   return (
     <>
-      <a href="!">
-        {" "}
-        <EditOutlined onClick={showModal} />{" "}
-      </a>
+  
+        <EditOutlined onClick={showModal} className="App-link "/>
 
       <Modal
         title="Editar Paso"

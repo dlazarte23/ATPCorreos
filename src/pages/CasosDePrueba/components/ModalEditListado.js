@@ -56,10 +56,9 @@ export default function ModalEditListado({
 
   return (
     <>
-      <a>
-        {" "}
-        <EditOutlined onClick={showModal} />{" "}
-      </a>
+  
+        <EditOutlined onClick={showModal} className="App-link "/>
+
 
       <Modal
         title={"Editar " + testName}
