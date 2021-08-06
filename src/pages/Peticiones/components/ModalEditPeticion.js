@@ -60,7 +60,7 @@ export default function ModalEditPeticion(props) {
       petitionCode: petitionCode,
       petitionName: petitionName,
       estimatedHours: estimatedHours,
-      sprint: number,
+      number: number,
       otCode: otCode,
     });
   }
