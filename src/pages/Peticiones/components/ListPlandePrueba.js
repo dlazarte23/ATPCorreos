@@ -1,12 +1,20 @@
 import { List } from 'antd';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 import { Link } from 'react-router-dom';
+import { Popconfirm } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+
+
+// actions de redux
+import { eliminarPlandePruebaAction } from "../../../stateManagement/actions/planesPruebaAction";
 
 const ListPlandePrueba = ({subjects}) => {
 
   const peticion = useSelector( state => state.planesPrueba.peticion );
- 
+
+  const dispatch = useDispatch( );
+  const eliminarPlandePrueba = (idPlan) => dispatch(eliminarPlandePruebaAction(idPlan));
 
   return (
 
@@ -25,6 +33,14 @@ const ListPlandePrueba = ({subjects}) => {
             {item.subject} 
           
           </Link>
+              <Popconfirm
+                title="¿Está seguro de eliminar?"
+                 onConfirm={() => eliminarPlandePrueba(item.id)}
+                okText="Confirmar"
+                cancelText="Cancelar"
+              >
+                <DeleteOutlined title="Eliminar" />
+              </Popconfirm>
 
         </List.Item>
       )}

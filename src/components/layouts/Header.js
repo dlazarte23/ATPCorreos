@@ -27,6 +27,7 @@ export default function MainHeader() {
 
       verificarLogeo(JSON.parse(user));
     }
+     // eslint-disable-next-line
   }, [usuario]);
 
   const logoutUsuario = () => dispatch(deslogearUsuario());

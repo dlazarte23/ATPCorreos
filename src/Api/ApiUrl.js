@@ -14,6 +14,7 @@ const ProyectoBaseUrl = {
   getTestSteps: `${process.env.REACT_APP_ATPCORREOS}step/testCase`,
   getTestPlan: `${process.env.REACT_APP_ATPCORREOS}springs`,
   setTestPlan: `${process.env.REACT_APP_ATPCORREOS}testplans`,
+  deleteTestPlan: `${process.env.REACT_APP_ATPCORREOS}testplans`,
 };
 
 const UsuarioBaseUrl = {

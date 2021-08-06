@@ -7,7 +7,10 @@ import {
     AGREGAR_PLAN_PRUEBA_ERROR,
     EDITAR_PLAN_PRUEBA,
     EDITAR_PLAN_PRUEBA_EXITO,
-    EDITAR_PLAN_PRUEBA_ERROR
+    EDITAR_PLAN_PRUEBA_ERROR,
+    ELIMINAR_PLAN_PRUEBA,
+    ELIMINAR_PLAN_PRUEBA_EXITO,
+    ELIMINAR_PLAN_PRUEBA_ERROR
 } from '../types/planesPruebaType';
 
 import { message } from 'antd';
@@ -16,7 +19,7 @@ import { ProyectoBaseUrl as uri } from '../../Api/ApiUrl';
 
 import { get } from '../../utils/confAxios/petitionGet';
 import { post } from '../../utils/confAxios/petitionPost';
-
+import { patch } from "../../utils/confAxios/petitionPatch";
 /**
  * Action para obtener todos los planes de prueba por el id de la petición
  * @param {*} idPeticion 
@@ -153,3 +156,54 @@ const editarPlanDePruebaError = error => ({
     type: EDITAR_PLAN_PRUEBA_ERROR,
     payload: error
 });
+
+
+
+
+
+/**
+ * Action para la eliminar plan de prueba
+ * @param {*} id
+ */
+ export function eliminarPlandePruebaAction(id) {
+ 
+     return async (dispatch) => {
+       dispatch(eliminarPlandePrueba());
+  
+       try {
+         // aqui se debe hacer la consulta a la API
+  
+        const usuario = localStorage.getItem("DATA_SESION");
+  
+        const { shortUser } = JSON.parse(usuario);
+  
+        const response = await patch(`${uri.deleteTestPlan}/${shortUser}/${id}`);
+  
+        if (response.status === 200) {
+          // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+          message.success("Petición eliminada correctamente!");
+  
+          dispatch(eliminarPlandePruebaExito(id));
+        }
+    } catch (error) {
+     message.error("Error al tratar de eliminar esta petición!");
+  
+        dispatch(eliminarPlandePruebaError(error));
+      }
+  };
+}
+  
+  const eliminarPlandePrueba = () => ({
+    type: ELIMINAR_PLAN_PRUEBA,
+  });
+  
+  const eliminarPlandePruebaExito = (idPlandePrueba) => ({
+    type: ELIMINAR_PLAN_PRUEBA_EXITO,
+    payload: idPlandePrueba,
+  })
+  
+  const eliminarPlandePruebaError = (error) => ({
+    type: ELIMINAR_PLAN_PRUEBA_ERROR,
+    payload: error,
+  });
+  

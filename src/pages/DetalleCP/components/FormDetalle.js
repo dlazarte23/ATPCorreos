@@ -91,6 +91,7 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
     setConfirmLoading(!loading);
     setTimeout(() => {
       setConfirmLoading(false);
+      console.log(confirmLoading)
     }, 2000);
 
     const newStep = {
