@@ -160,6 +160,7 @@ const agregarPeticionError = (error) => ({
  * @param {*} peticion
  */
 export function editarPeticionAction(values, id) {
+  console.log("id", id)
   return async (dispatch) => {
     dispatch(editarPeticion());
 
@@ -167,8 +168,8 @@ export function editarPeticionAction(values, id) {
       const usuario = localStorage.getItem("DATA_SESION");
       const { shortUser } = JSON.parse(usuario);
       values.user = shortUser;
-      values.id = 3;
-      values.project = 3;
+      values.id = id;
+      values.project = id;
 
       const response = await patch(uri.editPeticiones, values);
 
