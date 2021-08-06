@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 
 import { registrarCasosPruebasAction } from "../../../stateManagement/actions/casosPruebasAction";
 
-const FormCP = ({ peticion, subject }) => {
+const FormCP = ({ subject, usuario }) => {
   const dispatch = useDispatch();
 
   const registrarCasosDePrueba = (casosDePrueba) =>
@@ -16,7 +16,7 @@ const FormCP = ({ peticion, subject }) => {
 
   const onFinish = (values) => {
     const casoDePrueba = {
-      shortUsername: subject.user,
+      shortUsername: usuario.shortUser,
       subjectId: subject.id,
       testDescription: values.descripcionCP,
       testName: values.nomCp,

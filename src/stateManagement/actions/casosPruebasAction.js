@@ -5,6 +5,9 @@ import {
   LISTAR_CASOS_PRUEBA,
   LISTAR_CASOS_PRUEBA_EXITO,
   LISTAR_CASOS_PRUEBA_ERROR,
+  EDITAR_CASOS_PRUEBA,
+  EDITAR_CASOS_PRUEBA_EXITO,
+  EDITAR_CASOS_PRUEBA_ERROR,
   ELIMINAR_CASOS_PRUEBA,
   ELIMINAR_CASOS_PRUEBA_EXITO,
   ELIMINAR_CASOS_PRUEBA_ERROR,
@@ -91,6 +94,46 @@ const registrarCasosPruebaExito = (casoDePrueba) => ({
 
 const registrarCasosPruebaError = (error) => ({
   type: AGREGAR_CASOS_PRUEBA_ERROR,
+  payload: error,
+});
+
+/**
+ * Action para la edición del caso de prueba
+ * @param {*} idTestCase
+ * @param {*} data
+ */
+export function editarCasosPruebaAction(idTestCase, data) {
+  return async (dispatch) => {
+    dispatch(editarCasosPrueba());
+
+    try {
+      const response = await patch(
+        `${uri.setCasoDePrueba}/${idTestCase}`,
+        data
+      );
+
+      if (response.status === 200) {
+        message.success("Caso de Prueba modificada correctamente!");
+
+        dispatch(editarCasosPruebaExito(response.data));
+      }
+    } catch (error) {
+      dispatch(editarCasosPruebaError());
+
+      message.error("Error al trata de editar el Caso de Prueba!");
+    }
+  };
+}
+
+const editarCasosPrueba = () => ({
+  type: EDITAR_CASOS_PRUEBA,
+});
+const editarCasosPruebaExito = (testCase) => ({
+  type: EDITAR_CASOS_PRUEBA_EXITO,
+  payload: testCase,
+});
+const editarCasosPruebaError = (error) => ({
+  type: EDITAR_CASOS_PRUEBA_ERROR,
   payload: error,
 });
 
