@@ -186,35 +186,61 @@ export function descargarDocumento(idPeticion, tipoDocumento) {
     dispatch(descargaDocumento());
 
     try {
+
+      const date = new Date();
+
+      const nomCorrelativo = `${date.getDate()}${date.getMonth()}${date.getFullYear()}-${date.getSeconds()}`;
+      
       const nombreArchivo =
         tipoDocumento === "xml"
-          ? `exportado_xml_${idPeticion}.xml`
-          : `exportado_excel_${idPeticion}.xlsx`;
+          ? `exportado_xml_${nomCorrelativo}.xml`
+          : `exportado_excel_${nomCorrelativo}.xlsx`;
 
       if (tipoDocumento === "xml") {
+
         const response = await get(
           `${uri.getDocumentoXml}?testplan=${idPeticion}`
         );
-
+                
         FileSaver.saveAs(new Blob([response]), nombreArchivo);
+
       } else if (tipoDocumento === "excel") {
+
         const response = await getEnriched(
           `${uri.getDocumentoExcel}?id=${idPeticion}`,
           { responseType: "blob" }
         );
 
         FileSaver.saveAs(new Blob([response.data]), nombreArchivo);
+
       }
 
       message.success(`Archivo ${tipoDocumento} descargado correctamente!`);
 
       dispatch(descargaDocumentoExito());
-    } catch (error) {
-      message.error(
-        `Ocurrió un error al intentar descargar el archivo ${tipoDocumento}!`
-      );
 
-      dispatch(descargaDocumentoError());
+    } catch (error) {
+
+      const { status } = error.response;
+
+      if( status === 400) {
+
+        message.warning(
+          `No puede descargar el documento, aún le faltan completar los pasos!`
+        );
+  
+        dispatch(descargaDocumentoError( error ));
+
+      } else if( status === 500) {
+        
+        message.error(
+          `Ocurrió un error al intentar descargar el archivo ${tipoDocumento}!`
+        );
+  
+        dispatch(descargaDocumentoError( error ));
+      }
+
+      
     }
   };
 }
@@ -227,6 +253,7 @@ const descargaDocumentoExito = () => ({
   type: DESCARGAR_DOCUMENTO_EXITO,
 });
 
-const descargaDocumentoError = () => ({
+const descargaDocumentoError = error => ({
   type: DESCARGAR_DOCUMENTO_ERROR,
+  payload: error
 });

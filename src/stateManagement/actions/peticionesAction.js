@@ -159,29 +159,30 @@ const agregarPeticionError = (error) => ({
  * Action para la edición de la peticion
  * @param {*} peticion
  */
-export function editarPeticionAction( peticion ) {
+export function editarPeticionAction( values, id) {
+
 
     return async ( dispatch ) => {
 
         dispatch( editarPeticion( ) );
         
         try {
-
-            /**
-             * Aqui se debe hacer la petición a la API
-             * si esta API devuelve como respuesta un 200 o la petición modificada
-             * pasarsela a la función del dispatch, dentro del if
-             */      
-            const response = await patch(uri.editPeticiones, peticion);     
+         const usuario = localStorage.getItem("DATA_SESION");
+         const { shortUser } = JSON.parse(usuario);
+         values.user = shortUser;
+         values.id = 3;
+         values.project = 3;
+      
+            const response = await patch(uri.editPeticiones, values);     
             
             if ( response.status === 201 ) {
 
                 message.success("Petición modificada correctamente!");
 
-                dispatch( editarPeticionExito( peticion ) );
-
+                dispatch( editarPeticionExito( values ) );
             }
 
+          
         } catch ( error ) {
 
             dispatch( editarPeticionError( ) );
@@ -223,9 +224,6 @@ export function eliminarPeticionAction(idPeticion) {
       
 
       const response = await patch(`${uri.deletePeticiones}/${shortUser}/${idPeticion}`);
-
-      console.log( response );
-
 
       if ( response.status === 200 ) {
 

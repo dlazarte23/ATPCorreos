@@ -21,7 +21,6 @@ import "../peticion-style.css";
 import { useDispatch } from "react-redux";
 
 import { obtenerPlanesDePruebaAction } from "../../../stateManagement/actions/planesPruebaAction";
-import { useSelector } from "react-redux";
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -94,7 +93,7 @@ export default function ListPeticiones({ peticiones }) {
 
 const ListItem = ({ item, handleDetalle }) => {
 
-  const stateLoading = useSelector(state => state.planesPrueba.loading);
+
   
   return (
     <>
@@ -122,7 +121,7 @@ const ListItem = ({ item, handleDetalle }) => {
             <Col span={6}>
               <Descriptions size="small" column={1}>
                 <Descriptions.Item label="">
-                  <Button type="text" onClick={() => handleDetalle({ item })} loading={stateLoading}>
+                  <Button type="text" onClick={() => handleDetalle({ item })} >
                     Ver detalle <RightOutlined />
                   </Button>
                 </Descriptions.Item>
