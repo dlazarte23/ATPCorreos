@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Modal, Input, Form, Row, Col, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
@@ -17,7 +17,6 @@ export default function ModalEditListado({
   const dispatch = useDispatch();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "../cp-styles.css";
 import { Input, Button, Form } from "antd";
@@ -8,7 +8,8 @@ import { useDispatch } from "react-redux";
 
 import { registrarCasosPruebasAction } from "../../../stateManagement/actions/casosPruebasAction";
 
-const FormCP = ({ subject, usuario }) => {
+const FormCP = ({ subject, usuario, loading }) => {
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
 
   const registrarCasosDePrueba = (casosDePrueba) =>
@@ -29,9 +30,14 @@ const FormCP = ({ subject, usuario }) => {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {
+    !loading && form.resetFields();
+  }, [loading]);
+
   return (
     <Form
       layout="vertical"
+      form={form}
       className="area-contenido"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
