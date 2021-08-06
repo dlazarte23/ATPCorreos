@@ -32,7 +32,7 @@ const FormCP = ({ subject, usuario, loading }) => {
 
   useEffect(() => {
     !loading && form.resetFields();
-  }, [loading]);
+  }, [loading, form]);
 
   return (
     <Form

@@ -23,11 +23,11 @@ export default function MainHeader() {
     const isAuthenticated = localStorage.getItem("IS_AUTHENTICATED");
 
     if (isAuthenticated && Object.keys(usuario).length === 0) {
-      const usuario = localStorage.getItem("DATA_SESION");
+      const user = localStorage.getItem("DATA_SESION");
 
-      verificarLogeo(JSON.parse(usuario));
+      verificarLogeo(JSON.parse(user));
     }
-  }, []);
+  }, [usuario]);
 
   const logoutUsuario = () => dispatch(deslogearUsuario());
 
@@ -40,9 +40,6 @@ export default function MainHeader() {
 
   const content = (
     <div>
-      <p>Content</p>
-      <p>Content</p>
-      <p>Content</p>
       <p>
         <Button
           type="link"
