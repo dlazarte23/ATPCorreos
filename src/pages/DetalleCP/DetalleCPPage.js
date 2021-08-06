@@ -63,7 +63,9 @@ export default function DetalleCPPage(props) {
 
   useEffect(() => {
     // ah este metodo pasarle el id del caso de uso, que por ahora no se puede ya que viene en null
+ 
     obtenerDetalleCP(detalle.testId);
+   // eslint-disable-next-line
   }, [detalle.testId]);
 
   // aqui ya tendriamos lo que seria la lista de casos de prueba

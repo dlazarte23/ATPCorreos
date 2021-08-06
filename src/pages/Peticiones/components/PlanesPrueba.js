@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Drawer, Typography, Space, Input, Button, Form, Spin } from "antd";
 
@@ -41,6 +41,12 @@ const PlanesPrueba = ({ showPP, onCloseDetallePP }) => {
 
   const loading = useSelector((state) => state.planesPrueba.loading);
 
+
+  const [inputAddPlan, setInputAddPlan] = useState("")
+  const onChange = e => {
+    setInputAddPlan(e.target.value);
+  };
+
   return (
     <Drawer
       width={500}
@@ -74,10 +80,11 @@ const PlanesPrueba = ({ showPP, onCloseDetallePP }) => {
               <Input
                 placeholder="Nombre del plan de prueba"
                 style={{ width: 310 }}
+                onChange={onChange}
               />
             </Form.Item>
             <Form.Item>
-              <Button type="text" icon={<PlusOutlined />} htmlType="submit">
+              <Button type="text" icon={<PlusOutlined />} htmlType="submit" disabled={inputAddPlan ? false : true}>
                 Agregar
               </Button>
             </Form.Item>
