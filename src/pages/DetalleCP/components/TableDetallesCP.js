@@ -136,6 +136,8 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       dataIndex: "stepOrder",
       key: "stepOrder",
       editable: false,
+      defaultSortOrder: "ascend",
+      sorter: (a, b) => a.stepOrder - b.stepOrder,
     },
     {
       title: "Precondición",
@@ -161,7 +163,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       key: "results",
       editable: false,
       render: (_, row) => {
-        row.results.map(function (item) {
+        row.results?.map(function (item) {
           //console.log(item);
           return (
             <Image
@@ -248,7 +250,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
           size="middle"
           columns={cols}
           dataSource={dataTable}
-          rowKey={(record) => record.key}
+          rowKey={(record) => record.stepOrder}
           rowClassName="editable-row"
           pagination={paginationProps}
         />
