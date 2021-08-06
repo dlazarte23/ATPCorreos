@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Drawer, Typography, Space, Input, Button, Form, Spin } from "antd";
 
@@ -11,6 +11,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { agregarPlanPruebaAction } from "../../../stateManagement/actions/planesPruebaAction";
 
 const PlanesPrueba = ({ showPP, onCloseDetallePP }) => {
+
+  const [form] = Form.useForm();
+
   const { Title } = Typography;
 
   const dispatch = useDispatch();
@@ -22,8 +25,6 @@ const PlanesPrueba = ({ showPP, onCloseDetallePP }) => {
   const { shortUser } = useSelector((state) => state.usuario.usuario);
 
   const onFinish = (values) => {
-    console.log("Success:", values);
-
     const pp = {
       spring: id,
       subject: values.nomPlanPrueba,
@@ -40,6 +41,10 @@ const PlanesPrueba = ({ showPP, onCloseDetallePP }) => {
   const subjects = useSelector((state) => state.planesPrueba.planesPrueba);
 
   const loading = useSelector((state) => state.planesPrueba.loading);
+
+  useEffect(() => {
+    !loading && form.resetFields();
+  }, [loading, form]);
 
   return (
     <Drawer
@@ -59,6 +64,7 @@ const PlanesPrueba = ({ showPP, onCloseDetallePP }) => {
           <Form
             name="basic"
             layout="inline"
+            form={form}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
           >

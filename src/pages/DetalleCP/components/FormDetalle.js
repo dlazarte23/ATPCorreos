@@ -58,7 +58,7 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
       ),
     },
     {
-      title: "Resultado Esperado",
+      title: "Resultado esperado",
       icon: <FileProtectOutlined />,
       content: (
         <EditorStepDetalle
