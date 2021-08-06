@@ -103,7 +103,6 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
   };
 
   const save = async (record) => {
-    console.log(record);
     try {
       const row = await form.validateFields();
       //console.log(row);
@@ -126,7 +125,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
         actualizarStep(newStep, record.stepId);
       }
     } catch (errInfo) {
-      console.log("Validate Failed:", errInfo);
+      //console.log("Validate Failed:", errInfo);
     }
   };
 
@@ -137,6 +136,8 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       dataIndex: "stepOrder",
       key: "stepOrder",
       editable: false,
+      defaultSortOrder: "ascend",
+      sorter: (a, b) => a.stepOrder - b.stepOrder,
     },
     {
       title: "Precondición",
@@ -162,7 +163,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       key: "results",
       editable: false,
       render: (_, row) => {
-        row.results.map(function (item) {
+        row.results?.map(function (item) {
           //console.log(item);
           return (
             <Image
@@ -249,7 +250,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
           size="middle"
           columns={cols}
           dataSource={dataTable}
-          rowKey={(record) => record.key}
+          rowKey={(record) => record.stepOrder}
           rowClassName="editable-row"
           pagination={paginationProps}
         />

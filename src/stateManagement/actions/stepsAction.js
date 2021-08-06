@@ -51,7 +51,7 @@ export function actualizarNuevoStepAction(step, id) {
     try {
       const response = await patch(`${uri.setTestStep}/${id}`, step);
 
-      if (response.request.status === 200) {
+      if (response.status === 200) {
         message.success("Paso editado correctamente!");
         dispatch(actualizarStepExito(response.data));
         //dispatch(descargarStep());
@@ -86,8 +86,9 @@ const actualizarStep = () => ({
 });
 
 // si se ha guardado en BBDD correctamente
-const actualizarStepExito = () => ({
+const actualizarStepExito = (step) => ({
   type: ACTUALIZAR_STEP_EXITO,
+  payload: step,
 });
 
 // si hubo un error al guardar en la BBDD
