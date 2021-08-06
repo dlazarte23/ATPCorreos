@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Modal, Input, Form, Row, Col, Button } from "antd";
+import { Modal, Input, Form, Row, Col, Button, Tooltip } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
 import { editarCasosPruebaAction } from "../../../stateManagement/actions/casosPruebasAction";
@@ -56,9 +56,9 @@ export default function ModalEditListado({
 
   return (
     <>
-  
-        <EditOutlined onClick={showModal} className="App-link "/>
-
+      <Tooltip title="Editar">
+        <EditOutlined onClick={showModal} className="App-link " />
+      </Tooltip>
 
       <Modal
         title={"Editar " + testName}

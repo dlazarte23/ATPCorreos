@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Input, Form, Row, Col, Button } from "antd";
+import { Modal, Input, Form, Row, Col, Button, Tooltip } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
 export default function ModalEditListado(props) {
@@ -28,9 +28,9 @@ export default function ModalEditListado(props) {
 
   return (
     <>
-  
+     <Tooltip title="Editar">
         <EditOutlined onClick={showModal} className="App-link "/>
-
+        </Tooltip>
       <Modal
         title="Editar Paso"
         visible={isModalVisible}

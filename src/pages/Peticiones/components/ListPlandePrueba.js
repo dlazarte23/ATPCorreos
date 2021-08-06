@@ -2,7 +2,7 @@ import { List } from 'antd';
 import { useSelector, useDispatch } from "react-redux";
 
 import { Link } from 'react-router-dom';
-import { Popconfirm } from "antd";
+import { Popconfirm, Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
 
@@ -39,7 +39,9 @@ const ListPlandePrueba = ({subjects}) => {
                 okText="Confirmar"
                 cancelText="Cancelar"
               >
-                <DeleteOutlined title="Eliminar" />
+                   <Tooltip  title="Eliminar">
+                <DeleteOutlined title="Eliminar" className="App-link " />
+                </Tooltip>
               </Popconfirm>
 
         </List.Item>
