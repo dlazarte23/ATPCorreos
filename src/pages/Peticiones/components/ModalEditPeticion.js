@@ -33,6 +33,8 @@ export default function ModalEditPeticion(props) {
   // mandamos a llamar el action de peticionesAction
   const editarPeticion = (peticion, id, idProyecto) => dispatch(editarPeticionAction(peticion, id, idProyecto));
 
+  const dateFormat = "DD/MM/YYYY";
+
   // cuando el usuario haga clic en guardar cambios
   const handleOk = () => {
 
@@ -44,6 +46,9 @@ export default function ModalEditPeticion(props) {
 
         setShowModal(false)
 
+        values.expectedFinishDate = values.expectedFinishDate._d
+        values.finishDate = values.finishDate._d
+        values.startDate =values.startDate._d
         // creamos la nueva peticion
         editarPeticion(values, id, proyecto.id);
       })
@@ -145,7 +150,7 @@ export default function ModalEditPeticion(props) {
                   message: 'Selecione una fecha'
                 },
               ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} />
+                <DatePicker placeholder="--/--/--" showToday={false} format={dateFormat}/>
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -156,7 +161,7 @@ export default function ModalEditPeticion(props) {
                   message: 'Selecione una fecha'
                 },
               ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} />
+                <DatePicker placeholder="--/--/--" showToday={false} format={dateFormat}/>
               </Form.Item>
             </Col>
             <Col span={8}>
@@ -167,7 +172,7 @@ export default function ModalEditPeticion(props) {
                   message: 'Selecione una fecha'
                 },
               ]}>
-                <DatePicker placeholder="--/--/--" showToday={false} />
+                <DatePicker placeholder="--/--/--" showToday={false} format={dateFormat} />
               </Form.Item>
             </Col>
           </Row>
