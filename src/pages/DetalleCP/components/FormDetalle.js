@@ -104,6 +104,13 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
       stepOrder: stepsData.length + 1,
     };
     //console.log(newStep);
+    setStepData({
+      precondition: "",
+      action: "",
+      expectedResult: "",
+      evidences: [],
+    });
+    setCurrent(0);
 
     //Creamos el nuevo step
     crearStep(newStep);

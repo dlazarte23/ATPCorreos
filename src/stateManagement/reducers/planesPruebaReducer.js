@@ -68,7 +68,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                peticiones: state.planesPrueba.filter(planPrueba => planPrueba.id !== action.payload.id)
+                planesPrueba: state.planesPrueba.filter(planPrueba => planPrueba.id !== action.payload)
             }
         default:
             return state;
