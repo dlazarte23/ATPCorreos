@@ -16,7 +16,7 @@ import { ProyectoBaseUrl as uri } from '../../Api/ApiUrl';
 
 import { get } from '../../utils/confAxios/petitionGet';
 import { post } from '../../utils/confAxios/petitionPost';
-
+import { patch } from "../../utils/confAxios/petitionPatch";
 /**
  * Action para obtener todos los planes de prueba por el id de la petición
  * @param {*} idPeticion 
@@ -153,3 +153,58 @@ const editarPlanDePruebaError = error => ({
     type: EDITAR_PLAN_PRUEBA_ERROR,
     payload: error
 });
+
+
+
+
+
+/**
+ * Action para la eliminar plan de prueba
+ * @param {*} id
+ */
+ export function eliminarPlandePruebaAction(id) {
+ 
+     return async (dispatch) => {
+        console.log("servicio", id)
+     }
+    //   dispatch(eliminarPlandePrueba());
+  
+    //   try {
+    //     // aqui se debe hacer la consulta a la API
+  
+    //     const usuario = localStorage.getItem("DATA_SESION");
+  
+    //     const { shortUser } = JSON.parse(usuario);
+  
+    //     const response = await patch(
+    //       `${uri.deletePeticiones}/${shortUser}/${id}`
+    //     );
+  
+    //     if (response.status === 200) {
+    //       // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+    //       message.success("Petición eliminada correctamente!");
+  
+    //       dispatch(eliminarPeticionExito(id));
+    //     }
+    //   } catch (error) {
+    //     message.error("Error al tratar de eliminar esta petición!");
+  
+    //     dispatch(eliminarPeticionError(error));
+    //   }
+    // };
+  }
+  
+//   const eliminarPlandePrueba = () => ({
+//     type: ELIMINAR_PETICION,
+//   });
+  
+//   const eliminarPeticionExito = (idPeticion) => ({
+//     type: ELIMINAR_PETICION_EXITO,
+//     payload: idPeticion,
+//   });
+  
+//   const eliminarPeticionError = (error) => ({
+//     type: ELIMINAR_PETICION_ERROR,
+//     payload: error,
+//   });
+  
