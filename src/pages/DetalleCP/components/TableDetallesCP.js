@@ -157,7 +157,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
     },
     {
       title: "Evidencias",
-      /*  dataIndex: "results",
+      dataIndex: "results",
       key: "results",
       editable: false,
       render: (_, row) => {
@@ -167,11 +167,11 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
             <Image
               width={80}
               height={80}
-              source={{ uri: `data:image/jpeg;base64,${item}` }}
+              src={`data:image/jpeg;base64,${item}`}
             />
           );
         });
-      }, */
+      },
     },
     {
       title: "Acciones",
