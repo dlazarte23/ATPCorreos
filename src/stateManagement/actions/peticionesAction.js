@@ -159,16 +159,23 @@ const agregarPeticionError = (error) => ({
  * Action para la edición de la peticion
  * @param {*} peticion
  */
-export function editarPeticionAction(values, id) {
+export function editarPeticionAction(values, id, idProyecto) {
+  
   return async (dispatch) => {
     dispatch(editarPeticion());
 
     try {
       const usuario = localStorage.getItem("DATA_SESION");
       const { shortUser } = JSON.parse(usuario);
+
+      values.expectedFinishDate = values.expectedFinishDate._d;
+      values.finishDate = values.finishDate._d;
+      values.startDate = values.startDate._d;
       values.user = shortUser;
-      values.id = 3;
-      values.project = 3;
+      values.id = id;
+      values.project = idProyecto;
+
+      console.log(values);
 
       const response = await patch(uri.editPeticiones, values);
 
