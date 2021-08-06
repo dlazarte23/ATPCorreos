@@ -33,6 +33,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
       title: "#",
       dataIndex: "testId",
       key: "id",
+      render: (id, _, index) => <>{index + 1}</>,
     },
     {
       title: "Nombre",
@@ -74,7 +75,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
               state: {
                 detalle: record,
                 peticion: peticion,
-                subject: subject
+                subject: subject,
                 /* testDescription: record.testDescription,
                 testId: record.testDescription,
                 testName: record.testDescription, */
