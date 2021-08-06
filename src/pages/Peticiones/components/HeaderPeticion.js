@@ -23,7 +23,8 @@ import {
 const { Option } = Select;
 
 export default function HeaderPeticion(props) {
-  const { filter, setFilter, showModal, setShowModal, setSearchTerm } = props;
+  const { filter, setFilter, showModal, setShowModal, setSearchTerm, usuario } =
+    props;
 
   const dispatch = useDispatch();
 
@@ -44,19 +45,18 @@ export default function HeaderPeticion(props) {
 
   const seleccionarProyecto = (codProyecto) =>
     dispatch(seleccionarProyectoAction(codProyecto));
-  const obtenerPeticiones = (codProyecto) =>
-    dispatch(obtenerPeticionesAction(codProyecto));
+  const obtenerPeticiones = (codProyecto, filter, shortUser) =>
+    dispatch(obtenerPeticionesAction(codProyecto, filter, shortUser));
 
   const buscarPeticiones = (value) => {
     // setteamos el proyecto para almacenar el general
 
     const proyecto = proyectos.filter((proyecto) => proyecto.id === value);
-    
 
     seleccionarProyecto(proyecto[0]);
 
     // actualizamos la lista de peticiones dependiendo el tipo de proyecto q le pasemos
-    obtenerPeticiones(value);
+    obtenerPeticiones(value, filter, usuario.shortUser);
   };
 
   const options = [
@@ -65,9 +65,12 @@ export default function HeaderPeticion(props) {
   ];
 
   const onChange = (e) => {
-    setFilter({
-      value: e.target.value,
-    });
+    setFilter(e.target.value);
+    obtenerPeticiones(
+      proyectoSeleccionado.id,
+      e.target.value,
+      usuario.shortUser
+    );
   };
 
   const handleChangeSearch = (event) => {
@@ -129,7 +132,7 @@ export default function HeaderPeticion(props) {
           onChange={onChange}
           disabled={proyectoSeleccionado === null ? true : false}
           size={"middle"}
-          value={filter.value}
+          value={filter}
           optionType="button"
           buttonStyle="solid"
           style={{ marginLeft: 10 }}
