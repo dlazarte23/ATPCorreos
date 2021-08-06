@@ -103,7 +103,6 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
   };
 
   const save = async (record) => {
-    console.log(record);
     try {
       const row = await form.validateFields();
       //console.log(row);
@@ -126,7 +125,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
         actualizarStep(newStep, record.stepId);
       }
     } catch (errInfo) {
-      console.log("Validate Failed:", errInfo);
+      //console.log("Validate Failed:", errInfo);
     }
   };
 
