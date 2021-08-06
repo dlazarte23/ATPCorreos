@@ -2,6 +2,12 @@ import { List } from 'antd';
 import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
+import {
+  Popconfirm,
+  Typography,
+} from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+
 
 const ListPlandePrueba = ({subjects}) => {
 
@@ -25,6 +31,15 @@ const ListPlandePrueba = ({subjects}) => {
             {item.subject} 
           
           </Link>
+   
+              <Popconfirm
+                title="¿Está seguro de eliminar?"
+                // onConfirm={() => eliminarStep(record.stepId)}
+                okText="Confirmar"
+                cancelText="Cancelar"
+              >
+                <DeleteOutlined title="Eliminar" />
+              </Popconfirm>
 
         </List.Item>
       )}
