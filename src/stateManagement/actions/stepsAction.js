@@ -7,7 +7,10 @@ import {
   ACTUALIZAR_STEP_ERROR,
   DESCARGAR_STEP,
   DESCARGAR_STEP_EXITO,
-  DESCARGAR_STEP_ERROR
+  DESCARGAR_STEP_ERROR,
+  ELIMINAR_STEP,
+  ELIMINAR_STEP_EXITO,
+  ELIMINAR_STEP_ERROR,
 } from "../types/stepsType";
 
 import { message } from "antd";
@@ -16,25 +19,25 @@ import { ProyectoBaseUrl as uri } from "../../Api/ApiUrl";
 
 import { get } from "../../utils/confAxios/petitionGet";
 import { post } from "../../utils/confAxios/petitionPost";
-import { put } from "../../utils/confAxios/petitionPut";
+import { patch } from "../../utils/confAxios/petitionPatch";
 
 /**
  * Actión para poder hacer el registro del step
  * @param {*} step  => recibe un objeto con el step que se va a mandar a crear
  */
 export function crearNuevoStepAction(step) {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(guardarStep());
 
     try {
-      post(uri.setTestStep, step);
-      dispatch(guardarStepExito());
+      const response = await post(uri.setTestStep, step);
+      console.log(response.status);
+      console.log(response.data);
 
-      /**
-       * En esta situación se esta mandao a llamar al action de obtener
-       * peiticiones unicamente por temas de que necesitamos el id de esta petición
-       */
-      //dispatch(obtenerPeticionesAction(idProyecto));
+      if (response.status === 201) {
+        message.success("Paso creado correctamente!");
+        dispatch(guardarStepExito(response.data));
+      }
     } catch (error) {
       message.error("Error al crear el step!");
       dispatch(guardarStepError(error));
@@ -43,18 +46,16 @@ export function crearNuevoStepAction(step) {
 }
 
 export function actualizarNuevoStepAction(step, id) {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(actualizarStep());
-
     try {
-      put(`${uri.setTestStep}/${id}`, step);
-      dispatch(actualizarStepExito());
+      const response = await patch(`${uri.setTestStep}/${id}`, step);
 
-      /**
-       * En esta situación se esta mandao a llamar al action de obtener
-       * peiticiones unicamente por temas de que necesitamos el id de esta petición
-       */
-      //dispatch(obtenerPeticionesAction(idProyecto));
+      if (response.request.status === 200) {
+        message.success("Paso editado correctamente!");
+        dispatch(actualizarStepExito(response.data));
+        //dispatch(descargarStep());
+      }
     } catch (error) {
       message.error("Error al actualizar el step!");
       dispatch(actualizarStepError(error));
@@ -68,8 +69,9 @@ const guardarStep = () => ({
 });
 
 // si se ha guardado en BBDD correctamente
-const guardarStepExito = () => ({
+const guardarStepExito = (step) => ({
   type: GUARDAR_STEP_EXITO,
+  payload: step,
 });
 
 // si hubo un error al guardar en la BBDD
@@ -98,40 +100,78 @@ const actualizarStepError = (error) => ({
  * Action para descargar el detalle de cada petición por su id de peticion
  * @param {*} idCasoDePrueba
  */
-export function descargarDetalleCPAction ( idCasoDePrueba ) {
-
-  return async ( dispatch ) => {
-
-    dispatch( descargarStep( ) );
+export function descargarDetalleCPAction(idCasoDePrueba) {
+  return async (dispatch) => {
+    dispatch(descargarStep());
 
     try {
-
       const response = await get(`${uri.getTestSteps}/${idCasoDePrueba}`);
 
-      console.log(response);
-    
-      dispatch( descargarStepExito( response ) );
+      //console.log(response);
 
-    } catch ( error ) {
-
-      dispatch( descargarStepError( error ) );
-
+      dispatch(descargarStepExito(response));
+    } catch (error) {
+      dispatch(descargarStepError(error));
     }
-
-  }
-
+  };
 }
 
 const descargarStep = () => ({
-  type: DESCARGAR_STEP
+  type: DESCARGAR_STEP,
 });
 
-const descargarStepExito = steps => ({
+const descargarStepExito = (steps) => ({
   type: DESCARGAR_STEP_EXITO,
-  payload: steps
+  payload: steps,
 });
 
-const descargarStepError = error => ({
+const descargarStepError = (error) => ({
   type: DESCARGAR_STEP_ERROR,
-  payload: error
+  payload: error,
+});
+
+/**
+ * Action para la eliminación de la petición
+ * @param {*} idStep
+ */
+export function eliminarStepAction(idStep) {
+  return async (dispatch) => {
+    dispatch(eliminarStep());
+
+    try {
+      // aqui se debe hacer la consulta a la API
+
+      const usuario = localStorage.getItem("DATA_SESION");
+
+      const { shortUser } = JSON.parse(usuario);
+
+      const response = await patch(`${uri.setTestStep}/${shortUser}/${idStep}`);
+
+      console.log(response);
+
+      if (response.status === 200) {
+        // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+        message.success("Paso eliminado correctamente!");
+        dispatch(eliminarStepExito(idStep));
+      }
+    } catch (error) {
+      message.error("Error al tratar de eliminar el Paso!");
+
+      dispatch(eliminarStepError(error));
+    }
+  };
+}
+
+const eliminarStep = () => ({
+  type: ELIMINAR_STEP,
+});
+
+const eliminarStepExito = (idStep) => ({
+  type: ELIMINAR_STEP_EXITO,
+  payload: idStep,
+});
+
+const eliminarStepError = (error) => ({
+  type: ELIMINAR_STEP_ERROR,
+  payload: error,
 });

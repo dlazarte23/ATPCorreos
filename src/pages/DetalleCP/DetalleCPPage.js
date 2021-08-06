@@ -1,7 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./detalle-style.css";
-import { Typography, Row, Col, PageHeader, Space, Descriptions, Spin } from "antd";
+import {
+  Typography,
+  Row,
+  Col,
+  PageHeader,
+  Space,
+  Descriptions,
+  Spin,
+} from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../assets/icons/InfoSvg";
 import FormDetalle from "./components/FormDetalle";
@@ -12,7 +20,8 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import {
   crearNuevoStepAction,
   actualizarNuevoStepAction,
-  descargarDetalleCPAction
+  descargarDetalleCPAction,
+  eliminarStepAction,
 } from "../../stateManagement/actions/stepsAction";
 
 const Content = ({ children, extra }) => (
@@ -35,28 +44,34 @@ const extraContent = (
 );
 
 export default function DetalleCPPage(props) {
-
   const { Title, Paragraph } = Typography;
   const { detalle } = props.location.state;
+
+  //console.log(detalle);
 
   const loading = useSelector((state) => state.detalleCasoPrueba.loading);
 
   const dispatch = useDispatch();
+
   const crearStep = (step) => dispatch(crearNuevoStepAction(step));
+
   const actualizarStep = (step, id) =>
     dispatch(actualizarNuevoStepAction(step, id));
 
-  const obtenerDetalleCP = idCasosPrueba => dispatch( descargarDetalleCPAction( idCasosPrueba ) );
+  const obtenerDetalleCP = (idCasosPrueba) =>
+    dispatch(descargarDetalleCPAction(idCasosPrueba));
 
-  useEffect(( ) => {
+  const eliminarStep = (idStep) => dispatch(eliminarStepAction(idStep));
 
+  useEffect(() => {
     // ah este metodo pasarle el id del caso de uso, que por ahora no se puede ya que viene en null
-    obtenerDetalleCP(2);
-
-  }, [ ]);
+    obtenerDetalleCP(detalle.testId);
+  }, []);
 
   // aqui ya tendriamos lo que seria la lista de casos de prueba
-  const stepss = useSelector( state => state.detalleCasoPrueba.detallesCasoPrueba );
+  const stepss = useSelector(
+    (state) => state.detalleCasoPrueba.detallesCasoPrueba
+  );
 
   const renderContent = () => (
     <div className="card-information">
@@ -115,7 +130,11 @@ export default function DetalleCPPage(props) {
         <div className="contenedor">
           <Row className="steps-pasos">
             <Col span={24} className="setps">
-              <FormDetalle detalle={detalle} crearStep={crearStep} />
+              <FormDetalle
+                detalle={detalle}
+                stepsData={stepss}
+                crearStep={crearStep}
+              />
             </Col>
           </Row>
         </div>
@@ -126,7 +145,9 @@ export default function DetalleCPPage(props) {
             <Title level={4}>Listado de Todos los Pasos</Title>
             <TableDetallesCP
               detalle={detalle}
+              steps={useSelector((state) => state.detalleCasoPrueba)}
               actualizarStep={actualizarStep}
+              eliminarStep={eliminarStep}
             />
           </Col>
         </Row>

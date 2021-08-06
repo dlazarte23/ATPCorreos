@@ -10,10 +10,10 @@ const ProyectoBaseUrl = {
   getCasosDePrueba: `${process.env.REACT_APP_ATPCORREOS}testCase/testPlan`,
   getDocumentoXml: `${process.env.REACT_APP_ATPCORREOS}documents/export/xml`,
   getDocumentoExcel: `${process.env.REACT_APP_ATPCORREOS}export/excel`,
-  setTestStep: `${process.env.REACT_APP_ATPCORREOS}teststep`,
-  getTestSteps: `${process.env.REACT_APP_ATPCORREOS}teststep/test`,
+  setTestStep: `${process.env.REACT_APP_ATPCORREOS}step`,
+  getTestSteps: `${process.env.REACT_APP_ATPCORREOS}step/testCase`,
   getTestPlan: `${process.env.REACT_APP_ATPCORREOS}springs`,
-  setTestPlan:`${process.env.REACT_APP_ATPCORREOS}testplans`,
+  setTestPlan: `${process.env.REACT_APP_ATPCORREOS}testplans`,
 };
 
 const UsuarioBaseUrl = {

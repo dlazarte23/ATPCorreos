@@ -67,7 +67,10 @@ const TableListadoCP = ({ usuario }) => {
             to={{
               pathname: "/peticiones/creacion-de-casos-de-prueba/detalle",
               state: {
-                detalle: record.responseTestSteps,
+                detalle: record,
+                /* testDescription: record.testDescription,
+                testId: record.testDescription,
+                testName: record.testDescription, */
               },
             }}
             className="btn-yellow-link"

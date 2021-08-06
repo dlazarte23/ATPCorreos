@@ -21,9 +21,9 @@ import { message } from "antd";
 
 import { ProyectoBaseUrl as uri } from "../../Api/ApiUrl";
 
-import { get } from '../../utils/confAxios/petitionGet';
-import { post } from '../../utils/confAxios/petitionPost';
-import { patch } from '../../utils/confAxios/petitionPatch';
+import { get } from "../../utils/confAxios/petitionGet";
+import { post } from "../../utils/confAxios/petitionPost";
+import { patch } from "../../utils/confAxios/petitionPatch";
 
 /**
  * Actión para obtener la lista de proyectos
@@ -128,7 +128,7 @@ export function crearNuevaPeticionAction(peticion) {
 
       if (response.status === 201) {
         message.success("Petición creada correctamente!");
-        dispatch(agregarPeticionExito(response.data));
+        dispatch(agregarPeticionExito(peticion));
       }
     } catch (error) {
       message.error("Error al crear la petición!");
@@ -159,39 +159,30 @@ const agregarPeticionError = (error) => ({
  * Action para la edición de la peticion
  * @param {*} peticion
  */
-export function editarPeticionAction( peticion ) {
+export function editarPeticionAction(peticion) {
+  return async (dispatch) => {
+    dispatch(editarPeticion());
 
-    return async ( dispatch ) => {
+    try {
+      /**
+       * Aqui se debe hacer la petición a la API
+       * si esta API devuelve como respuesta un 200 o la petición modificada
+       * pasarsela a la función del dispatch, dentro del if
+       */
+      const response = await patch(uri.editPeticiones, peticion);
 
-        dispatch( editarPeticion( ) );
-        
-        try {
+      if (response.status === 201) {
+        message.success("Petición modificada correctamente!");
 
-            /**
-             * Aqui se debe hacer la petición a la API
-             * si esta API devuelve como respuesta un 200 o la petición modificada
-             * pasarsela a la función del dispatch, dentro del if
-             */      
-            const response = await patch(uri.editPeticiones, peticion);     
-            
-            if ( response.status === 201 ) {
+        dispatch(editarPeticionExito(peticion));
+      }
+    } catch (error) {
+      dispatch(editarPeticionError());
 
-                message.success("Petición modificada correctamente!");
-
-                dispatch( editarPeticionExito( peticion ) );
-
-            }
-
-        } catch ( error ) {
-
-            dispatch( editarPeticionError( ) );
-            
-            message.error("Error al trata de editar la petición!");
-
-        }
-
+      message.error("Error al trata de editar la petición!");
     }
   };
+}
 
 const editarPeticion = () => ({
   type: EDITAR_PETICION,
@@ -211,7 +202,6 @@ const editarPeticionError = (error) => ({
  */
 export function eliminarPeticionAction(idPeticion) {
   return async (dispatch) => {
-
     dispatch(eliminarPeticion());
 
     try {
@@ -220,23 +210,19 @@ export function eliminarPeticionAction(idPeticion) {
       const usuario = localStorage.getItem("DATA_SESION");
 
       const { shortUser } = JSON.parse(usuario);
-      
 
-      const response = await patch(`${uri.deletePeticiones}/${shortUser}/${idPeticion}`);
+      const response = await patch(
+        `${uri.deletePeticiones}/${shortUser}/${idPeticion}`
+      );
 
-      console.log( response );
+      console.log(response);
 
+      if (response.status === 200) {
+        // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+        message.success("Petición eliminada correctamente!");
 
-      if ( response.status === 200 ) {
-
-       // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
-       message.success("Petición eliminada correctamente!");
-
-       dispatch(eliminarPeticionExito(idPeticion));
-
-    }
-
-     
+        dispatch(eliminarPeticionExito(idPeticion));
+      }
     } catch (error) {
       message.error("Error al tratar de eliminar esta petición!");
 

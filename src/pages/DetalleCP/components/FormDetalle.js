@@ -19,21 +19,21 @@ import { crearNuevoStepAction } from "../../../stateManagement/actions/stepsActi
 
 const { Step } = Steps;
 
-const FormDetalle = ({ detalle, crearStep }) => {
+const FormDetalle = ({ detalle, stepsData, crearStep }) => {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [current, setCurrent] = useState(0);
   const [stepData, setStepData] = useState({
     precondition: "",
     action: "",
     expectedResult: "",
-    evidences: "",
+    evidences: [],
   });
 
   //console.log(detalle);
 
   const loading = useSelector((state) => state.peticiones.loading);
+  const usuario = useSelector((state) => state.usuario.usuario);
   const dispatch = useDispatch();
-  //const crearStep = (step) => dispatch(crearNuevoStepAction(step));
 
   const steps = [
     {
@@ -93,26 +93,21 @@ const FormDetalle = ({ detalle, crearStep }) => {
   };
 
   const onSaveNewStep = () => {
-    //message.success("Paso agregado!");
     setConfirmLoading(!loading);
     setTimeout(() => {
       setConfirmLoading(false);
     }, 2000);
 
     const newStep = {
-      step: [
-        {
-          result: stepData.evidences,
-          stepDescription: stepData.precondition,
-          stepExpectedResults: stepData.expectedResult,
-          stepName: detalle.length + 1,
-          testStatus: 1,
-        },
-      ],
-      testComments: stepData.action,
-      testDescription: detalle[0].testDescription,
-      testId: detalle[0].testId,
+      idTestCase: detalle.testId,
+      results: stepData.evidences,
+      shortUsername: usuario.shortUser,
+      stepComments: stepData.action,
+      stepDescription: stepData.precondition,
+      stepExpectedResult: stepData.expectedResult,
+      stepOrder: stepsData.length + 1,
     };
+    //console.log(newStep);
 
     //Creamos el nuevo step
     crearStep(newStep);

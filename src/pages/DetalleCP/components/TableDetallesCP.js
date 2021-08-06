@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   Table,
@@ -11,6 +12,10 @@ import {
   Upload,
 } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+
+/* // actions de redux
+import { eliminarStepAction } from "../../../stateManagement/actions/stepsAction"; */
+
 const { TextArea } = Input;
 const EditableContext = React.createContext();
 
@@ -69,57 +74,57 @@ const EditableCell = (props) => {
   return <EditableContext.Consumer>{renderCell}</EditableContext.Consumer>;
 };
 
-const TableDetallesCP = ({ detalle, actualizarStep }) => {
+const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
   const [form] = Form.useForm();
-  const [dataTable, setDataTable] = useState(detalle);
+  const [dataTable, setDataTable] = useState(steps.detallesCasoPrueba);
+  const usuario = useSelector((state) => state.usuario.usuario);
+  //const dispatch = useDispatch();
+
+  useEffect(() => {
+    setDataTable(steps.detallesCasoPrueba);
+  }, [steps]);
+
   const [editingKey, setEditingKey] = useState("");
-  const isEditing = (record) => record.step.stepName === editingKey;
+  const isEditing = (record) => record.stepId === editingKey;
 
   const edit = (record) => {
     //console.log(record);
     form.setFieldsValue({
-      result: "", //evidencias|
+      result: [], //evidencias|
       stepDescription: "", //acción
       stepExpectedResults: "", //resultado esperado
       ...record,
     });
-    setEditingKey(record.step.stepName);
+    setEditingKey(record.stepId);
   };
 
   const cancel = () => {
     setEditingKey("");
   };
 
-  const save = async (key) => {
+  const save = async (record) => {
+    console.log(record);
     try {
       const row = await form.validateFields();
+      //console.log(row);
       const newData = [...dataTable];
-      const index = newData.findIndex((item) => key === item.step.stepName);
+      const index = newData.findIndex((item) => record.stepId === item.stepId);
       if (index > -1) {
         const item = newData[index];
         const newStep = {
-          step: [
-            {
-              result: item.step.result,
-              stepDescription: row.step.stepDescription,
-              stepExpectedResults: row.step.stepExpectedResults,
-              stepName: item.step.stepName,
-              testStatus: 1,
-            },
-          ],
-          testComments: row.testComments,
-          testDescription: item.testDescription,
-          testId: item.testId,
+          idTestCase: detalle.testId,
+          results: record.results,
+          shortUsername: usuario.shortUser,
+          stepComments: row.stepComments,
+          stepDescription: row.stepDescription,
+          stepExpectedResult: row.stepExpectedResult,
+          stepOrder: record.stepId,
         };
+
         console.log(newStep);
         setEditingKey("");
-        actualizarStep(newStep, item.testId);
-      } /*  else {
-        newData.push(row);
-        console.log(row);
-        setDataTable(newData);
-        setEditingKey("");
-      } */
+        actualizarStep(newStep, record.stepId);
+      }
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
     }
@@ -129,42 +134,45 @@ const TableDetallesCP = ({ detalle, actualizarStep }) => {
     {
       title: "#",
       //dataIndex: ["step", "id"],
-      dataIndex: ["step", "stepName"],
-      key: "stepName",
+      dataIndex: "stepOrder",
+      key: "stepOrder",
       editable: false,
     },
     {
       title: "Precondición",
-      dataIndex: "testComments",
-      key: "testComments",
+      dataIndex: "stepDescription",
+      key: "stepDescription",
       editable: true,
     },
     {
       title: "Acción",
-      dataIndex: ["step", "stepDescription"],
-      key: ["step", "stepDescription"],
+      dataIndex: "stepComments",
+      key: "stepComments",
       editable: true,
     },
     {
       title: "Resultado Esperado",
-      dataIndex: ["step", "stepExpectedResults"],
-      key: ["step", "stepExpectedResults"],
+      dataIndex: "stepExpectedResult",
+      key: "stepExpectedResult",
       editable: true,
     },
     {
       title: "Evidencias",
-      dataIndex: ["step", "result"],
-      key: ["step", "result"],
+      /*  dataIndex: "results",
+      key: "results",
       editable: false,
-      render: (record) => {
-        return (
-          <Image
-            width={80}
-            height={80}
-            source={{ uri: `data:image/jpeg;base64,${record}` }}
-          />
-        );
-      },
+      render: (_, row) => {
+        row.results.map(function (item) {
+          //console.log(item);
+          return (
+            <Image
+              width={80}
+              height={80}
+              source={{ uri: `data:image/jpeg;base64,${item}` }}
+            />
+          );
+        });
+      }, */
     },
     {
       title: "Acciones",
@@ -174,7 +182,7 @@ const TableDetallesCP = ({ detalle, actualizarStep }) => {
         return editable ? (
           <span>
             <a
-              onClick={() => save(record.step.stepName)}
+              onClick={() => save(record)}
               style={{
                 marginRight: 8,
               }}
@@ -194,13 +202,10 @@ const TableDetallesCP = ({ detalle, actualizarStep }) => {
               <EditOutlined title="Editar" />
             </Typography.Link>
             <Divider type="vertical" />
-            <Typography.Link
-              disabled={editingKey !== ""}
-              /* onClick={() => onDelete(record)} */
-            >
+            <Typography.Link disabled={editingKey !== ""}>
               <Popconfirm
                 title="¿Está seguro de eliminar?"
-                /* onConfirm={() => handleDelete(record.key)} */
+                onConfirm={() => eliminarStep(record.stepId)}
                 okText="Confirmar"
                 cancelText="Cancelar"
               >
@@ -237,18 +242,18 @@ const TableDetallesCP = ({ detalle, actualizarStep }) => {
 
   return (
     <Form form={form} component={false}>
-      <Table
-        components={components}
-        bordered
-        size="middle"
-        columns={cols}
-        dataSource={dataTable}
-        //rowKey="id"
-        rowKey={(record) => record.key}
-        //rowKey={["step", "stepName"]}
-        rowClassName="editable-row"
-        pagination={paginationProps}
-      />
+      {
+        <Table
+          components={components}
+          bordered
+          size="middle"
+          columns={cols}
+          dataSource={dataTable}
+          rowKey={(record) => record.key}
+          rowClassName="editable-row"
+          pagination={paginationProps}
+        />
+      }
     </Form>
   );
 };

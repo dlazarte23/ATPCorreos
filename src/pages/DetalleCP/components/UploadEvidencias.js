@@ -24,19 +24,19 @@ const getBase64 = (file) => {
 
 const UploadEvidencias = (props) => {
   const { stepData, setStepData } = props;
-
   const draggerProps = {
-    multiple: false,
-    maxCount: 1,
+    multiple: true,
+    //maxCount: 1,
     accept: ".jpg,.png,.gif",
     beforeUpload: async (file) => {
       const base64Img = await getBase64(file);
-      setStepData({ ...stepData, evidences: base64Img });
+      const evidencesList = stepData.evidences;
+      evidencesList.push(base64Img);
+      setStepData({ ...stepData, evidences: evidencesList });
       return false;
     },
     onDrop(e) {
       setStepData({ ...stepData, evidences: [] });
-      //console.log("Dropped files", e.dataTransfer.files);
     },
   };
 

@@ -41,7 +41,7 @@ export default function Peticionespage() {
 
   useEffect(() => {
     const results = peticiones.filter((peticion) =>
-      peticion.codPeticion.includes(searchTerm.toLowerCase())
+      peticion.name?.includes(searchTerm.toLowerCase())
     );
     setFilteredData(results);
   }, [searchTerm]);
