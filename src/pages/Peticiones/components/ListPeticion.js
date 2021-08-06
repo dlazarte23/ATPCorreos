@@ -102,14 +102,14 @@ const ListItem = ({ item, handleDetalle }) => {
           <Row>
             <Col span={18}>
               <Descriptions size="small" column={1}>
-                <Descriptions.Item label="Id. Petición">
+                <Descriptions.Item label="Id. petición">
                   <IconText
                     icon={NumberOutlined}
                     text={item.petitionCode}
                     key={item.id}
                   />
                 </Descriptions.Item>
-                <Descriptions.Item label="Fecha Inicio">
+                <Descriptions.Item label="Fecha inicio">
                   <IconText
                     icon={CalendarOutlined}
                     text={item.startDate}

@@ -70,7 +70,7 @@ export default function ModalEditPeticion(props) {
 
   return (
     <>
-      <Tooltip placement="left" title="Editar Petición">
+      <Tooltip placement="left" title="Editar petición">
         <Button
           icon={<EditOutlined />}
           shape="round"
@@ -119,7 +119,7 @@ export default function ModalEditPeticion(props) {
             <Col span={18}>
               <Form.Item
                 name="petitionName"
-                label="Nombre Petición"
+                label="Nombre petición"
                 rules={[
                   {
                     required: true,
@@ -170,7 +170,7 @@ export default function ModalEditPeticion(props) {
 
           <Row gutter={16}>
             <Col span={8}>
-              <Form.Item name="estimatedHours" label="Horas Estimadas" rules={[
+              <Form.Item name="estimatedHours" label="Horas estimadas" rules={[
                 {
                   required: true,
                   type: "number",
