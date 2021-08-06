@@ -7,7 +7,10 @@ import {
     AGREGAR_PLAN_PRUEBA_ERROR,
     EDITAR_PLAN_PRUEBA,
     EDITAR_PLAN_PRUEBA_EXITO,
-    EDITAR_PLAN_PRUEBA_ERROR
+    EDITAR_PLAN_PRUEBA_ERROR,
+    ELIMINAR_PLAN_PRUEBA,
+    ELIMINAR_PLAN_PRUEBA_EXITO,
+    ELIMINAR_PLAN_PRUEBA_ERROR
 } from '../types/planesPruebaType';
 
 import { message } from 'antd';
@@ -165,8 +168,7 @@ const editarPlanDePruebaError = error => ({
  export function eliminarPlandePruebaAction(id) {
  
      return async (dispatch) => {
-        console.log("servicio", id)
-    //   dispatch(eliminarPlandePrueba());
+       dispatch(eliminarPlandePrueba());
   
        try {
          // aqui se debe hacer la consulta a la API
@@ -178,34 +180,32 @@ const editarPlanDePruebaError = error => ({
         const response = await patch(
           `${uri.deleteTestPlan}/${shortUser}/${id}`
         );
-    console.log(response)
   
-    //     if (response.status === 200) {
-    //       // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
-    //       message.success("Petición eliminada correctamente!");
+        if (response.status === 200) {
+          // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+          message.success("Petición eliminada correctamente!");
   
-    //       dispatch(eliminarPeticionExito(id));
-    //     }
+          dispatch(eliminarPlandePruebaExito(id));
+        }
     } catch (error) {
      message.error("Error al tratar de eliminar esta petición!");
   
-    //     dispatch(eliminarPeticionError(error));
+        dispatch(eliminarPlandePruebaError(error));
       }
-    // };
-  }
+  };
 }
   
-//   const eliminarPlandePrueba = () => ({
-//     type: ELIMINAR_PETICION,
-//   });
+  const eliminarPlandePrueba = () => ({
+    type: ELIMINAR_PLAN_PRUEBA,
+  });
   
-//   const eliminarPeticionExito = (idPeticion) => ({
-//     type: ELIMINAR_PETICION_EXITO,
-//     payload: idPeticion,
-//   });
+  const eliminarPlandePruebaExito = (idPlandePrueba) => ({
+    type: ELIMINAR_PLAN_PRUEBA_EXITO,
+    payload: idPlandePrueba,
+  });
   
-//   const eliminarPeticionError = (error) => ({
-//     type: ELIMINAR_PETICION_ERROR,
-//     payload: error,
-//   });
+  const eliminarPlandePruebaError = (error) => ({
+    type: ELIMINAR_PLAN_PRUEBA_ERROR,
+    payload: error,
+  });
   
