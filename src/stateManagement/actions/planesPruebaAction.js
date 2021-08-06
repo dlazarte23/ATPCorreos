@@ -175,11 +175,9 @@ const editarPlanDePruebaError = error => ({
   
         const usuario = localStorage.getItem("DATA_SESION");
   
-     const { shortUser } = JSON.parse(usuario);
+        const { shortUser } = JSON.parse(usuario);
   
-        const response = await patch(
-          `${uri.deleteTestPlan}/${shortUser}/${id}`
-        );
+        const response = await patch(`${uri.deleteTestPlan}/${shortUser}/${id}`);
   
         if (response.status === 200) {
           // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
@@ -202,7 +200,7 @@ const editarPlanDePruebaError = error => ({
   const eliminarPlandePruebaExito = (idPlandePrueba) => ({
     type: ELIMINAR_PLAN_PRUEBA_EXITO,
     payload: idPlandePrueba,
-  });
+  })
   
   const eliminarPlandePruebaError = (error) => ({
     type: ELIMINAR_PLAN_PRUEBA_ERROR,
