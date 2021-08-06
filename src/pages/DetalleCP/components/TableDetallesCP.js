@@ -162,7 +162,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       dataIndex: "results",
       key: "results",
       editable: false,
-      render: (_, row) => {
+      render: (_, row) =>
         row.results?.map(function (item) {
           //console.log(item);
           return (
@@ -172,8 +172,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
               src={`data:image/jpeg;base64,${item}`}
             />
           );
-        });
-      },
+        }),
     },
     {
       title: "Acciones",
