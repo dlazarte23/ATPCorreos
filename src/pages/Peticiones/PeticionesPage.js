@@ -4,7 +4,6 @@ import {
   HeaderPeticion,
   ListPeticiones,
   ModalCreatePeticion,
-  ModalDetallePeticion,
 } from "./components";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
@@ -115,11 +114,6 @@ export default function Peticionespage() {
           )}
         </Row>
         <br />
-
-        <ModalDetallePeticion
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
         <ModalCreatePeticion
           showModal={showModal}
           setShowModal={setShowModal}

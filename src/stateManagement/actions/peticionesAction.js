@@ -167,10 +167,6 @@ export function editarPeticionAction(values, id, idProyecto) {
     try {
       const usuario = localStorage.getItem("DATA_SESION");
       const { shortUser } = JSON.parse(usuario);
-
-      values.expectedFinishDate = values.expectedFinishDate._d;
-      values.finishDate = values.finishDate._d;
-      values.startDate = values.startDate._d;
       values.user = shortUser;
       values.id = id;
       values.project = idProyecto;
@@ -178,11 +174,11 @@ export function editarPeticionAction(values, id, idProyecto) {
       console.log(values);
 
       const response = await patch(uri.editPeticiones, values);
-
-      if (response.status === 201) {
+console.log(response)
+      if (response.status === 200) {
         message.success("Petición modificada correctamente!");
 
-        dispatch(editarPeticionExito(values));
+        dispatch(editarPeticionExito(response.data));
       }
     } catch (error) {
       dispatch(editarPeticionError());
