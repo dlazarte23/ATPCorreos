@@ -23,7 +23,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
 
   const casosDePruebas = useSelector(
     (state) => state.casosPruebas.casosPruebas
-  );
+  ).map((elem) => ({ ...elem, key: elem.testId }));
 
   const handleDelete = (testId) =>
     dispatch(eliminarCasosPruebaAction(usuario.shortUser, testId));
