@@ -85,12 +85,18 @@ const seleccionarProyecto = (codProyecto) => ({
  * Actión para traernos todas las peticiones por el cod de proyecto que exista.
  * @param {*} codProyecto
  */
-export function obtenerPeticionesAction(idProyecto) {
+export function obtenerPeticionesAction(idProyecto, filter, shortUser) {
   return async (dispatch) => {
     dispatch(obtenerPeticion());
-
     try {
-      const response = await get(`${uri.getPeticiones}/${idProyecto}`);
+      let response;
+      if (filter === "Personales") {
+        response = await get(
+          `${uri.getPeticionesByUser}/${shortUser}/${idProyecto}`
+        );
+      } else {
+        response = await get(`${uri.getPeticiones}/${idProyecto}`);
+      }
 
       dispatch(obtenerPeticionExito(response.springList));
     } catch (error) {
@@ -160,7 +166,6 @@ const agregarPeticionError = (error) => ({
  * @param {*} peticion
  */
 export function editarPeticionAction(values, id, idProyecto) {
-  
   return async (dispatch) => {
     dispatch(editarPeticion());
 
@@ -174,7 +179,7 @@ export function editarPeticionAction(values, id, idProyecto) {
       console.log(values);
 
       const response = await patch(uri.editPeticiones, values);
-console.log(response)
+      console.log(response);
       if (response.status === 200) {
         message.success("Petición modificada correctamente!");
 

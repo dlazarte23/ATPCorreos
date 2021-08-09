@@ -27,7 +27,7 @@ const peticionesRoute = {
 const creacionCpRoute = {
   path: "/peticiones/creacion-de-casos-de-prueba",
   component: CasosPruebasPage,
-  breadcrumb: "Creación de Casos de Prueba",
+  breadcrumb: "Creación de casos de prueba",
 };
 
 const creacionDetalleCpRoute = {

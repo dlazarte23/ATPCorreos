@@ -4,6 +4,7 @@ const ProyectoBaseUrl = {
   getProyectos: `${process.env.REACT_APP_ATPCORREOS}allprojectuser`,
   setPeticion: `${process.env.REACT_APP_ATPCORREOS}springs`,
   getPeticiones: `${process.env.REACT_APP_ATPCORREOS}springs/projects`,
+  getPeticionesByUser: `${process.env.REACT_APP_ATPCORREOS}springs/users`,
   editPeticiones: `${process.env.REACT_APP_ATPCORREOS}springs`,
   deletePeticiones: `${process.env.REACT_APP_ATPCORREOS}springs/delete`,
   setCasoDePrueba: `${process.env.REACT_APP_ATPCORREOS}testCase`,

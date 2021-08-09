@@ -21,14 +21,13 @@ export default function Peticionespage() {
   const loading = useSelector((state) => state.peticiones.loading);
   const peticiones = useSelector((state) => state.peticiones.peticiones);
   const proyectos = useSelector((state) => state.peticiones.proyectos);
+  const usuario = useSelector((state) => state.usuario.usuario);
 
   const proyectoSeleccionado = useSelector(
     (state) => state.peticiones.proyectoSeleccionado
   );
 
-  const [filter, setFilter] = useState({
-    value: "Personales",
-  });
+  const [filter, setFilter] = useState("Personales");
 
   const [showModal, setShowModal] = useState({
     detail: false,
@@ -39,7 +38,7 @@ export default function Peticionespage() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const results = peticiones.filter( peticion =>
+    const results = peticiones.filter((peticion) =>
       peticion.petitionCode.includes(searchTerm.toLowerCase())
     );
     setFilteredData(results);
@@ -68,57 +67,60 @@ export default function Peticionespage() {
   };
 
   const data = searchTerm !== "" ? filteredData : peticiones;
-  const loadingPP = useSelector(state => state.planesPrueba.loading);
+  const loadingPP = useSelector((state) => state.planesPrueba.loading);
 
   return (
     <Spin spinning={loading} tip="Cargando..." size="large">
       <Spin spinning={loadingPP} tip="Un momento..." size="large">
-      <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
-        <Row>
-          <Col span={24}>
-            <HeaderPeticion
-              filter={filter}
-              setFilter={setFilter}
-              showModal={showModal}
-              setShowModal={setShowModal}
-              setSearchTerm={setSearchTerm}
-            />
-          </Col>
-        </Row>
+        <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
+          <Row>
+            <Col span={24}>
+              <HeaderPeticion
+                filter={filter}
+                setFilter={setFilter}
+                showModal={showModal}
+                setShowModal={setShowModal}
+                setSearchTerm={setSearchTerm}
+                usuario={usuario}
+              />
+            </Col>
+          </Row>
 
-        <Row style={{ marginTop: 20 }}>
-          {proyectos.length !== 0 ? (
-            data.length !== 0 && !loading ? (
-              <Col span={getSpan()} offset={getOffset()}>
-                <ListPeticiones
-                  peticiones={data}
-                  showModal={showModal}
-                  setShowModal={setShowModal}
+          <Row style={{ marginTop: 20 }}>
+            {proyectos.length !== 0 ? (
+              data.length !== 0 ? (
+                <Col span={getSpan()} offset={getOffset()}>
+                  <ListPeticiones
+                    peticiones={data}
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                  />
+                </Col>
+              ) : (
+                <MessageError
+                  icono={dataNotFound}
+                  mensaje={
+                    proyectoSeleccionado === null
+                      ? "Debe seleccionar un proyecto."
+                      : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${
+                          proyectoSeleccionado.name
+                        }.`
+                  }
                 />
-              </Col>
+              )
             ) : (
               <MessageError
-                icono={dataNotFound}
-                mensaje={
-                  proyectoSeleccionado === null
-                    ? "Debe seleccionar un proyecto."
-                    : `No existe peticiones creadas en el proyecto: ${proyectoSeleccionado.name}.`
-                }
+                icono={alertError}
+                mensaje={"Oops, error con el servidor!"}
               />
-            )
-          ) : (
-            <MessageError
-              icono={alertError}
-              mensaje={"Oops, error con el servidor!"}
-            />
-          )}
-        </Row>
-        <br />
-        <ModalCreatePeticion
-          showModal={showModal}
-          setShowModal={setShowModal}
-        />
-      </Scrollbars>
+            )}
+          </Row>
+          <br />
+          <ModalCreatePeticion
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+        </Scrollbars>
       </Spin>
     </Spin>
   );
