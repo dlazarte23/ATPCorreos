@@ -193,7 +193,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       editable: true,
     },
     {
-      title: "Resultado Esperado",
+      title: "Resultado esperado",
       dataIndex: "stepExpectedResult",
       key: "stepExpectedResult",
       editable: true,

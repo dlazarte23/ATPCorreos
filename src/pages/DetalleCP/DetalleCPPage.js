@@ -62,11 +62,11 @@ export default function DetalleCPPage(props) {
   const eliminarStep = (idStep) => dispatch(eliminarStepAction(idStep));
 
   useEffect(() => {
-    // ah este metodo pasarle el id del caso de uso, que por ahora no se puede ya que viene en null
     obtenerDetalleCP(detalle.testId);
+
+    // eslint-disable-next-line 
   }, [detalle.testId]);
 
-  // aqui ya tendriamos lo que seria la lista de casos de prueba
   const stepss = useSelector(
     (state) => state.detalleCasoPrueba.detallesCasoPrueba
   );
@@ -79,12 +79,12 @@ export default function DetalleCPPage(props) {
           className="case-header"
           title={
             <Title level={5} className="description-info">
-              {detalle.testName}
+              {`Nombre del caso de prueba: ${detalle.testName}`}
             </Title>
           }
         >
           <Paragraph className="description-info">
-            {detalle.testDescription}
+            {`Descripción: ${detalle.testDescription}`}
           </Paragraph>
           <Descriptions size="small" column={3} className="description-info">
             <Descriptions.Item label="Id. petición">
