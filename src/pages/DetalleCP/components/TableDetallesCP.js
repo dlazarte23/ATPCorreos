@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import {
   Table,
@@ -10,12 +10,13 @@ import {
   Divider,
   Image,
   Upload,
-  Button
+  Button,
 } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-
-/* // actions de redux
-import { eliminarStepAction } from "../../../stateManagement/actions/stepsAction"; */
+import {
+  DeleteOutlined,
+  EditOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
 
 const { TextArea } = Input;
 const EditableContext = React.createContext();
@@ -31,7 +32,28 @@ const paginationProps = {
 };
 
 const EditableCell = (props) => {
+  const [fileList, setFileList] = useState([]);
+
   const renderCell = () => {
+    const onPreview = async (file) => {
+      let src = file.url;
+      if (!src) {
+        src = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file.originFileObj);
+          reader.onload = () => resolve(reader.result);
+        });
+      }
+      const image = new Image();
+      image.src = src;
+      const imgWindow = window.open(src);
+      imgWindow.document.write(image.outerHTML);
+    };
+
+    const onChange = ({ fileList: newFileList }) => {
+      setFileList(newFileList);
+    };
+
     const {
       editing,
       dataIndex,
@@ -42,11 +64,31 @@ const EditableCell = (props) => {
       children,
       ...restProps
     } = props;
+
+    setFileList(record?.results);
+
+    const fileList = [
+      {
+        uid: "-1",
+        name: "evidencia.png",
+        status: "done",
+        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+        thumbUrl:
+          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+      },
+    ];
+
     const inputNode =
       title === "Evidencias" ? (
-        <Upload listType="picture-card" style={{ width: 80, height: 80 }} />
+        record.results?.map(function (item) {
+          return (
+            <Upload listType="picture" defaultFileList={[...fileList]}>
+              <Button icon={<UploadOutlined />}>Cargar</Button>
+            </Upload>
+          );
+        })
       ) : (
-        <TextArea autoSize={{ minRows: 5, maxRows: 5 }} />
+        <TextArea autoSize={{ minRows: 6, maxRows: 6 }} />
       );
     return (
       <td {...restProps}>
@@ -79,7 +121,6 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
   const [form] = Form.useForm();
   const [dataTable, setDataTable] = useState(steps.detallesCasoPrueba);
   const usuario = useSelector((state) => state.usuario.usuario);
-  //const dispatch = useDispatch();
 
   useEffect(() => {
     setDataTable(steps.detallesCasoPrueba);
@@ -110,7 +151,6 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       const newData = [...dataTable];
       const index = newData.findIndex((item) => record.stepId === item.stepId);
       if (index > -1) {
-        
         const newStep = {
           idTestCase: detalle.testId,
           results: record.results,
@@ -118,7 +158,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
           stepComments: row.stepComments,
           stepDescription: row.stepDescription,
           stepExpectedResult: row.stepExpectedResult,
-          stepOrder: /* record.stepId */ row.stepOrder,
+          stepOrder: row.stepOrder,
         };
 
         console.log(newStep);
@@ -136,7 +176,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       //dataIndex: ["step", "id"],
       dataIndex: "stepOrder",
       key: "stepOrder",
-      editable: true,
+      editable: false,
       defaultSortOrder: "ascend",
       sorter: (a, b) => a.stepOrder - b.stepOrder,
     },
@@ -162,16 +202,18 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       title: "Evidencias",
       dataIndex: "results",
       key: "results",
-      editable: false,
+      editable: true,
       render: (_, row) =>
         row.results?.map(function (item) {
           //console.log(item);
           return (
-            <Image
-              width={80}
-              height={80}
-              src={`data:image/jpeg;base64,${item}`}
-            />
+            <Image.PreviewGroup>
+              <Image
+                width={80}
+                height={80}
+                src={`data:image/jpeg;base64,${item}`}
+              />
+            </Image.PreviewGroup>
           );
         }),
     },
@@ -182,7 +224,8 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
         const editable = isEditing(record);
         return editable ? (
           <>
-            <Button type="link"
+            <Button
+              type="link"
               onClick={() => save(record)}
               style={{
                 marginRight: 8,
@@ -191,7 +234,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
               Guardar
             </Button>
             <Popconfirm title="¿Descartar los cambios?" onConfirm={cancel}>
-            <Button type="link">Cancelar</Button>
+              <Button type="link">Cancelar</Button>
             </Popconfirm>
           </>
         ) : (
