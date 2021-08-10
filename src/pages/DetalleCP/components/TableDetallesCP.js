@@ -82,7 +82,7 @@ const EditableCell = (props) => {
       title === "Evidencias" ? (
         record.results?.map(function (item) {
           return (
-            <Upload listType="picture" defaultFileList={[...fileList]}>
+            <Upload key={item} listType="picture" defaultFileList={[...fileList]} >
               <Button icon={<UploadOutlined />}>Cargar</Button>
             </Upload>
           );
@@ -207,7 +207,7 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
         row.results?.map(function (item) {
           //console.log(item);
           return (
-            <Image.PreviewGroup>
+            <Image.PreviewGroup key={item}>
               <Image
                 width={80}
                 height={80}
