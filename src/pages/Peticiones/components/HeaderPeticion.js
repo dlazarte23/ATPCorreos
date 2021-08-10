@@ -38,7 +38,7 @@ export default function HeaderPeticion(props) {
   }, []);
 
   const proyectos = useSelector((state) => state.peticiones.proyectos);
-
+  
   const proyectoSeleccionado = useSelector(
     (state) => state.peticiones.proyectoSeleccionado
   );

@@ -6,16 +6,13 @@ import {
   ModalCreatePeticion,
 } from "./components";
 
+import { LoadingOutlined } from "@ant-design/icons";
+
 import { Scrollbars } from "react-custom-scrollbars-2";
 
-import { Row, Col, Spin } from "antd";
+import { Row, Col, Spin, Button, Result } from "antd";
 
 import { useSelector } from "react-redux";
-
-import { MessageError } from "../../components";
-
-import dataNotFound from "../../assets/img/dataNotFound.png";
-import alertError from "../../assets/img/alertError.png";
 
 export default function Peticionespage() {
   const loading = useSelector((state) => state.peticiones.loading);
@@ -69,9 +66,19 @@ export default function Peticionespage() {
   const data = searchTerm !== "" ? filteredData : peticiones;
   const loadingPP = useSelector((state) => state.planesPrueba.loading);
 
+  const antIcon = <LoadingOutlined style={{ fontSize: 60 }} spin />;
+
   return (
-    <Spin spinning={loading} tip="Cargando..." size="large">
-      <Spin spinning={loadingPP} tip="Un momento..." size="large">
+    <Spin
+      spinning={loading}
+      tip="Cargando"
+      size="large" /* indicator={antIcon} */
+    >
+      <Spin
+        spinning={loadingPP}
+        tip="Un momento..."
+        size="large" /* indicator={antIcon} */
+      >
         <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
           <Row>
             <Col span={24}>
@@ -96,24 +103,29 @@ export default function Peticionespage() {
                     setShowModal={setShowModal}
                   />
                 </Col>
-              ) : (
-                <MessageError
-                  icono={dataNotFound}
-                  mensaje={
-                    proyectoSeleccionado === null
-                      ? "Debe seleccionar un proyecto."
-                      : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${
-                          proyectoSeleccionado.name
-                        }.`
-                  }
+              ) : !loading ? (
+                <Col span={getSpan()} offset={getOffset()}>
+                  <Result
+                    status={proyectoSeleccionado === null ? "warning" : "404"}
+                    title={
+                      proyectoSeleccionado === null
+                        ? "Debe seleccionar un proyecto."
+                        : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${
+                            proyectoSeleccionado.name
+                          }.`
+                    }
+                  />
+                </Col>
+              ) : null
+            ) : !loading ? (
+              <Col span={getSpan()} offset={getOffset()}>
+                <Result
+                  status="500"
+                  title="500"
+                  subTitle="Oops, error con el servidor!"
                 />
-              )
-            ) : (
-              <MessageError
-                icono={alertError}
-                mensaje={"Oops, error con el servidor!"}
-              />
-            )}
+              </Col>
+            ) : null}
           </Row>
           <br />
           <ModalCreatePeticion
