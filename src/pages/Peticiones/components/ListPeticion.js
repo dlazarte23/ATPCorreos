@@ -7,7 +7,7 @@ import {
   Drawer,
   Card,
   Row,
-  Col
+  Col,
 } from "antd";
 import {
   CalendarOutlined,
@@ -29,18 +29,17 @@ const IconText = ({ icon, text }) => (
 );
 
 export default function ListPeticiones({ peticiones }) {
-
   const [detallePeticion, setDetallePeticion] = useState("");
   const [showDetalle, setShowDetalle] = useState(false);
 
-  const dispatch = useDispatch( );
+  const dispatch = useDispatch();
 
-  const obtenerPlanesDePrueba = idPeticion => dispatch( obtenerPlanesDePruebaAction( idPeticion ) );
+  const obtenerPlanesDePrueba = (idPeticion) =>
+    dispatch(obtenerPlanesDePruebaAction(idPeticion));
 
   const handleDetalle = async (value) => {
-
     const response = await obtenerPlanesDePrueba(value.item.id);
-    
+
     setDetallePeticion(response);
 
     setShowDetalle(true);
@@ -49,7 +48,7 @@ export default function ListPeticiones({ peticiones }) {
   const onCloseDetalle = () => {
     setShowDetalle(false);
   };
-    
+
   return (
     <>
       <List
@@ -74,7 +73,7 @@ export default function ListPeticiones({ peticiones }) {
         renderItem={(item) => (
           <ListItem item={item} handleDetalle={handleDetalle} />
         )}
-        >
+      >
         <Drawer
           width={500}
           placement="right"
@@ -82,7 +81,10 @@ export default function ListPeticiones({ peticiones }) {
           onClose={onCloseDetalle}
           visible={showDetalle}
         >
-          <InfoPeticion peticion={detallePeticion} onCloseDetalle={onCloseDetalle} />
+          <InfoPeticion
+            peticion={detallePeticion}
+            onCloseDetalle={onCloseDetalle}
+          />
         </Drawer>
       </List>
     </>
@@ -90,40 +92,39 @@ export default function ListPeticiones({ peticiones }) {
 }
 
 const ListItem = ({ item, handleDetalle }) => {
-
   return (
     <>
-        <Card title={item.petitionName} size="small" style={{ borderRadius: 20}}>
-          <Row>
-            <Col span={18}>
-              <Descriptions size="small" column={1}>
-                <Descriptions.Item label="Id. petición">
-                  <IconText
-                    icon={NumberOutlined}
-                    text={item.petitionCode}
-                    key={item.id}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label="Fecha inicio">
-                  <IconText
-                    icon={CalendarOutlined}
-                    text={item.startDate}
-                    key={item.id}
-                  />
-                </Descriptions.Item>
-              </Descriptions>
-            </Col>
-            <Col span={6}>
-              <Descriptions size="small" column={1}>
-                <Descriptions.Item label="">
-                  <Button type="text" onClick={() => handleDetalle({ item })} >
-                    Ver detalle <RightOutlined />
-                  </Button>
-                </Descriptions.Item>
-              </Descriptions>
-            </Col>
-          </Row>
-        </Card>
+      <Card title={item.petitionName} size="small" style={{ borderRadius: 20 }}>
+        <Row>
+          <Col span={18}>
+            <Descriptions size="small" column={1}>
+              <Descriptions.Item label="Id. petición">
+                <IconText
+                  icon={NumberOutlined}
+                  text={item.petitionCode}
+                  key={item.id}
+                />
+              </Descriptions.Item>
+              <Descriptions.Item label="Fecha inicio">
+                <IconText
+                  icon={CalendarOutlined}
+                  text={item.startDate}
+                  key={item.id}
+                />
+              </Descriptions.Item>
+            </Descriptions>
+          </Col>
+          <Col span={6}>
+            <Descriptions size="small" column={1}>
+              <Descriptions.Item label="">
+                <Button type="text" onClick={() => handleDetalle({ item })}>
+                  Ver detalle <RightOutlined />
+                </Button>
+              </Descriptions.Item>
+            </Descriptions>
+          </Col>
+        </Row>
+      </Card>
       <br />
     </>
   );
