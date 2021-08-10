@@ -114,10 +114,15 @@ export default function HeaderPeticion(props) {
           }
           showSearch
           style={{ width: "200px" }}
-          placeholder="Seleccione un proyecto"
+          placeholder={
+            loading && proyectoSeleccionado === null
+              ? "Cargando proyectos..."
+              : "Seleccione un proyecto"
+          }
           optionFilterProp="children"
           onChange={buscarPeticiones}
           loading={loading && proyectoSeleccionado === null}
+          disabled={loading && proyectoSeleccionado === null}
           filterOption={(input, option) =>
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }
