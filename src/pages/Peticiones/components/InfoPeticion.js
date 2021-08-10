@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 
-import { Card, Typography, Descriptions, Button, Space, Tooltip, Popconfirm } from "antd";
+import {
+  Card,
+  Typography,
+  Descriptions,
+  Button,
+  Space,
+  Tooltip,
+  Popconfirm,
+} from "antd";
 
 import {
   ExceptionOutlined,
   DeleteOutlined,
-  UnorderedListOutlined
+  UnorderedListOutlined,
 } from "@ant-design/icons";
 
 import ModalEditPeticion from "./ModalEditPeticion";
@@ -16,7 +24,6 @@ import { useDispatch } from "react-redux";
 import { eliminarPeticionAction } from "../../../stateManagement/actions/peticionesAction";
 
 const InfoPeticion = (props) => {
-
   const dispatch = useDispatch();
 
   const dataPeticion = props.peticion;
@@ -25,8 +32,6 @@ const InfoPeticion = (props) => {
 
   const { Title } = Typography;
 
- 
-
   // variables unicamente para abrir el 2 drawer del listado de planes de prueba
   const [showPP, setShowPP] = useState(false);
 
@@ -34,12 +39,13 @@ const InfoPeticion = (props) => {
     setShowPP(false);
   };
 
-  const eliminarPeticion = idPeticion => dispatch(eliminarPeticionAction(idPeticion));
+  const eliminarPeticion = (idPeticion) =>
+    dispatch(eliminarPeticionAction(idPeticion));
 
-  const confirmDeletePeticion = idPeticion => {
+  const confirmDeletePeticion = (idPeticion) => {
     eliminarPeticion(idPeticion);
     onCloseDetalle();
-  }
+  };
 
   return (
     <>
@@ -76,7 +82,6 @@ const InfoPeticion = (props) => {
               {`${dataPeticion.estimatedHours} h.`}
             </Descriptions.Item>
 
-
             <Descriptions.Item label="Creador por">
               {dataPeticion.user}
             </Descriptions.Item>
@@ -85,17 +90,17 @@ const InfoPeticion = (props) => {
         <>
           <div style={{ marginTop: 25 }}>
             <Space>
-
               <ModalEditPeticion
                 dataPeticion={dataPeticion}
+                onCloseDetalle={onCloseDetalle}
               />
-            
+
               <Popconfirm
                 title="¿Está seguro de eliminar?"
                 onConfirm={() => confirmDeletePeticion(dataPeticion.id)}
                 okText="Confirmar"
-                cancelText="Cancelar">
-
+                cancelText="Cancelar"
+              >
                 <Tooltip placement="right" title="Eliminar petición">
                   <Button
                     icon={<DeleteOutlined />}
@@ -105,21 +110,25 @@ const InfoPeticion = (props) => {
                   />
                 </Tooltip>
               </Popconfirm>
-
             </Space>
 
-            <Space style={{ float: 'right' }}>
-              <Button type="primary" icon={<UnorderedListOutlined />} onClick={() => setShowPP(true)} >
+            <Space style={{ float: "right" }}>
+              <Button
+                type="primary"
+                icon={<UnorderedListOutlined />}
+                onClick={() => setShowPP(true)}
+              >
                 Planes de prueba
               </Button>
             </Space>
 
-            <PlanesPrueba showPP={showPP} onCloseDetallePP={onCloseDetallePP} data={dataPeticion} />
-
+            <PlanesPrueba
+              showPP={showPP}
+              onCloseDetallePP={onCloseDetallePP}
+              data={dataPeticion}
+            />
           </div>
-
         </>
-
       </Card>
     </>
   );
