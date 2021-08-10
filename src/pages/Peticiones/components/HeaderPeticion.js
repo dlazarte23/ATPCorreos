@@ -38,11 +38,12 @@ export default function HeaderPeticion(props) {
   }, []);
 
   const proyectos = useSelector((state) => state.peticiones.proyectos);
-  
+
   const proyectoSeleccionado = useSelector(
     (state) => state.peticiones.proyectoSeleccionado
   );
 
+  const loading = useSelector((state) => state.peticiones.loading);
   const seleccionarProyecto = (codProyecto) =>
     dispatch(seleccionarProyectoAction(codProyecto));
   const obtenerPeticiones = (codProyecto, filter, shortUser) =>
@@ -116,6 +117,7 @@ export default function HeaderPeticion(props) {
           placeholder="Seleccione un proyecto"
           optionFilterProp="children"
           onChange={buscarPeticiones}
+          loading={loading && proyectoSeleccionado === null}
           filterOption={(input, option) =>
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }

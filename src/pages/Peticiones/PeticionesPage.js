@@ -64,67 +64,80 @@ export default function Peticionespage() {
   const loadingPP = useSelector((state) => state.planesPrueba.loading);
 
   return (
-    <Spin spinning={loading} tip="Cargando" size="large">
-      <Spin spinning={loadingPP} tip="Un momento..." size="large">
-        <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
-          <Row>
-            <Col span={24}>
-              <HeaderPeticion
-                filter={filter}
-                setFilter={setFilter}
-                showModal={showModal}
-                setShowModal={setShowModal}
-                setSearchTerm={setSearchTerm}
-                usuario={usuario}
-              />
-            </Col>
-          </Row>
+    /* <Spin spinning={loading} tip="Cargando" size="large"> */
+    <Spin spinning={loadingPP} tip="Un momento..." size="large">
+      <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
+        <Row>
+          <Col span={24}>
+            <HeaderPeticion
+              filter={filter}
+              setFilter={setFilter}
+              showModal={showModal}
+              setShowModal={setShowModal}
+              setSearchTerm={setSearchTerm}
+              usuario={usuario}
+            />
+          </Col>
+        </Row>
 
-          <Row style={{ marginTop: 20 }}>
-            {proyectos.length !== 0 ? (
-              data.length !== 0 ? (
-                <Col span={getSpan()} offset={getOffset()}>
-                  <ListPeticiones
-                    peticiones={data}
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                  />
-                </Col>
-              ) : !loading ? (
-                <Col span={getSpan()} offset={getOffset()}>
-                  <Result
-                    status={proyectoSeleccionado === null ? "warning" : "404"}
-                    title={
-                      proyectoSeleccionado === null
-                        ? "Debe seleccionar un proyecto."
-                        : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${
-                            proyectoSeleccionado.name
-                          }.`
-                    }
-                  />
-                </Col>
-              ) : (
-                <Col span={getSpan()} offset={getOffset()}>
-                  <SkeletonList loading={loading} />
-                </Col>
-              )
+        <Row style={{ marginTop: 20 }}>
+          {proyectos.length !== 0 ? (
+            data.length !== 0 ? (
+              <Col span={getSpan()} offset={getOffset()}>
+                <ListPeticiones
+                  peticiones={data}
+                  showModal={showModal}
+                  setShowModal={setShowModal}
+                />
+              </Col>
             ) : !loading ? (
               <Col span={getSpan()} offset={getOffset()}>
                 <Result
-                  status="500"
-                  title="500"
-                  subTitle="Oops, error con el servidor!"
+                  status={proyectoSeleccionado === null ? "warning" : "404"}
+                  title={
+                    proyectoSeleccionado === null
+                      ? "Debe seleccionar un proyecto."
+                      : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${
+                          proyectoSeleccionado.name
+                        }.`
+                  }
                 />
               </Col>
-            ) : null}
-          </Row>
-          <br />
-          <ModalCreatePeticion
-            showModal={showModal}
-            setShowModal={setShowModal}
-          />
-        </Scrollbars>
-      </Spin>
+            ) : (
+              <Col span={getSpan()} offset={getOffset()}>
+                <SkeletonList loading={loading} />
+              </Col>
+            )
+          ) : !loading ? (
+            <Col span={getSpan()} offset={getOffset()}>
+              <Result
+                status="500"
+                title="500"
+                subTitle="Oops, error con el servidor!"
+              />
+            </Col>
+          ) : (
+            <Col span={getSpan()} offset={getOffset()}>
+              <Result
+                status={proyectoSeleccionado === null ? "warning" : "404"}
+                title={
+                  proyectoSeleccionado === null
+                    ? "Debe seleccionar un proyecto."
+                    : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${
+                        proyectoSeleccionado.name
+                      }.`
+                }
+              />
+            </Col>
+          )}
+        </Row>
+        <br />
+        <ModalCreatePeticion
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
+      </Scrollbars>
     </Spin>
+    /* </Spin> */
   );
 }
