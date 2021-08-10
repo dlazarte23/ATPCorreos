@@ -106,8 +106,6 @@ export function descargarDetalleCPAction(idCasoDePrueba) {
     try {
       const response = await get(`${uri.getTestSteps}/${idCasoDePrueba}`);
 
-      //console.log(response);
-
       dispatch(descargarStepExito(response));
     } catch (error) {
       dispatch(descargarStepError(error));
@@ -144,9 +142,7 @@ export function eliminarStepAction(idStep) {
 
       const { shortUser } = JSON.parse(usuario);
 
-      const response = await patch(`${uri.setTestStep}/${shortUser}/${idStep}`);
-
-      console.log(response);
+      const response = await patch(`${uri.setTestStep}/${shortUser}/${idStep}`)
 
       if (response.status === 200) {
         // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if

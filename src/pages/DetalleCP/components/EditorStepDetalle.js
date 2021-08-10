@@ -5,7 +5,6 @@ const { TextArea } = Input;
 
 const EditorStepDetalle = (props) => {
   const { stepData, setStepData, initialData, current } = props;
-  //console.log(stepData);
   const handleChangeContent = (data) => {
     switch (current) {
       case "precondition":

@@ -130,7 +130,6 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
   const isEditing = (record) => record.stepId === editingKey;
 
   const edit = (record) => {
-    //console.log(record);
     form.setFieldsValue({
       result: [], //evidencias|
       stepDescription: "", //acción
@@ -147,7 +146,6 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
   const save = async (record) => {
     try {
       const row = await form.validateFields();
-      //console.log(row);
       const newData = [...dataTable];
       const index = newData.findIndex((item) => record.stepId === item.stepId);
       if (index > -1) {
@@ -159,14 +157,11 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
           stepDescription: row.stepDescription,
           stepExpectedResult: row.stepExpectedResult,
           stepOrder: row.stepOrder,
-        };
-
-        console.log(newStep);
+        }
         setEditingKey("");
         actualizarStep(newStep, record.stepId);
       }
     } catch (errInfo) {
-      //console.log("Validate Failed:", errInfo);
     }
   };
 
@@ -205,7 +200,6 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
       editable: true,
       render: (_, row) =>
         row.results?.map(function (item) {
-          //console.log(item);
           return (
             <Image.PreviewGroup key={item}>
               <Image

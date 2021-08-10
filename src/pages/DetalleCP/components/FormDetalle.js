@@ -91,7 +91,6 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
     setConfirmLoading(!loading);
     setTimeout(() => {
       setConfirmLoading(false);
-      console.log(confirmLoading)
     }, 2000);
 
     const newStep = {
@@ -103,7 +102,6 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
       stepExpectedResult: stepData.expectedResult,
       stepOrder: stepsData.length + 1,
     };
-    //console.log(newStep);
     setStepData({
       precondition: "",
       action: "",

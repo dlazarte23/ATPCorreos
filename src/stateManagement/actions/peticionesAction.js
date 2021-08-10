@@ -176,10 +176,7 @@ export function editarPeticionAction(values, id, idProyecto) {
       values.id = id;
       values.project = idProyecto;
 
-      console.log(values);
-
       const response = await patch(uri.editPeticiones, values);
-      console.log(response);
       if (response.status === 200) {
         message.success("Petición modificada correctamente!");
 
