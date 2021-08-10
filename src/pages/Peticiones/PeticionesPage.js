@@ -6,13 +6,32 @@ import {
   ModalCreatePeticion,
 } from "./components";
 
-import { LoadingOutlined } from "@ant-design/icons";
-
+import SkeletonList from "../../components/common/SkeletonList";
 import { Scrollbars } from "react-custom-scrollbars-2";
-
-import { Row, Col, Spin, Button, Result } from "antd";
-
+import { Row, Col, Spin, Result } from "antd";
 import { useSelector } from "react-redux";
+
+const getSpan = () => {
+  const width = window.screen.width;
+  if (width >= 1920) {
+    return 12;
+  } else if (width >= 1280) {
+    return 16;
+  } else {
+    return 24;
+  }
+};
+
+const getOffset = () => {
+  const width = window.screen.width;
+  if (width >= 1920) {
+    return 6;
+  } else if (width >= 1280) {
+    return 4;
+  } else {
+    return 0;
+  }
+};
 
 export default function Peticionespage() {
   const loading = useSelector((state) => state.peticiones.loading);
@@ -41,44 +60,12 @@ export default function Peticionespage() {
     setFilteredData(results);
   }, [peticiones, searchTerm]);
 
-  const getSpan = () => {
-    const width = window.screen.width;
-    if (width >= 1920) {
-      return 12;
-    } else if (width >= 1280) {
-      return 16;
-    } else {
-      return 24;
-    }
-  };
-
-  const getOffset = () => {
-    const width = window.screen.width;
-    if (width >= 1920) {
-      return 6;
-    } else if (width >= 1280) {
-      return 4;
-    } else {
-      return 0;
-    }
-  };
-
   const data = searchTerm !== "" ? filteredData : peticiones;
   const loadingPP = useSelector((state) => state.planesPrueba.loading);
 
-  const antIcon = <LoadingOutlined style={{ fontSize: 60 }} spin />;
-
   return (
-    <Spin
-      spinning={loading}
-      tip="Cargando"
-      size="large" /* indicator={antIcon} */
-    >
-      <Spin
-        spinning={loadingPP}
-        tip="Un momento..."
-        size="large" /* indicator={antIcon} */
-      >
+    <Spin spinning={loading} tip="Cargando" size="large">
+      <Spin spinning={loadingPP} tip="Un momento..." size="large">
         <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
           <Row>
             <Col span={24}>
@@ -116,7 +103,11 @@ export default function Peticionespage() {
                     }
                   />
                 </Col>
-              ) : null
+              ) : (
+                <Col span={getSpan()} offset={getOffset()}>
+                  <SkeletonList loading={loading} />
+                </Col>
+              )
             ) : !loading ? (
               <Col span={getSpan()} offset={getOffset()}>
                 <Result
