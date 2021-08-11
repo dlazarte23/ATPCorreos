@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Layout, Popover, Button, Avatar, Badge, Row, Col } from "antd";
-import avatarwomen from "../../../public/images/avatar.jpg";
+import avatarwomen from "../../assets/img/avatar.jpg";
 import { UserOutlined, ExportOutlined } from "@ant-design/icons";
 import Breadcrumbs from "./Breadcrumbs";
 import "./header.css";

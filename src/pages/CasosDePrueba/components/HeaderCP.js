@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { PageHeader, Button, Space, Typography, Descriptions } from "antd";
 
@@ -80,7 +80,6 @@ const HeaderCP = ({ peticion, subject }) => {
           shape="round"
           type="dashed"
           icon={<DownloadOutlined />}
-          className="btnTestLink"
           onClick={() => descargaDocumento(subject.id, "xml")} 
           key="2"
         >
@@ -93,7 +92,6 @@ const HeaderCP = ({ peticion, subject }) => {
           shape="round"
           type="dashed"
           icon={<FileExcelOutlined />}
-          className="btnExcel"
           onClick={() => descargaDocumento(subject.id, "excel")}
           key="4"
         >

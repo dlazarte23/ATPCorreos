@@ -7,8 +7,7 @@ import {
   Col,
   PageHeader,
   Space,
-  Descriptions,
-  Spin,
+  Descriptions
 } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { InfoSvg } from "../../assets/icons/InfoSvg";

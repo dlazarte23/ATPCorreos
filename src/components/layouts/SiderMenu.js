@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu, Layout } from "antd";
 import { Link } from "react-router-dom";
-import logo from "../../../public/images/logo_correos.png";
+import logo from "../../assets/img/logo_correos.png";
 import "./siderMenu.css";
 import {
   ReconciliationOutlined,

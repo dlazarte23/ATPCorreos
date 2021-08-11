@@ -17,6 +17,7 @@ import UploadEvidencias from "./UploadEvidencias";
 const { Step } = Steps;
 
 const FormDetalle = ({ detalle, stepsData, crearStep }) => {
+  // eslint-disable-next-line
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [current, setCurrent] = useState(0);
   const [stepData, setStepData] = useState({

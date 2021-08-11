@@ -10,8 +10,7 @@ import {
   Divider,
   Image,
   Upload,
-  Button,
-  message,
+  Button
 } from "antd";
 import {
   DeleteOutlined,
@@ -64,6 +63,7 @@ const TableDetallesCP = ({
     setEditingKey("");
   };
 
+  // eslint-disable-next-line
   const [fileList, setFileList] = useState([]);
 
   const save = async (record) => {
@@ -132,6 +132,8 @@ const TableDetallesCP = ({
       } = props;
 
       const list = [];
+      
+      // eslint-disable-next-line
       record?.results?.map(function (item) {
         list.push({
           name: item,
