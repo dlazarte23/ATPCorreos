@@ -11,6 +11,7 @@ import {
   Image,
   Upload,
   Button,
+  message,
 } from "antd";
 import {
   DeleteOutlined,
@@ -64,7 +65,6 @@ const TableDetallesCP = ({
   };
 
   const [fileList, setFileList] = useState([]);
-  console.log(fileList);
 
   const save = async (record) => {
     try {
@@ -82,7 +82,7 @@ const TableDetallesCP = ({
           stepOrder: record.stepOrder,
         };
         setEditingKey("");
-        console.log(newStep);
+        //console.log(newStep);
         actualizarStep(newStep, record.stepId);
       }
     } catch (errInfo) {}
@@ -131,8 +131,6 @@ const TableDetallesCP = ({
         ...restProps
       } = props;
 
-      //setFileList(record?.results);
-
       const list = [];
       record?.results?.map(function (item) {
         list.push({
@@ -145,13 +143,21 @@ const TableDetallesCP = ({
       const properties = {
         beforeUpload: async (file) => {
           if (file.status !== "removed") {
-            const newList = record.results;
             const base64Img = await getBase64(file);
+            /* if (record.results.filter((list) => !list.find(base64Img))) { */
+            const newList = record.results;
             newList.push(base64Img);
-            console.log(newList);
             setFileList(newList);
+            /* } else {
+              message.success("La imagen ya se encuentra adjunta.");
+            } */
           }
           return false;
+        },
+        onRemove: (file) => {
+          const list = record.results;
+          const newList = list.filter((list) => !list.includes(file.name));
+          record.results = newList;
         },
       };
 
