@@ -31,95 +31,6 @@ const paginationProps = {
   defaultCurrent: 1,
 };
 
-const EditableCell = (props) => {
-  const [fileList, setFileList] = useState([]);
-
-  const renderCell = () => {
-    const onPreview = async (file) => {
-      let src = file.url;
-      if (!src) {
-        src = await new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file.originFileObj);
-          reader.onload = () => resolve(reader.result);
-        });
-      }
-      const image = new Image();
-      image.src = src;
-      const imgWindow = window.open(src);
-      imgWindow.document.write(image.outerHTML);
-    };
-
-    const onChange = ({ fileList: newFileList }) => {
-      console.log(newFileList);
-      setFileList(newFileList);
-      console.log(fileList);
-    };
-
-    const {
-      editing,
-      dataIndex,
-      title,
-      inputType,
-      record,
-      index,
-      children,
-      ...restProps
-    } = props;
-
-    setFileList(record?.results);
-
-    const list = [];
-    record?.results?.map(function (item) {
-      list.push({
-        name: item,
-        status: "done",
-        utl: `data:image/jpeg;base64,${item}`,
-        thumbUrl: `data:image/jpeg;base64,${item}`,
-      });
-    });
-
-    const inputNode =
-      title === "Evidencias" ? (
-        <Upload
-          listType="picture"
-          defaultFileList={[...list]}
-          className="upload-list-inline"
-          onChange={onChange}
-          onPreview={onPreview}
-        >
-          <Button icon={<UploadOutlined />}>Cargar</Button>
-        </Upload>
-      ) : (
-        <TextArea autoSize={{ minRows: 6, maxRows: 6 }} />
-      );
-    return (
-      <td {...restProps}>
-        {editing ? (
-          <Form.Item
-            name={dataIndex}
-            rules={[
-              {
-                required: true,
-                message: `Por favor, introduzca ${title}!`,
-              },
-            ]}
-            style={{
-              margin: 0,
-            }}
-          >
-            {inputNode}
-          </Form.Item>
-        ) : (
-          children
-        )}
-      </td>
-    );
-  };
-
-  return <EditableContext.Consumer>{renderCell}</EditableContext.Consumer>;
-};
-
 const TableDetallesCP = ({
   detalle,
   steps,
@@ -152,6 +63,9 @@ const TableDetallesCP = ({
     setEditingKey("");
   };
 
+  const [fileList, setFileList] = useState([]);
+  console.log(fileList);
+
   const save = async (record) => {
     try {
       const row = await form.validateFields();
@@ -169,9 +83,117 @@ const TableDetallesCP = ({
         };
         setEditingKey("");
         console.log(newStep);
-        //actualizarStep(newStep, record.stepId);
+        actualizarStep(newStep, record.stepId);
       }
     } catch (errInfo) {}
+  };
+
+  const EditableCell = (props) => {
+    const renderCell = () => {
+      const onPreview = async (file) => {
+        let src = file.url;
+        if (!src) {
+          src = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file.originFileObj);
+            reader.onload = () => resolve(reader.result);
+          });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow.document.write(image.outerHTML);
+      };
+
+      const getBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            let encoded = reader.result.toString().replace(/^data:(.*,)?/, "");
+            if (encoded.length % 4 > 0) {
+              encoded += "=".repeat(4 - (encoded.length % 4));
+            }
+            resolve(encoded);
+          };
+          reader.onerror = (error) => reject(error);
+        });
+      };
+
+      const {
+        editing,
+        dataIndex,
+        title,
+        inputType,
+        record,
+        index,
+        children,
+        ...restProps
+      } = props;
+
+      //setFileList(record?.results);
+
+      const list = [];
+      record?.results?.map(function (item) {
+        list.push({
+          name: item,
+          status: "done",
+          thumbUrl: `data:image/jpeg;base64,${item}`,
+        });
+      });
+
+      const properties = {
+        beforeUpload: async (file) => {
+          if (file.status !== "removed") {
+            const newList = record.results;
+            const base64Img = await getBase64(file);
+            newList.push(base64Img);
+            console.log(newList);
+            setFileList(newList);
+          }
+          return false;
+        },
+      };
+
+      const inputNode =
+        title === "Evidencias" ? (
+          <Upload
+            {...properties}
+            listType="picture"
+            defaultFileList={[...list]}
+            className="upload-list-inline"
+            onPreview={onPreview}
+          >
+            <Button icon={<UploadOutlined />}>Cargar</Button>
+          </Upload>
+        ) : (
+          <TextArea autoSize={{ minRows: 6, maxRows: 6 }} />
+        );
+      return (
+        <td {...restProps}>
+          {editing ? (
+            <Form.Item
+              name={dataIndex}
+              rules={[
+                {
+                  required: true,
+                  message: `Por favor, introduzca ${title}!`,
+                },
+              ]}
+              style={{
+                margin: 0,
+              }}
+            >
+              {inputNode}
+            </Form.Item>
+          ) : (
+            children
+          )}
+        </td>
+      );
+    };
+
+    return <EditableContext.Consumer>{renderCell}</EditableContext.Consumer>;
   };
 
   const columns = [
