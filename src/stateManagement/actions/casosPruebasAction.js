@@ -194,7 +194,7 @@ export function descargarDocumento(idPeticion, tipoDocumento) {
       const nombreArchivo =
         tipoDocumento === "xml"
           ? `exportado_xml_${nomCorrelativo}.xml`
-          : `exportado_excel_${nomCorrelativo}.xlsx`;
+          : `exportado_excel_${nomCorrelativo}.xls`;
 
       if (tipoDocumento === "xml") {
         const response = await get(
@@ -208,7 +208,12 @@ export function descargarDocumento(idPeticion, tipoDocumento) {
           { responseType: "blob" }
         );
 
-        FileSaver.saveAs(new Blob([response.data]), nombreArchivo);
+        FileSaver.saveAs(
+          new Blob([response.data], {
+            type: "application/vnd.ms-excel",
+          }),
+          nombreArchivo
+        );
       }
 
       message.success(`Archivo ${tipoDocumento} descargado correctamente!`);

@@ -10,6 +10,7 @@ import {
   Descriptions,
   Select,
   Space,
+  Empty,
 } from "antd";
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import "../peticion-style.css";
@@ -123,6 +124,12 @@ export default function HeaderPeticion(props) {
           onChange={buscarPeticiones}
           loading={loading && proyectoSeleccionado === null}
           disabled={loading && proyectoSeleccionado === null}
+          notFoundContent={
+            <Empty
+              description="Sin datos"
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+            />
+          }
           filterOption={(input, option) =>
             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
           }

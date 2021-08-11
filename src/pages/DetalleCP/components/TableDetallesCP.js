@@ -82,7 +82,11 @@ const EditableCell = (props) => {
       title === "Evidencias" ? (
         record.results?.map(function (item) {
           return (
-            <Upload key={item} listType="picture" defaultFileList={[...fileList]} >
+            <Upload
+              key={item}
+              listType="picture"
+              defaultFileList={[...fileList]}
+            >
               <Button icon={<UploadOutlined />}>Cargar</Button>
             </Upload>
           );
@@ -117,7 +121,13 @@ const EditableCell = (props) => {
   return <EditableContext.Consumer>{renderCell}</EditableContext.Consumer>;
 };
 
-const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
+const TableDetallesCP = ({
+  detalle,
+  steps,
+  actualizarStep,
+  eliminarStep,
+  loading,
+}) => {
   const [form] = Form.useForm();
   const [dataTable, setDataTable] = useState(steps.detallesCasoPrueba);
   const usuario = useSelector((state) => state.usuario.usuario);
@@ -157,12 +167,11 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
           stepDescription: row.stepDescription,
           stepExpectedResult: row.stepExpectedResult,
           stepOrder: row.stepOrder,
-        }
+        };
         setEditingKey("");
         actualizarStep(newStep, record.stepId);
       }
-    } catch (errInfo) {
-    }
+    } catch (errInfo) {}
   };
 
   const columns = [
@@ -290,6 +299,8 @@ const TableDetallesCP = ({ detalle, steps, actualizarStep, eliminarStep }) => {
           rowKey={(record) => record.stepOrder}
           rowClassName="editable-row"
           pagination={paginationProps}
+          loading={loading}
+          locale={{ emptyText: "Sin datos" }}
         />
       }
     </Form>

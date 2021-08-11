@@ -92,6 +92,12 @@ export default function ListPeticiones({ peticiones }) {
 }
 
 const ListItem = ({ item, handleDetalle }) => {
+  const formatDate = (date) => {
+    const dd = date.slice(8, 10);
+    const mm = date.slice(5, 7);
+    const yyyy = date.slice(0, 4);
+    return `${dd}/${mm}/${yyyy}`;
+  };
   return (
     <>
       <Card title={item.petitionName} size="small" style={{ borderRadius: 20 }}>
@@ -108,7 +114,7 @@ const ListItem = ({ item, handleDetalle }) => {
               <Descriptions.Item label="Fecha inicio">
                 <IconText
                   icon={CalendarOutlined}
-                  text={item.startDate}
+                  text={formatDate(item.startDate)}
                   key={item.id}
                 />
               </Descriptions.Item>

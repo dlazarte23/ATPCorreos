@@ -63,9 +63,9 @@ export default function DetalleCPPage(props) {
 
   useEffect(() => {
     // ah este metodo pasarle el id del caso de uso, que por ahora no se puede ya que viene en null
- 
+
     obtenerDetalleCP(detalle.testId);
-   // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [detalle.testId]);
 
   const stepss = useSelector(
@@ -104,47 +104,49 @@ export default function DetalleCPPage(props) {
   );
 
   return (
-    <Spin spinning={loading} tip="Cargando..." size="large">
-      <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
-        {/** Column para el titulo y el botón general */}
-        <Row>
-          <Col span={24}>
-            <PageHeader
-              title="Detalle del caso de prueba"
-              onBack={() => window.history.back()}
-              backIcon={<LeftOutlined />}
-            >
-              <Content extra={extraContent}>{renderContent()}</Content>
-            </PageHeader>
-          </Col>
-        </Row>
+    /* <Spin spinning={loading} tip="Cargando..." size="large"> */
+    <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
+      {/** Column para el titulo y el botón general */}
+      <Row>
+        <Col span={24}>
+          <PageHeader
+            title="Detalle del caso de prueba"
+            onBack={() => window.history.back()}
+            backIcon={<LeftOutlined />}
+          >
+            <Content extra={extraContent}>{renderContent()}</Content>
+          </PageHeader>
+        </Col>
+      </Row>
 
-        {/** Column para pasos (steps) */}
-        <div className="contenedor">
-          <Row className="steps-pasos">
-            <Col span={24} className="setps">
-              <FormDetalle
-                detalle={detalle}
-                stepsData={stepss}
-                crearStep={crearStep}
-              />
-            </Col>
-          </Row>
-        </div>
-
-        {/** Column para la tabla */}
-        <Row className="table-detalleCp">
-          <Col span={22} offset={1}>
-            <Title level={4}>Listado de Todos los Pasos</Title>
-            <TableDetallesCP
+      {/** Column para pasos (steps) */}
+      <div className="contenedor">
+        <Row className="steps-pasos">
+          <Col span={24} className="setps">
+            <FormDetalle
               detalle={detalle}
-              steps={useSelector((state) => state.detalleCasoPrueba)}
-              actualizarStep={actualizarStep}
-              eliminarStep={eliminarStep}
+              stepsData={stepss}
+              crearStep={crearStep}
             />
           </Col>
         </Row>
-      </Scrollbars>
-    </Spin>
+      </div>
+
+      {/** Column para la tabla */}
+      <Row className="table-detalleCp">
+        <Col span={22} offset={1}>
+          <Title level={4}>Listado de Todos los Pasos</Title>
+          <TableDetallesCP
+            detalle={detalle}
+            steps={useSelector((state) => state.detalleCasoPrueba)}
+            actualizarStep={actualizarStep}
+            eliminarStep={eliminarStep}
+            locale={{ emptyText: "Sin datos" }}
+            loading={loading}
+          />
+        </Col>
+      </Row>
+    </Scrollbars>
+    /* </Spin> */
   );
 }
