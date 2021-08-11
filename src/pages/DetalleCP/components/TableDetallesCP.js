@@ -51,7 +51,9 @@ const EditableCell = (props) => {
     };
 
     const onChange = ({ fileList: newFileList }) => {
+      console.log(newFileList);
       setFileList(newFileList);
+      console.log(fileList);
     };
 
     const {
@@ -67,30 +69,27 @@ const EditableCell = (props) => {
 
     setFileList(record?.results);
 
-    const fileList = [
-      {
-        uid: "-1",
-        name: "evidencia.png",
+    const list = [];
+    record?.results?.map(function (item) {
+      list.push({
+        name: item,
         status: "done",
-        url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-        thumbUrl:
-          "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-      },
-    ];
+        utl: `data:image/jpeg;base64,${item}`,
+        thumbUrl: `data:image/jpeg;base64,${item}`,
+      });
+    });
 
     const inputNode =
       title === "Evidencias" ? (
-        record.results?.map(function (item) {
-          return (
-            <Upload
-              key={item}
-              listType="picture"
-              defaultFileList={[...fileList]}
-            >
-              <Button icon={<UploadOutlined />}>Cargar</Button>
-            </Upload>
-          );
-        })
+        <Upload
+          listType="picture"
+          defaultFileList={[...list]}
+          className="upload-list-inline"
+          onChange={onChange}
+          onPreview={onPreview}
+        >
+          <Button icon={<UploadOutlined />}>Cargar</Button>
+        </Upload>
       ) : (
         <TextArea autoSize={{ minRows: 6, maxRows: 6 }} />
       );
@@ -166,10 +165,11 @@ const TableDetallesCP = ({
           stepComments: row.stepComments,
           stepDescription: row.stepDescription,
           stepExpectedResult: row.stepExpectedResult,
-          stepOrder: row.stepOrder,
+          stepOrder: record.stepOrder,
         };
         setEditingKey("");
-        actualizarStep(newStep, record.stepId);
+        console.log(newStep);
+        //actualizarStep(newStep, record.stepId);
       }
     } catch (errInfo) {}
   };
