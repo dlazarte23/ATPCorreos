@@ -141,7 +141,6 @@ export default function DetalleCPPage(props) {
             steps={useSelector((state) => state.detalleCasoPrueba)}
             actualizarStep={actualizarStep}
             eliminarStep={eliminarStep}
-            locale={{ emptyText: "Sin datos" }}
             loading={loading}
           />
         </Col>

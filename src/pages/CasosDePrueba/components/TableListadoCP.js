@@ -97,7 +97,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
       dataSource={casosDePruebas}
       size="middle"
       pagination={paginationProps}
-      loading={loading}
+      //loading={loading}
       locale={{ emptyText: "Sin datos" }}
     />
   );

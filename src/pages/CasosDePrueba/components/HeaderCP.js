@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { PageHeader, Button, Space, Typography, Descriptions } from "antd";
 
@@ -35,8 +35,9 @@ const HeaderCP = ({ peticion, subject }) => {
 
   const { Title, Paragraph } = Typography;
 
-  const descargaDocumento = (idPeticion, tipoDocumento) =>
+  const descargaDocumento = (idPeticion, tipoDocumento) => {
     dispatch(descargarDocumento(idPeticion, tipoDocumento));
+  };
 
   const renderContent = () => (
     <div className="card-information">
@@ -80,7 +81,7 @@ const HeaderCP = ({ peticion, subject }) => {
           type="dashed"
           icon={<DownloadOutlined />}
           className="btnTestLink"
-          onClick={() => descargaDocumento(subject.id, "xml")}
+          onClick={() => descargaDocumento(subject.id, "xml")} 
           key="2"
         >
           Test Link

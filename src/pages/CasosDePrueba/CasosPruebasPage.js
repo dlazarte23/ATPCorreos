@@ -33,31 +33,31 @@ export default function CasosPruebasPage(props) {
   const usuario = useSelector((state) => state.usuario.usuario);
 
   return (
-    /* <Spin spinning={loading} tip="Cargando..." size="large"> */
-    <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
-      {/** Column para el titulo y el botón general */}
-      <Row>
-        <Col span={24}>
-          <HeaderCP peticion={peticion} subject={subject} />
+    <Spin spinning={loading} tip="Cargando..." size="large">
+      <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
+        {/** Column para el titulo y el botón general */}
+        <Row>
+          <Col span={24}>
+            <HeaderCP peticion={peticion} subject={subject} />
 
-          <div className="contenedor">
-            <FormCP subject={subject} usuario={usuario} loading={loading} />
-          </div>
+            <div className="contenedor">
+              <FormCP subject={subject} usuario={usuario} loading={loading} />
+            </div>
 
-          <Row className="table-detalleCp">
-            <Col span={22} offset={1}>
-              <Title level={4}>Listado de casos de prueba</Title>
-              <TableListadoCP
-                peticion={peticion}
-                usuario={usuario}
-                loading={loading}
-                subject={subject}
-              />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-    </Scrollbars>
-    /* </Spin> */
+            <Row className="table-detalleCp">
+              <Col span={22} offset={1}>
+                <Title level={4}>Listado de casos de prueba</Title>
+                <TableListadoCP
+                  peticion={peticion}
+                  usuario={usuario}
+                  loading={loading}
+                  subject={subject}
+                />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Scrollbars>
+    </Spin>
   );
 }
