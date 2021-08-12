@@ -143,6 +143,7 @@ const TableDetallesCP = ({
       });
 
       const properties = {
+        accept: ".jpg,.png,.gif",
         beforeUpload: async (file) => {
           if (file.status !== "removed") {
             const base64Img = await getBase64(file);
