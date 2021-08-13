@@ -65,6 +65,8 @@ export default function ModalCreatePeticion(props) {
           user: usuario,
         };
 
+        console.log(values.horasEstimadas)
+
         // creamos la nueva peticion
         agregarPeticion(peticion, proyecto.id);
       })

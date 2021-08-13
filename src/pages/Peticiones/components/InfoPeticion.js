@@ -47,6 +47,13 @@ const InfoPeticion = (props) => {
     onCloseDetalle();
   };
 
+  const formatDate = (date) => {
+    const dd = date.slice(8, 10);
+    const mm = date.slice(5, 7);
+    const yyyy = date.slice(0, 4);
+    return `${dd}/${mm}/${yyyy}`;
+  };
+  
   return (
     <>
       <Card style={{ maxWidth: 550, float: "right" }}>
@@ -69,14 +76,14 @@ const InfoPeticion = (props) => {
             <Descriptions.Item label="Sprint">
               {dataPeticion.number}
             </Descriptions.Item>
-            <Descriptions.Item label="Fecha de entrega">
-              {dataPeticion.finishDate}
+            <Descriptions.Item label="Fecha de entrega" >
+              {formatDate(dataPeticion.finishDate)}
             </Descriptions.Item>
             <Descriptions.Item label="Fecha de inicio">
-              {dataPeticion.startDate}
+              {formatDate(dataPeticion.startDate)}
             </Descriptions.Item>
             <Descriptions.Item label="Fecha prevista de entrega">
-              {dataPeticion.expectedFinishDate}
+              {formatDate(dataPeticion.expectedFinishDate)}
             </Descriptions.Item>
             <Descriptions.Item label="Horas estimadas">
               {`${dataPeticion.estimatedHours} h.`}
