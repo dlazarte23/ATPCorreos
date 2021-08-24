@@ -69,7 +69,7 @@ const FormCP = ({ subject, usuario, loading }) => {
             },
           ]}
         >
-          <Input.TextArea maxLength={100} showCount />
+          <Input.TextArea maxLength={500} showCount />
         </Form.Item>
       </div>
       <div className="div-align">
