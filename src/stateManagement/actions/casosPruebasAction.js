@@ -182,26 +182,17 @@ const eliminarCasosPruebaError = (error) => ({
  * @param {*} idPeticion
  * @param {*} tipoDocumento
  */
-export function descargarDocumento(idPeticion, tipoDocumento) {
+export function descargarDocumento(idPeticion, tipoDocumento, nombreArchivo) {
   return async (dispatch) => {
     dispatch(descargaDocumento());
 
     try {
-      const date = new Date();
-
-      const nomCorrelativo = `${date.getDate()}${date.getMonth()}${date.getFullYear()}-${date.getSeconds()}`;
-
-      const nombreArchivo =
-        tipoDocumento === "xml"
-          ? `exportado_xml_${nomCorrelativo}.xml`
-          : `exportado_excel_${nomCorrelativo}.xls`;
-
       if (tipoDocumento === "xml") {
         const response = await get(
           `${uri.getDocumentoXml}?testplan=${idPeticion}`
         );
 
-        FileSaver.saveAs(new Blob([response]), nombreArchivo);
+        FileSaver.saveAs(new Blob([response]), `${nombreArchivo}.xml`);
       } else if (tipoDocumento === "excel") {
         const response = await getEnriched(
           `${uri.getDocumentoExcel}?id=${idPeticion}`,

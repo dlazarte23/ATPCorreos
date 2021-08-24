@@ -36,7 +36,7 @@ const HeaderCP = ({ peticion, subject }) => {
   const { Title, Paragraph } = Typography;
 
   const descargaDocumento = (idPeticion, tipoDocumento) => {
-    dispatch(descargarDocumento(idPeticion, tipoDocumento));
+    dispatch(descargarDocumento(idPeticion, tipoDocumento, subject.subject));
   };
 
   const renderContent = () => (
@@ -80,7 +80,7 @@ const HeaderCP = ({ peticion, subject }) => {
           shape="round"
           type="dashed"
           icon={<DownloadOutlined />}
-          onClick={() => descargaDocumento(subject.id, "xml")} 
+          onClick={() => descargaDocumento(subject.id, "xml")}
           key="2"
         >
           Test Link
