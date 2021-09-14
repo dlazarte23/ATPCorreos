@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import "../detalle-style.css";
-import { Steps, Button } from "antd";
+import { Steps, Button, message } from "antd";
 import {
   FileExclamationOutlined,
   FileTextOutlined,
@@ -14,12 +14,17 @@ import { useSelector } from "react-redux";
 import EditorStepDetalle from "./EditorStepDetalle";
 import UploadEvidencias from "./UploadEvidencias";
 
+import { getBase64 } from "../../../utils/helpers/convertToBase64";
+
 const { Step } = Steps;
 
 const FormDetalle = ({ detalle, stepsData, crearStep }) => {
   // eslint-disable-next-line
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [current, setCurrent] = useState(0);
+
+  const referencia = useRef(0);
+
   const [stepData, setStepData] = useState({
     precondition: "",
     action: "",
@@ -29,7 +34,34 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
 
   const loading = useSelector((state) => state.peticiones.loading);
   const usuario = useSelector((state) => state.usuario.usuario);
-  //const dispatch = useDispatch();
+  
+  const handlePaste = async ( e ) => {
+    if ( e.clipboardData.files.length ) {
+
+        if ( stepData.evidences.length >= 3 ) {
+          message.warning('No puede subir mas de 3 imagenes por detalle!');
+          return;
+        }
+
+        referencia.current ++;
+
+        const archivoObjecto = e.clipboardData.files[0];
+
+        const response = await getBase64( archivoObjecto );
+
+        const dataFake = {
+            uid: `${ archivoObjecto.name + Math.random() }`,
+            name: `name_${ referencia.current }.png`,
+            status: 'done',
+            src: response
+        }
+
+        setStepData( { ...stepData, evidences: [ ...stepData.evidences, dataFake ] } );
+
+    } else {
+        message.warning("No encontramos imagenes en su portapapeles!");
+    }
+}
 
   const steps = [
     {
@@ -75,7 +107,19 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
       title: "Evidencias",
       icon: <FileImageOutlined />,
       content: (
-        <UploadEvidencias stepData={stepData} setStepData={setStepData} />
+        <div onPaste={ handlePaste }>
+          <UploadEvidencias stepData={stepData} setStepData={setStepData} />
+          <div 
+            style={{ 
+              height: 25,
+              border: '1px solid #3E92F5',
+              background: 'white',
+              color: '#3E92F5',
+              cursor: "pointer"
+            }}>
+            <p style={{ marginLeft: 10 }}>Click aqui para pegar sus imagenes desde el portapapeles...</p>
+          </div>
+        </div>
       ),
     },
   ];
@@ -89,14 +133,21 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
   };
 
   const onSaveNewStep = () => {
+
+    referencia.current = 0;
+    
     setConfirmLoading(!loading);
     setTimeout(() => {
       setConfirmLoading(false);
     }, 2000);
 
+    const arrFiltrada = [];
+
+    stepData.evidences.map( ( e ) => arrFiltrada.push( e.src ) );
+
     const newStep = {
       idTestCase: detalle.testId,
-      results: stepData.evidences,
+      results: arrFiltrada,
       shortUsername: usuario.shortUser,
       stepComments: stepData.precondition,
       stepDescription: stepData.action,

@@ -82,7 +82,6 @@ const TableDetallesCP = ({
           stepOrder: record.stepOrder,
         };
         setEditingKey("");
-        //console.log(newStep);
         actualizarStep(newStep, record.stepId);
       }
     } catch (errInfo) {}
@@ -183,12 +182,6 @@ const TableDetallesCP = ({
           {editing ? (
             <Form.Item
               name={dataIndex}
-              /* rules={[
-                {
-                  required: true,
-                  message: `Por favor, introduzca ${title}!`,
-                },
-              ]} */
               style={{
                 margin: 0,
               }}

@@ -1,47 +1,61 @@
 import React from "react";
 
 import "../detalle-style.css";
-import { Upload } from "antd";
+import { message, Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+
+import { getBase64 } from "../../../utils/helpers/convertToBase64";
 
 const { Dragger } = Upload;
 
-//Conversión del imagen a Base64
-const getBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      let encoded = reader.result.toString().replace(/^data:(.*,)?/, "");
-      if (encoded.length % 4 > 0) {
-        encoded += "=".repeat(4 - (encoded.length % 4));
-      }
-      resolve(encoded);
-    };
-    reader.onerror = (error) => reject(error);
-  });
-};
-
 const UploadEvidencias = (props) => {
   const { stepData, setStepData } = props;
+
   const draggerProps = {
     multiple: true,
     //maxCount: 1,
     accept: ".jpg,.png,.gif",
     beforeUpload: async (file) => {
+
+      if ( stepData.evidences.length >= 3 ) {
+        message.warning('No puede subir mas de 3 imagenes por detalle!');
+        return;
+      }
+
       const base64Img = await getBase64(file);
+
+      const objTemp = {
+        uid: file.uid,
+        name: file.name,
+        src: base64Img,
+        status: 'done'
+      }
+
       const evidencesList = stepData.evidences;
-      evidencesList.push(base64Img);
+
+      evidencesList.push(objTemp);
+
       setStepData({ ...stepData, evidences: evidencesList });
       return false;
     },
     onDrop(e) {
       setStepData({ ...stepData, evidences: [] });
     },
+    fileList: stepData.evidences,
+    onRemove: async ( e ) => {
+      console.log('qweqweqwewq');
+       stepData.evidences.filter ( ( img ) => img.uid !== e.uid ); 
+      setStepData({ 
+          ...stepData, 
+          evidences: stepData.evidences.filter ( ( img ) => img.uid !== e.uid ) 
+      });
+    }
   };
 
   return (
-    <Dragger {...draggerProps} className="uploadDragger">
+    <Dragger 
+      {...draggerProps} 
+      className="uploadDragger">
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
