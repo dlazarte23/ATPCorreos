@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import "../detalle-style.css";
 import { message, Upload } from "antd";
@@ -11,11 +11,20 @@ const { Dragger } = Upload;
 const UploadEvidencias = (props) => {
   const { stepData, setStepData } = props;
 
+  const numSubidas = useRef(0);
+
   const draggerProps = {
     multiple: true,
     //maxCount: 1,
     accept: ".jpg,.png,.gif",
     beforeUpload: async (file) => {
+
+      if ( numSubidas.current === 3 ) {
+        message.warning('No puede subir mas de 3 imagenes por detalle!');
+        return;
+      }
+
+      numSubidas.current ++;
 
       if ( stepData.evidences.length >= 3 ) {
         message.warning('No puede subir mas de 3 imagenes por detalle!');
@@ -47,6 +56,7 @@ const UploadEvidencias = (props) => {
           ...stepData, 
           evidences: stepData.evidences.filter ( ( img ) => img.uid !== e.uid ) 
       });
+      numSubidas.current --;
     }
   };
 
