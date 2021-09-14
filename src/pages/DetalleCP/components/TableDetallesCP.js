@@ -183,12 +183,12 @@ const TableDetallesCP = ({
           {editing ? (
             <Form.Item
               name={dataIndex}
-              rules={[
+              /* rules={[
                 {
                   required: true,
                   message: `Por favor, introduzca ${title}!`,
                 },
-              ]}
+              ]} */
               style={{
                 margin: 0,
               }}
@@ -217,13 +217,13 @@ const TableDetallesCP = ({
     },
     {
       title: "Precondición",
-      dataIndex: "stepDescription",
+      dataIndex: "stepComments",
       key: "stepDescription",
       editable: true,
     },
     {
       title: "Acción",
-      dataIndex: "stepComments",
+      dataIndex: "stepDescription",
       key: "stepComments",
       editable: true,
     },

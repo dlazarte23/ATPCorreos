@@ -98,8 +98,8 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
       idTestCase: detalle.testId,
       results: stepData.evidences,
       shortUsername: usuario.shortUser,
-      stepComments: stepData.action,
-      stepDescription: stepData.precondition,
+      stepComments: stepData.precondition,
+      stepDescription: stepData.action,
       stepExpectedResult: stepData.expectedResult,
       stepOrder: stepsData.length + 1,
     };

@@ -118,7 +118,7 @@ export default function ModalEditListado({
                 ]}
               >
                 <Input.TextArea
-                  maxLength={100}
+                  maxLength={500}
                   showCount
                   autoSize={{ minRows: 2, maxRows: 6 }}
                 />
