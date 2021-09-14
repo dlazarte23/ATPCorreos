@@ -43,8 +43,6 @@ const UploadEvidencias = (props) => {
     },
     fileList: stepData.evidences,
     onRemove: async ( e ) => {
-      console.log('qweqweqwewq');
-       stepData.evidences.filter ( ( img ) => img.uid !== e.uid ); 
       setStepData({ 
           ...stepData, 
           evidences: stepData.evidences.filter ( ( img ) => img.uid !== e.uid ) 
