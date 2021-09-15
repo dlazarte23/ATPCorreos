@@ -16,20 +16,15 @@ const UploadEvidencias = (props) => {
   const draggerProps = {
     multiple: true,
     //maxCount: 1,
-    accept: ".jpg,.png,.gif",
+    accept: ".jpg,.png",
     beforeUpload: async (file) => {
 
-      if ( numSubidas.current === 3 ) {
+      if ( stepData.evidences.length >= 3 || numSubidas.current === 3 ) {
         message.warning('No puede subir mas de 3 imagenes por detalle!');
         return;
       }
-
+      
       numSubidas.current ++;
-
-      if ( stepData.evidences.length >= 3 ) {
-        message.warning('No puede subir mas de 3 imagenes por detalle!');
-        return;
-      }
 
       const base64Img = await getBase64(file);
 

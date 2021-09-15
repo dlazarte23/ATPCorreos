@@ -61,7 +61,7 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
     } else {
         message.warning("No encontramos imagenes en su portapapeles!");
     }
-}
+  }
 
   const steps = [
     {

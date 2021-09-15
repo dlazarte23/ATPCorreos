@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import { useSelector } from "react-redux";
 
 import {
@@ -10,26 +11,22 @@ import {
   Divider,
   Image,
   Upload,
-  Button
+  Button,
+  message
 } from "antd";
+
 import {
   DeleteOutlined,
   EditOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
 
-const { TextArea } = Input;
-const EditableContext = React.createContext();
+import { paginationProps } from "../../../utils/helpers/paginationProps";
+import { getBase64 } from "../../../utils/helpers/convertToBase64";
 
-const paginationProps = {
-  defaultPageSize: 5,
-  pageSizeOptions: [5, 10, 20, 50],
-  showSizeChanger: true,
-  showQuickJumper: true,
-  showTotal: (total) => `${total} resultados`,
-  hideOnSinglePage: true,
-  defaultCurrent: 1,
-};
+const { TextArea } = Input;
+
+const EditableContext = React.createContext();
 
 const TableDetallesCP = ({
   detalle,
@@ -38,33 +35,29 @@ const TableDetallesCP = ({
   eliminarStep,
   loading,
 }) => {
+
   const [form] = Form.useForm();
   const [dataTable, setDataTable] = useState(steps.detallesCasoPrueba);
-  const usuario = useSelector((state) => state.usuario.usuario);
-
-  useEffect(() => {
-    setDataTable(steps.detallesCasoPrueba);
-  }, [steps]);
-
   const [editingKey, setEditingKey] = useState("");
+  const [fileList, setFileList] = useState([]);
+  
+  const usuario = useSelector((state) => state.usuario.usuario);
+  
   const isEditing = (record) => record.stepId === editingKey;
+
+  useEffect(() => { setDataTable(steps.detallesCasoPrueba); }, [ steps ]);
 
   const edit = (record) => {
     form.setFieldsValue({
-      result: [], //evidencias|
-      stepDescription: "", //acción
-      stepExpectedResults: "", //resultado esperado
+      result: [],
+      stepDescription: "",
+      stepExpectedResults: "",
       ...record,
     });
     setEditingKey(record.stepId);
   };
 
-  const cancel = () => {
-    setEditingKey("");
-  };
-
-  // eslint-disable-next-line
-  const [fileList, setFileList] = useState([]);
+  const cancel = () => { setEditingKey(""); };
 
   const save = async (record) => {
     try {
@@ -82,43 +75,17 @@ const TableDetallesCP = ({
           stepOrder: record.stepOrder,
         };
         setEditingKey("");
+
+        console.log( 'Registrar Detalle => ', newStep );
         actualizarStep(newStep, record.stepId);
       }
-    } catch (errInfo) {}
+    } catch ( errInfo ) {
+      console.error( errInfo );
+    }
   };
 
   const EditableCell = (props) => {
     const renderCell = () => {
-      const onPreview = async (file) => {
-        let src = file.url;
-        if (!src) {
-          src = await new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file.originFileObj);
-            reader.onload = () => resolve(reader.result);
-          });
-        }
-        const image = new Image();
-        image.src = src;
-        const imgWindow = window.open(src);
-        imgWindow.document.write(image.outerHTML);
-      };
-
-      const getBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => {
-            let encoded = reader.result.toString().replace(/^data:(.*,)?/, "");
-            if (encoded.length % 4 > 0) {
-              encoded += "=".repeat(4 - (encoded.length % 4));
-            }
-            resolve(encoded);
-          };
-          reader.onerror = (error) => reject(error);
-        });
-      };
-
       const {
         editing,
         dataIndex,
@@ -131,49 +98,90 @@ const TableDetallesCP = ({
       } = props;
 
       const list = [];
-      
+
+      const handlePaste = async ( e ) => {
+
+        if ( record.results.length >= 3 ) {
+          message.warning('No puede subir mas de 3 imagenes por detalle!');
+          return;
+        }
+        if ( e.clipboardData.files.length ) {
+    
+            const archivoObjecto = e.clipboardData.files[0];
+    
+            const response = await getBase64( archivoObjecto );
+
+            record.results.push(response);
+
+            setFileList([...fileList, record.results ]);
+
+            return true;
+        } else {
+            message.warning("No encontramos imagenes en su portapapeles!");
+        }
+      }
       // eslint-disable-next-line
-      record?.results?.map(function (item) {
+      record?.results?.map( (item) => {
         list.push({
-          name: item,
+          uid: Math.random()*10000000000000000,
+          name: 'image.png',
           status: "done",
           thumbUrl: `data:image/jpeg;base64,${item}`,
+          src: item
         });
       });
 
       const properties = {
-        accept: ".jpg,.png,.gif",
+        accept: ".jpg,.png",
         beforeUpload: async (file) => {
+
+          if ( record.results.length >= 3 ) {
+            message.warning('No puede subir mas de 3 imagenes por detalle!');
+            return;
+          }
+          
           if (file.status !== "removed") {
             const base64Img = await getBase64(file);
-            /* if (record.results.filter((list) => !list.find(base64Img))) { */
-            const newList = record.results;
-            newList.push(base64Img);
-            setFileList(newList);
-            /* } else {
-              message.success("La imagen ya se encuentra adjunta.");
-            } */
+            
+            record.results.push( base64Img );
+
+            setFileList([...fileList, record.results ]);
+
           }
           return false;
         },
         onRemove: (file) => {
-          const list = record.results;
-          const newList = list.filter((list) => !list.includes(file.name));
-          record.results = newList;
+          record.results = record.results.filter( ( img ) => img !== file.src );
+
+          setFileList([ ...fileList, record.results ]);
         },
       };
 
       const inputNode =
         title === "Evidencias" ? (
-          <Upload
-            {...properties}
-            listType="picture"
-            defaultFileList={[...list]}
-            className="upload-list-inline"
-            onPreview={onPreview}
-          >
-            <Button icon={<UploadOutlined />}>Cargar</Button>
-          </Upload>
+          <div onPaste={ handlePaste } >  
+            <Upload
+              {...properties}
+              listType="picture"
+              fileList={[...list]}
+              className="upload-list-inline"
+              onPreview={ () => message.info("No se puede previsualizar!") }
+              >
+              <Button icon={<UploadOutlined />}>Cargar</Button>
+            </Upload>
+            <div 
+              style={{ 
+                marginTop: 10,
+                height: 25,
+                border: '1px solid #3E92F5',
+                background: 'white',
+                width: '100%',
+                color: '#3E92F5',
+                cursor: "pointer"
+              }}>
+              <p style={{ marginLeft: 10, textAlign: 'center' }}>Ctrl + v ( aqui )</p>
+            </div>
+          </div>
         ) : (
           <TextArea autoSize={{ minRows: 6, maxRows: 6 }} />
         );
@@ -201,7 +209,6 @@ const TableDetallesCP = ({
   const columns = [
     {
       title: "#",
-      //dataIndex: ["step", "id"],
       dataIndex: "stepOrder",
       key: "stepOrder",
       editable: false,

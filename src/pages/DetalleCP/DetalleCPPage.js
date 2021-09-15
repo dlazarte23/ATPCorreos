@@ -61,8 +61,6 @@ export default function DetalleCPPage(props) {
   const eliminarStep = (idStep) => dispatch(eliminarStepAction(idStep));
 
   useEffect(() => {
-    // ah este metodo pasarle el id del caso de uso, que por ahora no se puede ya que viene en null
-
     obtenerDetalleCP(detalle.testId);
     // eslint-disable-next-line
   }, [detalle.testId]);
@@ -103,7 +101,6 @@ export default function DetalleCPPage(props) {
   );
 
   return (
-    /* <Spin spinning={loading} tip="Cargando..." size="large"> */
     <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
       {/** Column para el titulo y el botón general */}
       <Row>
@@ -145,6 +142,5 @@ export default function DetalleCPPage(props) {
         </Col>
       </Row>
     </Scrollbars>
-    /* </Spin> */
   );
 }
