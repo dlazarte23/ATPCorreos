@@ -75,8 +75,6 @@ const TableDetallesCP = ({
           stepOrder: record.stepOrder,
         };
         setEditingKey("");
-
-        console.log( 'Registrar Detalle => ', newStep );
         actualizarStep(newStep, record.stepId);
       }
     } catch ( errInfo ) {
