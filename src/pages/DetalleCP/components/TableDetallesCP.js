@@ -163,7 +163,7 @@ const TableDetallesCP = ({
               listType="picture"
               fileList={[...list]}
               className="upload-list-inline"
-              onPreview={ () => message.info("No se puede previsualizar!") }
+              onPreview={ () => {} }
               >
               <Button icon={<UploadOutlined />}>Cargar</Button>
             </Upload>

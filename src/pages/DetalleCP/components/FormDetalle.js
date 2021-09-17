@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import "../detalle-style.css";
 import { Steps, Button, message } from "antd";
@@ -23,8 +23,6 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [current, setCurrent] = useState(0);
 
-  const referencia = useRef(0);
-
   const [stepData, setStepData] = useState({
     precondition: "",
     action: "",
@@ -43,15 +41,13 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
           return;
         }
 
-        referencia.current ++;
-
         const archivoObjecto = e.clipboardData.files[0];
 
         const response = await getBase64( archivoObjecto );
 
         const dataFake = {
             uid: `${ archivoObjecto.name + Math.random() }`,
-            name: `name_${ referencia.current }.png`,
+            name: `image.png`,
             status: 'done',
             src: response
         }
@@ -132,10 +128,7 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
     setCurrent(current - 1);
   };
 
-  const onSaveNewStep = () => {
-
-    referencia.current = 0;
-    
+  const onSaveNewStep = () => {    
     setConfirmLoading(!loading);
     setTimeout(() => {
       setConfirmLoading(false);

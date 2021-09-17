@@ -9,24 +9,26 @@ import { getBase64 } from "../../../utils/helpers/convertToBase64";
 const { Dragger } = Upload;
 
 const UploadEvidencias = (props) => {
+
   const { stepData, setStepData } = props;
 
-  const numSubidas = useRef(0);
+  const numMaxImg = useRef(0);
 
   const draggerProps = {
+
     multiple: true,
-    //maxCount: 1,
     accept: ".jpg,.png",
+
     beforeUpload: async (file) => {
 
-      if ( stepData.evidences.length >= 3 || numSubidas.current === 3 ) {
+      if ( numMaxImg.current >= 3 || stepData.evidences.length >= 3 ) {
         message.warning('No puede subir mas de 3 imagenes por detalle!');
         return;
       }
-      
-      numSubidas.current ++;
 
-      const base64Img = await getBase64(file);
+      numMaxImg.current ++;
+
+      const base64Img = await getBase64( file );
 
       const objTemp = {
         uid: file.uid,
@@ -40,18 +42,18 @@ const UploadEvidencias = (props) => {
       evidencesList.push(objTemp);
 
       setStepData({ ...stepData, evidences: evidencesList });
+
       return false;
     },
-    onDrop(e) {
-      setStepData({ ...stepData, evidences: [] });
-    },
+
     fileList: stepData.evidences,
+
     onRemove: async ( e ) => {
       setStepData({ 
           ...stepData, 
           evidences: stepData.evidences.filter ( ( img ) => img.uid !== e.uid ) 
       });
-      numSubidas.current --;
+      numMaxImg.current --;
     }
   };
 
@@ -66,7 +68,7 @@ const UploadEvidencias = (props) => {
         Haga click o arrastre una imagen a esta área.
       </p>
       <p className="ant-upload-hint">
-        Adjuntar evidencia del step. Formatos aceptados: png, jpg, gif.
+        Adjuntar evidencia del step. Formatos aceptados: png, jpg.
       </p>
     </Dragger>
   );
