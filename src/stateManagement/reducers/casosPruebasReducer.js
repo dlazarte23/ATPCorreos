@@ -23,7 +23,7 @@ const initialState = {
 };
 
 // eslint-disable-next-line
-export default function (state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case LISTAR_CASOS_PRUEBA:
     case DESCARGAR_DOCUMENTO:

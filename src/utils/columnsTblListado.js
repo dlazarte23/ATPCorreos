@@ -7,8 +7,6 @@ import ModalEditListado from "../pages/CasosDePrueba/components/ModalEditListado
 
 const handleDelete = (testId) => {
   console.log("eliminar", testId);
-  // const dataSource = [...this.state.dataSource];
-  // this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
 };
 
 export const columns = [

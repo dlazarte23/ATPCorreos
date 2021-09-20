@@ -25,7 +25,7 @@ import { patch } from "../../utils/confAxios/petitionPatch";
  * Actión para poder hacer el registro del step
  * @param {*} step  => recibe un objeto con el step que se va a mandar a crear
  */
-export function crearNuevoStepAction(step) {
+export const crearNuevoStepAction = (step) => {
   return async (dispatch) => {
     dispatch(guardarStep());
 
@@ -43,7 +43,7 @@ export function crearNuevoStepAction(step) {
   };
 }
 
-export function actualizarNuevoStepAction(step, id) {
+export const actualizarNuevoStepAction = (step, id) => {
   return async (dispatch) => {
     dispatch(actualizarStep());
     try {
@@ -99,7 +99,7 @@ const actualizarStepError = (error) => ({
  * Action para descargar el detalle de cada petición por su id de peticion
  * @param {*} idCasoDePrueba
  */
-export function descargarDetalleCPAction(idCasoDePrueba) {
+export const descargarDetalleCPAction = (idCasoDePrueba) => {
   return async (dispatch) => {
     dispatch(descargarStep());
 
@@ -131,7 +131,7 @@ const descargarStepError = (error) => ({
  * Action para la eliminación de la petición
  * @param {*} idStep
  */
-export function eliminarStepAction(idStep) {
+export const eliminarStepAction = (idStep) => {
   return async (dispatch) => {
     dispatch(eliminarStep());
 

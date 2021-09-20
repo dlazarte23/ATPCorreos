@@ -20,7 +20,7 @@ import { get } from "../../utils/confAxios/petitionGet";
  * Action unicamente para el logeo del usuario
  * @param {*} usuario
  */
-export function logearUsuarioAction(usuario) {
+export const logearUsuarioAction = (usuario) => {
   return async (dispatch) => {
     dispatch(logeandoUsuario());
 
@@ -70,7 +70,7 @@ const logearUsuarioError = (error) => ({
  * @param {*} usuario 
  * @returns 
  */
-export function deslogearUsuario(usuario) {
+export const deslogearUsuario = () => {
   return async (dispatch) => {
     dispatch(deslogeandoUsuario());
     try {
@@ -101,7 +101,7 @@ const deslogearUsuarioError = (error) => ({
  * en el local storage
  * @param {*} usuario
  */
-export function verificarLogeoAction(usuario) {
+export const verificarLogeoAction = (usuario) => {
   return (dispatch) => {
     dispatch(verificarLogeo());
 

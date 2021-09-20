@@ -28,7 +28,7 @@ import { patch } from "../../utils/confAxios/petitionPatch";
 /**
  * Actión para obtener la lista de proyectos
  */
-export function listarProyectoAction() {
+export const listarProyectoAction = () => {
   return async (dispatch) => {
     // Avisamos que se esta iniciando la descarga de proyectos
     dispatch(comenzarDecargarProyectos());
@@ -70,7 +70,7 @@ const proyectosDescargadosError = (error) => ({
  * para identificar en base a que proyecto se esta trabajando todas las operaciones
  * @param {*} codProyecto
  */
-export function seleccionarProyectoAction(codProyecto) {
+export const seleccionarProyectoAction = (codProyecto) => {
   return (dispatch) => {
     dispatch(seleccionarProyecto(codProyecto));
   };
@@ -85,7 +85,7 @@ const seleccionarProyecto = (codProyecto) => ({
  * Actión para traernos todas las peticiones por el cod de proyecto que exista.
  * @param {*} codProyecto
  */
-export function obtenerPeticionesAction(idProyecto, filter, shortUser) {
+export const obtenerPeticionesAction = (idProyecto, filter, shortUser) => {
   return async (dispatch) => {
     dispatch(obtenerPeticion());
     try {
@@ -125,7 +125,7 @@ const obtenerPeticionError = (error) => ({
  * Actión para poder hacer el registro de las peticiónes
  * @param {*} peticion  => recibe un objeto con la petición que se va a mandar a crear
  */
-export function crearNuevaPeticionAction(peticion) {
+export const crearNuevaPeticionAction = (peticion) => {
   return async (dispatch) => {
     dispatch(agregarPeticion());
 
@@ -165,7 +165,7 @@ const agregarPeticionError = (error) => ({
  * Action para la edición de la peticion
  * @param {*} peticion
  */
-export function editarPeticionAction(values, id, idProyecto) {
+export const editarPeticionAction = (values, id, idProyecto) => {
   return async (dispatch) => {
     dispatch(editarPeticion());
 
@@ -206,7 +206,7 @@ const editarPeticionError = (error) => ({
  * Action para la eliminación de la petición
  * @param {*} idPeticion
  */
-export function eliminarPeticionAction(idPeticion) {
+export const eliminarPeticionAction = (idPeticion) => {
   return async (dispatch) => {
     dispatch(eliminarPeticion());
 

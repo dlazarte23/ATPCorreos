@@ -30,7 +30,7 @@ import FileSaver from "file-saver";
  * Action para el listado de todos los casos de pruebas
  * @param {*} idPeticion
  */
-export function listarCasosDePruebaAction(idPeticion) {
+export const listarCasosDePruebaAction = (idPeticion) => {
   return async (dispatch) => {
     dispatch(listarCasosPrueba());
 
@@ -63,7 +63,7 @@ const listarCasosPruebaError = (error) => ({
  * Action encargado de crear el caso de prueba.
  * @param {*} casoDePrueba
  */
-export function registrarCasosPruebasAction(casoDePrueba) {
+export const registrarCasosPruebasAction = (casoDePrueba) => {
   return async (dispatch) => {
     dispatch(registrarCasosPrueba());
 
@@ -102,7 +102,7 @@ const registrarCasosPruebaError = (error) => ({
  * @param {*} idTestCase
  * @param {*} data
  */
-export function editarCasosPruebaAction(idTestCase, data) {
+export const editarCasosPruebaAction = (idTestCase, data) => {
   return async (dispatch) => {
     dispatch(editarCasosPrueba());
 
@@ -142,7 +142,7 @@ const editarCasosPruebaError = (error) => ({
  * @param {*} shortUsername
  * @param {*} idTestCase
  */
-export function eliminarCasosPruebaAction(shortUsername, idTestCase) {
+export const eliminarCasosPruebaAction = (shortUsername, idTestCase) => {
   return async (dispatch) => {
     dispatch(eliminarCasosPrueba());
 
@@ -182,7 +182,7 @@ const eliminarCasosPruebaError = (error) => ({
  * @param {*} idPeticion
  * @param {*} tipoDocumento
  */
-export function descargarDocumento(idPeticion, tipoDocumento, nombreArchivo) {
+export const descargarDocumento = (idPeticion, tipoDocumento, nombreArchivo) => {
   return async (dispatch) => {
     dispatch(descargaDocumento());
 

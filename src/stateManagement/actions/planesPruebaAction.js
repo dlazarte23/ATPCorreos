@@ -25,25 +25,25 @@ import { patch } from "../../utils/confAxios/petitionPatch";
  * @param {*} idPeticion 
  * @returns 
  */
-export function obtenerPlanesDePruebaAction ( idPeticion ) {
+export const obtenerPlanesDePruebaAction = (idPeticion) => {
 
-    return async ( dispatch ) => {
+    return async (dispatch) => {
 
-        dispatch( obtenerPlanesPrueba( ) );
-        
+        dispatch(obtenerPlanesPrueba());
+
         try {
-            
+
             const response = await get(`${uri.getTestPlan}/${idPeticion}`);
 
-            dispatch( obtenerPlanesPruebaExito( response ) );
+            dispatch(obtenerPlanesPruebaExito(response));
 
             return response.spring;
-            
-        } catch ( error ) {
 
-            message.error("Error al obtener los planes de prueba!");            
-            dispatch( obtenerPlanesPruebaError( error ) );
-            
+        } catch (error) {
+
+            message.error("Error al obtener los planes de prueba!");
+            dispatch(obtenerPlanesPruebaError(error));
+
         }
 
     }
@@ -69,28 +69,28 @@ const obtenerPlanesPruebaError = error => ({
  * @param {*} idPeticion 
  * @returns 
  */
-export function agregarPlanPruebaAction( subject ) {
-    
-    return async ( dispatch ) => {
+export const agregarPlanPruebaAction = (subject) => {
 
-        dispatch( agregarPlanesPrueba( ) );
-        
+    return async (dispatch) => {
+
+        dispatch(agregarPlanesPrueba());
+
         try {
-            
+
             const response = await post(uri.setTestPlan, subject);
 
-            if ( response.status === 201 ) {
-                
-                dispatch( agregarPlanesPruebaExito( response.data ) );
-                message.success("Plan de prueba registrado correctamente!"); 
+            if (response.status === 201) {
+
+                dispatch(agregarPlanesPruebaExito(response.data));
+                message.success("Plan de prueba registrado correctamente!");
 
             }
-            
-        } catch ( error ) {
-            
+
+        } catch (error) {
+
             message.error("Error al registrar el plan de prueba!");
-            dispatch( agregarPlanesPruebaError( error ) );
-            
+            dispatch(agregarPlanesPruebaError(error));
+
         }
 
     }
@@ -111,36 +111,36 @@ const agregarPlanesPruebaError = error => ({
     payload: error
 });
 
+
 /**
  * Type para la actualización del plan de prueba
  * @param {*} idPlanPrueb 
  * @param {*} planPrueba 
  */
- export function editarPlanDePruebaAction ( idPlanPrueb, planPrueba ) {
+export const editarPlanDePruebaAction = (idPlanPrueb, planPrueba) => {
 
-    return ( dispatch ) => {
-        
-        dispatch( editarPlanDePrueba() );
-        
+    return (dispatch) => {
+
+        dispatch(editarPlanDePrueba());
+
         try {
-            
+
             // llamada al servicio
             // const response = put(uri +idPlanPrueb, planPrueba);
             //  if ( response.status == 200 ) { }
             // response.data
-            
-            dispatch( editarPlanDePruebaExito( planPrueba ) );
-            
-            
-        } catch ( error ) {
-            
+
+            dispatch(editarPlanDePruebaExito(planPrueba));
+
+        } catch (error) {
+
             message.error("Error al actualizar tu plan de prueba!");
-            dispatch( editarPlanDePruebaError( error ) );
+            dispatch(editarPlanDePruebaError(error));
 
         }
 
-    } 
-    
+    }
+
 }
 
 const editarPlanDePrueba = () => ({
@@ -158,52 +158,48 @@ const editarPlanDePruebaError = error => ({
 });
 
 
-
-
-
 /**
  * Action para la eliminar plan de prueba
  * @param {*} id
  */
- export function eliminarPlandePruebaAction(id) {
- 
-     return async (dispatch) => {
-       dispatch(eliminarPlandePrueba());
-  
-       try {
-         // aqui se debe hacer la consulta a la API
-  
-        const usuario = localStorage.getItem("DATA_SESION");
-  
-        const { shortUser } = JSON.parse(usuario);
-  
-        const response = await patch(`${uri.deleteTestPlan}/${shortUser}/${id}`);
-  
-        if (response.status === 200) {
-          // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
-          message.success("Petición eliminada correctamente!");
-  
-          dispatch(eliminarPlandePruebaExito(id));
+export const eliminarPlandePruebaAction = (id) => {
+
+    return async (dispatch) => {
+        dispatch(eliminarPlandePrueba());
+
+        try {
+            // aqui se debe hacer la consulta a la API
+
+            const usuario = localStorage.getItem("DATA_SESION");
+
+            const { shortUser } = JSON.parse(usuario);
+
+            const response = await patch(`${uri.deleteTestPlan}/${shortUser}/${id}`);
+
+            if (response.status === 200) {
+                // si la API devuelve un response de correcto meter este dispatch y el mensaje a un if
+                message.success("Petición eliminada correctamente!");
+
+                dispatch(eliminarPlandePruebaExito(id));
+            }
+        } catch (error) {
+            message.error("Error al tratar de eliminar esta petición!");
+
+            dispatch(eliminarPlandePruebaError(error));
         }
-    } catch (error) {
-     message.error("Error al tratar de eliminar esta petición!");
-  
-        dispatch(eliminarPlandePruebaError(error));
-      }
-  };
+    };
 }
-  
-  const eliminarPlandePrueba = () => ({
+
+const eliminarPlandePrueba = () => ({
     type: ELIMINAR_PLAN_PRUEBA,
-  });
-  
-  const eliminarPlandePruebaExito = (idPlandePrueba) => ({
+});
+
+const eliminarPlandePruebaExito = (idPlandePrueba) => ({
     type: ELIMINAR_PLAN_PRUEBA_EXITO,
     payload: idPlandePrueba,
-  })
-  
-  const eliminarPlandePruebaError = (error) => ({
+})
+
+const eliminarPlandePruebaError = (error) => ({
     type: ELIMINAR_PLAN_PRUEBA_ERROR,
     payload: error,
-  });
-  
+});

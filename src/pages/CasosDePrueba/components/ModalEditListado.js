@@ -5,14 +5,14 @@ import { EditOutlined } from "@ant-design/icons";
 
 import { editarCasosPruebaAction } from "../../../stateManagement/actions/casosPruebasAction";
 
-export default function ModalEditListado({
+const ModalEditListado = ({
   testId,
   testName,
   testDescription,
   usuario,
   loading,
   subject,
-}) {
+}) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -125,14 +125,10 @@ export default function ModalEditListado({
               </Form.Item>
             </Col>
           </Row>
-          {/* <Form.Item
-            name="sprint"
-            label="Sprint"
-            rules={[{ required: true, type: "number", min: 0, max: 99, message: "El numero de sprint debe estar entre 0 a 99 !" }]} >
-            <InputNumber />
-          </Form.Item> */}
         </Form>
       </Modal>
     </>
   );
 }
+
+export default ModalEditListado;

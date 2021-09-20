@@ -1,8 +1,0 @@
-{
-  "testCaseCode": "102030",
-  "stepNumber": 1,
-  "precondition": "<ul><li><strong>Precondición</strong> del caso de prueba!</li><li>Segunda precondición.</li></ul>",
-  "action": "<ul><li>Acciones del caso de prueba!</li><li>Otra acción.</li></ul>",
-  "expectedResult": "<ul><li>Resultado esperado!</li></ul>",
-  "evidences": ["AQUI_BASE64_IMG", "OTRA_BASE64_IMG"]
-}
