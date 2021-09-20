@@ -9,7 +9,7 @@ import { Layout } from "antd";
 import { Provider } from 'react-redux';
 import store from './stateManagement/store';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Layout>
