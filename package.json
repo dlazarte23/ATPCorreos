@@ -4,8 +4,6 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
-    "@ckeditor/ckeditor5-build-classic": "^28.0.0",
-    "@ckeditor/ckeditor5-react": "^3.0.2",
     "antd": "^4.16.6",
     "axios": "^0.21.1",
     "cpr": "^3.0.1",
@@ -18,7 +16,6 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
-    "reqwest": "^2.0.5",
     "use-react-router-breadcrumbs": "^2.0.2",
     "web-vitals": "^1.1.2"
   },

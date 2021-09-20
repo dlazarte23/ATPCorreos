@@ -13,6 +13,7 @@ const FormLogin = () => {
   const { Title } = Typography;
 
   const history = useHistory();
+  
   const [isLogging, setIsLogging] = useState(false);
 
   const dispatch = useDispatch();
@@ -38,10 +39,7 @@ const FormLogin = () => {
 
   };
 
-  const onFinishFailed = (errorInfo) => {
-    setIsLogging(false);
-    console.log("Failed:", errorInfo);
-  };
+  const onFinishFailed = () => setIsLogging(false);
 
   return (
     <div className="contenedor-formLogin">
