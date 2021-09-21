@@ -64,7 +64,6 @@ export default function Peticionespage() {
   const loadingPP = useSelector((state) => state.planesPrueba.loading);
 
   return (
-    /* <Spin spinning={loading} tip="Cargando" size="large"> */
     <Spin spinning={loadingPP} tip="Un momento..." size="large">
       <Scrollbars autoHeight={true} autoHeightMin={"80vh"}>
         <Row>
@@ -97,9 +96,8 @@ export default function Peticionespage() {
                   title={
                     proyectoSeleccionado === null
                       ? "Debe seleccionar un proyecto."
-                      : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${
-                          proyectoSeleccionado.name
-                        }.`
+                      : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${proyectoSeleccionado.name
+                      }.`
                   }
                 />
               </Col>
@@ -123,9 +121,8 @@ export default function Peticionespage() {
                 title={
                   proyectoSeleccionado === null
                     ? "Debe seleccionar un proyecto."
-                    : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${
-                        proyectoSeleccionado.name
-                      }.`
+                    : `No existe peticiones ${filter.toLocaleLowerCase()} en el proyecto: ${proyectoSeleccionado.name
+                    }.`
                 }
               />
             </Col>
@@ -138,6 +135,5 @@ export default function Peticionespage() {
         />
       </Scrollbars>
     </Spin>
-    /* </Spin> */
   );
 }
