@@ -66,6 +66,7 @@ const ModalEditListado = ({
         onOk={handleOk}
         onCancel={handleCancel}
         centered="true"
+        width={1000}
         footer={[
           <Button key="back" onClick={handleCancel}>
             Cancelar
@@ -112,15 +113,13 @@ const ModalEditListado = ({
                 rules={[
                   {
                     required: true,
-                    message:
-                      "Debe ingresar la descripción del caso de Prueba !",
+                    message: "Debe ingresar la descripción del caso de Prueba !",
                   },
                 ]}
               >
                 <Input.TextArea
                   maxLength={500}
                   showCount
-                  autoSize={{ minRows: 2, maxRows: 6 }}
                 />
               </Form.Item>
             </Col>

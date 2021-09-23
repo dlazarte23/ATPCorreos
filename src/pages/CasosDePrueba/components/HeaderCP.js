@@ -46,7 +46,7 @@ const HeaderCP = ({ peticion, subject }) => {
         <PageHeader
           className="case-header"
           title={
-            <Title level={5} style={{ maxWidth: 600 }}>
+            <Title level={5} style={{ maxWidth: '100%' }}>
               <Descriptions size="small" column={1}>
                 <Descriptions.Item label="Plan de pruebas">
                   <span style={{ color: "#1890ff" }}>{subject.subject}</span>

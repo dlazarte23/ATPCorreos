@@ -18,8 +18,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
 
   const dispatch = useDispatch();
 
-  const casosDePruebas = useSelector((state) => state.casosPruebas.casosPruebas)
-                          .map((elem) => ({ ...elem, key: elem.testId }));
+  const casosDePruebas = useSelector((state) => state.casosPruebas.casosPruebas).map((elem) => ({ ...elem, key: elem.testId.toString() }));
 
   const handleDelete = (testId) => dispatch(eliminarCasosPruebaAction(usuario.shortUser, testId));
 
@@ -106,7 +105,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
         components={ components }
         pagination={ paginationProps }
         locale={{ emptyText: "Sin datos" }}
-        onRow={( record, index ) => ({
+        onRow={( _, index ) => ({
           index,
           moveRow
         })}

@@ -85,7 +85,7 @@ export default function DetalleCPPage(props) {
             {`Descripción: ${detalle.testDescription}`}
           </Paragraph>
           <Descriptions size="small" column={3} className="description-info">
-            <Descriptions.Item label="Id. petición">
+            <Descriptions.Item label="Nom. pp">
               {subject.subject}
             </Descriptions.Item>
             <Descriptions.Item label="Id. petición">
