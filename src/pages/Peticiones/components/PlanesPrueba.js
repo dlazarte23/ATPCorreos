@@ -24,6 +24,12 @@ const PlanesPrueba = ({ showPP, onCloseDetallePP }) => {
 
   const { shortUser } = useSelector((state) => state.usuario.usuario);
 
+  const subjects = useSelector((state) => state.planesPrueba.planesPrueba);
+  
+  const loading = useSelector((state) => state.planesPrueba.loading);
+  
+  const [inputAddPlan, setInputAddPlan] = useState("");
+
   const onFinish = (values) => {
     const pp = {
       spring: id,
@@ -38,12 +44,6 @@ const PlanesPrueba = ({ showPP, onCloseDetallePP }) => {
     console.log("Failed:", errorInfo);
   };
 
-  const subjects = useSelector((state) => state.planesPrueba.planesPrueba);
-
-  const loading = useSelector((state) => state.planesPrueba.loading);
-
-
-  const [inputAddPlan, setInputAddPlan] = useState("")
   const onChange = e => {
     setInputAddPlan(e.target.value);
   };

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Popconfirm, Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
-
 // actions de redux
 import { eliminarPlandePruebaAction } from "../../../stateManagement/actions/planesPruebaAction";
 

@@ -12,25 +12,22 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { listarCasosDePruebaAction } from "../../stateManagement/actions/casosPruebasAction";
 
-export default function CasosPruebasPage(props) {
+export default function CasosPruebasPage( props ) {
+
   const { Title } = Typography;
 
-  const { peticion } = props.location.state;
-  const { subject } = props.location.state;
+  const { peticion, subject } = props.location.state;
 
   const dispatch = useDispatch();
 
-  const obtenerCasosDePrueba = (idPeticion) =>
-    dispatch(listarCasosDePruebaAction(idPeticion));
+  const obtenerCasosDePrueba = (idPeticion) => dispatch(listarCasosDePruebaAction(idPeticion));
 
   useEffect(() => {
     obtenerCasosDePrueba(subject.id);
-
     // eslint-disable-next-line
   }, []);
 
-  const loading = useSelector((state) => state.casosPruebas.loading);
-  const usuario = useSelector((state) => state.usuario.usuario);
+  const { loading, usuario } = useSelector((state) => state.casosPruebas);
 
   return (
     <Spin spinning={loading} tip="Cargando..." size="large">
