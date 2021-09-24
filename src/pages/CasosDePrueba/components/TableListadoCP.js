@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { Table, Space, Popconfirm } from "antd";
@@ -17,12 +17,14 @@ import { eliminarCasosPruebaAction } from "../../../stateManagement/actions/caso
 const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
 
   const dispatch = useDispatch();
+  
+  const { casosPruebas : testsCase } = useSelector(( state ) => state.casosPruebas );
+  
+  const handleDelete = ( testId ) => dispatch(eliminarCasosPruebaAction( usuario.shortUser, testId ));
+  
+  const [data, setData] = useState( [] );
 
-  const casosDePruebas = useSelector((state) => state.casosPruebas.casosPruebas).map((elem) => ({ ...elem, key: elem.testId.toString() }));
-
-  const handleDelete = (testId) => dispatch(eliminarCasosPruebaAction(usuario.shortUser, testId));
-
-  const [data, setData] = useState(casosDePruebas);
+  useEffect(() => { setData( testsCase.map(( elem ) => ( { ...elem, key: elem.testId.toString() } )) ); }, [ testsCase ]);
 
   const columns = [
     {
@@ -60,8 +62,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
             cancelText="Cancelar"
           >
             <a href="!">
-              {" "}
-              <DeleteOutlined />{" "}
+              {" "}<DeleteOutlined />{" "}
             </a>
           </Popconfirm>
 
@@ -76,8 +77,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
             }}
             className="btn-yellow-link"
           >
-            {" "}
-            <SettingOutlined />{" "}
+            {" "}<SettingOutlined />{" "}
           </Link>
         </Space>
       ),
@@ -87,7 +87,13 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
   const components = { body: { row: DragableBodyRow } };
 
   const moveRow = useCallback(( dragIndex, hoverIndex ) => {
+
+    console.log('moveRow', { dragIndex, hoverIndex });
+
     const dragRow = data[ dragIndex ];
+
+    console.log('dragRow', { dragRow });
+
     setData( update( data, {
       $splice: [
         [ dragIndex, 1 ],

@@ -18,7 +18,7 @@ export const DragableBodyRow = ({ index, moveRow, className, style, ...restProps
 
       return {
         isOver: monitor.isOver(),
-        dropClassName: dragIndex < index ? "drop-over-downward" : "drop-over-upward",
+        dropClassName: `drop-over-${ dragIndex < index ? 'downward' : 'upward'}`,
       }
     },
     

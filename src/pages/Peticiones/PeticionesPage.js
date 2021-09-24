@@ -1,39 +1,19 @@
 import React, { useState, useEffect } from "react";
 
+import { Scrollbars } from "react-custom-scrollbars-2";
+import { Row, Col, Spin, Result } from "antd";
+import { useSelector } from "react-redux";
+
 import {
   HeaderPeticion,
   ListPeticiones,
   ModalCreatePeticion,
 } from "./components";
-
 import SkeletonList from "../../components/common/SkeletonList";
-import { Scrollbars } from "react-custom-scrollbars-2";
-import { Row, Col, Spin, Result } from "antd";
-import { useSelector } from "react-redux";
+import { getSpan, getOffset } from "../../utils/helpers/screenMeasures";
 
-const getSpan = () => {
-  const width = window.screen.width;
-  if (width >= 1920) {
-    return 12;
-  } else if (width >= 1280) {
-    return 16;
-  } else {
-    return 24;
-  }
-};
-
-const getOffset = () => {
-  const width = window.screen.width;
-  if (width >= 1920) {
-    return 6;
-  } else if (width >= 1280) {
-    return 4;
-  } else {
-    return 0;
-  }
-};
-
-export default function Peticionespage() {
+const Peticionespage = () => {
+  
   const loading = useSelector((state) => state.peticiones.loading);
   const peticiones = useSelector((state) => state.peticiones.peticiones);
   const proyectos = useSelector((state) => state.peticiones.proyectos);
@@ -137,3 +117,5 @@ export default function Peticionespage() {
     </Spin>
   );
 }
+
+export default Peticionespage;

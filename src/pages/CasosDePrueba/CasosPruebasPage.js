@@ -41,7 +41,10 @@ export default function CasosPruebasPage(props) {
             <HeaderCP peticion={peticion} subject={subject} />
 
             <div className="contenedor">
-              <FormCP subject={subject} usuario={usuario} loading={loading} />
+              <FormCP
+                subject={subject} 
+                usuario={usuario} 
+                loading={loading} />
             </div>
 
             <Row className="table-detalleCp">
