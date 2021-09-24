@@ -3,7 +3,7 @@ import { Layout } from "antd";
 
 const { Footer } = Layout;
 
-export default function MainFooter() {
+const MainFooter = () => {
   return (
     <Footer
       style={{
@@ -11,7 +11,9 @@ export default function MainFooter() {
         padding: 10,
       }}
     >
-      ATPCorreos ©2021
+      ATPCorreos ©{ new Date().getFullYear() }
     </Footer>
   );
 }
+
+export default MainFooter;

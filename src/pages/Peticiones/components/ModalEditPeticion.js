@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Modal,
   Input,
@@ -11,12 +12,12 @@ import {
   Tooltip,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-
 import { EditOutlined } from "@ant-design/icons";
-// actions de redux
-import { editarPeticionAction } from "../../../stateManagement/actions/peticionesAction";
 import moment from "moment";
-export default function ModalEditPeticion(props) {
+
+import { editarPeticionAction } from "../../../stateManagement/actions/peticionesAction";
+
+const ModalEditPeticion = (props) => {
   const { dataPeticion } = props;
 
   const {
@@ -41,18 +42,14 @@ export default function ModalEditPeticion(props) {
     console.log("on finsh");
   };
 
-  const loading = useSelector((state) => state.peticiones.loading);
+  const { loading } = useSelector((state) => state.peticiones);
 
-  // utilizamos use dispatch y nos crea una función
   const dispatch = useDispatch();
 
-  // mandamos a llamar el action de peticionesAction
-  const editarPeticion = (peticion, id, idProyecto) =>
-    dispatch(editarPeticionAction(peticion, id, idProyecto));
+  const editarPeticion = (peticion, id, idProyecto) => dispatch(editarPeticionAction(peticion, id, idProyecto));
 
   const dateFormat = "DD/MM/YYYY";
 
-  // cuando el usuario haga clic en guardar cambios
   const handleOk = () => {
     form
       .validateFields()
@@ -87,9 +84,7 @@ export default function ModalEditPeticion(props) {
       otCode: otCode,
     });
   };
-  const handleCancel = () => {
-    setShowModal(false);
-  };
+  const handleCancel = () => { setShowModal(false); };
 
   return (
     <>
@@ -275,3 +270,5 @@ export default function ModalEditPeticion(props) {
     </>
   );
 }
+
+export default ModalEditPeticion;

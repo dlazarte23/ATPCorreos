@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { breadcrumbRoutes } from "../../routes/routes";
 import { Breadcrumb } from "antd";
 
-export default function Breadcrumbs() {
+const Breadcrumbs = () => {
   const breadcrumbs = useBreadcrumbs(breadcrumbRoutes);
 
   return (
@@ -16,3 +16,5 @@ export default function Breadcrumbs() {
     </Breadcrumb>
   );
 }
+
+export default Breadcrumbs;

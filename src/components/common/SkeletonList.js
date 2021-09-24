@@ -1,27 +1,7 @@
 import React from "react";
 import { Col, Skeleton } from "antd";
 
-const getSpan = () => {
-  const width = window.screen.width;
-  if (width >= 1920) {
-    return 12;
-  } else if (width >= 1280) {
-    return 16;
-  } else {
-    return 24;
-  }
-};
-
-const getOffset = () => {
-  const width = window.screen.width;
-  if (width >= 1920) {
-    return 6;
-  } else if (width >= 1280) {
-    return 4;
-  } else {
-    return 0;
-  }
-};
+import { getSpan, getOffset } from "../../utils/helpers/screenMeasures";
 
 const SkeletonList = ({ loading }) => {
   return (

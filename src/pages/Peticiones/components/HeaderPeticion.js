@@ -23,14 +23,11 @@ import {
 
 const { Option } = Select;
 
-export default function HeaderPeticion(props) {
-  const { filter, setFilter, showModal, setShowModal, setSearchTerm, usuario } =
-    props;
+const HeaderPeticion = ({ filter, setFilter, showModal, setShowModal, setSearchTerm, usuario }) => {
 
   const dispatch = useDispatch();
 
-  const obtenerProyectos = (shortUser) =>
-    dispatch(listarProyectoAction(shortUser));
+  const obtenerProyectos = (shortUser) => dispatch(listarProyectoAction(shortUser));
 
   useEffect(() => {
     obtenerProyectos();
@@ -38,26 +35,22 @@ export default function HeaderPeticion(props) {
     // eslint-disable-next-line
   }, []);
 
-  const proyectos = useSelector((state) => state.peticiones.proyectos);
+  const { proyectos } = useSelector((state) => state.peticiones);
 
   const proyectoSeleccionado = useSelector(
     (state) => state.peticiones.proyectoSeleccionado
   );
 
   const loading = useSelector((state) => state.peticiones.loading);
-  const seleccionarProyecto = (codProyecto) =>
-    dispatch(seleccionarProyectoAction(codProyecto));
-  const obtenerPeticiones = (codProyecto, filter, shortUser) =>
-    dispatch(obtenerPeticionesAction(codProyecto, filter, shortUser));
+
+  const seleccionarProyecto = (codProyecto) => dispatch(seleccionarProyectoAction(codProyecto));
+  const obtenerPeticiones = (codProyecto, filter, shortUser) => dispatch(obtenerPeticionesAction(codProyecto, filter, shortUser));
 
   const buscarPeticiones = (value) => {
-    // setteamos el proyecto para almacenar el general
-
     const proyecto = proyectos.filter((proyecto) => proyecto.id === value);
 
-    seleccionarProyecto(proyecto[0]);
+    seleccionarProyecto( proyecto[0] );
 
-    // actualizamos la lista de peticiones dependiendo el tipo de proyecto q le pasemos
     obtenerPeticiones(value, filter, usuario.shortUser);
   };
 
@@ -75,9 +68,7 @@ export default function HeaderPeticion(props) {
     );
   };
 
-  const handleChangeSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  const handleChangeSearch = (event) => { setSearchTerm(event.target.value); };
 
   return (
     <PageHeader
@@ -102,7 +93,7 @@ export default function HeaderPeticion(props) {
       <Space align="start">
         <Input
           size="default"
-          placeholder="Buscar"
+          placeholder="Buscar por id de petición"
           disabled={proyectoSeleccionado === null ? true : false}
           style={{ width: "400px" }}
           prefix={<SearchOutlined />}
@@ -156,3 +147,5 @@ export default function HeaderPeticion(props) {
     </PageHeader>
   );
 }
+
+export default HeaderPeticion;

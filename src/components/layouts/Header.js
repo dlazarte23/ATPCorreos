@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const { Header } = Layout;
 
-export default function MainHeader() {
+const MainHeader = () => {
   const dispatch = useDispatch();
 
   const usuario = useSelector((state) => state.usuario.usuario);
@@ -83,3 +83,5 @@ export default function MainHeader() {
     </Header>
   );
 }
+
+export default MainHeader;
