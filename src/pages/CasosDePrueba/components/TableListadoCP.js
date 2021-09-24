@@ -24,7 +24,11 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
   
   const [data, setData] = useState( [] );
 
-  useEffect(() => { setData( testsCase.map(( elem ) => ( { ...elem, key: elem.testId.toString() } )) ); }, [ testsCase ]);
+  useEffect(() => { 
+    setData(
+      testsCase.map(( elem ) => ( { ...elem, key: elem.testId.toString() } )) 
+    ); 
+  }, [ testsCase ]);
 
   const columns = [
     {

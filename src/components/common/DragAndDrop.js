@@ -25,9 +25,7 @@ export const DragableBodyRow = ({ index, moveRow, className, style, ...restProps
       }
     },
     
-    drop: ( item ) => {
-      moveRow( item.index, index );
-    }
+    drop: ( item ) => { moveRow( item.index, index ); }
 
   }), [ index ]);
 
@@ -46,8 +44,7 @@ export const DragableBodyRow = ({ index, moveRow, className, style, ...restProps
       ref={ ref }
       className={ `${ className }${ isOver ? dropClassName : '' }` }
       style={{ cursor: "move", ...style }}
-      { ...restProps }>
-        
+      { ...restProps }>        
     </tr>
   );
 
