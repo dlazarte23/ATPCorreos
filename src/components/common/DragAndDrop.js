@@ -4,6 +4,9 @@ import { useDrag, useDrop } from "react-dnd";
 
 const type = 'DragableBodyRow';
 
+/**
+ * Componente reutilizable para usar el arrastar y soltar.
+ */
 export const DragableBodyRow = ({ index, moveRow, className, style, ...restProps }) => {
   const ref = useRef();
   
