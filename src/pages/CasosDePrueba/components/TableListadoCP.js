@@ -8,11 +8,10 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 
-import { DragableBodyRow } from "../../../components/common/DragAndDrop";
-
 import ModalEditListado from "./ModalEditListado";
 import { paginationProps } from "../../../utils/helpers/paginationProps"; 
 import { eliminarCasosPruebaAction } from "../../../stateManagement/actions/casosPruebasAction";
+import { DragableBodyRow } from "../../../components/common/DragableBodyRow";
 
 const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
 
