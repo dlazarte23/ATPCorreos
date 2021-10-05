@@ -177,7 +177,7 @@ const TableDetallesCP = ({
                 color: '#3E92F5',
                 cursor: "pointer"
               }}>
-              <p style={{ marginLeft: 10, textAlign: 'center' }}>Ctrl + v ( aqui )</p>
+              <p style={{ marginLeft: 10, textAlign: 'center' }}>Ctrl + v</p>
             </div>
           </div>
         ) : (

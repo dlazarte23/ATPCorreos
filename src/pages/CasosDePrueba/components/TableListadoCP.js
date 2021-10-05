@@ -1,32 +1,34 @@
-import React from "react";
-import { Table, Space, Popconfirm } from "antd";
+import React, { useState, useCallback, useEffect } from "react";
+
 import { Link } from "react-router-dom";
+import { Table, Space, Popconfirm, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutlined, SettingOutlined } from "@ant-design/icons";
-
-import { eliminarCasosPruebaAction } from "../../../stateManagement/actions/casosPruebasAction";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import update from 'immutability-helper';
 
 import ModalEditListado from "./ModalEditListado";
-
-const paginationProps = {
-  defaultPageSize: 5,
-  pageSizeOptions: [5, 10, 20, 50],
-  showSizeChanger: true,
-  showQuickJumper: true,
-  showTotal: (total) => `${total} resultados`,
-  hideOnSinglePage: true,
-  defaultCurrent: 1,
-};
+import { paginationProps } from "../../../utils/helpers/paginationProps"; 
+import { eliminarCasosPruebaAction, orderPosicionTestCase } from "../../../stateManagement/actions/casosPruebasAction";
+import { DragableBodyRow } from "../../../components/common/DragableBodyRow";
 
 const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
+
   const dispatch = useDispatch();
+  
+  const { casosPruebas : testsCase } = useSelector(( state ) => state.casosPruebas );
+  
+  const handleDelete = ( testId ) => dispatch(eliminarCasosPruebaAction( usuario.shortUser, testId ));
+  
+  const [data, setData] = useState( [] ); 
+  const [cambioPosicion, setCambioPosicion] = useState( false );
 
-  const casosDePruebas = useSelector(
-    (state) => state.casosPruebas.casosPruebas
-  ).map((elem) => ({ ...elem, key: elem.testId }));
-
-  const handleDelete = (testId) =>
-    dispatch(eliminarCasosPruebaAction(usuario.shortUser, testId));
+  useEffect(() => { 
+    setData(
+      testsCase.map(( elem ) => ( { ...elem, key: elem.testId.toString() } )) 
+    ); 
+  }, [ testsCase ]);
 
   const columns = [
     {
@@ -64,8 +66,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
             cancelText="Cancelar"
           >
             <a href="!">
-              {" "}
-              <DeleteOutlined />{" "}
+              {" "}<DeleteOutlined />{" "}
             </a>
           </Popconfirm>
 
@@ -76,30 +77,75 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
                 detalle: record,
                 peticion: peticion,
                 subject: subject,
-                /* testDescription: record.testDescription,
-                testId: record.testDescription,
-                testName: record.testDescription, */
               },
             }}
             className="btn-yellow-link"
           >
-            {" "}
-            <SettingOutlined />{" "}
+            {" "}<SettingOutlined />{" "}
           </Link>
         </Space>
       ),
     },
   ];
 
+  const components = { body: { row: DragableBodyRow } };
+
+  const moveRow = useCallback(( dragIndex, hoverIndex ) => {
+
+    setCambioPosicion( true );
+
+    const dragRow = data[ dragIndex ];
+
+    setData( update( data, {
+      $splice: [
+        [ dragIndex, 1 ],
+        [ hoverIndex, 0, dragRow ]
+      ]
+    }));
+
+  // eslint-disable-next-line
+  }, [ data ]);
+
+  const actualizarPosicion = () => {    
+    const datosNuevaPosicion =  {
+      testCaseList: data.map(( test, index ) => ( { idTestCase: test.testId, order: index+1 } ) )
+    }
+    
+    dispatch( orderPosicionTestCase( datosNuevaPosicion ) );
+    
+    setCambioPosicion( false );    
+  }
+
   return (
-    <Table
-      columns={columns}
-      dataSource={casosDePruebas}
-      size="middle"
-      pagination={paginationProps}
-      //loading={loading}
-      locale={{ emptyText: "Sin datos" }}
-    />
+
+    <>
+      <DndProvider backend={ HTML5Backend }>
+        <Table
+          columns={ columns }
+          dataSource={ data }
+          size="middle"
+          components={ components }
+          pagination={ paginationProps }
+          locale={{ emptyText: "Sin datos" }}
+          onRow={( _, index ) => ({
+            index,
+            moveRow
+          })}
+        />
+      </DndProvider>
+
+      { 
+        ( cambioPosicion ) && (
+          <Button 
+            type="primary"
+            style={{ marginBottom: 20, marginTop: 20}} 
+            onClick={ () => actualizarPosicion() }
+            block >
+              Guardar Posiciones
+          </Button>
+        ) 
+      }
+    </>
   );
 };
 

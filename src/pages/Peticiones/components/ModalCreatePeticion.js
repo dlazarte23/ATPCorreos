@@ -5,11 +5,10 @@ import { Modal, Input, InputNumber, Form, Row, Col, Button, DatePicker } from "a
 import { useDispatch, useSelector } from "react-redux";
 import { SaveOutlined } from "@ant-design/icons";
 
-// actions de redux
 import { crearNuevaPeticionAction } from "../../../stateManagement/actions/peticionesAction";
 
-export default function ModalCreatePeticion(props) {
-  const { showModal, setShowModal } = props;
+const ModalCreatePeticion = ({ showModal, setShowModal }) => {
+
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const [form] = Form.useForm();
@@ -26,18 +25,14 @@ export default function ModalCreatePeticion(props) {
 
   const loading = useSelector((state) => state.peticiones.loading);
 
-  const proyecto = useSelector(
-    (state) => state.peticiones.proyectoSeleccionado
-  );
+  const proyecto = useSelector((state) => state.peticiones.proyectoSeleccionado);
 
   const usuario = useSelector((state) => state.usuario.usuario.shortUser);
 
   const dispatch = useDispatch();
 
-  const agregarPeticion = (peticion, idProyecto) =>
-    dispatch(crearNuevaPeticionAction(peticion, idProyecto));
+  const agregarPeticion = (peticion, idProyecto) => dispatch(crearNuevaPeticionAction(peticion, idProyecto));
 
-  // cuando el usuario haga clic en guardar cambios
   const handleOk = () => {
     form
       .validateFields()
@@ -46,11 +41,9 @@ export default function ModalCreatePeticion(props) {
 
         setConfirmLoading(!loading);
 
-        setTimeout(() => {
-          setConfirmLoading(false);
+        setConfirmLoading(false);
 
-          setShowModal({ ...showModal, create: false });
-        }, 2000);
+        setShowModal({ ...showModal, create: false });
 
         const peticion = {
           estimatedHours: values.horasEstimadas,
@@ -65,9 +58,6 @@ export default function ModalCreatePeticion(props) {
           user: usuario,
         };
 
-        console.log(values.horasEstimadas)
-
-        // creamos la nueva peticion
         agregarPeticion(peticion, proyecto.id);
       })
       .catch((info) => {
@@ -252,3 +242,5 @@ export default function ModalCreatePeticion(props) {
     </>
   );
 }
+
+export default ModalCreatePeticion;

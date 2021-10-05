@@ -1,23 +1,20 @@
 import React from "react";
-import { Menu, Layout } from "antd";
 import { Link } from "react-router-dom";
+import { Menu, Layout } from "antd";
+import {  ReconciliationOutlined, } from "@ant-design/icons";
+
 import logo from "../../assets/img/logo_correos.png";
 import "./siderMenu.css";
-import {
-  ReconciliationOutlined,
-} from "@ant-design/icons";
 
 const { Sider } = Layout;
 
-export default function MainSider() {
+const MainSider = () => {
 
   return (
     <Sider
       breakpoint="lg"
-      onBreakpoint={(broken) => {
-      }}
-      onCollapse={(collapsed, type) => {
-      }}
+      onBreakpoint={(broken) => { }}
+      onCollapse={(collapsed, type) => { }}
       style={{ position: "sticky", height: "100vh" }}
     >
       <div className="logo">
@@ -36,3 +33,5 @@ export default function MainSider() {
     </Sider>
   );
 }
+
+export default MainSider;

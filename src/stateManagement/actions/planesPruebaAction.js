@@ -117,21 +117,21 @@ const agregarPlanesPruebaError = error => ({
  * @param {*} idPlanPrueb 
  * @param {*} planPrueba 
  */
-export const editarPlanDePruebaAction = (idPlanPrueb, planPrueba) => {
+export const editarPlanDePruebaAction = ( planPrueba ) => {
 
-    return (dispatch) => {
+    return async (dispatch) => {
 
         dispatch(editarPlanDePrueba());
 
         try {
 
-            // llamada al servicio
-            // const response = put(uri +idPlanPrueb, planPrueba);
-            //  if ( response.status == 200 ) { }
-            // response.data
+            const response = await patch(uri.setTestPlan, planPrueba);
 
-            dispatch(editarPlanDePruebaExito(planPrueba));
-
+            if ( response.status === 200 ) {
+                message.success("Plan de prueba actualizado correctamente!");
+                dispatch(editarPlanDePruebaExito(response.data));
+            }
+            
         } catch (error) {
 
             message.error("Error al actualizar tu plan de prueba!");

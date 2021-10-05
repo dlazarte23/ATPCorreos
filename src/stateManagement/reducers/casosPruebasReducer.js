@@ -14,6 +14,9 @@ import {
   EDITAR_CASOS_PRUEBA,
   EDITAR_CASOS_PRUEBA_EXITO,
   EDITAR_CASOS_PRUEBA_ERROR,
+  ORDENAR_CP,
+  ORDENAR_CP_EXITO,
+  ORDENAR_CP_ERROR
 } from "../types/casosPruebasType";
 
 const initialState = {
@@ -25,6 +28,8 @@ const initialState = {
 // eslint-disable-next-line
 export default (state = initialState, action) => {
   switch (action.type) {
+    
+    case ORDENAR_CP:
     case LISTAR_CASOS_PRUEBA:
     case DESCARGAR_DOCUMENTO:
     case EDITAR_CASOS_PRUEBA:
@@ -49,6 +54,7 @@ export default (state = initialState, action) => {
         casosPruebas: [...state.casosPruebas, action.payload],
       };
 
+    case ORDENAR_CP_EXITO:
     case DESCARGAR_DOCUMENTO_EXITO:
       return {
         ...state,
@@ -75,6 +81,7 @@ export default (state = initialState, action) => {
         ),
       };
 
+    case ORDENAR_CP_ERROR:
     case LISTAR_CASOS_PRUEBA_ERROR:
     case DESCARGAR_DOCUMENTO_ERROR:
     case AGREGAR_CASOS_PRUEBA_ERROR:

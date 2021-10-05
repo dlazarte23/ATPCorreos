@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import "../peticion-style.css";
 import {
   List,
   Space,
@@ -9,17 +12,17 @@ import {
   Row,
   Col,
 } from "antd";
+
 import {
   CalendarOutlined,
   RightOutlined,
   NumberOutlined,
 } from "@ant-design/icons";
+
 import { InfoPeticion } from "../components";
-import "../peticion-style.css";
-
-import { useDispatch } from "react-redux";
-
 import { obtenerPlanesDePruebaAction } from "../../../stateManagement/actions/planesPruebaAction";
+
+
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -28,7 +31,7 @@ const IconText = ({ icon, text }) => (
   </Space>
 );
 
-export default function ListPeticiones({ peticiones }) {
+const ListPeticiones = ({ peticiones }) => {
   const [detallePeticion, setDetallePeticion] = useState("");
   const [showDetalle, setShowDetalle] = useState(false);
 
@@ -135,3 +138,5 @@ const ListItem = ({ item, handleDetalle }) => {
     </>
   );
 };
+
+export default ListPeticiones;

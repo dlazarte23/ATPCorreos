@@ -134,9 +134,7 @@ const FormDetalle = ({ detalle, stepsData, crearStep }) => {
       setConfirmLoading(false);
     }, 2000);
 
-    const arrFiltrada = [];
-
-    stepData.evidences.map( ( e ) => arrFiltrada.push( e.src ) );
+    const arrFiltrada = stepData.evidences.map( ( elemento ) => elemento.src );
 
     const newStep = {
       idTestCase: detalle.testId,
