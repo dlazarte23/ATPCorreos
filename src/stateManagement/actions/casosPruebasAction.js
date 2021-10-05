@@ -14,6 +14,9 @@ import {
   DESCARGAR_DOCUMENTO,
   DESCARGAR_DOCUMENTO_EXITO,
   DESCARGAR_DOCUMENTO_ERROR,
+  ORDENAR_CP,
+  ORDENAR_CP_EXITO,
+  ORDENAR_CP_ERROR
 } from "../types/casosPruebasType";
 
 import { message } from "antd";
@@ -210,7 +213,9 @@ export const descargarDocumento = (idPeticion, tipoDocumento, nombreArchivo) => 
       message.success(`Archivo ${tipoDocumento} descargado correctamente!`);
 
       dispatch(descargaDocumentoExito());
+
     } catch (error) {
+      
       const { status } = error.response;
 
       if (status === 400) {
@@ -241,4 +246,39 @@ const descargaDocumentoExito = () => ({
 const descargaDocumentoError = (error) => ({
   type: DESCARGAR_DOCUMENTO_ERROR,
   payload: error,
+});
+
+/**
+ * Action para ordenar la posocion de los casos de prueba
+ * @param {*} listaTestCase -> objeto con una lista de casos de prueba
+ */
+export const orderPosicionTestCase = ( listaTestCase ) => {
+  return async ( dispatch ) => {
+
+    dispatch( ordenarTestCase() );
+
+    try {
+
+      const response = await patch( uri.updatePositionTC, listaTestCase );
+
+      if ( response.status === 200 ) {
+        message.success('Posición cambiada correctamente!');
+        dispatch( ordenarTestCaseExito() );
+      }
+
+    } catch ( error ) {
+      dispatch( ordenarTestCaseError( error ) );
+    }
+  }
+}
+
+const ordenarTestCase = () => ({
+  type: ORDENAR_CP
+});
+const ordenarTestCaseExito = () => ({
+  type: ORDENAR_CP_EXITO
+});
+const ordenarTestCaseError = ( error ) => ({
+  type: ORDENAR_CP_ERROR,
+  payload: error
 });

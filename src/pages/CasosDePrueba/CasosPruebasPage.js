@@ -52,7 +52,7 @@ export default function CasosPruebasPage( props ) {
                   usuario={usuario}
                   loading={loading}
                   subject={subject}
-                />
+                />                
               </Col>
             </Row>
           </Col>

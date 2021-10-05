@@ -8,6 +8,7 @@ const ProyectoBaseUrl = {
   editPeticiones: `${process.env.REACT_APP_ATPCORREOS}/springs`,
   deletePeticiones: `${process.env.REACT_APP_ATPCORREOS}/springs/delete`,
   setCasoDePrueba: `${process.env.REACT_APP_ATPCORREOS}/testCase`,
+  updatePositionTC: `${process.env.REACT_APP_ATPCORREOS}/testCase/reorganize`,
   getCasosDePrueba: `${process.env.REACT_APP_ATPCORREOS}/testCase/testPlan`,
   getDocumentoXml: `${process.env.REACT_APP_ATPCORREOS}/documents/export/xml`,
   getDocumentoExcel: `${process.env.REACT_APP_ATPCORREOS}/export/excel`,

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 
 import { Link } from "react-router-dom";
-import { Table, Space, Popconfirm } from "antd";
+import { Table, Space, Popconfirm, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutlined, SettingOutlined } from "@ant-design/icons";
 import { DndProvider } from "react-dnd";
@@ -10,7 +10,7 @@ import update from 'immutability-helper';
 
 import ModalEditListado from "./ModalEditListado";
 import { paginationProps } from "../../../utils/helpers/paginationProps"; 
-import { eliminarCasosPruebaAction } from "../../../stateManagement/actions/casosPruebasAction";
+import { eliminarCasosPruebaAction, orderPosicionTestCase } from "../../../stateManagement/actions/casosPruebasAction";
 import { DragableBodyRow } from "../../../components/common/DragableBodyRow";
 
 const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
@@ -21,7 +21,8 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
   
   const handleDelete = ( testId ) => dispatch(eliminarCasosPruebaAction( usuario.shortUser, testId ));
   
-  const [data, setData] = useState( [] );
+  const [data, setData] = useState( [] ); 
+  const [cambioPosicion, setCambioPosicion] = useState( false );
 
   useEffect(() => { 
     setData(
@@ -91,11 +92,9 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
 
   const moveRow = useCallback(( dragIndex, hoverIndex ) => {
 
-    console.log('moveRow', { dragIndex, hoverIndex });
+    setCambioPosicion( true );
 
     const dragRow = data[ dragIndex ];
-
-    console.log('dragRow', { dragRow });
 
     setData( update( data, {
       $splice: [
@@ -103,23 +102,50 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
         [ hoverIndex, 0, dragRow ]
       ]
     }));
+
+  // eslint-disable-next-line
   }, [ data ]);
 
+  const actualizarPosicion = () => {    
+    const datosNuevaPosicion =  {
+      testCaseList: data.map(( test, index ) => ( { idTestCase: test.testId, order: index+1 } ) )
+    }
+    
+    dispatch( orderPosicionTestCase( datosNuevaPosicion ) );
+    
+    setCambioPosicion( false );    
+  }
+
   return (
-    <DndProvider backend={ HTML5Backend }>
-      <Table
-        columns={ columns }
-        dataSource={ data }
-        size="middle"
-        components={ components }
-        pagination={ paginationProps }
-        locale={{ emptyText: "Sin datos" }}
-        onRow={( _, index ) => ({
-          index,
-          moveRow
-        })}
-      />
-    </DndProvider>
+
+    <>
+      <DndProvider backend={ HTML5Backend }>
+        <Table
+          columns={ columns }
+          dataSource={ data }
+          size="middle"
+          components={ components }
+          pagination={ paginationProps }
+          locale={{ emptyText: "Sin datos" }}
+          onRow={( _, index ) => ({
+            index,
+            moveRow
+          })}
+        />
+      </DndProvider>
+
+      { 
+        ( cambioPosicion ) && (
+          <Button 
+            type="primary"
+            style={{ marginBottom: 20, marginTop: 20}} 
+            onClick={ () => actualizarPosicion() }
+            block >
+              Guardar Posiciones
+          </Button>
+        ) 
+      }
+    </>
   );
 };
 

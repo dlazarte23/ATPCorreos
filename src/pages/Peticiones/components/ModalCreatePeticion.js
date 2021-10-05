@@ -41,11 +41,9 @@ const ModalCreatePeticion = ({ showModal, setShowModal }) => {
 
         setConfirmLoading(!loading);
 
-        setTimeout(() => {
-          setConfirmLoading(false);
+        setConfirmLoading(false);
 
-          setShowModal({ ...showModal, create: false });
-        }, 2000);
+        setShowModal({ ...showModal, create: false });
 
         const peticion = {
           estimatedHours: values.horasEstimadas,

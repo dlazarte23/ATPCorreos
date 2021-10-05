@@ -52,7 +52,6 @@ export const actualizarNuevoStepAction = (step, id) => {
       if (response.status === 200) {
         message.success("Paso editado correctamente!");
         dispatch(actualizarStepExito(response.data));
-        //dispatch(descargarStep());
       }
     } catch (error) {
       message.error("Error al actualizar el step!");
