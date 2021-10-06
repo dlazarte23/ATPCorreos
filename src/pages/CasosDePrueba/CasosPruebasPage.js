@@ -27,7 +27,9 @@ export default function CasosPruebasPage( props ) {
     // eslint-disable-next-line
   }, []);
 
-  const { loading, usuario } = useSelector((state) => state.casosPruebas);
+  const { loading } = useSelector((state) => state.casosPruebas);
+
+  const { usuario } = useSelector((state) => state.usuario);
 
   return (
     <Spin spinning={loading} tip="Cargando..." size="large">

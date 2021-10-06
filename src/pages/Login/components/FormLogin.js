@@ -21,22 +21,15 @@ const FormLogin = () => {
   const loginUsuario = usuario => dispatch( logearUsuarioAction ( usuario ) );
 
   const onFinish = async ( values ) => {
-
     setIsLogging(true);
     
     const response = await loginUsuario( values );
 
     if (response === "200") {
-
-      //Redirigiendo al home...
       history.push("/peticiones");
-
     } else {
-
       setIsLogging(false);
-
     }
-
   };
 
   const onFinishFailed = () => setIsLogging(false);
