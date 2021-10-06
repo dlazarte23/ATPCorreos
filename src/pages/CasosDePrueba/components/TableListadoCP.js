@@ -26,7 +26,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
 
   useEffect(() => { 
     setData(
-      testsCase.map(( elem ) => ( { ...elem, key: elem.testId.toString() } )) 
+      testsCase.map(( elem ) => ( { ...elem, key: elem.testId.toString() } ))
     ); 
   }, [ testsCase ]);
 

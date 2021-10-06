@@ -1,17 +1,11 @@
 import React from "react";
 
-//import assets own
-import "./login-style.css";
-import logo_correos from "../../assets/img/logo_correos_login.png";
-//import componentes from antd
 import { Row, Col, Typography } from "antd";
 
-//import components own
+import "./login-style.css";
+import logo_correos from "../../assets/img/logo_correos_login.png";
 import FormLogin from "./components/FormLogin";
 
-/**
- * Screen principal para la pagina de login
- */
 const LoginPage = () => {
 
   const { Title } = Typography;
