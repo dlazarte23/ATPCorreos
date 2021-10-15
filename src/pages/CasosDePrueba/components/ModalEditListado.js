@@ -9,6 +9,7 @@ const ModalEditListado = ({
   testId,
   testName,
   testDescription,
+  order,
   usuario,
   loading,
   subject,
@@ -42,6 +43,7 @@ const ModalEditListado = ({
             ...values,
             shortUsername: usuario.shortUser,
             subjectId: subject.id,
+            order
           })
         );
       })

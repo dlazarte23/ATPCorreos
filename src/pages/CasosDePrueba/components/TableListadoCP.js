@@ -32,6 +32,11 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
 
   const columns = [
     {
+      title: "Order",
+      dataIndex: "order",
+      key: "numOrder",
+    },
+    {
       title: "#",
       dataIndex: "testId",
       key: "id",
@@ -121,7 +126,7 @@ const TableListadoCP = ({ peticion, usuario, loading, subject }) => {
     <>
       <DndProvider backend={ HTML5Backend }>
         <Table
-          columns={ columns }
+          columns={ columns.filter( ( col ) => col.dataIndex !== 'order') }
           dataSource={ data }
           size="middle"
           components={ components }
