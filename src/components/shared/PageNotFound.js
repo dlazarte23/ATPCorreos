@@ -1,3 +1,4 @@
+import React from "react";
 import { Result, Button } from "antd";
 
 import { ArrowLeftOutlined } from '@ant-design/icons'
