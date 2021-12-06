@@ -1,3 +1,4 @@
+import React from "react";
 import './App.css'; // import prueba
 
 import Routing from './routes';
