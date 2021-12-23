@@ -49,7 +49,7 @@ export const logearUsuarioAction = (usuario) => {
       dispatch(logearUsuarioError(error));
     }
   };
-}
+};
 
 const logeandoUsuario = () => ({
   type: LOGEO_USUARIO,
@@ -67,21 +67,21 @@ const logearUsuarioError = (error) => ({
 
 /**
  * Type para deslogear al usuario
- * @param {*} usuario 
- * @returns 
+ * @param {*} usuario
+ * @returns
  */
 export const deslogearUsuario = () => {
   return async (dispatch) => {
     dispatch(deslogeandoUsuario());
     try {
-      message.success("Ah cerrado sesión correctamente!");
+      message.success("Ha cerrado sesión correctamente!");
       dispatch(deslogearUsuarioExito());
     } catch (error) {
       message.success("Error al tratar de cerrar la sesión!");
       dispatch(deslogearUsuarioError(error));
     }
   };
-}
+};
 
 const deslogeandoUsuario = () => ({
   type: DESLOGEO_USUARIO,
@@ -111,7 +111,7 @@ export const verificarLogeoAction = (usuario) => {
       dispatch(verificarLogeoError(error));
     }
   };
-}
+};
 
 const verificarLogeo = () => ({
   type: VERIFICAR_USUARIO,
