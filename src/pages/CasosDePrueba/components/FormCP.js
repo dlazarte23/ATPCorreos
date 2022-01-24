@@ -73,6 +73,7 @@ const FormCP = ({ subject, usuario, loading }) => {
         </Form.Item>
       </div>
       <div className="div-align">
+        <br />
         <Button
           shape="round"
           className="btnAgregar"
