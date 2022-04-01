@@ -16,7 +16,7 @@ import {
   DESCARGAR_DOCUMENTO_ERROR,
   ORDENAR_CP,
   ORDENAR_CP_EXITO,
-  ORDENAR_CP_ERROR
+  ORDENAR_CP_ERROR,
 } from "../types/casosPruebasType";
 
 import { message } from "antd";
@@ -46,7 +46,7 @@ export const listarCasosDePruebaAction = (idPeticion) => {
       dispatch(listarCasosPruebaError(error));
     }
   };
-}
+};
 
 const listarCasosPrueba = () => ({
   type: LISTAR_CASOS_PRUEBA,
@@ -84,7 +84,7 @@ export const registrarCasosPruebasAction = (casoDePrueba) => {
       dispatch(registrarCasosPruebaError(error));
     }
   };
-}
+};
 
 const registrarCasosPrueba = () => ({
   type: AGREGAR_CASOS_PRUEBA,
@@ -126,7 +126,7 @@ export const editarCasosPruebaAction = (idTestCase, data) => {
       message.error("Error al trata de editar el Caso de Prueba!");
     }
   };
-}
+};
 
 const editarCasosPrueba = () => ({
   type: EDITAR_CASOS_PRUEBA,
@@ -164,7 +164,7 @@ export const eliminarCasosPruebaAction = (shortUsername, idTestCase) => {
       dispatch(eliminarCasosPruebaError(error));
     }
   };
-}
+};
 
 const eliminarCasosPrueba = () => ({
   type: ELIMINAR_CASOS_PRUEBA,
@@ -185,7 +185,11 @@ const eliminarCasosPruebaError = (error) => ({
  * @param {*} idPeticion
  * @param {*} tipoDocumento
  */
-export const descargarDocumento = (idPeticion, tipoDocumento, nombreArchivo) => {
+export const descargarDocumento = (
+  idPeticion,
+  tipoDocumento,
+  nombreArchivo
+) => {
   return async (dispatch) => {
     dispatch(descargaDocumento());
 
@@ -206,16 +210,14 @@ export const descargarDocumento = (idPeticion, tipoDocumento, nombreArchivo) => 
           new Blob([response.data], {
             type: "application/vnd.ms-excel",
           }),
-          nombreArchivo
+          `${nombreArchivo}.xls`
         );
       }
 
       message.success(`Archivo ${tipoDocumento} descargado correctamente!`);
 
       dispatch(descargaDocumentoExito());
-
     } catch (error) {
-      
       const { status } = error.response;
 
       if (status === 400) {
@@ -233,7 +235,7 @@ export const descargarDocumento = (idPeticion, tipoDocumento, nombreArchivo) => 
       }
     }
   };
-}
+};
 
 const descargaDocumento = () => ({
   type: DESCARGAR_DOCUMENTO,
@@ -252,33 +254,30 @@ const descargaDocumentoError = (error) => ({
  * Action para ordenar la posocion de los casos de prueba
  * @param {*} listaTestCase -> objeto con una lista de casos de prueba
  */
-export const orderPosicionTestCase = ( listaTestCase ) => {
-  return async ( dispatch ) => {
-
-    dispatch( ordenarTestCase() );
+export const orderPosicionTestCase = (listaTestCase) => {
+  return async (dispatch) => {
+    dispatch(ordenarTestCase());
 
     try {
+      const response = await patch(uri.updatePositionTC, listaTestCase);
 
-      const response = await patch( uri.updatePositionTC, listaTestCase );
-
-      if ( response.status === 200 ) {
-        message.success('Posición cambiada correctamente!');
-        dispatch( ordenarTestCaseExito() );
+      if (response.status === 200) {
+        message.success("Posición cambiada correctamente!");
+        dispatch(ordenarTestCaseExito());
       }
-
-    } catch ( error ) {
-      dispatch( ordenarTestCaseError( error ) );
+    } catch (error) {
+      dispatch(ordenarTestCaseError(error));
     }
-  }
-}
+  };
+};
 
 const ordenarTestCase = () => ({
-  type: ORDENAR_CP
+  type: ORDENAR_CP,
 });
 const ordenarTestCaseExito = () => ({
-  type: ORDENAR_CP_EXITO
+  type: ORDENAR_CP_EXITO,
 });
-const ordenarTestCaseError = ( error ) => ({
+const ordenarTestCaseError = (error) => ({
   type: ORDENAR_CP_ERROR,
-  payload: error
+  payload: error,
 });
